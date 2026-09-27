@@ -1,0 +1,83 @@
+/* Mabel 2.0 — plush companion animation.
+   All motion eases on a soft spring: cubic-bezier(0.34,1.56,0.64,1).
+   Inlined SVG carries classes: .mabel-root (.is-type default, .is-knit, .is-wave). */
+.mabel-root{ --spring: cubic-bezier(0.34,1.56,0.64,1); display:block; width:100%; height:auto; }
+.mabel{ max-width:340px; margin:0 auto; }
+.mabel-sm{ max-width:190px; }
+.mabel-xs{ max-width:120px; }
+
+/* variant switching */
+.mabel-root .mabel-knit{ display:none; }
+.mabel-root.is-knit .mabel-knit{ display:block; }
+.mabel-root.is-knit .mabel-type{ display:none; }
+
+/* breathe: whole plush swells gently, 3s */
+.mabel-root .mabel-breathe{
+  transform-box: view-box; transform-origin: 200px 424px;
+  animation: mabel-breathe 3s ease-in-out infinite alternate;
+}
+@keyframes mabel-breathe{ from{ transform: scale(1); } to{ transform: scale(1.02); } }
+
+/* blink: 4.2s cycle, eyes closed for ~150ms */
+.mabel-root .eyes-open{ animation: mabel-blink-open 4.2s linear infinite; }
+.mabel-root .eyes-closed{ opacity:0; animation: mabel-blink-closed 4.2s linear infinite; }
+@keyframes mabel-blink-open{ 0%,96.4%{ opacity:1; } 96.5%,100%{ opacity:0; } }
+@keyframes mabel-blink-closed{ 0%,96.4%{ opacity:0; } 96.5%,100%{ opacity:1; } }
+
+/* typing arm: stubby arm taps the keys, ±8°, 0.5s */
+.mabel-root .arm-type{
+  transform-box: view-box; transform-origin: 298px 262px;
+  animation: mabel-type-arm .5s var(--spring) infinite alternate;
+}
+@keyframes mabel-type-arm{ from{ transform: rotate(-8deg); } to{ transform: rotate(8deg); } }
+
+/* victory wave (leaderboard crowns, wins) */
+.mabel-root.is-wave .arm-type{ animation: mabel-wave 1.1s var(--spring) infinite; }
+@keyframes mabel-wave{
+  0%,100%{ transform: rotate(-6deg); } 25%{ transform: rotate(14deg); }
+  50%{ transform: rotate(-2deg); } 75%{ transform: rotate(12deg); }
+}
+
+/* keys bob as they're "pressed" */
+.mabel-root .key-bob{ animation: mabel-key-bob .5s ease-in-out infinite alternate; animation-delay: var(--kd, 0s); }
+@keyframes mabel-key-bob{ from{ transform: translateY(0); } to{ transform: translateY(3.5px); } }
+
+/* typed lines grow across the paper, staggered */
+.mabel-root .typed-line{
+  transform-box: fill-box; transform-origin: left center;
+  animation: mabel-type-line 4s ease-out infinite; animation-delay: var(--d, 0s);
+}
+@keyframes mabel-type-line{
+  0%{ transform: scaleX(0); opacity:0; } 8%{ opacity:1; }
+  45%,88%{ transform: scaleX(1); opacity:1; } 96%,100%{ transform: scaleX(1); opacity:0; }
+}
+
+/* yarn ball rocks in the basket */
+.mabel-root .yarn-ball{ animation: mabel-yarn-roll 2.4s ease-in-out infinite alternate; }
+@keyframes mabel-yarn-roll{ from{ transform: translateX(-13px) rotate(-8deg); } to{ transform: translateX(13px) rotate(8deg); } }
+
+/* knitting needles click */
+.mabel-root.is-knit .mabel-knit line{ transform-box: fill-box; }
+
+/* staged entrance for the hero */
+.rise{ opacity:0; animation: mabel-rise .9s ease-out forwards; }
+.rise-1{ animation-delay: .15s; } .rise-2{ animation-delay: .3s; }
+.rise-3{ animation-delay: .45s; } .rise-4{ animation-delay: .6s; }
+@keyframes mabel-rise{ from{ opacity:0; transform: translateY(18px); } to{ opacity:1; transform: none; } }
+
+/* spotlight behind the character */
+.spotlight{ position:relative; }
+.spotlight::before{
+  content:""; position:absolute; inset:-8% -18%; pointer-events:none;
+  background: radial-gradient(ellipse at 50% 42%, rgba(193,124,96,.16), rgba(193,124,96,0) 68%);
+}
+
+/* kindness for motion-sensitive players */
+@media (prefers-reduced-motion: reduce){
+  .mabel-root *, .mabel-root, .rise{
+    animation: none !important;
+  }
+  .rise{ opacity:1 !important; }
+  .mabel-root .eyes-closed{ opacity:0 !important; }
+  .mabel-root .eyes-open{ opacity:1 !important; }
+}
