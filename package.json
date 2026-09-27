@@ -1,0 +1,1 @@
+{"dependencies":{"@vercel/kv":"latest"},"description":"Serverless backend for makersonmuse.com: private submissions, provisional scoring, live leaderboard, run streaming.","name":"makers-on-muse-api","private":true,"version":"0.1.0"}
