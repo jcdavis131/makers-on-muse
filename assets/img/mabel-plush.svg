@@ -1,0 +1,158 @@
+<svg class="mabel-root is-type" viewBox="0 0 400 460" role="img" aria-label="Mabel, a plush grandma stenographer companion" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="plushGrad" cx="50%" cy="30%" r="72%">
+      <stop offset="0%" stop-color="#FFFEFB"/>
+      <stop offset="55%" stop-color="#F6EFE3"/>
+      <stop offset="100%" stop-color="#EDDFC8"/>
+    </radialGradient>
+    <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C9CF0"/>
+      <stop offset="100%" stop-color="#B48CE8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- soft ground shadow -->
+  <ellipse class="mabel-shadow" cx="200" cy="438" rx="105" ry="12" fill="#2A2A2A" opacity="0.08"/>
+
+  <!-- breathing body -->
+  <g class="mabel-breathe">
+    <!-- plush bean body -->
+    <path d="M200,78 C118,78 84,172 84,272 C84,372 136,424 200,424 C264,424 316,372 316,272 C316,172 282,78 200,78 Z"
+          fill="url(#plushGrad)"/>
+    <!-- stitched seam -->
+    <path d="M200,94 C130,94 100,180 100,272 C100,360 146,408 200,408 C254,408 300,360 300,272 C300,180 270,94 200,94 Z"
+          fill="none" stroke="#D8CBB4" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" opacity="0.9"/>
+
+    <!-- moss knit cardigan -->
+    <path d="M90,296 C140,282 260,282 310,296 L310,332 C310,394 262,422 200,422 C138,422 90,394 90,332 Z" fill="#8A9A8B"/>
+    <path d="M104,330 C150,322 250,322 296,330" fill="none" stroke="#74846F" stroke-width="2" stroke-dasharray="5 4" opacity="0.8"/>
+    <path d="M106,356 C152,348 248,348 294,356" fill="none" stroke="#74846F" stroke-width="2" stroke-dasharray="5 4" opacity="0.8"/>
+    <path d="M112,382 C156,374 244,374 288,382" fill="none" stroke="#74846F" stroke-width="2" stroke-dasharray="5 4" opacity="0.8"/>
+    <path d="M166,290 L200,324 L234,290" fill="none" stroke="#6F7F70" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- stitched buttons -->
+    <g>
+      <circle cx="200" cy="350" r="7.5" fill="#F6EFE3" stroke="#D8CBB4" stroke-width="2"/>
+      <path d="M195,350 h10 M200,345 v10" stroke="#B8A99A" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="200" cy="382" r="7.5" fill="#F6EFE3" stroke="#D8CBB4" stroke-width="2"/>
+      <path d="M195,382 h10 M200,377 v10" stroke="#B8A99A" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <!-- Muse-spark belly emblem -->
+    <g>
+      <path d="M200,304 C201.5,311 203,312.5 210,314 C203,315.5 201.5,317 200,324 C198.5,317 197,315.5 190,314 C197,312.5 198.5,311 200,304 Z" fill="url(#sparkGrad)"/>
+      <path d="M216,306 C216.6,309 217.3,309.7 220.5,310.3 C217.3,310.9 216.6,311.6 216,314.6 C215.4,311.6 214.7,310.9 211.5,310.3 C214.7,309.7 215.4,309 216,306 Z" fill="url(#sparkGrad)" opacity="0.8"/>
+    </g>
+
+    <!-- silver grandma bun -->
+    <circle cx="200" cy="50" r="33" fill="#D9D3C6"/>
+    <circle cx="200" cy="50" r="26" fill="none" stroke="#B7AE9C" stroke-width="2.5" stroke-dasharray="5 4"/>
+    <path d="M200,52 m-13,1 a13,13 0 1,1 13,13 a8.5,8.5 0 1,0 8.5,-8.5 a4.5,4.5 0 1,1 -4.5,-4.5"
+          fill="none" stroke="#B7AE9C" stroke-width="2.5" stroke-dasharray="4 3" stroke-linecap="round"/>
+    <!-- terracotta pencil hair-stick -->
+    <g transform="rotate(28 200 50)">
+      <rect x="195.5" y="12" width="9" height="76" rx="4" fill="#C17C60"/>
+      <rect x="195.5" y="12" width="9" height="13" rx="4" fill="#8A5F47"/>
+    </g>
+
+    <!-- round stitched glasses -->
+    <g>
+      <circle cx="158" cy="196" r="27" fill="#FFFFFF" fill-opacity="0.25" stroke="#2A2A2A" stroke-width="3.5"/>
+      <circle cx="242" cy="196" r="27" fill="#FFFFFF" fill-opacity="0.25" stroke="#2A2A2A" stroke-width="3.5"/>
+      <path d="M185,194 Q200,186 215,194" fill="none" stroke="#2A2A2A" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M132,190 L106,182 M268,190 L294,182" stroke="#2A2A2A" stroke-width="3.5" stroke-linecap="round"/>
+    </g>
+    <!-- embroidered face: open eyes -->
+    <g class="eyes-open">
+      <circle cx="158" cy="196" r="7" fill="#2A2A2A"/>
+      <circle cx="160.5" cy="193.5" r="2.4" fill="#FFFFFF"/>
+      <circle cx="242" cy="196" r="7" fill="#2A2A2A"/>
+      <circle cx="244.5" cy="193.5" r="2.4" fill="#FFFFFF"/>
+    </g>
+    <!-- embroidered face: closed lash curves (blink swaps these in) -->
+    <g class="eyes-closed">
+      <path d="M147,197 Q158,205 169,197" fill="none" stroke="#2A2A2A" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M231,197 Q242,205 253,197" fill="none" stroke="#2A2A2A" stroke-width="3.5" stroke-linecap="round"/>
+    </g>
+    <!-- stitched smile + blush -->
+    <path d="M177,238 Q200,257 223,238" fill="none" stroke="#2A2A2A" stroke-width="3" stroke-dasharray="6 4.5" stroke-linecap="round"/>
+    <ellipse cx="126" cy="230" rx="13" ry="8" fill="#E8A9A0" opacity="0.5"/>
+    <ellipse cx="274" cy="230" rx="13" ry="8" fill="#E8A9A0" opacity="0.5"/>
+  </g>
+
+  <!-- stubby arms -->
+  <g class="arm-left">
+    <ellipse cx="94" cy="298" rx="25" ry="42" transform="rotate(16 94 298)"
+             fill="#F1E7D3" stroke="#D8CBB4" stroke-width="2.5" stroke-dasharray="6 5"/>
+  </g>
+  <g class="arm-type">
+    <ellipse cx="306" cy="298" rx="25" ry="42" transform="rotate(-20 306 298)"
+             fill="#F1E7D3" stroke="#D8CBB4" stroke-width="2.5" stroke-dasharray="6 5"/>
+  </g>
+
+  <!-- typing variant: miniature typewriter -->
+  <g class="mabel-type">
+    <g transform="rotate(-4 200 322)">
+      <rect x="168" y="286" width="64" height="74" rx="3" fill="#FFFDF9" stroke="#E4D9C6" stroke-width="2"/>
+      <rect class="typed-line" style="--d:0s"    x="178" y="300" width="44" height="4.5" rx="2" fill="#9A938A"/>
+      <rect class="typed-line" style="--d:.35s"  x="178" y="311" width="44" height="4.5" rx="2" fill="#9A938A"/>
+      <rect class="typed-line" style="--d:.7s"   x="178" y="322" width="44" height="4.5" rx="2" fill="#9A938A"/>
+      <rect class="typed-line" style="--d:1.05s" x="178" y="333" width="30" height="4.5" rx="2" fill="#9A938A"/>
+    </g>
+    <rect x="126" y="342" width="148" height="16" rx="7" fill="#A67B5B"/>
+    <circle cx="118" cy="350" r="6" fill="#2A2A2A"/>
+    <circle cx="282" cy="350" r="6" fill="#2A2A2A"/>
+    <rect x="118" y="354" width="164" height="44" rx="10" fill="#C17C60"/>
+    <g fill="#2A2A2A">
+      <rect x="140" y="362" width="13" height="9" rx="3"/>
+      <rect x="159" y="362" width="13" height="9" rx="3"/>
+      <rect class="key-bob" style="--kd:.1s" x="178" y="362" width="13" height="9" rx="3"/>
+      <rect x="197" y="362" width="13" height="9" rx="3"/>
+      <rect x="216" y="362" width="13" height="9" rx="3"/>
+      <rect x="235" y="362" width="13" height="9" rx="3"/>
+      <rect x="254" y="362" width="13" height="9" rx="3"/>
+      <rect x="140" y="374" width="13" height="9" rx="3"/>
+      <rect x="159" y="374" width="13" height="9" rx="3"/>
+      <rect x="178" y="374" width="13" height="9" rx="3"/>
+      <rect x="197" y="374" width="13" height="9" rx="3"/>
+      <rect class="key-bob" style="--kd:.45s" x="216" y="374" width="13" height="9" rx="3"/>
+      <rect x="235" y="374" width="13" height="9" rx="3"/>
+      <rect x="254" y="374" width="13" height="9" rx="3"/>
+      <rect x="140" y="386" width="13" height="9" rx="3"/>
+      <rect x="159" y="386" width="13" height="9" rx="3"/>
+      <rect x="178" y="386" width="13" height="9" rx="3"/>
+      <rect x="197" y="386" width="13" height="9" rx="3"/>
+      <rect x="216" y="386" width="13" height="9" rx="3"/>
+      <rect x="235" y="386" width="13" height="9" rx="3"/>
+      <rect x="254" y="386" width="13" height="9" rx="3"/>
+    </g>
+    <rect x="112" y="396" width="176" height="12" rx="6" fill="#A5664F"/>
+  </g>
+
+  <!-- knitting variant (hidden until .is-knit on root) -->
+  <g class="mabel-knit" display="none">
+    <g class="yarn-ball">
+      <circle cx="200" cy="344" r="25" fill="#C17C60"/>
+      <path d="M178,338 Q200,330 222,338 M176,350 Q200,358 224,350 M182,326 Q196,344 188,362"
+            fill="none" stroke="#A5664F" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M222,352 C250,360 260,344 270,354" fill="none" stroke="#C17C60" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g stroke="#D8CBB4" stroke-width="5" stroke-linecap="round">
+      <line x1="152" y1="374" x2="248" y2="318"/>
+      <line x1="248" y1="374" x2="152" y2="318"/>
+    </g>
+    <circle cx="152" cy="374" r="7" fill="#C17C60"/>
+    <circle cx="248" cy="374" r="7" fill="#C17C60"/>
+    <path d="M132,380 L268,380 L254,430 L146,430 Z" fill="#A67B5B"/>
+    <g stroke="#8A6A4D" stroke-width="2" opacity="0.85">
+      <line x1="136" y1="394" x2="264" y2="394"/>
+      <line x1="140" y1="408" x2="260" y2="408"/>
+      <line x1="144" y1="422" x2="256" y2="422"/>
+    </g>
+    <g stroke="#8A6A4D" stroke-width="2" stroke-dasharray="4 3" opacity="0.7">
+      <line x1="162" y1="380" x2="156" y2="430"/>
+      <line x1="190" y1="380" x2="188" y2="430"/>
+      <line x1="218" y1="380" x2="220" y2="430"/>
+      <line x1="246" y1="380" x2="252" y2="430"/>
+    </g>
+    <rect x="128" y="370" width="144" height="14" rx="7" fill="#C17C60"/>
+  </g>
+</svg>
