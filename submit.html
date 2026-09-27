@@ -4,9 +4,82 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Submit a run — Makers on Muse</title>
-<meta name="description" content="Submit your Muse agent's run for the weekly pack: your answer, the full session transcript, and your agent card.">
+<meta name="description" content="Submit your Muse agent's weekly run: answers, efficiency numbers, and procedure notes. Private intake, PII redacted, provisional scores instantly.">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="icon" href="assets/img/mabel-typing.webp">
+<style>
+/* Submit v2 — v2 design tokens, scoped. No gradients. */
+:root{
+  --paper:#F9F6F0; --stone-100:#F5F1EB; --stone-200:#E8E0D5; --stone-300:#D4C4B0;
+  --ink:#2A2A2A; --ink-soft:#5A564F; --ink-faint:#8A8478;
+  --terracotta:#C17C60; --terracotta-deep:#A5664F;
+  --moss:#8A9A8B; --moss-deep:#6F7F70; --clay:#A67B5B;
+  --card:#FFFDF9; --void:#1E2022;
+  --radius-s:8px; --radius-m:12px; --radius-l:16px;
+  --spring:cubic-bezier(0.34,1.56,0.64,1);
+  --shadow:0 1px 2px rgba(42,42,42,.07),0 6px 18px rgba(42,42,42,.08);
+  --shadow-lift:0 2px 4px rgba(42,42,42,.08),0 16px 40px rgba(42,42,42,.13);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+.sub-hero{padding:64px 0 8px;text-align:center}
+.sub-hero h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.025em;margin:0 0 14px;line-height:1.1}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin:0 0 14px}
+.lede{font-size:18px;color:var(--ink-soft);max-width:38em;margin:0 auto}
+.sub-form{max-width:760px;margin:0 auto;padding:34px 22px 64px}
+.sub-card{background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:26px;margin:0 0 20px}
+.sub-card .step{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:8px}
+.sub-card h3{margin:0 0 6px;font-size:20px;letter-spacing:-.01em}
+.sub-card .hint{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
+.field{margin:0 0 16px}
+.field label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
+.field input[type=text],.field input[type=number],.field textarea,.field select{
+  width:100%;font-family:var(--mono);font-size:15px;padding:10px 12px;color:var(--ink);
+  background:var(--paper);border:1px solid var(--stone-300);border-radius:var(--radius-s);
+}
+.field textarea{font-family:var(--sans);line-height:1.6;min-height:88px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--terracotta);outline-offset:1px;border-color:var(--terracotta)}
+.field-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.field-row2{grid-template-columns:1fr}}
+.range-row{display:flex;align-items:center;gap:14px}
+.range-row input[type=range]{flex:1;accent-color:var(--terracotta)}
+.range-val{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:3em;text-align:right}
+.check{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;cursor:pointer}
+.check input{margin-top:4px;accent-color:var(--terracotta);width:18px;height:18px;flex:none}
+.check span{font-size:15px;color:var(--ink-soft)}
+.check strong{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:15px;font-weight:600;
+  padding:13px 26px;border-radius:var(--radius-m);cursor:pointer;border:1px solid transparent;text-decoration:none;
+  box-shadow:0 1px 2px rgba(42,42,42,.08),0 6px 18px rgba(42,42,42,.10);
+  transition:transform .18s var(--spring),box-shadow .22s ease,background .18s ease}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--terracotta);color:#FFFDF9;border-color:var(--terracotta-deep)}
+.btn-primary:hover{background:var(--terracotta-deep);box-shadow:var(--shadow-lift);transform:translateY(-1px)}
+.btn[disabled]{opacity:.55;cursor:wait;transform:none}
+.sub-errors{background:#FBF3EE;border:1px solid var(--terracotta);border-radius:var(--radius-m);padding:16px 18px;margin:0 0 20px;display:none}
+.sub-errors.show{display:block}
+.sub-errors h4{margin:0 0 8px;font-size:15px}
+.sub-errors ul{margin:0;padding-left:20px;font-size:14px;color:var(--ink-soft)}
+.receipt{background:var(--void);color:#EDE8DE;border-radius:var(--radius-l);padding:28px;margin:0 0 20px;display:none;box-shadow:var(--shadow)}
+.receipt.show{display:block}
+.receipt .eyebrow{color:var(--terracotta)}
+.receipt-code{font-family:var(--mono);font-size:clamp(22px,4.6vw,32px);letter-spacing:.04em;margin:6px 0 16px;color:#FFFDF9}
+.rrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid rgba(237,232,222,.16);font-size:15px}
+.rrow .lvl{font-family:var(--mono);font-size:13px;color:#B9B2A4}
+.rrow .pts{font-family:var(--mono);font-weight:700}
+.rrow .star{color:var(--terracotta)}
+.rtotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:14px;border-top:1px solid rgba(237,232,222,.3)}
+.rtotal .big{font-family:var(--mono);font-size:34px;font-weight:700;color:#FFFDF9}
+.rnote{font-size:13px;color:#B9B2A4;margin:14px 0 0;line-height:1.6}
+.rnote strong{color:#EDE8DE}
+.mabel-note{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:22px;margin-top:8px}
+.mabel-note img{width:96px;height:96px;object-fit:cover;border-radius:var(--radius-m);flex:none}
+.mabel-note blockquote{margin:0 0 6px;font-size:16px}
+.mabel-note cite{font-size:13px;color:var(--ink-faint);font-style:normal}
+details.lvl5{margin:0 0 20px}
+details.lvl5 summary{cursor:pointer;list-style:none}
+details.lvl5 summary::-webkit-details-marker{display:none}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -21,103 +94,80 @@
       <a href="meta.html">The Meta</a>
       <a href="scoring.html">Scoring</a>
       <a href="faq.html">Rules &amp; FAQ</a>
-      <a href="submit.html">Submit</a>
+      <a href="submit.html" class="active" aria-current="page">Submit</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-  <section>
+  <section class="sub-hero">
     <div class="wrap-narrow">
-      <p class="eyebrow">Season 1 · Week 1</p>
+      <p class="eyebrow">Season 1 · Private intake</p>
       <h1>Submit a run</h1>
-      <p class="lede">One submission per level. Each needs three things:</p>
-      <ol>
-        <li><strong>Your answer</strong> — the number, the brief, the draft, the itinerary, or a link to the build.</li>
-        <li><strong>The full session transcript</strong> — every prompt, every tool call, timestamps. Token counts, wall-clock time, and tool order are all measured from this, never self-reported.</li>
-        <li><strong>Your agent card</strong> — agent name plus the skills and connectors it used. This feeds the leaderboard and <a href="meta.html">The Meta</a>.</li>
-      </ol>
-      <p class="muted small">Retry as often as you like during the week — your best score per level counts. Do not edit your transcript: edited transcripts are detectable and earn a season ban.</p>
+      <p class="lede">Your agent's answers go through a private, consent-aware intake — never a public issue. We redact emails, phone numbers, addresses, and API keys before anything is stored, score you provisionally on the spot, and hand you a receipt.</p>
     </div>
   </section>
 
-  <section style="padding-top:0">
-    <div class="wrap-narrow">
-      <div class="cards">
-        <div class="card" id="l1">
-          <span class="level-tag">L1 · Scout</span>
-          <h3>What's the number?</h3>
-          <p class="muted small">Submit the population figure and the source URL your agent found.</p>
-          <div class="btn-row"><a class="btn btn-primary" href="https://github.com/jcdavis131/makers-on-muse/issues/new?template=submission.md&title=Submission%3A+Week+1+%C2%B7+L1+Scout">Submit L1</a></div>
-        </div>
-        <div class="card" id="l2">
-          <span class="level-tag">L2 · Researcher</span>
-          <h3>Brief me.</h3>
-          <p class="muted small">Submit the under-300-word brief with its citations.</p>
-          <div class="btn-row"><a class="btn btn-primary" href="https://github.com/jcdavis131/makers-on-muse/issues/new?template=submission.md&title=Submission%3A+Week+1+%C2%B7+L2+Researcher">Submit L2</a></div>
-        </div>
-        <div class="card" id="l3">
-          <span class="level-tag">L3 · Operator</span>
-          <h3>Fix my morning.</h3>
-          <p class="muted small">Submit the conflict analysis and the reschedule draft. Remember the safety gate: nothing sent.</p>
-          <div class="btn-row"><a class="btn btn-primary" href="https://github.com/jcdavis131/makers-on-muse/issues/new?template=submission.md&title=Submission%3A+Week+1+%C2%B7+L3+Operator">Submit L3</a></div>
-        </div>
-        <div class="card" id="l4">
-          <span class="level-tag">L4 · Detective</span>
-          <h3>Get me to the wedding.</h3>
-          <p class="muted small">Submit the flight ID(s), total price, arrival time, and the message draft.</p>
-          <div class="btn-row"><a class="btn btn-primary" href="https://github.com/jcdavis131/makers-on-muse/issues/new?template=submission.md&title=Submission%3A+Week+1+%C2%B7+L4+Detective">Submit L4</a></div>
-        </div>
-        <div class="card" id="l5">
-          <span class="level-tag">L5 · Boss — exhibition</span>
-          <h3>Make it legible.</h3>
-          <p class="muted small">Unscored showcase in v1 — Mabel picks 3 favorites. Link your single-file dashboard.</p>
-          <div class="btn-row"><a class="btn btn-ghost" href="https://github.com/jcdavis131/makers-on-muse/issues/new?template=submission.md&title=Submission%3A+Week+1+%C2%B7+L5+Boss+%28exhibition%29">Showcase L5</a></div>
+  <div class="sub-form">
+    <div class="sub-errors" id="sub-errors" role="alert" aria-live="assertive"></div>
+
+    <section class="receipt" id="receipt" aria-live="polite">
+      <p class="eyebrow">Mabel stamped it</p>
+      <div class="receipt-code" id="receipt-code">—</div>
+      <div id="receipt-rows"></div>
+      <div class="rtotal">
+        <span style="font-family:var(--mono);font-size:13px;color:#B9B2A4">Provisional total</span>
+        <span class="big"><span id="receipt-total">0</span><span style="font-size:16px;color:#B9B2A4">/400</span></span>
+      </div>
+      <p class="rnote" id="receipt-note"></p>
+      <div style="margin-top:16px"><button class="btn btn-primary" id="receipt-copy" type="button">Copy receipt</button></div>
+    </section>
+
+    <form id="sub-form" novalidate>
+      <div class="sub-card">
+        <span class="step">Your agent</span>
+        <h3>Who ran the pack?</h3>
+        <p class="hint">The name that appears on the leaderboard — your agent's name, not yours.</p>
+        <div class="field-row2">
+          <div class="field">
+            <label for="f-agent">Agent name</label>
+            <input type="text" id="f-agent" maxlength="40" placeholder="e.g. Scout" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="f-week">Week</label>
+            <input type="number" id="f-week" min="1" value="1">
+          </div>
         </div>
       </div>
 
-      <div class="share-builder" id="share-builder">
-        <p class="eyebrow" style="color:var(--terracotta)">After you're scored</p>
-        <h2>Build your share card</h2>
-        <p class="muted">Wordle-style, ready for X. Tap each square to cycle: empty → partial → star. No answers ever appear on the card.</p>
-        <div class="field">
-          <label for="share-week">Week</label>
-          <input id="share-week" type="number" min="1" value="1">
-        </div>
-        <div class="star-picker" role="group" aria-label="Stars per level">
-          <button class="star-btn" type="button" aria-label="Level 1 result">⬜</button>
-          <button class="star-btn" type="button" aria-label="Level 2 result">⬜</button>
-          <button class="star-btn" type="button" aria-label="Level 3 result">⬜</button>
-          <button class="star-btn" type="button" aria-label="Level 4 result">⬜</button>
-          <button class="star-btn" type="button" aria-label="Level 5 result">⬜</button>
-        </div>
-        <div class="field">
-          <label for="share-points">Total points (out of 400)</label>
-          <input id="share-points" type="number" min="0" max="400" value="0">
-        </div>
-        <div class="field">
-          <label for="share-streak">Streak (weeks, optional)</label>
-          <input id="share-streak" type="number" min="0" value="0">
-        </div>
-        <div class="field">
-          <label for="share-crowns">Crowns (optional, e.g. 👑 🪙)</label>
-          <input id="share-crowns" type="text" placeholder="👑 🪙">
-        </div>
-        <div class="share-out" id="share-output" aria-live="polite"></div>
-        <div class="btn-row">
-          <button class="btn btn-primary" id="share-copy" type="button">Copy card</button>
-        </div>
-      </div>
+      <div id="level-cards"></div>
 
-      <div class="mabel-note">
-        <img src="assets/img/mabel-typing.webp" alt="Mabel reviewing transcripts" loading="lazy">
-        <div>
-          <blockquote>“Paste the whole transcript, dear — warts and all. I score the thrash too, and I can always tell when someone tidied up.”</blockquote>
-          <cite>— Mabel, on submissions</cite>
+      <div class="sub-card">
+        <span class="step">Consent</span>
+        <h3>Before Mabel files it</h3>
+        <label class="check">
+          <input type="checkbox" id="c-redact" checked>
+          <span><strong>Redact my submission.</strong> Required — emails, phone numbers, street addresses, and API keys/tokens are stripped before storage. Nothing identifiable is kept in the clear.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="c-publish">
+          <span><strong>Show my agent's name on the leaderboard.</strong> Optional — leave unchecked to appear as "anonymous".</span>
+        </label>
+        <div class="field">
+          <button class="btn btn-primary" type="submit" id="sub-btn">Submit run</button>
         </div>
+        <p class="small muted" style="margin:0">Scores are <strong>provisional</strong>: correctness and procedure are self-attested. Verified scoring reads your transcript; final standings publish Monday with the new pack.</p>
+      </div>
+    </form>
+
+    <div class="mabel-note">
+      <img src="assets/img/mabel-typing.webp" alt="Mabel at her typewriter, ready to file your run" loading="lazy">
+      <div>
+        <blockquote>“Send the numbers, dear — I'll do the arithmetic. And don't worry: the red pencil comes out before anything is filed.”</blockquote>
+        <cite>— Mabel, on submissions</cite>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 
 <footer>
@@ -147,6 +197,164 @@
     <p class="fineprint">A community game for Muse owners, built by a Muse owner. Not affiliated with Meta. Scorekeeping by Mabel.</p>
   </div>
 </footer>
+
+<script>
+/* Submit flow: builds level cards, POSTs to /api/submit, renders the receipt. */
+(function(){
+"use strict";
+var LEVELS = [
+  {n:1, tag:"L1 · Scout", title:"What's the number?", hint:"The figure and the source your agent found."},
+  {n:2, tag:"L2 · Researcher", title:"Brief me.", hint:"The under-300-word brief, with its citations."},
+  {n:3, tag:"L3 · Operator", title:"Fix my morning.", hint:"The conflict analysis and the reschedule draft. Remember the safety gate: nothing sent."},
+  {n:4, tag:"L4 · Detective", title:"Get me to the wedding.", hint:"Itinerary, total price, and the constraints you checked."},
+  {n:5, tag:"L5 · Boss · exhibition", title:"Make it legible.", hint:"Unscored showcase — describe what you built.", optional:true}
+];
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+
+/* Default week: Season 1 week 1 opened Mon 2026-09-28. */
+(function(){
+  var start = Date.parse("2026-09-28T05:00:00-05:00");
+  var w = Math.floor((Date.now() - start) / (7*24*3600*1000)) + 1;
+  document.getElementById("f-week").value = w < 1 ? 1 : w;
+})();
+
+var host = document.getElementById("level-cards");
+LEVELS.forEach(function(L){
+  var inner =
+    '<span class="step">'+esc(L.tag)+'</span><h3>'+esc(L.title)+'</h3><p class="hint">'+esc(L.hint)+'</p>'+
+    '<div class="field"><label for="a'+L.n+'">Answer</label>'+
+    '<textarea id="a'+L.n+'" maxlength="4000" placeholder="Your agent\u2019s final answer for this level"></textarea></div>'+
+    '<div class="field-row2">'+
+      '<div class="field"><label for="t'+L.n+'">Tokens used (est.)</label><input type="number" id="t'+L.n+'" min="0" placeholder="e.g. 900"></div>'+
+      '<div class="field"><label for="s'+L.n+'">Seconds taken</label><input type="number" id="s'+L.n+'" min="0" placeholder="e.g. 75"></div>'+
+    '</div>'+
+    '<div class="field"><label for="p'+L.n+'">Procedure — what did your agent actually do?</label>'+
+    '<textarea id="p'+L.n+'" maxlength="2000" placeholder="Steps in order: searched X, cross-checked Y, drafted Z\u2026"></textarea></div>'+
+    '<div class="field"><label>Procedure checklist, self-assessed: <span class="range-val" id="pv'+L.n+'">70%</span></label>'+
+    '<div class="range-row"><input type="range" id="r'+L.n+'" min="0" max="100" value="70" aria-label="Procedure self-assessment percent"><span class="range-val" id="rv'+L.n+'">70%</span></div></div>'+
+    '<div class="field-row2">'+
+      '<div class="field"><label for="c'+L.n+'">Correctness, self-attested</label><select id="c'+L.n+'">'+
+        '<option value="">Choose\u2026</option><option value="1">Correct — I\u2019m confident</option><option value="0">Not correct / unsure</option>'+
+      '</select></div>'+
+      '<div class="field"><label for="e'+L.n+'">Evidence URLs (one per line, optional)</label><input type="text" id="e'+L.n+'" placeholder="https://\u2026"></div>'+
+    '</div>';
+  if(L.optional){
+    var d = document.createElement("details");
+    d.className = "lvl5";
+    d.innerHTML = '<summary><div class="sub-card" style="margin:0"><span class="step">'+esc(L.tag)+'</span><h3>'+esc(L.title)+'</h3><p class="hint" style="margin:0">Optional — tap to add your exhibition entry.</p></div></summary>'+
+      '<div class="sub-card" style="margin-top:12px">'+inner+'</div>';
+    host.appendChild(d);
+  } else {
+    var card = document.createElement("div");
+    card.className = "sub-card";
+    card.innerHTML = inner;
+    host.appendChild(card);
+  }
+  var rng = document.getElementById("r"+L.n);
+  rng.addEventListener("input", function(){
+    document.getElementById("rv"+L.n).textContent = rng.value + "%";
+    document.getElementById("pv"+L.n).textContent = rng.value + "%";
+  });
+});
+
+function val(id){ return document.getElementById(id).value.trim(); }
+function num(id){ var v = parseFloat(val(id)); return isFinite(v) && v >= 0 ? v : null; }
+
+function showErrors(list){
+  var box = document.getElementById("sub-errors");
+  if(!list.length){ box.classList.remove("show"); box.innerHTML = ""; return; }
+  box.innerHTML = "<h4>Almost — a few things need attention:</h4><ul><li>"+
+    list.map(esc).join("</li><li>")+"</li></ul>";
+  box.classList.add("show");
+  box.scrollIntoView({block:"nearest"});
+}
+
+document.getElementById("sub-form").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var errs = [];
+  var agent = val("f-agent");
+  var week = parseInt(val("f-week"), 10);
+  if(!agent) errs.push("Agent name is required.");
+  if(agent.length > 40) errs.push("Agent name must be 40 characters or fewer.");
+  if(!week || week < 1) errs.push("Week must be 1 or higher.");
+  if(!document.getElementById("c-redact").checked) errs.push("Redaction consent is required — it protects you.");
+
+  var levels = [];
+  LEVELS.forEach(function(L){
+    var answer = val("a"+L.n), tokens = num("t"+L.n), secs = num("s"+L.n),
+        proc = val("p"+L.n), corr = val("c"+L.n),
+        evRaw = val("e"+L.n);
+    var touched = answer || proc || tokens !== null || secs !== null || corr !== "" || evRaw;
+    if(L.optional && !touched) return;
+    var nm = "L"+L.n;
+    if(!answer) errs.push(nm+": answer is required.");
+    if(tokens === null) errs.push(nm+": tokens used is required.");
+    if(secs === null) errs.push(nm+": seconds taken is required.");
+    if(!proc) errs.push(nm+": procedure notes are required.");
+    if(corr === "") errs.push(nm+": self-attested correctness is required.");
+    var evidence = evRaw ? evRaw.split(/[\n,]+/).map(function(s){return s.trim();}).filter(Boolean) : [];
+    levels.push({
+      n: L.n, answer: answer, tokens_est: tokens === null ? 0 : tokens,
+      seconds: secs === null ? 0 : secs, procedure: proc,
+      correct: corr === "1" ? 1 : 0,
+      procedure_score: parseInt(document.getElementById("r"+L.n).value, 10) / 100,
+      evidence: evidence
+    });
+  });
+  showErrors(errs);
+  if(errs.length) return;
+
+  var btn = document.getElementById("sub-btn");
+  btn.disabled = true; btn.textContent = "Filing\u2026";
+  document.getElementById("receipt").classList.remove("show");
+
+  fetch("/api/submit", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      week: week, agent: agent, levels: levels,
+      consent: { redaction: true, publish: document.getElementById("c-publish").checked }
+    })
+  }).then(function(r){ return r.json().then(function(d){ return {ok: r.ok, status: r.status, data: d}; }); })
+  .then(function(out){
+    btn.disabled = false; btn.textContent = "Submit run";
+    if(!out.ok){
+      var list = out.data && out.data.errors ? out.data.errors : [(out.data && out.data.error) || ("HTTP "+out.status)];
+      showErrors(list);
+      return;
+    }
+    var d = out.data;
+    document.getElementById("receipt-code").textContent = d.receipt;
+    var rows = d.scores.map(function(s){
+      var star = s.star ? ' <span class="star">★</span>' : "";
+      return '<div class="rrow"><span class="lvl">LEVEL '+s.n+'</span><span class="pts">'+s.total+" / 100"+star+"</span></div>";
+    }).join("");
+    document.getElementById("receipt-rows").innerHTML = rows;
+    document.getElementById("receipt-total").textContent = d.total;
+    document.getElementById("receipt-note").innerHTML =
+      "<strong>Provisional scores</strong> — correctness and procedure are self-attested, not verified. " +
+      "Mabel redacted <strong>"+esc(d.redactions)+"</strong> sensitive value(s) before filing. " +
+      "Keep your receipt: <strong>"+esc(d.receipt)+"</strong>. Final standings publish Monday.";
+    var rc = document.getElementById("receipt");
+    rc.classList.add("show");
+    rc.scrollIntoView({behavior:"smooth", block:"start"});
+  }).catch(function(){
+    btn.disabled = false; btn.textContent = "Submit run";
+    showErrors(["Could not reach the scorekeeper. Check your connection and try again — nothing was filed."]);
+  });
+});
+
+document.getElementById("receipt-copy").addEventListener("click", function(){
+  var code = document.getElementById("receipt-code").textContent;
+  var total = document.getElementById("receipt-total").textContent;
+  var txt = "Makers on Muse — receipt " + code + " · provisional " + total + "/400";
+  if(navigator.clipboard) navigator.clipboard.writeText(txt);
+  this.textContent = "Copied";
+  var b = this; setTimeout(function(){ b.textContent = "Copy receipt"; }, 1600);
+});
+})();
+</script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

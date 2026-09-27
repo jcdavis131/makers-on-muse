@@ -4,6 +4,21 @@
 
   var LIVE_URL = "https://raw.githubusercontent.com/jcdavis131/makers-on-muse/live-runs/data/live/run.json";
   var RUNS_INDEX = "data/runs/index.json";
+
+  /* SSE transport: preferred when the API backend is up; falls back to the
+     branch poll below. Rendering logic is untouched — only how beats arrive. */
+  function getRunId(){
+    try {
+      var m = /[?&]run=([^&]+)/.exec(window.location.search || "");
+      if(m) return decodeURIComponent(m[1]);
+    } catch(e){}
+    return "week1-live";
+  }
+  var RUN_ID = getRunId();
+  var STREAM_URL = "/api/run-stream?run_id=" + encodeURIComponent(RUN_ID);
+  var STREAM_GRACE_MS = 4000;
+  var es = null, streamOk = false, streamTimer = null;
+  var liveData = null; // envelope accumulator fed by SSE beats
   var POLL_LIVE = 2500;
   var POLL_DONE = 30000;
   var CATCHUP_AT = 6;
@@ -282,6 +297,65 @@
     pollTimer = setTimeout(poll, ms);
   }
 
+  /* ---------- SSE transport: beats arrive here when the API is up ---------- */
+  function handleMeta(meta){
+    if(!meta) return;
+    if(!liveData || liveData.run_id !== meta.run_id){
+      liveData = { run_id: meta.run_id || RUN_ID, events: [] };
+    }
+    liveData.status = meta.status || liveData.status || "live";
+    if(meta.week != null) liveData.week = meta.week;
+    if(meta.week_title) liveData.week_title = meta.week_title;
+    if(meta.agent) liveData.agent = meta.agent;
+    if(meta.started_at) liveData.started_at = meta.started_at;
+    handleRun(liveData);
+    if(streamOk && pollTimer){ clearTimeout(pollTimer); pollTimer = null; }
+  }
+  function handleBeat(ev){
+    if(!ev || mode !== "live") return;
+    if(!liveData) liveData = { run_id: RUN_ID, status: "live", events: [] };
+    liveData.events.push(ev);
+    handleRun(liveData);
+    if(streamOk && pollTimer){ clearTimeout(pollTimer); pollTimer = null; }
+  }
+  function closeStream(){
+    if(streamTimer){ clearTimeout(streamTimer); streamTimer = null; }
+    if(es){ try { es.close(); } catch(e){} es = null; }
+  }
+  function tryStream(){
+    if(!("EventSource" in window)) return false;
+    closeStream();
+    streamOk = false;
+    liveData = null;
+    try {
+      es = new EventSource(STREAM_URL);
+    } catch(e){ return false; }
+    function firstMessage(){
+      streamOk = true;
+      if(streamTimer){ clearTimeout(streamTimer); streamTimer = null; }
+    }
+    es.addEventListener("meta", function(msg){
+      firstMessage();
+      try { handleMeta(JSON.parse(msg.data)); } catch(e){}
+    });
+    es.addEventListener("beat", function(msg){
+      firstMessage();
+      try { handleBeat(JSON.parse(msg.data)); } catch(e){}
+    });
+    es.addEventListener("end", function(){ closeStream(); });
+    /* Mid-run drops auto-reconnect (EventSource default); replays dedupe on seq. */
+    es.addEventListener("error", function(){ /* noop: reconnect or grace-timer handles it */ });
+    // No message within the grace window (404/503/blocked) -> branch poll.
+    streamTimer = setTimeout(function(){
+      streamTimer = null;
+      if(!streamOk){ closeStream(); poll(); }
+    }, STREAM_GRACE_MS);
+    return true;
+  }
+  function initTransport(){
+    if(!tryStream()) poll();
+  }
+
   /* ---------- replays ---------- */
   function loadReplayIndex(){
     fetch(RUNS_INDEX, {cache:"no-store"})
@@ -320,6 +394,7 @@
   function enterReplay(data, meta){
     mode = "replay";
     if(pollTimer) clearTimeout(pollTimer);
+    closeStream();
     resetLive();
     hideIdle();
     setLiveBadge(false);
@@ -375,7 +450,7 @@
     replayBadge.hidden = true;
     replayControls.hidden = true;
     showIdle();
-    poll();
+    initTransport();
   }
 
   function wireReplayControls(){
@@ -410,5 +485,5 @@
   loadReplayIndex();
   startTokTicker();
   showIdle();
-  poll();
+  initTransport();
 })();
