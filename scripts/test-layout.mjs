@@ -184,6 +184,10 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
   t("privacy: run events 30 days", pv.includes("30 days after the run's last event"));
   t("privacy: rate-limit counters about 2 minutes, hashed IP", pv.includes("About 2 minutes") && pv.includes("hash of the IP address"));
   t("privacy: contact email never returned", pv.includes("No page or API returns it"));
+  // api/receipt.js returns status, scores, handle and agent, never answers.
+  t("privacy: answers are not returned by any page or API", pv.includes("No page or API returns them") &&
+    /Never the answers/.test(read("api/receipt.js")));
+  t("privacy: no blanket \"don't share\" claim next to the processors", !/sell or share/i.test(pv) && pv.includes("We share it only with the services below"));
   t("privacy: token kept as a hash", pv.includes("We keep the hash, not the token"));
   t("privacy: deletion by token on the receipt page", /href="receipt\.html"/.test(read("privacy.html")) && pv.includes("choose Delete"));
   t("privacy: drafts stay in the browser without contact or token", pv.includes("leaves out your contact email and your token"));
