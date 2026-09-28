@@ -213,9 +213,9 @@ var LEVELS = [
 
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 
-/* Default week: Season 1 week 1 opened Mon 2026-09-28. */
+/* Default week: Season 1 week 1 opens Mon 2026-10-05, 6 AM CT (held one week). */
 (function(){
-  var start = Date.parse("2026-09-28T05:00:00-05:00");
+  var start = Date.parse("2026-10-05T06:00:00-05:00");
   var w = Math.floor((Date.now() - start) / (7*24*3600*1000)) + 1;
   document.getElementById("f-week").value = w < 1 ? 1 : w;
 })();
