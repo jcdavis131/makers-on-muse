@@ -106,7 +106,9 @@ The leaderboard (`/api/leaderboard?week=1`) holds entries back until the week cl
 Plain HTML, CSS and JS, with no framework. Vercel serves the root as static files and runs `api/*.js` as functions. There is no build on Vercel. Two small Node scripts with no dependencies write into the pages, and their output is committed:
 
 - `npm run build:pack` (`scripts/stamp-pack.mjs`) stamps the pack manifest's numbers into the pages.
-- `npm run build:layout` (`scripts/stamp-layout.mjs`) copies the shared nav and footer from `partials/nav.html` and `partials/footer.html` into every page, between `<!-- layout:nav -->` and `<!-- layout:footer -->` markers. It marks the page's own link with `aria-current="page"`, so the current page shows without JavaScript. To change the nav or footer, edit the partial, run `npm run build:layout`, and commit the partial and the pages together. A new page needs both marker pairs. `scripts/test-layout.mjs` fails if any page differs from the partials.
+- `npm run build:layout` (`scripts/stamp-layout.mjs`) copies the shared nav and footer from `partials/nav.html` and `partials/footer.html` into every page, between `<!-- layout:nav -->` and `<!-- layout:footer -->` markers. It marks the page's own link with `aria-current="page"`, so the current page shows without JavaScript. To change the nav or footer, edit the partial, run `npm run build:layout`, and commit the partial and the pages together. A new page needs all three marker pairs. `scripts/test-layout.mjs` fails if any page differs from the partials.
+- The same script stamps `partials/head.html` between `<!-- layout:head -->` markers: the icons, the theme colour, and for indexable pages the canonical link and the Open Graph and Twitter tags. It fills in the page's clean address and copies the page's own `<title>` and meta description, so those two tags stay the only place to write them. A page with `<meta name="robots" content="noindex">` (404 and receipt) gets the icons only and stays out of `sitemap.xml`, which the script also writes.
+- `npm run build:images` (`scripts/render-images.mjs`) renders the share image `assets/img/og.png` (1200x630, from `scripts/og/og.html`) and the icons (`favicon.ico` with 16 and 32 px, `assets/img/icon-32.png`, `assets/img/apple-touch-icon.png`, from `assets/img/icon.svg`) with headless Chrome. It needs `puppeteer-core`, which the site doesn't depend on: install it anywhere and set `PUPPETEER_CORE_DIR` to that folder. The images are committed, so this runs only when the design changes. The share image has no dates or pack content, so it doesn't go stale.
 
 The nav has three groups: Play (This week, Submit, Leaderboard, Replays), Library (Playbook, Setups, Skills) and About (Rules & scoring, FAQ, About). On wide screens each group is a button with a dropdown; on phones the Menu button opens all three. The footer carries the independent-project and trademark line on every page.
 
@@ -132,6 +134,7 @@ faq.html                rules and FAQ
 404.html                the page for any address that doesn't exist (noindex)
 robots.txt              allow all but /api/; points at the sitemap
 sitemap.xml             every indexable page at its clean address (written by build:layout)
+favicon.ico             16 and 32 px icons (written by build:images)
 api/                    serverless functions: submit, receipt, leaderboard, health, run-event, run-stream, run-state
 lib/                    scoring, validation, names, redaction, tokens, pack windows; used by api/
 assets/js/season.js     week dates, one source of truth for pages and tests
@@ -143,11 +146,11 @@ assets/js/board.js      the leaderboard page
 assets/js/receipt.js    the receipt page
 assets/js/watch.js      the Watch player: live through the API, or the archive's first run
 assets/css/             styles
-assets/img/             Mabel artwork
+assets/img/             Mabel artwork, the site icon (icon.svg and PNGs), the share image og.png
 data/packs/             one manifest per week: dates, levels, pars, blends, the star rule (public; no answers)
 data/runs/              scrubbed runs that Watch replays
 docs/watch-protocol.md  the Watch event format and the archive rules
-partials/               the shared nav and footer (repo only; stamped into the pages)
+partials/               the shared head tags, nav and footer (repo only; stamped into the pages)
 scripts/                tests, an in-memory Redis for them, the pack and layout stamps, a local server that applies vercel.json, the link check, the post-deploy health check
 LICENSE                 MIT, for the code
 LICENSE-CONTENT         CC BY 4.0, for the Playbook content
@@ -180,6 +183,7 @@ Runs each test script in `scripts/` with Node. Run `npm ci` once first: the inte
 - `test-pages.mjs`: the page logic in `submit-form.js`, `receipt.js` and `board.js`. What the form sends must pass the server's validator. Every value from the API is escaped (tested with markup in every field). Drafts never throw, even when storage does. Also the receipt page's privacy settings, its `/receipt` address, and a reviewed list of every `innerHTML` assignment, so a new one fails until someone checks it.
 - `test-pack.mjs`: the pack manifest contract. The manifest is well formed. The pages' marked numbers match it, and no page has lost a marker. `scoring.html`'s worked example is what `lib/score.js` computes. The scorer moves with the manifest. `api/submit.js` scores with it. The validator asks for its scored levels. The archived runs' scores reproduce under its pars.
 - `test-site.mjs`: how the site is served, through `serve.mjs`. Clean URLs and their 308s, the www and vercel.app redirects to the apex (path and query kept; previews not redirected), the branded 404 at any depth, repo-only files not served, `robots.txt`, a current `sitemap.xml`, and the link check.
+- `test-seo.mjs`: the stamped head on every page. Indexable pages have a canonical link at their clean address and Open Graph and Twitter tags with absolute URLs; noindex pages have neither. Titles and descriptions are present and unique. The committed images are the sizes the tags claim, `favicon.ico` holds 16 and 32 px images, and the share image template has no dates.
 - `test-layout.mjs`: every page carries the shared nav and footer from `partials/`, with the trademark line and its own link marked; the nav groups and their order; every link is served at its clean address without a redirect; the `/meta` redirects; no page links `meta.html` or any `.html` address; the trust pages state what the code does (TTLs, processors, deletion by token, no cookies); `main.js` runs the nav without `innerHTML`; the Mabel emblem uses no gradient; both license files.
 - `test-playbook.mjs`: the Playbook's data and page logic. Ids are unique and URL-safe, every setup tag is explained in the page's tag legend, no tag names a connector no source lists, the stats and the home page strip match the data, the query string round-trips and ignores anything it doesn't know, every card value is escaped, and a reviewed list of `innerHTML` assignments.
 - `test-watch.mjs`: the Watch player. Run time is the last event minus the start. Tokens are only what the agent reported, or "—". A reconnect adds no beat twice. The result is out of the manifest's maximum. The page follows the feed only when the reader has scrolled to its end. Also escaping, the page's first state ("Connecting…"), the demo badge, and a reviewed list of `innerHTML` assignments.

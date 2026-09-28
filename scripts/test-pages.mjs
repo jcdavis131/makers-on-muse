@@ -317,7 +317,8 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   t("submit: the shareable receipt text has no token", /var txt = "Makers on Muse, Week " \+ week \+ ": receipt " \+ code/.test(sub) &&
     !/txt[^\n]*token/.test(sub));
   t("submit: the Mabel image is the plush SVG", /<img src="\/assets\/img\/mabel-plush\.svg"/.test(sub));
-  t("submit: favicon is the plush SVG", /<link rel="icon" href="\/assets\/img\/mabel-plush\.svg" type="image\/svg\+xml">/.test(sub));
+  t("submit: icons come from the shared head, none from the old webp", sub.includes('<link rel="icon" href="/favicon.ico" sizes="32x32">') &&
+    sub.includes('<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">') && !/\.webp/.test(sub));
 }
 
 /* ---------- 5. innerHTML ratchet ---------- */

@@ -1,4 +1,4 @@
-/* Stamp the shared nav and footer into every page.
+/* Stamp the shared head tags, nav and footer into every page.
 
    The pages stay plain HTML that works without JavaScript and from any
    static server. The nav and the footer are written once, in
@@ -10,8 +10,17 @@
      <!-- /layout:nav -->
 
    The copy marks the page's own link (its clean path, e.g. /pack for
-   pack.html) with aria-current="page" (in the nav and the footer) and its nav group with the class is-current, so
-   the current page shows without JavaScript.
+   pack.html) with aria-current="page" (in the nav and the footer) and
+   its nav group with the class is-current, so the current page shows
+   without JavaScript.
+
+   partials/head.html is the same idea for the tags every page's <head>
+   shares: icons, theme colour, and for indexable pages the canonical
+   link and the Open Graph and Twitter tags. {{url}} becomes the page's
+   canonical address, and {{title}} and {{description}} come from the
+   page's own <title> and meta description, so those stay the one place
+   to edit. A noindex page (404.html, receipt.html) gets only the lines
+   above "<!-- indexable pages only -->".
 
      node scripts/stamp-layout.mjs           check only; exit 1 on any drift
      node scripts/stamp-layout.mjs --write   rewrite the pages (npm run build:layout)
@@ -27,7 +36,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-export const NAMES = ["nav", "footer"];
+export const NAMES = ["head", "nav", "footer"];
 export const ORIGIN = "https://makersonmuse.com";
 
 const read = (p) => readFileSync(join(ROOT, p), "utf8").replace(/\r\n/g, "\n");
@@ -48,10 +57,34 @@ export function pathFor(page) {
   return page === "index.html" ? "/" : "/" + page.replace(/\.html$/, "");
 }
 
-/* render(name, page) -> the partial as it appears in that page. */
-export function render(name, page, source) {
+export const INDEX_ONLY = "<!-- indexable pages only -->";
+
+/* pageMeta(html) -> { title, description } as attribute-safe text. */
+export function pageMeta(html) {
+  const title = (/<title>([^<]+)<\/title>/.exec(html) || [])[1];
+  const description = (/<meta name="description" content="([^"]+)">/.exec(html) || [])[1];
+  if (!title || !description) throw new Error("a page needs a <title> and a meta description");
+  return { title: title.replace(/"/g, "&quot;"), description };
+}
+
+/* render(name, page, source, pageHtml) -> the partial as it appears in
+   that page. The head needs the page's own HTML (title, description,
+   noindex). */
+export function render(name, page, source, pageHtml) {
   let html = source === undefined ? partial(name) : source;
   const path = pathFor(page);
+  if (name === "head") {
+    const page_ = pageHtml === undefined ? read(page) : pageHtml;
+    const meta = pageMeta(page_);
+    const lines = html.split("\n");
+    const cut = lines.indexOf(INDEX_ONLY);
+    if (cut === -1) throw new Error("partials/head.html needs the line " + INDEX_ONLY);
+    const kept = noindex(page_) ? lines.slice(0, cut) : lines.slice(0, cut).concat(lines.slice(cut + 1));
+    return kept.join("\n")
+      .split("{{url}}").join(ORIGIN + path)
+      .split("{{title}}").join(meta.title)
+      .split("{{description}}").join(meta.description);
+  }
   const link = '<a href="' + path + '">';
   if (name === "nav") {
     // A group holds a label, a button and a list: no nested div.
@@ -78,15 +111,15 @@ export function sitemap() {
     "</urlset>\n";
 }
 
-const BLOCK =/<!-- layout:(nav|footer) -->\n([\s\S]*?)\n<!-- \/layout:\1 -->/g;
+const BLOCK = /<!-- layout:(head|nav|footer) -->\n([\s\S]*?)\n<!-- \/layout:\1 -->/g;
 
-/* stampPage(html, page) -> { html, count: {nav, footer}, drift: [name] } */
+/* stampPage(html, page) -> { html, count: {head, nav, footer}, drift: [name] } */
 export function stampPage(html, page, sources = {}) {
-  const count = { nav: 0, footer: 0 };
+  const count = { head: 0, nav: 0, footer: 0 };
   const drift = [];
   const out = html.replace(BLOCK, (all, name, inner) => {
     count[name]++;
-    const want = render(name, page, sources[name]);
+    const want = render(name, page, sources[name], html);
     if (inner !== want) drift.push(name);
     return "<!-- layout:" + name + " -->\n" + want + "\n<!-- /layout:" + name + " -->";
   });

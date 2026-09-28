@@ -125,6 +125,12 @@ try {
       t("sitemap URL is served as is: " + u, res.status === 200);
     }
     t("receipt stays noindex", noindex(read("receipt.html")));
+    for (const [path, type] of [["/favicon.ico", "image/x-icon"], ["/assets/img/og.png", "image/png"], ["/assets/img/icon-32.png", "image/png"],
+      ["/assets/img/apple-touch-icon.png", "image/png"], ["/assets/img/icon.svg", "image/svg+xml"]]) {
+      const res = await get(path);
+      t(path + " is served as " + type, res.status === 200 && res.headers.get("content-type") === type, [res.status, res.headers.get("content-type")]);
+    }
+    t("the share image template is repo-only", (await get("/scripts/og/og.html")).status === 404);
   }
 
   /* ---------- 6. the link check ---------- */

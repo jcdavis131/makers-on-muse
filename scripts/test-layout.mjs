@@ -170,6 +170,8 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
   for (const p of PAGES) {
     const html = read(p);
     for (const m of html.matchAll(/<(?:script|link|img|iframe)\b[^>]*\b(?:src|href)="([^"]+)"/g)) {
+      // rel="canonical" names the page's own address; the browser loads nothing from it.
+      if (/^<link rel="canonical"/.test(m[0])) { t(p + ": canonical is on this site", m[1].startsWith("https://makersonmuse.com/")); continue; }
       t(p + ": loads only its own files: " + m[1], !/^(https?:)?\/\//.test(m[1]));
     }
   }
