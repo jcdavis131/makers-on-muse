@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
     stars: scores.stars,
     provisional: true,
     redactions: redacted.redactions,
-    note: "Scores are provisional: correctness and procedure are self-attested. " +
-      "Verified scoring reads your transcript; final standings are published Monday."
+    note: "Scores are provisional: every input is self-reported and nothing is verified yet. " +
+      "Server grading is not built yet."
   });
 };

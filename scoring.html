@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How scoring works — Makers on Muse</title>
-<meta name="description" content="The Makers on Muse composite score: correctness gates everything, then token efficiency, time efficiency, and procedure decide the ranking.">
+<meta name="description" content="How a Makers on Muse level is scored: correctness is a gate, then a per-level blend of token efficiency, time efficiency and procedure. Scores are self-reported and provisional for now.">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/mabel.css">
 <link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
@@ -32,34 +32,40 @@
     <div class="wrap-narrow">
       <p class="eyebrow">The composite score</p>
       <h1>Correctness opens the door.<br>Efficiency decides the room.</h1>
-      <p class="lede">Every level scores 0&ndash;100. Correctness is a gate, not a weight: a wrong answer scores zero no matter how fast or cheap it was. Among the correct, three dimensions decide the ranking.</p>
+      <p class="lede">Every level scores 0&ndash;100. Correctness is a gate, not a weight: a wrong answer scores zero no matter how fast or cheap it was. Among correct answers, three dimensions set the score.</p>
 
-      <div class="formula" role="math" aria-label="Level score equals correctness times the blend of token, time, and procedure efficiency">
-        Level score <span class="op">=</span> Correctness <span class="op">&times;</span><br>
-        (0.35 <span class="op">&times;</span> TokenEff <span class="op">+</span> 0.25 <span class="op">&times;</span> TimeEff <span class="op">+</span> 0.40 <span class="op">&times;</span> Procedure)
+      <div class="status-note">
+        <p><strong>What is true today.</strong> Every input is self-reported. On the submit form you attest correctness, estimate tokens, report seconds and rate your own procedure. Scores are provisional until server grading ships.</p>
+        <p><strong>The totals.</strong> Four scored levels (L1&ndash;L4), up to 100 points each, so up to 400 points and 0&ndash;4 stars a week. L5 is an unscored exhibition build.</p>
       </div>
+
+      <div class="formula" role="math" aria-label="Level score equals correctness times a weighted blend of token efficiency, time efficiency and procedure. The weights change by level.">
+        Level score <span class="op">=</span> Correctness <span class="op">&times;</span><br>
+        (w<sub>token</sub> <span class="op">&times;</span> TokenEff <span class="op">+</span> w<sub>time</sub> <span class="op">&times;</span> TimeEff <span class="op">+</span> w<sub>proc</sub> <span class="op">&times;</span> Procedure)
+      </div>
+      <p class="muted">The weights change by level; see the table below. The week total is the sum of L1&ndash;L4.</p>
 
       <h2>The four dimensions</h2>
       <div class="cards" style="margin-top:22px">
         <div class="card">
           <span class="step">Gate &middot; 0&ndash;1</span>
           <h3>Correctness</h3>
-          <p class="muted">Did it get the right answer? Binary for exact-answer levels, rubric-graded for open ones. Zero here zeroes everything.</p>
+          <p class="muted">Did it get the right answer? A wrong answer zeroes the level. For now you self-attest it. Server grading against private answer keys is coming.</p>
         </div>
         <div class="card">
-          <span class="step">35% of the blend</span>
+          <span class="step">20&ndash;50% of the blend</span>
           <h3>Token efficiency</h3>
-          <p class="muted"><span style="font-family:var(--mono)">min(par &divide; actual, 1)</span>, measured from your transcript &mdash; never self-reported. Par is set from the reference solution, then recalibrated weekly to the median of successful runs. Under par scores 1.0: we reward lean, not degenerate.</p>
+          <p class="muted"><span style="font-family:var(--mono)">min(par &divide; actual, 1)</span>, using your own estimate. Meta's help pages describe a usage limit, not a per-task token count (<a href="https://www.meta.com/help/artificial-intelligence/1331373868832401/">Meta Help Center: get started</a>), so this input may change. Pars are listed on the pack page; they are first guesses, not yet calibrated on real runs. Under par scores 1.0.</p>
         </div>
         <div class="card">
-          <span class="step">25% of the blend</span>
+          <span class="step">20&ndash;30% of the blend</span>
           <h3>Time efficiency</h3>
-          <p class="muted"><span style="font-family:var(--mono)">min(par &divide; actual, 1)</span> from transcript timestamps. Rewards fast tools, good planning, no thrash loops.</p>
+          <p class="muted"><span style="font-family:var(--mono)">min(par &divide; actual, 1)</span>, using the seconds you report. Server-measured time is coming.</p>
         </div>
         <div class="card">
-          <span class="step">40% of the blend</span>
+          <span class="step">20&ndash;60% of the blend</span>
           <h3>Procedure</h3>
-          <p class="muted">A per-puzzle checklist: required steps present, in a valid order, no forbidden moves. The &ldquo;works like a professional&rdquo; score &mdash; where good skills and connectors visibly pay off.</p>
+          <p class="muted">Did it work like a professional: the right steps, in a sensible order, nothing forbidden? For now you rate it yourself on the submit form. Published per-level checklists are coming.</p>
         </div>
       </div>
     </div>
@@ -68,7 +74,7 @@
   <section style="padding-top:0">
     <div class="wrap-narrow">
       <h2>A worked example</h2>
-      <p class="muted">Your agent clears L1: correct number (correctness 1.0), 860 tokens against an 800 par (800&divide;860 = 0.93), 70 seconds against a 60 par (60&divide;70 = 0.86), and a clean 3-for-3 on the procedure checklist (1.0). L1's blend is 50 / 30 / 20.</p>
+      <p class="muted">Your agent clears L1: correct number (correctness 1.0), 860 tokens against an 800 par (800&divide;860 = 0.93), 70 seconds against a 60 par (60&divide;70 = 0.86), and a procedure rating of 100% (1.0). L1's blend is 50 / 30 / 20.</p>
       <div class="formula" style="font-size:17px;text-align:left">
         Blend <span class="op">=</span> 0.50&times;0.93 <span class="op">+</span> 0.30&times;0.86 <span class="op">+</span> 0.20&times;1.0 <span class="op">=</span> 0.923<br>
         Score <span class="op">=</span> 1.0 &times; 0.923 &times; 100 <span class="op">=</span> <strong>92</strong> &rarr; star earned
@@ -80,14 +86,14 @@
   <section style="padding-top:0">
     <div class="wrap-narrow">
       <h2>Weights shift by level</h2>
-      <p class="muted">The formula never changes; the blend does &mdash; published with every pack.</p>
+      <p class="muted">The formula stays the same; the weights change by level.</p>
       <div class="board-scroll">
       <table class="clean">
         <thead><tr><th>Level</th><th>Token</th><th>Time</th><th>Procedure</th><th>Why</th></tr></thead>
         <tbody>
           <tr><td><strong>L1 Scout</strong></td><td class="num-cell">50%</td><td class="num-cell">30%</td><td class="num-cell">20%</td><td class="muted">A retrieval sprint</td></tr>
           <tr><td><strong>L2 Researcher</strong></td><td class="num-cell">30%</td><td class="num-cell">20%</td><td class="num-cell">50%</td><td class="muted">Method matters</td></tr>
-          <tr><td><strong>L3 Operator</strong></td><td class="num-cell">20%</td><td class="num-cell">20%</td><td class="num-cell">60%</td><td class="muted">Procedure dominates; safety gate applies</td></tr>
+          <tr><td><strong>L3 Operator</strong></td><td class="num-cell">20%</td><td class="num-cell">20%</td><td class="num-cell">60%</td><td class="muted">Procedure dominates; safety rule applies</td></tr>
           <tr><td><strong>L4 Detective</strong></td><td class="num-cell">30%</td><td class="num-cell">20%</td><td class="num-cell">50%</td><td class="muted">Verify like a professional</td></tr>
         </tbody>
       </table>
@@ -97,12 +103,12 @@
 
   <section style="padding-top:0">
     <div class="wrap-narrow">
-      <h2>Stars, crowns, seasons</h2>
+      <h2>Stars, and what's coming</h2>
       <div class="cards cols-2">
-        <div class="card"><span class="step">0&ndash;5 per week</span><h3>Stars</h3><p class="muted">Score 60+ on a level to earn its star.</p></div>
-        <div class="card"><span class="step">Prestige currency</span><h3>Streaks</h3><p class="muted">3+ stars in consecutive weeks extends your streak. Miss a week and it resets.</p></div>
-        <div class="card"><span class="step">Four per week</span><h3>Crowns</h3><p class="muted">Overall champion, token miser, speedster, cleanest procedure. More ways to win, more setups to learn from.</p></div>
-        <div class="card"><span class="step">8 weeks</span><h3>Season 1</h3><p class="muted">Season points = weekly stars + 2 per crown. Old packs stay playable anytime &mdash; they just don't count for the season.</p></div>
+        <div class="card"><span class="step">0&ndash;4 per week</span><h3>Stars</h3><p class="muted">Score 60+ on a scored level to earn its star. L5 has no star.</p></div>
+        <div class="card"><span class="step">Coming</span><h3>Streaks</h3><p class="muted">Not built yet. Streaks need a reliable way to tell that two weeks came from the same player.</p></div>
+        <div class="card"><span class="step">Coming</span><h3>Crowns</h3><p class="muted">Not built yet. The plan is weekly crowns for overall, fewest tokens, fastest and cleanest procedure, once scores are verified.</p></div>
+        <div class="card"><span class="step">Coming</span><h3>Season points</h3><p class="muted">Not built yet. Season 1, Week 1 runs Mon Oct 5 &ndash; Sun Oct 11, 2026.</p></div>
       </div>
       <div class="card" style="margin-top:28px">
         <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
@@ -119,7 +125,7 @@
     <div class="foot-grid">
       <div>
         <h4>Makers on Muse</h4>
-        <p class="small muted">A weekly gauntlet for Muse agents. Five levels, every Monday. Mabel keeps the minutes.</p>
+        <p class="small muted">A weekly test for Muse agents: four scored levels and one exhibition build. Mabel keeps the minutes.</p>
       </div>
       <div>
         <h4>Play</h4>
@@ -139,7 +145,7 @@
       </div>
     </div>
     <div class="foot-note">
-      <span>Season 1 &middot; 8 weeks &middot; entries close Sunday midnight CT</span>
+      <span>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</span>
       <span>Built by a Muse owner. Not affiliated with Meta.</span>
     </div>
   </div>

@@ -50,6 +50,8 @@ h3{font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
 .stage .mabel{width:190px;margin:0 auto 26px}
 .stage h1{max-width:12em;margin-left:auto;margin-right:auto}
 .stage .lede{margin:0 auto}
+.pb-note{font-size:14px;color:var(--ink-soft);max-width:40em;margin:14px auto 0}
+.pb-note code{font-family:var(--mono);font-size:12px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 7px;color:var(--moss-deep)}
 .pb-stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
 .pb-stats span{font-family:var(--mono);font-size:13px;background:var(--card);border:1px solid var(--stone-200);border-radius:999px;padding:8px 18px;color:var(--ink-soft)}
 .pb-stats strong{color:var(--ink)}
@@ -137,9 +139,10 @@ footer{border-top:1px solid var(--stone-200);margin-top:56px;padding:40px 0 50px
   <section class="stage">
     <div class="wrap">
       <p class="eyebrow">The Playbook</p>
-      <img class="mabel" src="assets/img/mabel-plush.svg" alt="Mabel, the plush Muse stenographer, at her typewriter" width="190">
+      <img class="mabel" src="assets/img/mabel-plush.svg" alt="Mabel, our plush stenographer mascot, at her typewriter" width="190">
       <h1>Workflows worth stealing.</h1>
-      <p class="lede">Twenty-eight field-tested workflows for real life — see what a great Muse setup can do, then run one and find out what yours still needs.</p>
+      <p class="lede">Twenty-eight starter workflows for real life. None has been checked on a real Muse yet, so treat each one as a test: run it and see what your setup still needs.</p>
+      <p class="pb-note">Setup tags name the connector a workflow uses. <code>browser</code> means Muse's <a href="https://research.meta.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse">built-in browser</a>. <code>photo-upload</code> means you add the photos to the chat (<a href="https://www.meta.com/help/artificial-intelligence/1331373868832401/">file upload is built in</a>).</p>
       <div class="pb-stats" aria-label="Playbook stats">
         <span><strong>28</strong> workflows</span>
         <span><strong>7</strong> personas</span>
@@ -182,8 +185,8 @@ footer{border-top:1px solid var(--stone-200);margin-top:56px;padding:40px 0 50px
 <footer>
   <div class="wrap">
     <div class="foot-note">
-      <span>Makers on Muse — a weekly game for Muse owners.</span>
-      <span>Mabel keeps the book.</span>
+      <span>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</span>
+      <span>Built by a Muse owner. Not affiliated with Meta.</span>
     </div>
   </div>
 </footer>
@@ -214,7 +217,7 @@ var PLAYBOOKS = [
   "difficulty": 3,
   "time": "20 min",
   "setup": [
-   "shopping"
+   "browser"
   ],
   "recipe": [
    "My kid turns 7 on [date]. I am inviting 12 kids to our house, 2-4pm. Plan the party: theme ideas, food, one main activity, and a full supply list. Total budget $150.",
@@ -233,14 +236,14 @@ var PLAYBOOKS = [
   "difficulty": 1,
   "time": "5 min",
   "setup": [
-   "media-library"
+   "photo-upload"
   ],
   "recipe": [
-   "Look through my photo library and pick the 5 best photos of my grandkids from this month. Tell me the date of each one.",
+   "I'm uploading this month's photos of my grandkids. Pick the 5 best ones and tell me which they are.",
    "Write a warm letter to my sister describing what is happening in each photo, one short paragraph per photo. Keep it cheerful and under 300 words total.",
-   "Now make a shorter version I can paste as a text message, with the photos attached in the same order."
+   "Now make a shorter version I can paste as a text message, and list the photos in the same order so I can attach them."
   ],
-  "test": "5 real photos from this month with correct dates, and a letter that describes things actually visible in those photos.",
+  "test": "5 picks from the photos you uploaded, and a letter that describes things actually visible in those photos.",
   "proves": "The simplest possible capability check — can your Muse look at your photos and talk about them like a person would.",
   "group": "grandparent"
  },
@@ -315,9 +318,9 @@ var PLAYBOOKS = [
   "recipe": [
    "I am running a 10K on Sunday at 8am in [city]. I run about 25 miles a week. Give me a 7-day race-week plan: workouts, sleep targets, and what to eat the night before and morning of.",
    "Check the weather forecast for race morning in [city] and tell me exactly what to wear, when to arrive, and how much water to bring.",
-   "Put the race on my calendar with a 6am wake-up alarm and a reminder to lay out my gear Saturday night."
+   "Put the race on my calendar, set a Muse reminder for 6am race morning, and remind me to lay out my gear Saturday night."
   ],
-  "test": "A complete 7-day plan, a clothing call that matches the real forecast, and the calendar event with alarms actually set.",
+  "test": "A complete 7-day plan, a clothing call that matches the real forecast, and the calendar event and reminders actually set.",
   "proves": "Whether your Muse blends live external data with a personal plan instead of giving generic advice.",
   "group": "athlete"
  },
@@ -329,7 +332,7 @@ var PLAYBOOKS = [
   "difficulty": 2,
   "time": "10 min",
   "setup": [
-   "shopping"
+   "browser"
   ],
   "recipe": [
    "I lift 4 times a week and need about 150g of protein a day. My grocery budget is $80 a week. Build me a one-week grocery list that hits the protein target.",
@@ -370,7 +373,7 @@ var PLAYBOOKS = [
   "setup": [
    "gmail",
    "google-calendar",
-   "flightaware"
+   "browser"
   ],
   "recipe": [
    "I am flying to London for a conference, out Oct 12, back Oct 16. I need to leave Austin Sunday afternoon and land Monday morning. Research real flight options under $900, one stop max, and give me the top 3 with flight numbers, times, and prices.",
@@ -466,9 +469,9 @@ var PLAYBOOKS = [
   "track": "moment",
   "moment": "airport-wait",
   "difficulty": 2,
-  "time": "25 min",
+  "time": "10 min",
   "setup": [
-   "flightaware"
+   "browser"
   ],
   "recipe": [
    "My flight is [AIRLINE + NUMBER] out of [AIRPORT] today. Check its live status and tell me the gate, boarding time, and any delay risk.",
@@ -489,7 +492,7 @@ var PLAYBOOKS = [
   "setup": [
    "gmail",
    "google-calendar",
-   "maps"
+   "browser"
   ],
   "recipe": [
    "I have a 90-minute layover at [AIRPORT TERMINAL]. Scan my inbox for anything that arrived in the last 3 hours and give me a triage: urgent, action, FYI — 5 bullets max.",
@@ -509,7 +512,7 @@ var PLAYBOOKS = [
   "difficulty": 1,
   "time": "15 min",
   "setup": [
-   "maps"
+   "browser"
   ],
   "recipe": [
    "I land in [CITY] at [TIME] tonight. Give me a wheels-down brief: current weather, how long the train or taxi takes to [HOTEL ADDRESS] right now, and one dinner spot nearby that takes walk-ins.",
@@ -535,8 +538,8 @@ var PLAYBOOKS = [
    "Also make a one-page cheat sheet of the names, dates, and numbers from the episode that I can review offline.",
    "After I land: quiz me with 5 questions on the episode and score me."
   ],
-  "test": "the episode plays end to end, the cheat sheet matches what the episode actually said, and the quiz scores you fairly. (Steps 1-2 need wifi; step 3 works offline.)",
-  "proves": "whether your Muse can produce real media artifacts and follow through across a connectivity gap.",
+  "test": "the episode plays end to end, the cheat sheet matches what the episode actually said, and the quiz scores you fairly. (Every step needs a connection: Muse runs in the cloud.)",
+  "proves": "whether your Muse can produce real media artifacts and pick the thread back up hours later.",
   "group": "long-flight"
  },
  {
@@ -547,7 +550,7 @@ var PLAYBOOKS = [
   "difficulty": 3,
   "time": "1 hr",
   "setup": [
-   "maps"
+   "browser"
   ],
   "recipe": [
    "We're driving [START] to [END] — about [MILES] miles. My car gets [MPG] mpg highway and I have half a tank ([GALLONS] gallons). Where's the cheapest gas stop that keeps me above a quarter tank the whole way?",
@@ -626,7 +629,7 @@ var PLAYBOOKS = [
   "difficulty": 2,
   "time": "20 min",
   "setup": [
-   "maps"
+   "browser"
   ],
   "recipe": [
    "I'm at a 2-hour outdoor graduation at [VENUE]. It's [TEMP] degrees. Give me a survival checklist: what goes in my bag, where the shade will be at [TIME] given the sun's position, and the nearest water refill.",
@@ -645,14 +648,14 @@ var PLAYBOOKS = [
   "difficulty": 4,
   "time": "1 hr",
   "setup": [
-   "media-library"
+   "photo-upload"
   ],
   "recipe": [
    "My [GRADUATE] asked me to say a few words at the graduation dinner tonight. Ask me 5 questions about them — one at a time — then draft a 90-second toast.",
-   "Look through my recent family photos and pick 3 that match the stories in the toast. Tell me which ones and why.",
+   "I'm uploading some recent family photos. Pick 3 that match the stories in the toast. Tell me which ones and why.",
    "Now tighten it: cut 30%, keep the funny line about [DETAIL], end on the future, not the past."
   ],
-  "test": "the toast uses only details you actually gave (no invented childhood anecdotes), the photo picks reference real photos, and it reads aloud in about 90 seconds.",
+  "test": "the toast uses only details you actually gave (no invented childhood anecdotes), the photo picks come from the photos you uploaded, and it reads aloud in about 90 seconds.",
   "proves": "whether your Muse can interview you, respect your stories, and edit to a hard time constraint.",
   "group": "graduation"
  },
@@ -664,7 +667,7 @@ var PLAYBOOKS = [
   "difficulty": 1,
   "time": "10 min",
   "setup": [
-   "maps"
+   "browser"
   ],
   "recipe": [
    "I'm [MINUTES] from [SCHOOL] in current traffic. School lets out at [TIME]. Will I make it, or should I text the teacher?",
@@ -685,7 +688,7 @@ var PLAYBOOKS = [
   "setup": [
    "google-calendar",
    "gmail",
-   "maps"
+   "browser"
   ],
   "recipe": [
    "Here's our afternoon: pickup at [SCHOOL] at [TIME], practice at [LOCATION] at [TIME], dinner somewhere between. Build the timeline with real drive times.",
@@ -761,7 +764,7 @@ function card(w){
     '<details class="pb-recipe"><summary>Recipe · '+w.recipe.length+' steps</summary><ol>'+steps+'</ol></details>'+
     '<p class="pb-test"><strong>The test</strong>'+esc(w.test)+'</p>'+
     '<p class="pb-proves"><strong>Proves</strong>'+esc(w.proves)+'</p>'+
-    '<div class="pb-links"><a href="pack.html">Train this muscle &rarr;</a><a href="meta.html">Winning setups &rarr;</a></div>'+
+    '<div class="pb-links"><a href="pack.html">Train this muscle &rarr;</a><a href="meta.html">Setup notes &rarr;</a></div>'+
     '</article>';
 }
 function matches(w){

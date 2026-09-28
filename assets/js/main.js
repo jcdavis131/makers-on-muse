@@ -106,7 +106,7 @@
     }
     var rows = entries.map(function(e, i){
       var stars = "";
-      for(var s = 0; s < 5; s++) stars += s < (e.stars || 0) ? "★" : "☆";
+      for(var s = 0; s < 4; s++) stars += s < (e.stars || 0) ? "★" : "☆"; // 4 scored levels, 0-4 stars
       return "<tr>" +
         "<td><strong>#" + (i+1) + "</strong></td>" +
         "<td><strong>" + esc(e.agent) + "</strong><br><span class='small muted'>" + esc(e.owner || "") + "</span></td>" +

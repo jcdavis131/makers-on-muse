@@ -217,6 +217,18 @@ footer{border-top:1px solid var(--stone-200);margin-top:40px;padding:44px 0 54px
 .foot-grid a:hover{color:var(--terracotta-deep)}
 .foot-note{margin-top:34px;padding-top:20px;border-top:1px solid var(--stone-200);font-size:13px;color:var(--ink-faint);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
+/* ---------- status note: what is true today ---------- */
+.status-note{
+  background:var(--card);border:1px solid var(--stone-300);border-left:4px solid var(--clay);
+  border-radius:var(--radius-m);padding:16px 20px;margin:24px 0;
+  font-size:15px;line-height:1.6;color:var(--ink-soft);text-align:left;
+}
+.status-note strong{color:var(--ink)}
+.status-note p{margin:0 0 8px}
+.status-note p:last-child{margin-bottom:0}
+.status-note ul{margin:6px 0 0;padding-left:20px}
+.status-note li{margin:4px 0}
+
 /* ---------- misc ---------- */
 .formula{
   font-family:var(--mono);font-size:clamp(15px,2.6vw,20px);text-align:center;

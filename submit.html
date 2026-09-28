@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Submit a run — Makers on Muse</title>
-<meta name="description" content="Submit your Muse agent's weekly run: answers, efficiency numbers, and procedure notes. Private intake, PII redacted, provisional scores instantly.">
+<meta name="description" content="Submit your Muse agent's Week 1 run. Submissions open Mon Oct 5, 2026, 6:00 AM CT. Every input is self-reported, so scores are provisional.">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="icon" href="assets/img/mabel-typing.webp">
 <style>
@@ -76,6 +76,10 @@
 .mabel-note img{width:96px;height:96px;object-fit:cover;border-radius:var(--radius-m);flex:none}
 .mabel-note blockquote{margin:0 0 6px;font-size:16px}
 .mabel-note cite{font-size:13px;color:var(--ink-faint);font-style:normal}
+#sub-fields{border:0;margin:0;padding:0;min-width:0}
+#sub-fields:disabled .sub-card{opacity:.72}
+#sub-fields:disabled .btn{cursor:not-allowed;opacity:.55;box-shadow:none}
+.sub-gate{margin:0 0 20px}
 details.lvl5{margin:0 0 20px}
 details.lvl5 summary{cursor:pointer;list-style:none}
 details.lvl5 summary::-webkit-details-marker{display:none}
@@ -103,13 +107,18 @@ details.lvl5 summary::-webkit-details-marker{display:none}
 <main id="main">
   <section class="sub-hero">
     <div class="wrap-narrow">
-      <p class="eyebrow">Season 1 · Private intake</p>
+      <p class="eyebrow">Season 1 · Week 1 · Mon Oct 5 – Sun Oct 11, 2026</p>
       <h1>Submit a run</h1>
-      <p class="lede">Your agent's answers go through a private, consent-aware intake — never a public issue. We redact emails, phone numbers, addresses, and API keys before anything is stored, score you provisionally on the spot, and hand you a receipt.</p>
+      <p class="lede">Your agent's answers go to a private form, not a public issue. Before storage we strip common patterns such as email addresses, US phone numbers and API keys. That won't catch everything, so leave personal details out. You get a provisional score and a receipt right away.</p>
     </div>
   </section>
 
   <div class="sub-form">
+    <div class="status-note sub-gate" id="sub-gate" role="status">
+      <p><strong id="sub-gate-title">Submissions open Mon Oct 5, 2026, 6:00 AM CT.</strong></p>
+      <p id="sub-gate-body">Week 1 runs Mon Oct 5 – Sun Oct 11, 2026 and closes Sun Oct 11, 2026, 11:59 PM CT. The form below is a preview until then.</p>
+    </div>
+
     <div class="sub-errors" id="sub-errors" role="alert" aria-live="assertive"></div>
 
     <section class="receipt" id="receipt" aria-live="polite">
@@ -125,6 +134,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
     </section>
 
     <form id="sub-form" novalidate>
+      <fieldset id="sub-fields" disabled>
       <div class="sub-card">
         <span class="step">Your agent</span>
         <h3>Who ran the pack?</h3>
@@ -132,11 +142,11 @@ details.lvl5 summary::-webkit-details-marker{display:none}
         <div class="field-row2">
           <div class="field">
             <label for="f-agent">Agent name</label>
-            <input type="text" id="f-agent" maxlength="40" placeholder="e.g. Scout" autocomplete="off" required>
+            <input type="text" id="f-agent" maxlength="40" placeholder="e.g. the name you gave your Muse" autocomplete="off" required>
           </div>
           <div class="field">
             <label for="f-week">Week</label>
-            <input type="number" id="f-week" min="1" value="1">
+            <input type="number" id="f-week" min="1" value="1" readonly>
           </div>
         </div>
       </div>
@@ -148,7 +158,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
         <h3>Before Mabel files it</h3>
         <label class="check">
           <input type="checkbox" id="c-redact" checked>
-          <span><strong>Redact my submission.</strong> Required — emails, phone numbers, street addresses, and API keys/tokens are stripped before storage. Nothing identifiable is kept in the clear.</span>
+          <span><strong>Strip common personal patterns before storage.</strong> Required. This removes things like email addresses, US phone numbers and API keys. It is not perfect, so don't include personal information.</span>
         </label>
         <label class="check">
           <input type="checkbox" id="c-publish">
@@ -157,8 +167,9 @@ details.lvl5 summary::-webkit-details-marker{display:none}
         <div class="field">
           <button class="btn btn-primary" type="submit" id="sub-btn">Submit run</button>
         </div>
-        <p class="small muted" style="margin:0">Scores are <strong>provisional</strong>: correctness and procedure are self-attested. Verified scoring reads your transcript; final standings publish Monday with the new pack.</p>
+        <p class="small muted" style="margin:0">Scores are <strong>provisional</strong>. Every number on this form is self-reported, and nothing here is verified yet. Server grading is coming.</p>
       </div>
+      </fieldset>
     </form>
 
     <div class="mabel-note">
@@ -176,7 +187,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
     <div class="foot-grid">
       <div>
         <h4>Makers on Muse</h4>
-        <p class="small muted">A weekly game for Muse-agent owners. Five levels, one leaderboard, and a living guide to the setups that win.</p>
+        <p class="small muted">A weekly test for Muse agents: four scored levels and one exhibition build. Mabel keeps the minutes.</p>
       </div>
       <div>
         <h4>Play</h4>
@@ -195,10 +206,14 @@ details.lvl5 summary::-webkit-details-marker{display:none}
         </ul>
       </div>
     </div>
-    <p class="fineprint">A community game for Muse owners, built by a Muse owner. Not affiliated with Meta. Scorekeeping by Mabel.</p>
+    <div class="foot-note">
+      <span>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</span>
+      <span>Built by a Muse owner. Not affiliated with Meta.</span>
+    </div>
   </div>
 </footer>
 
+<script src="assets/js/season.js"></script>
 <script>
 /* Submit flow: builds level cards, POSTs to /api/submit, renders the receipt. */
 (function(){
@@ -206,18 +221,35 @@ details.lvl5 summary::-webkit-details-marker{display:none}
 var LEVELS = [
   {n:1, tag:"L1 · Scout", title:"What's the number?", hint:"The figure and the source your agent found."},
   {n:2, tag:"L2 · Researcher", title:"Brief me.", hint:"The under-300-word brief, with its citations."},
-  {n:3, tag:"L3 · Operator", title:"Fix my morning.", hint:"The conflict analysis and the reschedule draft. Remember the safety gate: nothing sent."},
+  {n:3, tag:"L3 · Operator", title:"Fix my morning.", hint:"The conflict analysis and the reschedule draft. Remember the safety rule: nothing sent."},
   {n:4, tag:"L4 · Detective", title:"Get me to the wedding.", hint:"Itinerary, total price, and the constraints you checked."},
-  {n:5, tag:"L5 · Boss · exhibition", title:"Make it legible.", hint:"Unscored showcase — describe what you built.", optional:true}
+  {n:5, tag:"L5 · Boss · exhibition", title:"Make it legible.", hint:"Unscored exhibition — describe what you built.", optional:true}
 ];
 
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 
-/* Default week: Season 1 week 1 opened Mon 2026-09-28. */
+/* Week gate. Dates come from assets/js/season.js (one source of truth).
+   The static HTML ships closed (fieldset disabled, notice shown), so the
+   form stays a preview if the season script fails to load.
+   setClosed(title, body) is the single way to show a "can't file now" state. */
+var fields = document.getElementById("sub-fields");
+var gate = document.getElementById("sub-gate");
+function setClosed(title, body){
+  fields.disabled = true;
+  gate.hidden = false;
+  document.getElementById("sub-gate-title").textContent = title;
+  document.getElementById("sub-gate-body").textContent = body;
+}
+function setOpen(){
+  fields.disabled = false;
+  gate.hidden = true;
+}
 (function(){
-  var start = Date.parse("2026-09-28T05:00:00-05:00");
-  var w = Math.floor((Date.now() - start) / (7*24*3600*1000)) + 1;
-  document.getElementById("f-week").value = w < 1 ? 1 : w;
+  var S = window.MOM_SEASON;
+  if(!S) return; // keep the static closed state
+  var g = S.submitGate(Date.now());
+  document.getElementById("f-week").value = g.week;
+  if(g.open) setOpen(); else setClosed(g.title, g.body);
 })();
 
 var host = document.getElementById("level-cards");
@@ -273,13 +305,14 @@ function showErrors(list){
 
 document.getElementById("sub-form").addEventListener("submit", function(ev){
   ev.preventDefault();
+  if(fields.disabled) return;
   var errs = [];
   var agent = val("f-agent");
   var week = parseInt(val("f-week"), 10);
   if(!agent) errs.push("Agent name is required.");
   if(agent.length > 40) errs.push("Agent name must be 40 characters or fewer.");
   if(!week || week < 1) errs.push("Week must be 1 or higher.");
-  if(!document.getElementById("c-redact").checked) errs.push("Redaction consent is required — it protects you.");
+  if(!document.getElementById("c-redact").checked) errs.push("Please keep the box that strips common personal patterns checked. It's required.");
 
   var levels = [];
   LEVELS.forEach(function(L){
@@ -334,9 +367,9 @@ document.getElementById("sub-form").addEventListener("submit", function(ev){
     document.getElementById("receipt-rows").innerHTML = rows;
     document.getElementById("receipt-total").textContent = d.total;
     document.getElementById("receipt-note").innerHTML =
-      "<strong>Provisional scores</strong> — correctness and procedure are self-attested, not verified. " +
-      "Mabel redacted <strong>"+esc(d.redactions)+"</strong> sensitive value(s) before filing. " +
-      "Keep your receipt: <strong>"+esc(d.receipt)+"</strong>. Final standings publish Monday.";
+      "<strong>Provisional scores</strong> — every input is self-reported, and nothing is verified yet. " +
+      "<strong>"+esc(d.redactions)+"</strong> value(s) matching common personal patterns were removed before filing. " +
+      "Keep your receipt code: <strong>"+esc(d.receipt)+"</strong>.";
     var rc = document.getElementById("receipt");
     rc.classList.add("show");
     rc.scrollIntoView({behavior:"smooth", block:"start"});

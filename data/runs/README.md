@@ -17,12 +17,13 @@ Finished live runs live here so `watch.html` can replay them beat by beat.
   "title": "Week 1 — First Day as Chief of Staff",
   "agent": "Scout",
   "date": "2026-09-28",
-  "score": 412,
+  "score": 300,
   "file": "data/runs/2026-09-28-scout-w1.json"
 }
 ```
 
-`score` is the run total out of 500 (sum of the five level scores).
+`score` is the run total out of 400: the sum of the four scored levels
+(L1-L4). L5 is an unscored exhibition build and adds nothing.
 `file` is the path relative to the site root.
 
 ## Format

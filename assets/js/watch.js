@@ -214,16 +214,16 @@
     var sum = totals.reduce(function(a, e){ return a + (Number(e.total) || 0); }, 0);
     var nStars = stars.filter(Boolean).length;
     var starLine = "";
-    for(var i = 0; i < 5; i++) starLine += i < nStars ? "★" : "☆";
+    for(var i = 0; i < 4; i++) starLine += i < nStars ? "★" : "☆"; // 4 scored levels, 0-4 stars
     runEnd.hidden = false;
     runEnd.innerHTML =
       '<div class="run-end">' +
         '<img src="assets/img/mabel-typing.webp" alt="Mabel stamping the final scores into the minutes">' +
         '<p class="eyebrow">Final minutes</p>' +
-        '<div class="big-score">' + sum + '<span class="small muted">/500</span></div>' +
+        '<div class="big-score">' + sum + '<span class="small muted">/400</span></div>' +
         '<div class="stars">' + starLine + "</div>" +
         "<p class='muted'>Mabel stamps the minutes. " + esc(data.agent || "Scout") +
-        " clears " + nStars + " of 5 levels with a star.</p>" +
+        " earns a star on " + nStars + " of 4 scored levels. Scores are self-reported and provisional.</p>" +
         '<div class="btn-row" style="justify-content:center">' +
           '<a class="btn btn-primary" href="leaderboard.html">See the leaderboard</a>' +
         "</div>" +
@@ -374,7 +374,7 @@
             '<span><strong>' + esc(run.title || run.id) + "</strong><br>" +
             '<span class="rid">' + esc(run.id) + " · " + esc(run.agent || "") +
             (run.date ? " · " + esc(run.date) : "") + "</span></span>" +
-            (run.score != null ? '<span class="rscore">' + esc(run.score) + "/500</span>" : "");
+            (run.score != null ? '<span class="rscore">' + esc(run.score) + "/400</span>" : "");
           b.addEventListener("click", function(){ startReplay(run); });
           replayList.appendChild(b);
         });
