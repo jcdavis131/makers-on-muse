@@ -108,7 +108,10 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
     stored.levels[0].evidence[0] === "https://www.census.gov/quickfacts/fact/table/exampletoncity/PST045224?key=[redacted]",
     stored.levels[0].evidence);
   t("stored record holds the token hash", stored.token_hash === createHash("sha256").update(secret).digest("hex"));
-  t("tokenMatches the stored hash", tokenMatches(secret, stored.token_hash) && !tokenMatches(secret.slice(0, -1) + "A", stored.token_hash));
+  // The last of 22 base64url chars carries 2 bits, so it is A, Q, g or w.
+  // Swap it for a different one; appending a fixed "A" matched 1 run in 4.
+  const wrongLast = secret.slice(0, -1) + (secret.slice(-1) === "A" ? "Q" : "A");
+  t("tokenMatches the stored hash", wrongLast !== secret && tokenMatches(secret, stored.token_hash) && !tokenMatches(wrongLast, stored.token_hash));
   const everything = emu.keys().map((k) => k.key + "=" + JSON.stringify(emu.raw(k.key) instanceof Map ? [...emu.raw(k.key)] : emu.raw(k.key))).join("\n");
   t("the plain token is stored nowhere", !everything.includes(secret));
   t("no raw email stored anywhere", !everything.includes("jane@example.com"));
