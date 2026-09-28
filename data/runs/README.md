@@ -20,8 +20,10 @@ Follow "Archiving a run" in `docs/watch-protocol.md`. In short:
    (calendar, email, contacts). Replace each cut with a bracketed note.
 2. Convert `t` to seconds since `started_at` and number `seq` from 1.
 3. Set `demo`, `label` and `about` if it isn't a real pack run.
-4. Save it as `data/runs/<run_id>.json` and add one entry to
-   `index.json`:
+4. Save it as `data/runs/<run_id>.json` and add one entry at the top of
+   the `runs` array in `index.json`. Keep the newest run first: when
+   nothing is live, Watch plays the first entry. No test checks the
+   order.
 
 ```json
 {

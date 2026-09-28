@@ -205,8 +205,9 @@ in this repo.
    `seq` start at 1.
 3. **Label it.** If the run isn't a real pack run under the rules, set
    `demo`, `label` and `about`.
-4. **Save it** as `data/runs/<run_id>.json` and add an entry to
-   `data/runs/index.json`:
+4. **Save it** as `data/runs/<run_id>.json` and add an entry at the top
+   of the `runs` array in `data/runs/index.json`. Newest first: with no
+   live run, Watch plays the first entry.
 
 ```json
 {"id": "exampleton-test-run", "week": 1, "title": "Week 1 test run",
