@@ -202,7 +202,11 @@ Answer keys aren't built yet; when they are, they stay out of it too.
    piece with a bracketed note that says what kind of thing was there.
    Don't add events and don't rewrite what's left.
 2. **Normalize it.** Convert `t` to seconds since `started_at` and make
-   `seq` start at 1.
+   `seq` start at 1. Then set `started_at` to midnight UTC on the run's
+   date (`2026-10-05T00:00:00.000Z`); `t` keeps the timing, and the
+   archive carries no clock time from the run. If you note where the
+   run came from (`scrub.source`), say what it was, not where it lives:
+   never a branch, file path or commit.
 3. **Label it.** If the run isn't a real pack run under the rules, set
    `demo`, `label` and `about`.
 4. **Save it** as `data/runs/<run_id>.json` and add an entry at the top

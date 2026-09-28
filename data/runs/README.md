@@ -19,6 +19,9 @@ Follow "Archiving a run" in `docs/watch-protocol.md`. In short:
    budget, names), no answers, nothing from the player's own accounts
    (calendar, email, contacts). Replace each cut with a bracketed note.
 2. Convert `t` to seconds since `started_at` and number `seq` from 1.
+   Then set `started_at` to midnight UTC on the run's date. `t` keeps
+   the timing. `scrub.source`, if present, never names a branch, file
+   path or commit where the unscrubbed original lived.
 3. Set `demo`, `label` and `about` if it isn't a real pack run.
 4. Save it as `data/runs/<run_id>.json` and add one entry at the top of
    the `runs` array in `index.json`. Keep the newest run first: when
