@@ -10,7 +10,7 @@ Site: **makersonmuse.com**. Independent project, not affiliated with Meta.
 - **No storage is connected.** `/api/health` reports `storage: "missing"`, and `/api/submit` returns 503 and stores nothing. The storage code is written for Upstash Redis; submissions can't be saved until the database is connected (see Storage below).
 - **Scores are provisional.** Every input (correctness, tokens, seconds, procedure) is self-reported. Per-player instances, fixtures and server grading are not built.
 - **The leaderboard opens after the week closes.** Until then `/api/leaderboard` returns only the number of entries, and the page says when the board opens.
-- **Watch has one replay**, labelled "Demo run, unofficial". Nothing streams live.
+- **Watch plays one replay**, labelled "Demo run, unofficial". Nothing streams live until storage is connected.
 
 ## Submitting a run
 
@@ -55,12 +55,17 @@ Don't submit through GitHub issues. This repo is public, and a Muse transcript c
 level score = correctness × (w_token·tokenEff + w_time·timeEff + w_proc·procedure)
 ```
 
-- Correctness is 0 or 1 and gates the level. Efficiency is `min(par / actual, 1)`. The level score is 0-100.
-- Weights (token/time/procedure): L1 50/30/20, L2 30/20/50, L3 20/20/60, L4 30/20/50.
-- 60+ on a level earns its star. Four scored levels make up to 400 points and 0-4 stars a week. L5 is an unscored exhibition.
-- The pars in `lib/score.js` and `pack.html` don't agree yet. One pack manifest that both read is planned.
+Every number comes from the week's pack manifest, `data/packs/s1w1.json` (version 1):
 
-Code: `lib/score.js`. Page: `scoring.html`.
+- Correctness is 0 or 1, attested by the player, and gates the level. Efficiency is `min(par / actual, 1)`. The level score is 0-100.
+- Pars (tokens, time): L1 800, 60 s; L2 4,000, 4 min; L3 2,500, 3 min; L4 6,000, 6 min. They are first guesses, not calibrated on real Muse runs, and stay fixed for Week 1.
+- Weights (token/time/procedure): L1 50/30/20, L2 30/20/50, L3 20/20/60, L4 30/20/50.
+- 60 or more on a level earns its star. Four scored levels make up to 400 points and 0-4 stars a week. L5 is an unscored exhibition.
+- L3's 30% safety cap is recorded in the manifest but not applied: nothing can detect a violation until server grading ships.
+
+The pack page and the old scorer had different pars. The manifest keeps the pack page's set, because it is what players saw and it reproduces both `scoring.html`'s worked example (92) and the demo replay's self-reported scores (318). `data/packs/README.md` has the details.
+
+`lib/score.js` scores from the manifest it is given and throws on anything it can't apply. `api/submit.js` passes the week's manifest and stores its id, version and hash on each record. `pack.html`, `scoring.html`, `faq.html` and `submit.html` carry the numbers as static text marked `data-pack`, written by `npm run build:pack` (`scripts/stamp-pack.mjs`). Watch reads the manifest for a run's week. `scripts/test-pack.mjs` fails if any of them disagree.
 
 ## Storage
 
@@ -98,7 +103,7 @@ The leaderboard (`/api/leaderboard?week=1`) holds entries back until the week cl
 
 ## This repo
 
-Plain HTML, CSS and JS. No framework and no build step. Vercel serves the root as static files and runs `api/*.js` as functions. `.vercelignore` keeps `scripts/`, `docs/`, `.github/` and the READMEs off the site. `lib/` has to stay deployed because `api/` requires it.
+Plain HTML, CSS and JS, with no framework. Vercel serves the root as static files and runs `api/*.js` as functions. There is no build on Vercel: `npm run build:pack` stamps the pack manifest's numbers into the pages, and its output is committed. `.vercelignore` keeps `scripts/`, `docs/`, `.github/` and the READMEs off the site. `lib/` has to stay deployed because `api/` requires it.
 
 ```
 index.html              landing
@@ -118,13 +123,13 @@ assets/js/main.js       mobile nav, Mabel
 assets/js/submit-form.js  the submit form's checks, error mapping, receipt rows and drafts
 assets/js/board.js      the leaderboard page
 assets/js/receipt.js    the receipt page
-assets/js/watch.js      the Watch player
+assets/js/watch.js      the Watch player: live through the API, or the archive's first run
 assets/css/             styles
 assets/img/             Mabel artwork
-data/packs/             one manifest per week: the open and close instants (public; no answers)
+data/packs/             one manifest per week: dates, levels, pars, blends, the star rule (public; no answers)
 data/runs/              scrubbed runs that Watch replays
 docs/watch-protocol.md  the Watch event format and the archive rules
-scripts/                tests, an in-memory Redis for them, the post-deploy health check
+scripts/                tests, an in-memory Redis for them, the pack stamp, the post-deploy health check
 ```
 
 ## Running it locally
@@ -150,6 +155,8 @@ Runs each test script in `scripts/` with Node. Run `npm ci` once first: the inte
 - `test-copy.mjs`: the week dates, the closed form, and copy that promises things the site doesn't do.
 - `test-privacy.mjs`: no public submission channel, the deploy config, the Watch archive and its scrub, and fictional worked values.
 - `test-pages.mjs`: the page logic in `submit-form.js`, `receipt.js` and `board.js`. What the form sends must pass the server's validator. Every value from the API is escaped (tested with markup in every field). Drafts never throw, even when storage does. Also the receipt page's privacy settings, the `/receipt` rewrite, and a reviewed list of every `innerHTML` assignment, so a new one fails until someone checks it.
+- `test-pack.mjs`: the pack manifest contract. The manifest is well formed. The pages' marked numbers match it, and no page has lost a marker. `scoring.html`'s worked example is what `lib/score.js` computes. The scorer moves with the manifest. `api/submit.js` scores with it. The validator asks for its scored levels. The archived runs' scores reproduce under its pars.
+- `test-watch.mjs`: the Watch player. Run time is the last event minus the start. Tokens are only what the agent reported, or "—". A reconnect adds no beat twice. The result is out of the manifest's maximum. The page follows the feed only when the reader has scrolled to its end. Also escaping, the page's first state ("Connecting…"), the demo badge, and a reviewed list of `innerHTML` assignments.
 
 `test-privacy.mjs` can also scan every file for the retired instance values. It needs the private list, one value per line, kept outside the repo:
 
@@ -161,10 +168,10 @@ Without it, that scan is skipped and says so.
 
 ## Roadmap
 
-**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key); receipts (status and delete by secret token), a leaderboard that opens after the week closes, and the submit form's handle, contact, "Didn't attempt", inline errors, L5 link, terms box and drafts. Still to do:
+**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key); receipts (status and delete by secret token), a leaderboard that opens after the week closes, and the submit form's handle, contact, "Didn't attempt", inline errors, L5 link, terms box and drafts; one pack manifest for pars, blends, totals and stars, and the Watch fixes (no forced scrolling, one final panel, "Connecting…", no invented tokens, run time from the events, the demo replay by default). Still to do:
 
 - Connect the Upstash database in the Vercel Marketplace, then run `scripts/check-health.mjs`.
-- Watch fixes, levels, pars and blends in the pack manifest, About/Privacy/Terms pages (the submit form's consent box already links `terms.html` and `privacy.html`), and site hygiene.
+- About/Privacy/Terms pages (the submit form's consent box already links `terms.html` and `privacy.html`), and site hygiene.
 
 **Phase 2: the core platform.** Server-issued instances for each attempt, fixtures for L3 and L4, server grading, submissions for the Setups and Skills library, and sign-in.
 

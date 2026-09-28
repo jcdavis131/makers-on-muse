@@ -271,8 +271,15 @@ console.warn = (...a) => { warnings.push(a.join(" ")); };
       wk.opensLabel === PACK.opens_label && wk.closesLabel === PACK.closes_label && wk.title === PACK.title,
       { wk, PACK });
     t("every season.js week has a manifest", season.WEEKS.every((w) => packs.byWeek(w.week)));
-    const allowed = ["schema", "id", "season", "week", "title", "timezone", "opens", "closes", "range", "opens_label", "closes_label"];
-    t("manifest holds only schedule fields (no answers)", Object.keys(PACK).every((k) => allowed.includes(k)), Object.keys(PACK));
+    // The manifest is served publicly. checkManifest refuses answer-shaped
+    // keys anywhere in it (answer, solution, optimum, instance, pool, trap,
+    // secret, key); scripts/test-pack.mjs covers the rest of its shape.
+    t("manifest is valid and holds no answer-shaped keys", packs.checkManifest(PACK).length === 0, packs.checkManifest(PACK));
+    for (const k of ["answer_key", "instances", "trap_notes", "optimum", "keys"]) {
+      const bad = JSON.parse(JSON.stringify(PACK));
+      bad.levels[0][k] = "x";
+      t("manifest check refuses a \"" + k + "\" key", packs.checkManifest(bad).some((e) => /no answer-shaped keys/.test(e)));
+    }
     t("manifest opens 6:00 AM CT Mon Oct 5 2026", PACK.opens === "2026-10-05T11:00:00Z");
   }
 

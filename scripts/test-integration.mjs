@@ -92,6 +92,8 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   const s1 = sub("juniper-player", "Juniper");
   s1.levels[0].answer = "answer with jane@example.com inside";
   s1.levels[0].evidence = ["https://www.census.gov/quickfacts/fact/table/exampletoncity/PST045224?key=abc123"];
+  // L1 carries scoring.html's worked example: 860 tokens, 70 s, procedure 1.0.
+  Object.assign(s1.levels[0], { tokens_est: 860, seconds: 70, procedure_score: 1, correct: 1 });
   r = await post(submit, s1, { origin: "https://makersonmuse.com" });
   t("submit -> 200 + receipt", r.status === 200 && /^1-[0-9a-f]{8}$/.test(r.body.receipt), r);
   t("submit returns a 128-bit secret token", /^mom_[A-Za-z0-9_-]{22}$/.test(r.body.token || ""));
@@ -99,6 +101,11 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   t("submit response is no-store", r.headers["cache-control"] === "no-store");
   t("submit redacted the email", r.body.redactions >= 1);
   t("submit provisional totals", typeof r.body.total === "number" && r.body.stars >= 0 && r.body.provisional === true);
+  t("the API scores with the manifest pars: the worked example is 92 (the old scorer pars gave 97)",
+    r.body.scores[0].total === 92 && r.body.scores[0].star === true, r.body.scores[0]);
+  t("submit names the manifest it scored with",
+    JSON.stringify(r.body.pack) === JSON.stringify({ id: "s1w1", version: PACK.version, hash: packs.hash(PACK) }), r.body.pack);
+  t("submit reports the manifest maximums", r.body.max_total === PACK.scoring.max_total && r.body.max_stars === PACK.scoring.max_stars, r.body);
   const receipt = r.body.receipt;
   const secret = r.body.token;
 
@@ -118,7 +125,9 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   t("token index points at the receipt", emu.raw("mom:tok:" + stored.token_hash) === receipt);
   t("handle claim points at the receipt", emu.raw("mom:handle:s1w1:juniper-player") === receipt);
   t("record keeps only known fields", Object.keys(stored).sort().join() ===
-    "agent,consent,created_at,handle,levels,pack,provisional,receipt,redactions,schema,scores,season,stars,status,token_hash,total,week");
+    "agent,consent,created_at,handle,levels,pack,pack_hash,pack_version,provisional,receipt,redactions,schema,scores,season,stars,status,token_hash,total,week");
+  t("record stamps the manifest id, version and hash", stored.schema === 4 && stored.pack === "s1w1" &&
+    stored.pack_version === PACK.version && stored.pack_hash === packs.hash(PACK) && /^[0-9a-f]{64}$/.test(stored.pack_hash), stored);
   t("record starts as received, with terms agreed", stored.status === "received" && stored.consent.terms === true);
 
   /* --- one entry per handle per week --- */
@@ -177,6 +186,8 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   t("receipt status: week open, expiry date", r.body.week_state === "open" &&
     r.body.expires === new Date(packs.expiresAt(PACK) * 1000).toISOString(), r.body);
   t("receipt status is no-store", r.headers["cache-control"] === "no-store");
+  t("receipt status names the manifest", r.body.pack && r.body.pack.id === "s1w1" && r.body.pack.version === PACK.version &&
+    r.body.pack.hash === packs.hash(PACK), r.body.pack);
   const own = JSON.stringify(r.body);
   t("receipt status holds no answers or token hash", !own.includes("answer with") && !own.includes(stored.token_hash) && !own.includes(secret));
   r = await post(receiptApi, { token: quillToken, action: "status" });

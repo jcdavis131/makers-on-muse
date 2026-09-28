@@ -8,7 +8,7 @@ const { validateSubmission } = require("../lib/validate.js");
 const { checkHandle, checkAgent } = require("../lib/names.js");
 const tok = require("../lib/token.js");
 const packs = require("../lib/packs.js");
-const { provisionalScore, provisionalSubmissionScore, BLENDS } = require("../lib/score.js");
+const { provisionalScore, provisionalSubmissionScore, levelSpec } = require("../lib/score.js");
 
 let pass = 0, fail = 0;
 function t(name, cond) {
@@ -268,38 +268,62 @@ t("array body fails", !validateSubmission([]).ok);
 }
 
 /* ---------- score ---------- */
-// scoring.html's worked example says 92, but it uses the BASELINE blend
-// (35/25/40) for an L4 run; the published L4 blend is 30/20/50, which gives:
-// 0.3*1.0 + 0.2*1.0 + 0.5*0.8 = 0.90 -> 90. The blend table is authoritative,
-// so the implementation (and this test) follow it. Flagged for content fix.
+// Pars, blends and the star rule come from the pack manifest.
+// scripts/test-pack.mjs checks the pages against it; these check the math.
+const P = packs.byWeek(1);
 const ex = provisionalScore(
-  { n: 4, correct: 1, tokens_est: 4800, seconds: 300, procedure_score: 0.8 },
-  { pars: { 4: { tokens: 6000, seconds: 360 } } }
+  { n: 4, correct: 1, tokens_est: 4800, seconds: 300, procedure_score: 0.8 }, P
 );
+// L4 par 6,000 tokens / 360 s, blend 30/20/50: 0.3*1 + 0.2*1 + 0.5*0.8 = 0.90
 eq("L4 blend total", ex.total, 90);
-t("worked example star", ex.star === true);
+t("90 earns the star", ex.star === true);
 t("provisional labeled", ex.provisional === true);
 eq("parts", ex.parts, { correctness: 1, tokens: 1, time: 1, procedure: 0.8 });
+eq("scoring.html worked example (L1: 860 tokens, 70 s, procedure 1.0) scores 92",
+  provisionalScore({ n: 1, correct: 1, tokens_est: 860, seconds: 70, procedure_score: 1 }, P).total, 92);
+{
+  // L2 at par (30 + 20) plus procedure p x 50: p 0.18 -> 59, p 0.2 -> 60.
+  const l2 = (p) => provisionalScore({ n: 2, correct: 1, tokens_est: 4000, seconds: 240, procedure_score: p }, P);
+  eq("star rule: 59 has no star, 60 has one", [l2(0.18).total, l2(0.18).star, l2(0.2).total, l2(0.2).star], [59, false, 60, true]);
+}
 
-const wrong = provisionalScore({ n: 1, correct: 0, tokens_est: 10, seconds: 5, procedure_score: 1 });
+const wrong = provisionalScore({ n: 1, correct: 0, tokens_est: 10, seconds: 5, procedure_score: 1 }, P);
 eq("gate: wrong answer scores 0", wrong.total, 0);
 
-const noProc = provisionalScore({ n: 2, correct: 1, tokens_est: 6000, seconds: 600 });
+const noProc = provisionalScore({ n: 2, correct: 1, tokens_est: 6000, seconds: 600 }, P);
 t("missing procedure_score -> procedure 0", noProc.parts.procedure === 0);
 
-const s = provisionalSubmissionScore(good.levels);
+const s = provisionalSubmissionScore(good.levels, P);
 t("submission total is sum of L1-L4", s.total === s.levels.filter(l => l.n <= 4).reduce((a, l) => a + l.total, 0));
 t("stars counted", typeof s.stars === "number");
-t("blends match published", BLENDS[1].token === 0.5 && BLENDS[3].procedure === 0.6);
+eq("submission reports the manifest maximums", [s.max_total, s.max_stars], [400, 4]);
+t("blends come from the manifest", levelSpec(P, 1).blend.token === 0.5 && levelSpec(P, 3).blend.procedure === 0.6);
+
+/* The scorer refuses what it can't apply, instead of scoring it some other way. */
+function throws(name, fn, match) {
+  try { fn(); t(name + " (did not throw)", false); } catch (e) { t(name + " (" + e.message + ")", match.test(e.message)); }
+}
+throws("no pack: throws", () => provisionalScore({ n: 1, correct: 1, tokens_est: 1, seconds: 1 }), /needs a pack manifest/);
+throws("no pack: submission throws", () => provisionalSubmissionScore(good.levels), /needs a pack manifest/);
+throws("exhibition level is not scored", () => provisionalScore({ n: 5, correct: 1, tokens_est: 1, seconds: 1 }, P), /not a scored level/);
+throws("unknown level is not scored", () => provisionalScore({ n: 9, correct: 1, tokens_est: 1, seconds: 1 }, P), /not a scored level/);
+{
+  const partial = clone(P);
+  partial.levels[3].correctness = "partial";
+  throws("a correctness type the scorer can't apply throws", () => provisionalSubmissionScore(good.levels, partial), /needs server grading/);
+  const capped = clone(P);
+  capped.levels[2].safety_cap.applied = true;
+  throws("an applied safety cap throws", () => provisionalScore(good.levels[2], capped), /safety cap needs server grading/);
+}
 {
   const levels = clone(good.levels);
   levels[1] = { n: 2, skipped: true };
-  const sk = provisionalSubmissionScore(levels);
+  const sk = provisionalSubmissionScore(levels, P);
   eq("a skipped level scores 0, no star", sk.levels[1], { n: 2, skipped: true, total: 0, star: false, provisional: true });
   eq("L5 is an exhibition with no points", sk.levels[4], { n: 5, exhibition: true, provisional: true });
   eq("total counts attempted L1-L4 only",
-    sk.total, [0, 2, 3].reduce((a, i) => a + provisionalScore(levels[i]).total, 0));
-  t("stars count attempted levels only", sk.stars === [0, 2, 3].filter((i) => provisionalScore(levels[i]).star).length);
+    sk.total, [0, 2, 3].reduce((a, i) => a + provisionalScore(levels[i], P).total, 0));
+  t("stars count attempted levels only", sk.stars === [0, 2, 3].filter((i) => provisionalScore(levels[i], P).star).length);
 }
 {
   const r = redactSubmission({ levels: [

@@ -17,6 +17,7 @@ const require = createRequire(import.meta.url);
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const season = require("../assets/js/season.js");
 const { provisionalSubmissionScore } = require("../lib/score.js");
+const PACK = require("../lib/packs.js").byWeek(1);
 
 let pass = 0, fail = 0;
 function t(name, cond) {
@@ -194,21 +195,26 @@ for (const f of scanFiles) {
 /* ---------- 4. canonical scoring line ---------- */
 {
   const perfect = [1, 2, 3, 4, 5].map((n) => ({ n, correct: 1, tokens_est: 1, seconds: 1, procedure_score: 1 }));
-  const s = provisionalSubmissionScore(perfect);
+  const s = provisionalSubmissionScore(perfect, PACK);
   eq("max week total is 400", s.total, 400);
   eq("max stars is 4", s.stars, 4);
-  const onlyL5 = provisionalSubmissionScore([perfect[4]]);
+  const onlyL5 = provisionalSubmissionScore([perfect[4]], PACK);
   eq("L5 adds no points", onlyL5.total, 0);
   eq("L5 adds no star", onlyL5.stars, 0);
 
-  const scoring = decode(read("scoring.html"));
+  // Tags stripped: pack numbers sit in data-pack spans (scripts/stamp-pack.mjs).
+  const scoring = decode(read("scoring.html").replace(/<[^>]+>/g, ""));
   t("scoring: 400 points", scoring.includes("up to 400 points"));
   t("scoring: 0-4 stars", scoring.includes("0–4 stars") && scoring.includes("0–4 per week"));
   t("scoring: L5 unscored exhibition", scoring.includes("L5 is an unscored exhibition build"));
   t("scoring: says inputs are self-reported", scoring.includes("Every input is self-reported"));
-  t("watch.js: final panel out of 400", read("assets/js/watch.js").includes("/400</span>"));
+  // Watch takes the maximum and the star count from the run's pack
+  // manifest (scripts/test-pack.mjs and scripts/test-watch.mjs check it).
+  t("watch.js: final panel out of the manifest's max_total", /s\.maxTotal/.test(read("assets/js/watch.js")) &&
+    /maxTotal: pack \? pack\.scoring\.max_total/.test(read("assets/js/watch.js")));
   t("board.js: four star slots", /for \(var i = 0; i < 4; i\+\+\)/.test(read("assets/js/board.js")));
-  t("watch.js: four star slots", /for\(var i = 0; i < 4; i\+\+\)/.test(read("assets/js/watch.js")));
+  t("watch.js: one star slot per scored level", /maxStars: pack \? pack\.scoring\.max_stars/.test(read("assets/js/watch.js")) &&
+    /for \(var i = 0; i < s\.maxStars; i\+\+\)/.test(read("assets/js/watch.js")));
 }
 
 /* ---------- 5. Muse facts cite reviewed sources ---------- */

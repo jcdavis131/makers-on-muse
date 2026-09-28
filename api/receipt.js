@@ -73,6 +73,8 @@ function view(rec, code) {
       return { n: s.n, total: s.total, star: Boolean(s.star) };
     }),
     provisional: true,
+    // The manifest the scores were computed with (records from schema 4 on).
+    pack: rec.pack_version ? { id: rec.pack, version: rec.pack_version, hash: rec.pack_hash } : null,
     week_state: pack ? packs.state(pack, lib.now()) : "closed",
     expires: pack ? new Date(packs.expiresAt(pack) * 1000).toISOString() : null
   };

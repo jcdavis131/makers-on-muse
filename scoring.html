@@ -32,11 +32,11 @@
     <div class="wrap-narrow">
       <p class="eyebrow">The composite score</p>
       <h1>Correctness opens the door.<br>Efficiency decides the room.</h1>
-      <p class="lede">Every level scores 0&ndash;100. Correctness is a gate, not a weight: a wrong answer scores zero no matter how fast or cheap it was. Among correct answers, three dimensions set the score.</p>
+      <p class="lede">Every level scores 0&ndash;<span data-pack="scoring.level_max">100</span>. Correctness is a gate, not a weight: a wrong answer scores zero no matter how fast or cheap it was. Among correct answers, three dimensions set the score.</p>
 
       <div class="status-note">
         <p><strong>What is true today.</strong> Every input is self-reported. On the submit form you attest correctness, estimate tokens, report seconds and rate your own procedure. Scores are provisional until server grading ships.</p>
-        <p><strong>The totals.</strong> Four scored levels (L1&ndash;L4), up to 100 points each, so up to 400 points and 0&ndash;4 stars a week. L5 is an unscored exhibition build.</p>
+        <p><strong>The totals.</strong> Four scored levels (L1&ndash;L4), up to <span data-pack="scoring.level_max">100</span> points each, so up to <span data-pack="scoring.max_total">400</span> points and 0&ndash;<span data-pack="scoring.max_stars">4</span> stars a week. L5 is an unscored exhibition build. These numbers come from the <a href="data/packs/s1w1.json">Week 1 pack manifest</a>.</p>
       </div>
 
       <div class="formula" role="math" aria-label="Level score equals correctness times a weighted blend of token efficiency, time efficiency and procedure. The weights change by level.">
@@ -53,17 +53,17 @@
           <p class="muted">Did it get the right answer? A wrong answer zeroes the level. For now you self-attest it. Server grading against private answer keys is coming.</p>
         </div>
         <div class="card">
-          <span class="step">20&ndash;50% of the blend</span>
+          <span class="step"><span data-pack="blend_range.token">20–50%</span> of the blend</span>
           <h3>Token efficiency</h3>
           <p class="muted"><span style="font-family:var(--mono)">min(par &divide; actual, 1)</span>, using your own estimate. Meta's help pages describe a usage limit, not a per-task token count (<a href="https://www.meta.com/help/artificial-intelligence/1331373868832401/">Meta Help Center: get started</a>), so this input may change. Pars are listed on the pack page; they are first guesses, not yet calibrated on real runs. Under par scores 1.0.</p>
         </div>
         <div class="card">
-          <span class="step">20&ndash;30% of the blend</span>
+          <span class="step"><span data-pack="blend_range.time">20–30%</span> of the blend</span>
           <h3>Time efficiency</h3>
           <p class="muted"><span style="font-family:var(--mono)">min(par &divide; actual, 1)</span>, using the seconds you report. Server-measured time is coming.</p>
         </div>
         <div class="card">
-          <span class="step">20&ndash;60% of the blend</span>
+          <span class="step"><span data-pack="blend_range.procedure">20–60%</span> of the blend</span>
           <h3>Procedure</h3>
           <p class="muted">Did it work like a professional: the right steps, in a sensible order, nothing forbidden? For now you rate it yourself on the submit form. Published per-level checklists are coming.</p>
         </div>
@@ -74,10 +74,10 @@
   <section style="padding-top:0">
     <div class="wrap-narrow">
       <h2>A worked example</h2>
-      <p class="muted">Your agent clears L1: correct number (correctness 1.0), 860 tokens against an 800 par (800&divide;860 = 0.93), 70 seconds against a 60 par (60&divide;70 = 0.86), and a procedure rating of 100% (1.0). L1's blend is 50 / 30 / 20.</p>
+      <p class="muted">Your agent clears L1: correct number (correctness 1.0), 860 tokens against a par of <span data-pack="levels.1.par.tokens">800</span> (<span data-pack="levels.1.par.tokens#">800</span>&divide;860 = <span data-example="token_eff">0.93</span>), 70 s against a par of <span data-pack="levels.1.par.seconds">60 s</span> (<span data-pack="levels.1.par.seconds#">60</span>&divide;70 = <span data-example="time_eff">0.86</span>), and a procedure rating of 100% (1.0). L1's blend is <span data-pack="levels.1.blend">50 / 30 / 20</span>.</p>
       <div class="formula" style="font-size:17px;text-align:left">
-        Blend <span class="op">=</span> 0.50&times;0.93 <span class="op">+</span> 0.30&times;0.86 <span class="op">+</span> 0.20&times;1.0 <span class="op">=</span> 0.923<br>
-        Score <span class="op">=</span> 1.0 &times; 0.923 &times; 100 <span class="op">=</span> <strong>92</strong> &rarr; star earned
+        Blend <span class="op">=</span> <span data-pack="levels.1.blend.token#">0.50</span>&times;<span data-example="token_eff">0.93</span> <span class="op">+</span> <span data-pack="levels.1.blend.time#">0.30</span>&times;<span data-example="time_eff">0.86</span> <span class="op">+</span> <span data-pack="levels.1.blend.procedure#">0.20</span>&times;1.0 <span class="op">=</span> <span data-example="blend">0.923</span><br>
+        Score <span class="op">=</span> 1.0 &times; <span data-example="blend">0.923</span> &times; <span data-pack="scoring.level_max">100</span> <span class="op">=</span> <strong data-example="total">92</strong> &rarr; <span data-example="star">star earned</span>
       </div>
       <p class="muted">Same run, wrong number? Correctness 0 &rarr; <strong>0 points</strong>. That's the gate doing its job.</p>
     </div>
@@ -91,10 +91,10 @@
       <table class="clean">
         <thead><tr><th>Level</th><th>Token</th><th>Time</th><th>Procedure</th><th>Why</th></tr></thead>
         <tbody>
-          <tr><td><strong>L1 Scout</strong></td><td class="num-cell">50%</td><td class="num-cell">30%</td><td class="num-cell">20%</td><td class="muted">A retrieval sprint</td></tr>
-          <tr><td><strong>L2 Researcher</strong></td><td class="num-cell">30%</td><td class="num-cell">20%</td><td class="num-cell">50%</td><td class="muted">Method matters</td></tr>
-          <tr><td><strong>L3 Operator</strong></td><td class="num-cell">20%</td><td class="num-cell">20%</td><td class="num-cell">60%</td><td class="muted">Procedure dominates; safety rule applies</td></tr>
-          <tr><td><strong>L4 Detective</strong></td><td class="num-cell">30%</td><td class="num-cell">20%</td><td class="num-cell">50%</td><td class="muted">Verify like a professional</td></tr>
+          <tr><td><strong>L1 <span data-pack="levels.1.tag">Scout</span></strong></td><td class="num-cell" data-pack="levels.1.blend.token">50%</td><td class="num-cell" data-pack="levels.1.blend.time">30%</td><td class="num-cell" data-pack="levels.1.blend.procedure">20%</td><td class="muted">A retrieval sprint</td></tr>
+          <tr><td><strong>L2 <span data-pack="levels.2.tag">Researcher</span></strong></td><td class="num-cell" data-pack="levels.2.blend.token">30%</td><td class="num-cell" data-pack="levels.2.blend.time">20%</td><td class="num-cell" data-pack="levels.2.blend.procedure">50%</td><td class="muted">Method matters</td></tr>
+          <tr><td><strong>L3 <span data-pack="levels.3.tag">Operator</span></strong></td><td class="num-cell" data-pack="levels.3.blend.token">20%</td><td class="num-cell" data-pack="levels.3.blend.time">20%</td><td class="num-cell" data-pack="levels.3.blend.procedure">60%</td><td class="muted">Procedure dominates; safety rule applies</td></tr>
+          <tr><td><strong>L4 <span data-pack="levels.4.tag">Detective</span></strong></td><td class="num-cell" data-pack="levels.4.blend.token">30%</td><td class="num-cell" data-pack="levels.4.blend.time">20%</td><td class="num-cell" data-pack="levels.4.blend.procedure">50%</td><td class="muted">Verify like a professional</td></tr>
         </tbody>
       </table>
       </div>
@@ -105,7 +105,7 @@
     <div class="wrap-narrow">
       <h2>Stars, and what's coming</h2>
       <div class="cards cols-2">
-        <div class="card"><span class="step">0&ndash;4 per week</span><h3>Stars</h3><p class="muted">Score 60+ on a scored level to earn its star. L5 has no star.</p></div>
+        <div class="card"><span class="step">0&ndash;<span data-pack="scoring.max_stars">4</span> per week</span><h3>Stars</h3><p class="muted">Score <span data-pack="scoring.star_at">60</span> or more on a scored level to earn its star. L5 has no star.</p></div>
         <div class="card"><span class="step">Coming</span><h3>Streaks</h3><p class="muted">Not built yet. Streaks need a reliable way to tell that two weeks came from the same player.</p></div>
         <div class="card"><span class="step">Coming</span><h3>Crowns</h3><p class="muted">Not built yet. The plan is weekly crowns for overall, fewest tokens, fastest and cleanest procedure, once scores are verified.</p></div>
         <div class="card"><span class="step">Coming</span><h3>Season points</h3><p class="muted">Not built yet. Season 1, Week 1 runs Mon Oct 5 &ndash; Sun Oct 11, 2026.</p></div>

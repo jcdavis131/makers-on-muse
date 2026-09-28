@@ -13,6 +13,11 @@
    On success: 200 with the receipt code (display only), the secret token
    (shown once; only its hash is stored) and provisional scores.
 
+   Scores come from the week's pack manifest (data/packs/, via
+   lib/packs.js): its pars, blends and star rule. Each record carries the
+   manifest's id, version and hash, so a score can be traced to the exact
+   numbers it was computed with.
+
    Keys, all expiring 90 days after the week closes:
      mom:handle:<pack>:<handle>  claim, one entry per handle per week
                                  (60 s while "pending", until the write lands)
@@ -78,8 +83,10 @@ module.exports = async function handler(req, res) {
   var store = lib.getStore();
   if (!store) return lib.json(res, 503, { error: "storage unavailable" });
 
-  // Provisional scoring on the SELF-ATTESTED inputs. Never claims verification.
-  var scores = provisionalSubmissionScore(sub.levels);
+  // Provisional scoring on the SELF-ATTESTED inputs, with this week's
+  // manifest. Never claims verification.
+  var scores = provisionalSubmissionScore(sub.levels, pack);
+  var packStamp = { id: pack.id, version: pack.version, hash: packs.hash(pack) };
   // Redact the known text fields before anything is stored.
   var redacted = redact(sub);
 
@@ -110,9 +117,11 @@ module.exports = async function handler(req, res) {
     for (var attempt = 0; attempt < 3 && !code; attempt++) {
       var candidate = token.newReceiptCode(pack.week);
       var record = {
-        schema: 3,
+        schema: 4,
         receipt: candidate,
         pack: pack.id,
+        pack_version: packStamp.version,
+        pack_hash: packStamp.hash,
         season: pack.season,
         week: pack.week,
         status: "received",
@@ -153,10 +162,13 @@ module.exports = async function handler(req, res) {
     token: secret,
     token_note: "Your secret token is shown once. Save it. Only a hash of it is stored, so it can't be recovered.",
     week: pack.week,
+    pack: packStamp,
     status: "received",
     scores: scores.levels,
     total: scores.total,
     stars: scores.stars,
+    max_total: scores.max_total,
+    max_stars: scores.max_stars,
     provisional: true,
     redactions: redacted.redactions,
     expires: new Date(exat * 1000).toISOString(),

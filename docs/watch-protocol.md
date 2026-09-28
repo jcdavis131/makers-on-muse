@@ -19,6 +19,30 @@ branch. `vercel.json` sets `git.deploymentEnabled` to false for
 
 All worked values below are fictional. Exampleton is not a real city.
 
+## What the page does
+
+- It says "Connecting…" until it knows what to show.
+- It asks `/api/health` first, and opens
+  `/api/run-stream?run_id=latest` only when storage is "reachable".
+  `?run=<id>` on the page's address asks for one run instead.
+- A run from the API plays live only while its status is `live`. A
+  finished run isn't shown from the API unless `?run=` names it.
+- With no live run, the page plays the first run in
+  `data/runs/index.json`, which lists the newest first.
+- Beats are kept by `seq`. The stream sends a run from the start on each
+  reconnect, so a beat already on the page is skipped.
+- When a run ends (a `run` end beat, or the stream's `end` event), the
+  page closes the stream, shows the final panel once and fetches nothing
+  more.
+- Run time is the last event's `t` minus `started_at`. The token figure is
+  the sum of `tokens_est` on `score` events, labelled a self-reported
+  estimate, or "—" when the agent sent none.
+- The maximum total, the star rule and which levels score come from the
+  run week's pack manifest, `data/packs/s1w<week>.json`.
+- The page scrolls by itself only while the reader follows the feed: they
+  have scrolled, the feed's end is on screen and its top is above the
+  middle of the window.
+
 ## Posting a beat (live)
 
 ```json

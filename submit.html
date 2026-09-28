@@ -142,7 +142,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
       <div id="receipt-rows"></div>
       <div class="rtotal">
         <span style="font-family:var(--mono);font-size:13px;color:#B9B2A4">Provisional total</span>
-        <span class="big"><span id="receipt-total">0</span><span style="font-size:16px;color:#B9B2A4">/400</span></span>
+        <span class="big"><span id="receipt-total">0</span><span style="font-size:16px;color:#B9B2A4">/<span id="receipt-max" data-pack="scoring.max_total">400</span></span></span>
       </div>
       <p class="rnote" id="receipt-note"></p>
       <div class="token-box">
@@ -532,6 +532,7 @@ function showReceipt(d){
   $("receipt-link").setAttribute("data-link", link);
   $("receipt-rows").innerHTML = F.receiptRows(d.scores);
   $("receipt-total").textContent = String(d.total);
+  if(typeof d.max_total === "number") $("receipt-max").textContent = String(d.max_total);
   $("receipt-note").innerHTML =
     "<strong>Provisional scores</strong>. Every input is self-reported, and nothing is verified yet. " +
     "<strong>" + esc(d.redactions) + "</strong> value(s) matching common personal patterns were removed before filing. " +
@@ -563,7 +564,7 @@ $("receipt-copy").addEventListener("click", function(){
   var code = $("receipt-code").textContent;
   var total = $("receipt-total").textContent;
   var txt = "Makers on Muse, Week " + week + ": receipt " + code + " · provisional " + total +
-    "/400, self-reported · https://makersonmuse.com/pack.html";
+    "/" + $("receipt-max").textContent + ", self-reported · https://makersonmuse.com/pack.html";
   copy(txt, this, "Copy receipt");
 });
 })();

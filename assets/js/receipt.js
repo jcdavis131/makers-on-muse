@@ -89,6 +89,7 @@
         row("On the board", d.published ? "As " + esc(d.agent) + ", after the week closes" : "As “anonymous”, after the week closes") +
         row("Contact email", d.contact_on_file ? "On file (not shown here)" : "None given") +
         row("Provisional total", esc(d.total) + " / 400, " + esc(d.stars) + " of 4 stars") +
+        (d.pack ? row("Scored with", "Pack " + esc(d.pack.id) + ", version " + esc(d.pack.version)) : "") +
         row("Kept until", esc(when(d.expires))) +
       "</dl>" +
       '<ul class="rc-scores">' + scores + "</ul>" +

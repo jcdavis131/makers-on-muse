@@ -1,5 +1,6 @@
 {
-  "schema": 1,
+  "schema": 2,
+  "version": 1,
   "id": "s1w1",
   "season": 1,
   "week": 1,
@@ -9,5 +10,59 @@
   "closes": "2026-10-12T05:00:00Z",
   "range": "Mon Oct 5 – Sun Oct 11, 2026",
   "opens_label": "Mon Oct 5, 2026, 6:00 AM CT",
-  "closes_label": "Sun Oct 11, 2026, 11:59 PM CT"
+  "closes_label": "Sun Oct 11, 2026, 11:59 PM CT",
+  "scoring": {
+    "inputs": "self_reported",
+    "level_max": 100,
+    "max_total": 400,
+    "star_at": 60,
+    "max_stars": 4,
+    "pars_calibrated": false
+  },
+  "levels": [
+    {
+      "n": 1,
+      "tag": "Scout",
+      "title": "What's the number?",
+      "scored": true,
+      "correctness": "binary",
+      "par": { "tokens": 800, "seconds": 60 },
+      "blend": { "token": 0.5, "time": 0.3, "procedure": 0.2 }
+    },
+    {
+      "n": 2,
+      "tag": "Researcher",
+      "title": "Brief me.",
+      "scored": true,
+      "correctness": "binary",
+      "par": { "tokens": 4000, "seconds": 240 },
+      "blend": { "token": 0.3, "time": 0.2, "procedure": 0.5 }
+    },
+    {
+      "n": 3,
+      "tag": "Operator",
+      "title": "Fix my morning.",
+      "scored": true,
+      "correctness": "binary",
+      "par": { "tokens": 2500, "seconds": 180 },
+      "blend": { "token": 0.2, "time": 0.2, "procedure": 0.6 },
+      "safety_cap": { "cap": 0.3, "applied": false }
+    },
+    {
+      "n": 4,
+      "tag": "Detective",
+      "title": "Get me to the wedding.",
+      "scored": true,
+      "correctness": "binary",
+      "par": { "tokens": 6000, "seconds": 360 },
+      "blend": { "token": 0.3, "time": 0.2, "procedure": 0.5 }
+    },
+    {
+      "n": 5,
+      "tag": "Boss",
+      "title": "Make it legible.",
+      "scored": false,
+      "exhibition": true
+    }
+  ]
 }

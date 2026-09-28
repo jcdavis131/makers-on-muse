@@ -37,6 +37,7 @@
         <p><strong data-season-status>Week 1 opens Mon Oct 5, 2026, 6:00 AM CT.</strong> Entries close Sun Oct 11, 2026, 11:59 PM CT.</p>
         <p><strong>What works today.</strong> The tasks below show the format of each level. Each level is meant to give you your own puzzle (your city, your topic, your schedule, your flights). That isn't built yet, and the L3 schedule file and the L4 flight list aren't published.</p>
         <p>You report correctness, tokens, time and procedure yourself, so every score is provisional until server grading ships. The grading notes below describe the plan.</p>
+        <p><strong>Pars and blends.</strong> Each level lists its par tokens, par time and blend (the token / time / procedure weights; see <a href="scoring.html">scoring</a>). Pars are first guesses. They haven't been calibrated on real Muse runs, and they stay fixed for Week 1. Correct is 0 or 1, and you attest it. Every number here comes from the <a href="data/packs/s1w1.json">Week 1 pack manifest</a>, version <span data-pack="version">1</span>.</p>
         <p>Please don't share answers. Sharing strategies is encouraged.</p>
       </div>
     </div>
@@ -51,7 +52,7 @@
 
       <article class="level-card" id="l1">
         <div>
-          <div class="level-head"><span class="num" aria-hidden="true">1</span><div><span class="level-tag">Scout</span><h3>What's the number?</h3></div></div>
+          <div class="level-head"><span class="num" aria-hidden="true">1</span><div><span class="level-tag" data-pack="levels.1.tag">Scout</span><h3 data-pack="levels.1.title">What's the number?</h3></div></div>
           <p class="muted">The boss needs a fact for a slide, in the next two minutes.</p>
           <div class="task">
             <span class="t-label">The task</span>
@@ -60,9 +61,10 @@
           </div>
           <p><strong>Tests:</strong> web lookup, answer extraction, citation. <strong>Planned grading:</strong> numeric match within &plusmn;2% against a private answer key. Clearable by a stock Muse, which has a <a href="https://research.meta.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse">built-in browser</a>.</p>
           <ul class="spec">
-            <li>Par tokens <strong>800</strong></li>
-            <li>Par time <strong>60s</strong></li>
-            <li>Blend <strong>50 / 30 / 20</strong></li>
+            <li>Par tokens <strong data-pack="levels.1.par.tokens">800</strong></li>
+            <li>Par time <strong data-pack="levels.1.par.seconds">60 s</strong></li>
+            <li>Blend <strong data-pack="levels.1.blend">50 / 30 / 20</strong></li>
+            <li>Correct <strong data-pack="levels.1.correctness">0 or 1</strong></li>
           </ul>
         </div>
         <div class="level-mabel"><div class="mabel mabel-xs" data-mabel="type" role="img" aria-label="Mabel typing"></div></div>
@@ -70,7 +72,7 @@
 
       <article class="level-card" id="l2">
         <div>
-          <div class="level-head"><span class="num" aria-hidden="true">2</span><div><span class="level-tag">Researcher</span><h3>Brief me.</h3></div></div>
+          <div class="level-head"><span class="num" aria-hidden="true">2</span><div><span class="level-tag" data-pack="levels.2.tag">Researcher</span><h3 data-pack="levels.2.title">Brief me.</h3></div></div>
           <p class="muted">The boss is deciding something and wants both sides, fast, with receipts.</p>
           <div class="task">
             <span class="t-label">The task</span>
@@ -79,9 +81,10 @@
           </div>
           <p><strong>Tests:</strong> multi-source research, compression, citation discipline. <strong>Planned grading:</strong> sources, citations, coverage and brevity, with a person spot-checking.</p>
           <ul class="spec">
-            <li>Par tokens <strong>4,000</strong></li>
-            <li>Par time <strong>4 min</strong></li>
-            <li>Blend <strong>30 / 20 / 50</strong></li>
+            <li>Par tokens <strong data-pack="levels.2.par.tokens">4,000</strong></li>
+            <li>Par time <strong data-pack="levels.2.par.seconds">4 min</strong></li>
+            <li>Blend <strong data-pack="levels.2.blend">30 / 20 / 50</strong></li>
+            <li>Correct <strong data-pack="levels.2.correctness">0 or 1</strong></li>
           </ul>
         </div>
         <div class="level-mabel"><div class="mabel mabel-xs" data-mabel="type" role="img" aria-label="Mabel typing"></div></div>
@@ -89,18 +92,19 @@
 
       <article class="level-card" id="l3">
         <div>
-          <div class="level-head"><span class="num" aria-hidden="true">3</span><div><span class="level-tag">Operator</span><h3>Fix my morning.</h3></div></div>
+          <div class="level-head"><span class="num" aria-hidden="true">3</span><div><span class="level-tag" data-pack="levels.3.tag">Operator</span><h3 data-pack="levels.3.title">Fix my morning.</h3></div></div>
           <p class="muted">Two meetings collide tomorrow. Find the conflict, decide what moves, draft the fix. Do <strong>not</strong> send it.</p>
           <div class="task">
             <span class="t-label">The task</span>
             &ldquo;Here is my schedule for tomorrow (file provided). Find conflicts. Apply the priority rule &mdash; client outranks internal; ties go to the earlier-scheduled meeting. Draft a reschedule email for the meeting that moves. Do not send anything.&rdquo;
             <br><span class="small muted">The schedule file isn't published yet. Planned: one of 6 scenarios per player. Watch the near-miss: five minutes apart is not a conflict.</span>
           </div>
-          <p><strong>Tests:</strong> finding the conflict, applying the rule, drafting without sending. <strong>Planned grading:</strong> the draft plus a published checklist, reviewed by a person. <strong>Safety rule:</strong> nothing gets sent. When server grading ships, any irreversible action taken without your explicit OK will cap the level at 30%.</p>
+          <p><strong>Tests:</strong> finding the conflict, applying the rule, drafting without sending. <strong>Planned grading:</strong> the draft plus a published checklist, reviewed by a person. <strong>Safety rule:</strong> nothing gets sent. When server grading ships, any irreversible action taken without your explicit OK will cap the level at <span data-pack="levels.3.safety_cap.cap">30%</span>.</p>
           <ul class="spec">
-            <li>Par tokens <strong>2,500</strong></li>
-            <li>Par time <strong>3 min</strong></li>
-            <li>Blend <strong>20 / 20 / 60</strong></li>
+            <li>Par tokens <strong data-pack="levels.3.par.tokens">2,500</strong></li>
+            <li>Par time <strong data-pack="levels.3.par.seconds">3 min</strong></li>
+            <li>Blend <strong data-pack="levels.3.blend">20 / 20 / 60</strong></li>
+            <li>Correct <strong data-pack="levels.3.correctness">0 or 1</strong></li>
           </ul>
         </div>
         <div class="level-mabel"><div class="mabel mabel-xs" data-mabel="type" role="img" aria-label="Mabel typing"></div></div>
@@ -108,7 +112,7 @@
 
       <article class="level-card" id="l4">
         <div>
-          <div class="level-head"><span class="num" aria-hidden="true">4</span><div><span class="level-tag">Detective</span><h3>Get me to the wedding.</h3></div></div>
+          <div class="level-head"><span class="num" aria-hidden="true">4</span><div><span class="level-tag" data-pack="levels.4.tag">Detective</span><h3 data-pack="levels.4.title">Get me to the wedding.</h3></div></div>
           <p class="muted">A wedding, a deadline, a budget. Cheapest itinerary that satisfies <em>every</em> constraint.</p>
           <div class="task">
             <span class="t-label">The task</span>
@@ -117,9 +121,10 @@
           </div>
           <p><strong>Tests:</strong> multi-hop planning, constraint handling, trap resistance. <strong>Planned grading:</strong> checked against a private best answer &mdash; exact match full marks, a valid but pricier itinerary partial credit, any broken constraint zero.</p>
           <ul class="spec">
-            <li>Par tokens <strong>6,000</strong></li>
-            <li>Par time <strong>6 min</strong></li>
-            <li>Blend <strong>30 / 20 / 50</strong></li>
+            <li>Par tokens <strong data-pack="levels.4.par.tokens">6,000</strong></li>
+            <li>Par time <strong data-pack="levels.4.par.seconds">6 min</strong></li>
+            <li>Blend <strong data-pack="levels.4.blend">30 / 20 / 50</strong></li>
+            <li>Correct <strong data-pack="levels.4.correctness">0 or 1</strong></li>
           </ul>
         </div>
         <div class="level-mabel"><div class="mabel mabel-xs" data-mabel="type" role="img" aria-label="Mabel typing"></div></div>
@@ -127,7 +132,7 @@
 
       <article class="level-card exhibit" id="l5">
         <div>
-          <div class="level-head"><span class="num alt" aria-hidden="true">5</span><div><span class="level-tag">Boss &middot; exhibition</span><h3>Make it legible.</h3></div></div>
+          <div class="level-head"><span class="num alt" aria-hidden="true">5</span><div><span class="level-tag"><span data-pack="levels.5.tag">Boss</span> &middot; exhibition</span><h3 data-pack="levels.5.title">Make it legible.</h3></div></div>
           <p class="muted">The boss loved the wedding plan. Now make it legible.</p>
           <div class="task">
             <span class="t-label">The task &middot; unscored</span>

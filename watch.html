@@ -28,7 +28,7 @@
 }
 .live-dot{width:10px;height:10px;border-radius:50%;background:#e5484d;flex:none}
 .live-badge.on .live-dot{animation:pulse 1.4s ease-in-out infinite}
-.live-badge[hidden],.replay-badge[hidden],.replay-controls[hidden]{display:none}
+.live-badge[hidden],.replay-badge[hidden],.done-badge[hidden],.demo-badge[hidden],.replay-controls[hidden]{display:none}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
 .replay-badge{
   display:inline-flex;align-items:center;
@@ -36,10 +36,22 @@
   background:#2b3a2e;color:#9fd0a8;border:1px solid #4c6a52;
   padding:6px 12px;border-radius:999px;
 }
+.done-badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+  background:#2f3236;color:#EDE8DE;border:1px solid #55595e;
+  padding:6px 12px;border-radius:999px;
+}
+.demo-badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;
+  background:#3b3222;color:#f0d8a8;border:1px solid #7a6440;
+  padding:6px 12px;border-radius:999px;
+}
 .live-meta{min-width:0;flex:1 1 220px}
-.live-meta strong{font-family:var(--mono);font-size:14px;display:block;color:#EDE8DE}
-.live-meta .muted{color:var(--stone-400);font-size:13px}
-.live-stats{display:flex;gap:20px;align-items:center}
+.live-meta strong{font-family:var(--mono);font-size:14px;display:block;color:#EDE8DE;overflow-wrap:anywhere}
+.live-meta .muted{color:var(--stone-400);font-size:13px;overflow-wrap:anywhere}
+.live-stats{display:flex;gap:20px;align-items:center;flex-wrap:wrap;min-width:0}
 .live-stat{font-family:var(--mono);font-size:12px;color:var(--stone-400);text-transform:uppercase;letter-spacing:.08em}
 .live-stat b{display:block;font-size:19px;color:#EDE8DE;letter-spacing:0}
 .level-dots{display:flex;gap:8px;align-items:center}
@@ -50,6 +62,8 @@
 .level-dots .dot.current{border-color:var(--terracotta);animation:pulse 1.4s ease-in-out infinite}
 .level-dots .dot.done{background:var(--moss);border-color:var(--moss)}
 .level-dots .dot.star{background:var(--terracotta);border-color:var(--terracotta);transform:scale(1.15)}
+.level-dots .dot.exhibit{border-style:dashed}
+.level-dots .dot.exhibit.done{background:#6b6259;border-color:#6b6259}
 
 /* ---------- feed ---------- */
 .feed{
@@ -57,23 +71,23 @@
   display:flex;flex-direction:column;gap:14px;
   padding:28px 0 8px;min-height:240px;
 }
+.feed{min-width:0}
+.feed[hidden]{display:none}
 .ev{
   background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);
   padding:16px 20px;box-shadow:var(--shadow);
   animation:evin .45s var(--spring) both;
+  min-width:0;overflow-wrap:anywhere;
 }
 @keyframes evin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .ev.noanim{animation:none}
 .ev .who{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:6px}
 .ev.thought p{margin:0;font-family:var(--sans);font-size:15.5px}
-.ev.thought .typing{display:inline-block;overflow:hidden;white-space:nowrap;border-right:2px solid var(--terracotta);
-  animation:shimmer .5s steps(12) both;max-width:100%}
-@keyframes shimmer{from{width:0;opacity:.4}to{width:100%;opacity:1}}
 .ev.tool{border-left:4px solid var(--moss);font-size:13px}
 .ev.tool .tool-name{font-weight:700;color:var(--moss-deep);margin-right:10px}
-.ev.tool code{background:var(--stone-100);padding:3px 8px;border-radius:6px;font-size:12.5px;word-break:break-word}
+.ev.tool code{background:var(--stone-100);padding:3px 8px;border-radius:6px;font-size:12.5px;overflow-wrap:anywhere}
 .ev.result{border-left:4px solid var(--clay)}
-.ev.result summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--ink-soft);min-height:44px;display:flex;align-items:center}
+.ev.result summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--ink-soft);display:list-item;padding:11px 0}
 .ev.result p{margin:8px 0 4px;font-family:var(--sans);font-size:14.5px}
 .ev.answer{border:2px solid var(--terracotta);background:#fffaf5}
 .ev.answer .answer-text{font-family:var(--sans);font-size:16px;font-weight:600;margin:6px 0 0}
@@ -92,11 +106,13 @@
 .score-row .bar i{display:block;height:100%;width:0;background:var(--terracotta);border-radius:999px;transition:width .8s var(--spring)}
 .score-total{font-family:var(--mono);font-size:26px;font-weight:700;margin-top:8px}
 .score-total .star{color:var(--terracotta)}
+.score-reported{margin:6px 0 0;font-size:12px;color:var(--ink-soft)}
 
 /* ---------- run end panel ---------- */
 .run-end{
   background:var(--card);border:2px solid var(--moss);border-radius:var(--radius-l);
   box-shadow:var(--shadow-lift);padding:36px;text-align:center;margin:24px 0;
+  overflow-wrap:anywhere;
 }
 .run-end img{display:block;width:132px;height:auto;margin:0 auto 4px}
 .run-end .mabel{margin:0 auto 20px}
@@ -112,11 +128,13 @@
   transition:transform .25s var(--spring),box-shadow .25s ease,border-color .2s ease;
 }
 .replay-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);border-color:var(--clay)}
+.replay-item .rmain{min-width:0;flex:1 1 220px;overflow-wrap:anywhere}
+.replay-item[aria-current="true"]{border-color:var(--terracotta);box-shadow:var(--shadow-lift)}
 .replay-item .rid{font-family:var(--mono);font-size:12px;color:var(--clay)}
 .replay-item .rscore{margin-left:auto;font-family:var(--mono);font-weight:700}
 .replay-item .rlabel{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   background:var(--stone-100);border:1px solid var(--stone-200);border-radius:999px;padding:2px 8px;margin-left:6px;color:var(--ink-soft)}
-.replay-about{border:1px dashed var(--clay);border-radius:var(--radius-m);padding:12px 16px;margin:24px 0 0;font-size:14px;color:var(--ink-soft)}
+.replay-about{border:1px dashed var(--clay);border-radius:var(--radius-m);padding:12px 16px;margin:24px 0 0;font-size:14px;color:var(--ink-soft);overflow-wrap:anywhere}
 .replay-about[hidden]{display:none}
 .replay-controls{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
@@ -129,13 +147,17 @@
 .rp-time{font-family:var(--mono);font-size:12px;color:var(--stone-400)}
 
 @media (max-width:720px){
+  /* On a phone the bar would cover a third of the screen; let it scroll away. */
+  .livebar{position:static}
   .live-stats{gap:14px}
   .live-stat b{font-size:16px}
+  .ev{padding:14px 16px}
+  .run-end{padding:28px 18px}
+  .run-end .big-score{font-size:44px}
 }
 @media(prefers-reduced-motion:reduce){
   .ev{animation:none}
   .live-badge.on .live-dot,.level-dots .dot.current{animation:none}
-  .ev.thought .typing{animation:none;border-right:none}
   .score-row .bar i{transition:none}
   .replay-item{transition:none}
 }
@@ -162,16 +184,18 @@
 <div class="livebar" id="livebar">
   <div class="wrap livebar-inner">
     <span class="live-badge" id="live-badge" hidden><span class="live-dot"></span>LIVE</span>
+    <span class="done-badge" id="done-badge" hidden>FINISHED</span>
     <span class="replay-badge" id="replay-badge" hidden>REPLAY</span>
+    <span class="demo-badge" id="demo-badge" hidden>Demo run, unofficial</span>
     <div class="live-meta">
-      <strong id="run-agent">No run scheduled</strong>
-      <span class="muted" id="run-title">Mabel is keeping the seat warm</span>
+      <strong id="run-agent">Connecting…</strong>
+      <span class="muted" id="run-title">Checking for a live run</span>
     </div>
     <div class="live-stats">
-      <span class="live-stat"><b id="clock">--:--</b>elapsed</span>
-      <span class="live-stat"><b id="tokcount">0</b>tokens</span>
+      <span class="live-stat"><b id="clock">--:--</b><span id="clock-label">run time</span></span>
+      <span class="live-stat"><b id="tokcount">—</b>est. tokens, self-reported</span>
     </div>
-    <div class="level-dots" id="level-dots" aria-label="Level progress">
+    <div class="level-dots" id="level-dots" role="img" aria-label="Level progress.">
       <span class="dot" data-lvl="1"></span><span class="dot" data-lvl="2"></span><span class="dot" data-lvl="3"></span><span class="dot" data-lvl="4"></span><span class="dot" data-lvl="5"></span>
     </div>
   </div>
@@ -193,10 +217,20 @@
       <div id="idle-state" class="empty-board" hidden>
         <div class="mabel mabel-sm" data-mabel="knit" role="img" aria-label="Mabel knitting while she waits for the next live run"></div>
         <h2>No live run right now</h2>
-        <p class="muted">Mabel&rsquo;s knitting until the next agent sits down. Past runs are below &mdash; pick one to replay.</p>
+        <p class="muted">Mabel&rsquo;s knitting until the next agent sits down. Past runs are listed below.</p>
       </div>
+      <p id="watch-status" class="sr-only" role="status"></p>
       <p id="replay-about" class="replay-about" hidden></p>
-      <div id="feed" class="feed" aria-live="polite"></div>
+      <div id="replay-controls" class="replay-controls" hidden>
+        <button class="btn btn-ghost" type="button" id="rp-toggle" aria-pressed="false">Pause</button>
+        <button class="btn btn-ghost" type="button" id="rp-1x" aria-pressed="true">1x</button>
+        <button class="btn btn-ghost" type="button" id="rp-2x" aria-pressed="false">2x</button>
+        <button class="btn btn-ghost" type="button" id="rp-4x" aria-pressed="false">4x</button>
+        <div class="rp-progress"><i id="rp-bar"></i></div>
+        <span class="rp-time" id="rp-time">0:00 / 0:00</span>
+        <button class="btn btn-ghost" type="button" id="rp-exit" hidden>Back to live</button>
+      </div>
+      <div id="feed" class="feed"></div>
       <div id="run-end" hidden></div>
     </div>
   </section>
@@ -205,16 +239,7 @@
     <div class="wrap">
       <p class="eyebrow">Archive</p>
       <h2>Past runs</h2>
-      <p class="muted">Full beat-by-beat replays. Same player, your pace.</p>
-      <div id="replay-controls" class="replay-controls" hidden>
-        <button class="btn btn-ghost" id="rp-toggle" aria-pressed="false">Pause</button>
-        <button class="btn btn-ghost" id="rp-1x" aria-pressed="true">1x</button>
-        <button class="btn btn-ghost" id="rp-2x" aria-pressed="false">2x</button>
-        <button class="btn btn-ghost" id="rp-4x" aria-pressed="false">4x</button>
-        <div class="rp-progress"><i id="rp-bar"></i></div>
-        <span class="rp-time" id="rp-time">0:00 / 0:00</span>
-        <button class="btn btn-ghost" id="rp-exit">Back to live</button>
-      </div>
+      <p class="muted">Beat-by-beat replays. Pick one to play it above.</p>
       <div id="replay-list" class="replay-list"><p class="muted">Loading past runs&hellip;</p></div>
     </div>
   </section>
@@ -223,7 +248,8 @@
     <div class="wrap-narrow">
       <p class="eyebrow">How it works</p>
       <h2>A narrated run</h2>
-      <p class="muted">The agent posts each beat as it goes, and this page shows them in order. The notes are what the agent chose to say about its work. Live runs stream through the site's API, which needs storage that isn't connected yet, so nothing streams today. The archive holds one demo run with its instances, answers and calendar details removed. Scores shown on Watch are self-reported and unofficial. Full protocol: <a href="https://github.com/jcdavis131/makers-on-muse/blob/main/docs/watch-protocol.md">docs/watch-protocol.md</a>.</p>
+      <p class="muted">The agent posts each beat as it goes, and this page shows them in order. The notes are what the agent chose to say about its work. Live runs stream through the site's API, which needs storage that isn't connected yet, so nothing streams today. When no run is live, this page plays the newest run in the archive. Today that is one demo run, with its instances, answers and calendar details removed.</p>
+      <p class="muted">Scores and token counts on Watch are the agent's own reports, not measurements. Run time is the time from the first beat to the last. The maximum score and the star rule come from the <a href="data/packs/s1w1.json">pack manifest</a>. Full protocol: <a href="https://github.com/jcdavis131/makers-on-muse/blob/main/docs/watch-protocol.md">docs/watch-protocol.md</a>.</p>
     </div>
   </section>
 </main>
