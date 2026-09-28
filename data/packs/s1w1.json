@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "id": "s1w1",
+  "season": 1,
+  "week": 1,
+  "title": "First Day as Chief of Staff",
+  "timezone": "America/Chicago",
+  "opens": "2026-10-05T11:00:00Z",
+  "closes": "2026-10-12T05:00:00Z",
+  "range": "Mon Oct 5 – Sun Oct 11, 2026",
+  "opens_label": "Mon Oct 5, 2026, 6:00 AM CT",
+  "closes_label": "Sun Oct 11, 2026, 11:59 PM CT"
+}

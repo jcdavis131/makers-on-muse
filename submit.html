@@ -72,6 +72,12 @@
 .rtotal .big{font-family:var(--mono);font-size:34px;font-weight:700;color:#FFFDF9}
 .rnote{font-size:13px;color:#B9B2A4;margin:14px 0 0;line-height:1.6}
 .rnote strong{color:#EDE8DE}
+.token-box{margin-top:18px;padding:16px 18px;border:1px dashed rgba(237,232,222,.45);border-radius:var(--radius-m)}
+.token-box .eyebrow{margin:0 0 6px}
+.token-code{font-family:var(--mono);font-size:clamp(15px,3.6vw,19px);color:#FFFDF9;word-break:break-all;margin:0 0 10px}
+.btn-ghost{background:transparent;color:#EDE8DE;border-color:rgba(237,232,222,.5);box-shadow:none}
+.btn-ghost:hover{border-color:#EDE8DE}
+.field .fhint{font-size:13px;color:var(--ink-soft);margin:6px 0 0;line-height:1.5}
 .mabel-note{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:22px;margin-top:8px}
 .mabel-note img{width:96px;height:96px;object-fit:cover;border-radius:var(--radius-m);flex:none}
 .mabel-note blockquote{margin:0 0 6px;font-size:16px}
@@ -130,20 +136,34 @@ details.lvl5 summary::-webkit-details-marker{display:none}
         <span class="big"><span id="receipt-total">0</span><span style="font-size:16px;color:#B9B2A4">/400</span></span>
       </div>
       <p class="rnote" id="receipt-note"></p>
+      <div class="token-box">
+        <p class="eyebrow">Your secret token</p>
+        <div class="token-code" id="token-code">—</div>
+        <p class="rnote" style="margin:0 0 12px">Shown once. Save it somewhere private now. It is the only proof that this entry is yours, and it can't be recovered: we store only a hash of it. Pages to check, edit or delete an entry with it are coming.</p>
+        <button class="btn btn-ghost" id="token-copy" type="button">Copy token</button>
+      </div>
       <div style="margin-top:16px"><button class="btn btn-primary" id="receipt-copy" type="button">Copy receipt</button></div>
     </section>
 
     <form id="sub-form" novalidate>
       <fieldset id="sub-fields" disabled>
       <div class="sub-card">
-        <span class="step">Your agent</span>
+        <span class="step">You and your agent</span>
         <h3>Who ran the pack?</h3>
-        <p class="hint">The name that appears on the leaderboard — your agent's name, not yours.</p>
+        <p class="hint">Your handle is private. It keeps one entry per player each week. Your agent's name shows on the leaderboard only if you tick the box at the end.</p>
         <div class="field-row2">
           <div class="field">
-            <label for="f-agent">Agent name</label>
-            <input type="text" id="f-agent" maxlength="40" placeholder="e.g. the name you gave your Muse" autocomplete="off" required>
+            <label for="f-handle">Your handle</label>
+            <input type="text" id="f-handle" maxlength="24" placeholder="e.g. juniper-7" autocomplete="off" spellcheck="false" required aria-describedby="f-handle-hint">
+            <p class="fhint" id="f-handle-hint">3 to 24 letters, digits, - or _. Private.</p>
           </div>
+          <div class="field">
+            <label for="f-agent">Agent name</label>
+            <input type="text" id="f-agent" maxlength="40" placeholder="e.g. the name you gave your Muse" autocomplete="off" required aria-describedby="f-agent-hint">
+            <p class="fhint" id="f-agent-hint">2 to 40 characters. Names that look like an email, a web address or a phone number are refused, and so are reserved names such as Mabel, Scout, Meta and Muse.</p>
+          </div>
+        </div>
+        <div class="field-row2">
           <div class="field">
             <label for="f-week">Week</label>
             <input type="number" id="f-week" min="1" value="1" readonly>
@@ -250,6 +270,21 @@ function setOpen(){
   var g = S.submitGate(Date.now());
   document.getElementById("f-week").value = g.week;
   if(g.open) setOpen(); else setClosed(g.title, g.body);
+  /* While the week is open, pause the form if storage can't keep entries.
+     /api/health is cached for 30 s (and may be served stale for 60 s), so
+     this can lag a change by up to a minute. If the check itself fails,
+     leave the form open: a submit reports its own error. */
+  if(g.open && window.fetch){
+    fetch("/api/health", {headers: {"Accept": "application/json"}})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(h){
+        if(h && h.storage && h.storage !== "reachable"){
+          setClosed("Submissions can't be saved yet.",
+            "Storage isn't connected, so nothing sent now would be kept. The form is paused. Check back soon.");
+        }
+      })
+      .catch(function(){});
+  }
 })();
 
 var host = document.getElementById("level-cards");
@@ -294,10 +329,20 @@ LEVELS.forEach(function(L){
 function val(id){ return document.getElementById(id).value.trim(); }
 function num(id){ var v = parseFloat(val(id)); return isFinite(v) && v >= 0 ? v : null; }
 
-function showErrors(list){
+/* Headings by HTTP status, so a server-side problem never reads as the
+   player's mistake. */
+var HEADINGS = {
+  400: "Almost — a few things need attention:",
+  409: "Not filed.",
+  413: "Not filed: this entry is too long.",
+  415: "Not filed.",
+  429: "Not filed: too many tries.",
+  503: "Not filed: storage isn't connected yet."
+};
+function showErrors(list, heading){
   var box = document.getElementById("sub-errors");
   if(!list.length){ box.classList.remove("show"); box.innerHTML = ""; return; }
-  box.innerHTML = "<h4>Almost — a few things need attention:</h4><ul><li>"+
+  box.innerHTML = "<h4>"+esc(heading || HEADINGS[400])+"</h4><ul><li>"+
     list.map(esc).join("</li><li>")+"</li></ul>";
   box.classList.add("show");
   box.scrollIntoView({block:"nearest"});
@@ -307,10 +352,11 @@ document.getElementById("sub-form").addEventListener("submit", function(ev){
   ev.preventDefault();
   if(fields.disabled) return;
   var errs = [];
+  var handle = val("f-handle");
   var agent = val("f-agent");
   var week = parseInt(val("f-week"), 10);
-  if(!agent) errs.push("Agent name is required.");
-  if(agent.length > 40) errs.push("Agent name must be 40 characters or fewer.");
+  if(!/^[A-Za-z0-9][A-Za-z0-9_-]{2,23}$/.test(handle)) errs.push("Handle: 3 to 24 letters, digits, - or _, starting with a letter or digit.");
+  if(agent.length < 2 || agent.length > 40) errs.push("Agent name: 2 to 40 characters.");
   if(!week || week < 1) errs.push("Week must be 1 or higher.");
   if(!document.getElementById("c-redact").checked) errs.push("Please keep the box that strips common personal patterns checked. It's required.");
 
@@ -347,29 +393,37 @@ document.getElementById("sub-form").addEventListener("submit", function(ev){
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({
-      week: week, agent: agent, levels: levels,
+      week: week, handle: handle, agent: agent, levels: levels,
       consent: { redaction: true, publish: document.getElementById("c-publish").checked }
     })
-  }).then(function(r){ return r.json().then(function(d){ return {ok: r.ok, status: r.status, data: d}; }); })
+  }).then(function(r){
+    return r.json().catch(function(){ return null; })
+      .then(function(d){ return {ok: r.ok, status: r.status, data: d}; });
+  })
   .then(function(out){
     btn.disabled = false; btn.textContent = "Submit run";
-    if(!out.ok){
-      var list = out.data && out.data.errors ? out.data.errors : [(out.data && out.data.error) || ("HTTP "+out.status)];
-      showErrors(list);
+    var d = out.data || {};
+    if(!out.ok || !d.receipt){
+      var list;
+      if(out.status === 400 && d.errors) list = d.errors;
+      else if(out.status === 503) list = ["This is on our side, not yours. Nothing was saved, and your answers are still in the form."];
+      else if(d.message) list = [d.message];
+      else list = [d.error || ("Something went wrong (HTTP "+out.status+"). Nothing was filed.")];
+      showErrors(list, HEADINGS[out.status] || "Not filed.");
       return;
     }
-    var d = out.data;
     document.getElementById("receipt-code").textContent = d.receipt;
-    var rows = d.scores.map(function(s){
+    document.getElementById("token-code").textContent = d.token || "—";
+    var rows = (d.scores || []).map(function(s){
       var star = s.star ? ' <span class="star">★</span>' : "";
-      return '<div class="rrow"><span class="lvl">LEVEL '+s.n+'</span><span class="pts">'+s.total+" / 100"+star+"</span></div>";
+      return '<div class="rrow"><span class="lvl">LEVEL '+esc(s.n)+'</span><span class="pts">'+esc(s.total)+" / 100"+star+"</span></div>";
     }).join("");
     document.getElementById("receipt-rows").innerHTML = rows;
     document.getElementById("receipt-total").textContent = d.total;
     document.getElementById("receipt-note").innerHTML =
       "<strong>Provisional scores</strong> — every input is self-reported, and nothing is verified yet. " +
       "<strong>"+esc(d.redactions)+"</strong> value(s) matching common personal patterns were removed before filing. " +
-      "Keep your receipt code: <strong>"+esc(d.receipt)+"</strong>.";
+      "Your receipt code <strong>"+esc(d.receipt)+"</strong> is for display. It proves nothing on its own; the secret token below does.";
     var rc = document.getElementById("receipt");
     rc.classList.add("show");
     rc.scrollIntoView({behavior:"smooth", block:"start"});
@@ -377,6 +431,13 @@ document.getElementById("sub-form").addEventListener("submit", function(ev){
     btn.disabled = false; btn.textContent = "Submit run";
     showErrors(["Could not reach the scorekeeper. Check your connection and try again — nothing was filed."]);
   });
+});
+
+document.getElementById("token-copy").addEventListener("click", function(){
+  var tokenText = document.getElementById("token-code").textContent;
+  if(navigator.clipboard) navigator.clipboard.writeText(tokenText);
+  this.textContent = "Copied";
+  var b = this; setTimeout(function(){ b.textContent = "Copy token"; }, 1600);
 });
 
 document.getElementById("receipt-copy").addEventListener("click", function(){

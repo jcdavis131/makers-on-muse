@@ -31,9 +31,16 @@ POST /api/run-event
 - The server assigns `seq` (1, 2, 3, ...) and stamps `t` as an ISO time.
   Don't send either.
 - The server keeps the last 500 events of a run.
-- A `run` start event marks the run live and makes it `runs:current`.
-  A `run` end event marks it done.
-- Wrong or missing secret: 403. No storage: 503.
+- A `run` start event marks the run live and makes it the current run
+  (`run_id=latest`). A `run` end event marks it done.
+- The body may carry only `run_id`, `secret`, `event`, `week` and
+  `week_title`, and an event only the fields listed below. Any other
+  field: 400. Text fields have length caps and go through the same
+  redaction as submissions before they're stored.
+- Every key for a run expires 30 days after its last event.
+- Wrong or missing secret: 403. No storage: 503. The body limits of
+  `/api/submit` apply too: JSON only (415), 64 KB (413), and an `Origin`,
+  if sent, from the site (403).
 
 ## The archive envelope
 

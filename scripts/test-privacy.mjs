@@ -69,14 +69,16 @@ function t(name, cond) {
   }
   const mustHide = [
     "scripts/smoke.mjs", "scripts/test-privacy.mjs", "docs/watch-protocol.md",
-    ".github/ISSUE_TEMPLATE/config.yml", "README.md", "data/runs/README.md",
+    ".github/ISSUE_TEMPLATE/config.yml", "README.md", "data/runs/README.md", "data/packs/README.md",
+    "scripts/redis-emu.mjs", "scripts/check-health.mjs",
     "lib/score.test.js", "lib/sub/redact.spec.js"
   ];
   const tracked = execFileSync("git", ["ls-files"], { cwd: ROOT, encoding: "utf8" }).split("\n").filter(Boolean);
   const mustServe = [
     ...tracked.filter((f) => /^(api|lib|assets|data)\//.test(f) || /^[^/]+\.html$/.test(f))
       .filter((f) => !/README\.md$/.test(f) && !/\.(test|spec)\.js$/.test(f)),
-    "package.json", "vercel.json", "data/runs/index.json", "data/runs/demo-2026-09-27-scout.json"
+    "package.json", "package-lock.json", "vercel.json", "data/runs/index.json", "data/runs/demo-2026-09-27-scout.json",
+    "data/packs/s1w1.json", "lib/packs.js", "lib/names.js", "lib/token.js"
   ];
   const hidden = ignored(mustHide);
   for (const p of mustHide) t(".vercelignore hides " + p, hidden.has(p));
