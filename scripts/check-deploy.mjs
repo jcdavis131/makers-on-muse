@@ -112,9 +112,21 @@ export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000, allo
   }
 
   // Repo-only files stay off the site.
+  // Vercel's clean-URL rule answers any .html address with a 308 to the
+  // address without it, whether or not the file is deployed, so follow
+  // same-site redirects (up to 3) and require a 404 at the end.
+  const origin = new URL(base).origin;
   for (const path of ["/scripts/check-deploy.mjs", "/README.md", "/partials/nav.html", "/docs/watch-protocol.md"]) {
-    const r = await get(path);
-    add(path + " is not served", r.status === 404, got(r));
+    let r = await get(path);
+    const hops = [];
+    while ([301, 302, 307, 308].includes(r.status) && hops.length < 3) {
+      let next;
+      try { next = new URL(r.headers.get("location") || "", origin + path); } catch { break; }
+      if (next.origin !== origin) break;
+      hops.push(r.status + " " + next.pathname);
+      r = await get(next.pathname + next.search);
+    }
+    add(path + " is not served", r.status === 404, hops.concat([got(r)]).join(" -> "));
   }
   // The Watch archive is data the page needs.
   const runs = await get("/data/runs/index.json");

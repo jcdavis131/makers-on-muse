@@ -133,6 +133,29 @@ try {
     pd.includes("vars.MOM_STORAGE_CONNECTED != 'true' && '--allow-missing-storage'"));
 }
 
+/* 5b. Repo-only .html files behind Vercel's clean-URL 308 (seen on a real
+   preview: /partials/nav.html -> 308 /partials/nav -> 404) count as not
+   served; a 308 that lands on a 200, or on another site, does not. */
+{
+  const mk = (target) => http.createServer((req, res) => {
+    const u = req.url;
+    if (u === "/partials/nav.html") { res.writeHead(308, { location: target }); return res.end(); }
+    if (u === "/partials/nav") { res.writeHead(404); return res.end("not found"); }
+    if (u === "/partials/leak") { res.writeHead(200, { "content-type": "text/html" }); return res.end("<nav></nav>"); }
+    res.writeHead(404); res.end();
+  });
+  for (const [target, want, label] of [["/partials/nav", true, "a 308 to an address that 404s"],
+    ["/partials/leak", false, "a 308 to an address that serves the file"],
+    ["https://elsewhere.example/partials/nav", false, "a 308 to another site"]]) {
+    const s = mk(target);
+    await new Promise((r) => s.listen(0, "127.0.0.1", r));
+    const res = await checkDeploy("http://127.0.0.1:" + s.address().port, { hosts: [], allowMissingStorage: true });
+    const line = res.results.find((r) => r.name === "/partials/nav.html is not served");
+    t("repo-only check, " + label + ": " + (want ? "passes" : "fails"), line && line.ok === want, line);
+    await new Promise((r) => s.close(r));
+  }
+}
+
 /* 6. --allow-missing-storage: "missing" becomes a note; "unreachable" still fails */
 {
   const mk = (storage) => http.createServer((req, res) => {
