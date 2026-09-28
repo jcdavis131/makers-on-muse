@@ -180,7 +180,8 @@ const BANNED = [
   [/0(&ndash;|–|-)5 per week/i, "0-4 stars"],
   [/sunday midnight/i, "absolute close time"],
   [/2026-09-28|sep(t(ember)?)? 28/i, "old Week 1 date"],
-  [/0\.35[^\n]{0,40}tokeneff/i, "headline 0.35/0.25/0.40 formula fits no scored level"]
+  [/0\.35[^\n]{0,40}tokeneff/i, "headline 0.35/0.25/0.40 formula fits no scored level"],
+  [/mabel-typing|\.webp\b/i, "the webp Mabel images are gone; use mabel-plush.svg"]
 ];
 for (const f of scanFiles) {
   const text = read(f);
@@ -206,7 +207,7 @@ for (const f of scanFiles) {
   t("scoring: L5 unscored exhibition", scoring.includes("L5 is an unscored exhibition build"));
   t("scoring: says inputs are self-reported", scoring.includes("Every input is self-reported"));
   t("watch.js: final panel out of 400", read("assets/js/watch.js").includes("/400</span>"));
-  t("main.js: four star slots", /for\(var s = 0; s < 4; s\+\+\)/.test(read("assets/js/main.js")));
+  t("board.js: four star slots", /for \(var i = 0; i < 4; i\+\+\)/.test(read("assets/js/board.js")));
   t("watch.js: four star slots", /for\(var i = 0; i < 4; i\+\+\)/.test(read("assets/js/watch.js")));
 }
 

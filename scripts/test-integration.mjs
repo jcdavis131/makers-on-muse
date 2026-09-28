@@ -3,10 +3,12 @@
    Upstash REST protocol (scripts/redis-emu.mjs). The emulator honors
    TTLs and has a clock the test moves forward.
    Covers: run-event seq + meta lifecycle, submit -> leaderboard through
-   the week's sorted set, one entry per handle per week, the secret token
-   stored only as a hash, 429 on the sixth post in a minute, a TTL on
-   every key, expiry after 30 and 90 days, and cleanup after a failed
-   write. Run: node scripts/test-integration.mjs */
+   the week's sorted set (count only until the week closes), one entry per
+   handle per week, the secret token stored only as a hash, receipt status
+   and delete by token, the contact address kept private, 429 on the
+   sixth post in a minute, a TTL on every key, expiry after 30 and 90
+   days, and cleanup after a failed write.
+   Run: node scripts/test-integration.mjs */
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { createEmulator, serveUpstash } from "./redis-emu.mjs";
@@ -30,8 +32,9 @@ const runEvent = require("../api/run-event.js");
 const runState = require("../api/run-state.js");
 const submit = require("../api/submit.js");
 const leaderboard = require("../api/leaderboard.js");
+const receiptApi = require("../api/receipt.js");
 const packs = require("../lib/packs.js");
-const { tokenMatches } = require("../lib/token.js");
+const { tokenMatches, hashToken, newToken } = require("../lib/token.js");
 
 const { t, done } = counter();
 const PACK = packs.byWeek(1);
@@ -112,30 +115,119 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   t("token index points at the receipt", emu.raw("mom:tok:" + stored.token_hash) === receipt);
   t("handle claim points at the receipt", emu.raw("mom:handle:s1w1:juniper-player") === receipt);
   t("record keeps only known fields", Object.keys(stored).sort().join() ===
-    "agent,consent,created_at,handle,levels,pack,provisional,receipt,redactions,schema,scores,season,stars,token_hash,total,week");
+    "agent,consent,created_at,handle,levels,pack,provisional,receipt,redactions,schema,scores,season,stars,status,token_hash,total,week");
+  t("record starts as received, with terms agreed", stored.status === "received" && stored.consent.terms === true);
 
   /* --- one entry per handle per week --- */
   r = await post(submit, sub("JUNIPER-player", "Juniper Two"));
   t("same handle (any case) again -> 409", r.status === 409 && r.body.error === "handle already entered", r.body);
-  r = await post(submit, sub("second-player", "Bramble", { consent: { redaction: true, publish: true } }));
-  t("another handle -> 200", r.status === 200, r.body);
-  const s3 = sub("third-player", "Quill", { consent: { redaction: true, publish: true } });
+  const s2 = sub("second-player", "Bramble", { consent: { terms: true, publish: true } });
+  s2.levels[3] = { n: 4, skipped: true };
+  r = await post(submit, s2);
+  t("another handle, L4 not attempted -> 200", r.status === 200, r.body);
+  t("the skipped level scores 0 on the receipt", r.body.scores[3].skipped === true && r.body.scores[3].total === 0, r.body.scores);
+  const s3 = sub("third-player", "Quill", { consent: { terms: true, publish: true }, contact: "quill@example.org" });
   s3.levels.forEach((l) => { l.procedure_score = 1; });
+  s3.levels.push({ n: 5, answer: "a one-page dashboard", link: "https://example.org/build.html" });
   r = await post(submit, s3);
-  t("third entry -> 200", r.status === 200, r.body);
+  t("third entry, with contact and L5 -> 200", r.status === 200, r.body);
+  t("L5 is an unscored exhibition on the receipt", r.body.scores[4].exhibition === true && r.body.total <= 400, r.body.scores);
+  const quillCode = r.body.receipt;
+  const quillToken = r.body.token;
+  const quill = JSON.parse(emu.raw("mom:sub:" + quillCode));
+  t("the contact address is stored with the record", quill.contact === "quill@example.org");
+  t("the L5 link is stored", quill.levels[4].link === "https://example.org/build.html", quill.levels[4]);
 
-  /* --- leaderboard from the sorted set --- */
+  /* --- leaderboard: count only until the week closes --- */
   emu.log.length = 0;
   r = await get(leaderboard, { week: "1" });
-  t("leaderboard lists 3 entries", r.status === 200 && r.body.entries.length === 3 && r.body.count === 3, r.body);
+  t("mid-week: board holds entries back, count only",
+    r.status === 200 && r.body.state === "open" && r.body.count === 3 && r.body.entries.length === 0, r.body);
+  t("mid-week: one read (ZCARD)", emu.log.join() === "ZCARD", emu.log);
+  t("board says when it opens", r.body.closes === PACK.closes && r.body.closes_label === PACK.closes_label, r.body);
+  t("leaderboard cached 60 s", r.headers["cache-control"] === "public, s-maxage=60, stale-while-revalidate=120");
+
+  lib.setClock(() => Date.parse(PACK.closes));
+  emu.log.length = 0;
+  r = await get(leaderboard, { week: "1" });
+  t("after close: lists 3 entries", r.status === 200 && r.body.state === "closed" && r.body.entries.length === 3 && r.body.count === 3, r.body);
   t("leaderboard reads the sorted set, not one key per receipt", emu.log.join() === "ZCARD,ZRANGE,MGET", emu.log);
   t("leaderboard ranked by total", r.body.entries[0].total >= r.body.entries[1].total && r.body.entries[1].total >= r.body.entries[2].total);
   t("leaderboard top is Quill", r.body.entries[0].agent === "Quill", r.body.entries);
   t("unpublished name -> anonymous", r.body.entries.some((e) => e.agent === "anonymous"));
+  t("board rows carry levels 1-4 only", r.body.entries.every((e) => e.levels.length === 4 && e.levels.every((l) => l.n >= 1 && l.n <= 4)), r.body.entries);
+  const bramble = r.body.entries.find((e) => e.agent === "Bramble");
+  t("a skipped level shows as skipped on the board", bramble && bramble.levels[3].skipped === true && !("total" in bramble.levels[3]), bramble);
+  t("board entries hold only public fields", r.body.entries.every((e) => Object.keys(e).sort().join() === "agent,levels,provisional,stars,total"));
   const pub = JSON.stringify(r.body);
-  t("leaderboard exposes no answers", !pub.includes("answer with") && !pub.includes("fictional answer"));
-  t("leaderboard exposes no handles or token hashes", !pub.includes("player") && !pub.includes("token"));
-  t("leaderboard cached 60 s", r.headers["cache-control"] === "public, s-maxage=60, stale-while-revalidate=120");
+  t("leaderboard exposes no answers", !pub.includes("answer with") && !pub.includes("fictional answer") && !pub.includes("dashboard"));
+  t("leaderboard exposes no handles, contacts or token hashes", !pub.includes("player") && !pub.includes("token") && !pub.includes("@"));
+  lib.setClock(() => IN_WEEK_1);
+
+  /* --- receipt: status by secret token --- */
+  r = await post(receiptApi, { token: secret });
+  t("receipt status -> 200", r.status === 200 && r.body.receipt === receipt, r.body);
+  t("receipt status: received, provisional", r.body.status === "received" && r.body.provisional === true);
+  t("receipt status: scores and total", r.body.total === stored.total && r.body.scores.length === 4 && r.body.stars === stored.stars, r.body);
+  t("receipt status: the owner's names, publish choice, contact flag",
+    r.body.handle === "juniper-player" && r.body.agent === "Juniper" && r.body.published === false && r.body.contact_on_file === false, r.body);
+  t("receipt status: week open, expiry date", r.body.week_state === "open" &&
+    r.body.expires === new Date(packs.expiresAt(PACK) * 1000).toISOString(), r.body);
+  t("receipt status is no-store", r.headers["cache-control"] === "no-store");
+  const own = JSON.stringify(r.body);
+  t("receipt status holds no answers or token hash", !own.includes("answer with") && !own.includes(stored.token_hash) && !own.includes(secret));
+  r = await post(receiptApi, { token: quillToken, action: "status" });
+  t("receipt status: contact on file, but not echoed", r.status === 200 && r.body.contact_on_file === true &&
+    !JSON.stringify(r.body).includes("quill@example.org"), r.body);
+  t("receipt status: L5 shows as exhibition", r.body.scores.some((x) => x.n === 5 && x.exhibition === true), r.body.scores);
+  r = await post(receiptApi, { token: newToken() });
+  t("unknown token -> generic 404", r.status === 404 && r.body.error === "not found" && /deleted, or it expired/.test(r.body.message), r.body);
+  {
+    // An index entry that points at a record with another token's hash.
+    const forged = newToken();
+    emu.exec(["SET", "mom:tok:" + hashToken(forged), receipt]);
+    r = await post(receiptApi, { token: forged });
+    t("a token must match the record's own hash -> 404", r.status === 404, r.body);
+    emu.exec(["DEL", "mom:tok:" + hashToken(forged)]);
+  }
+  {
+    const ip = { "x-real-ip": "203.0.113.20" };
+    const statuses = [];
+    for (let i = 0; i < 11; i++) statuses.push((await post(receiptApi, { token: newToken() }, ip)).status);
+    t("receipt: lookups 1-10 in a minute pass the limiter", statuses.slice(0, 10).every((x) => x === 404), statuses);
+    t("receipt: the 11th lookup from one IP in a minute -> 429", statuses[10] === 429, statuses);
+  }
+
+  /* --- receipt: delete by secret token --- */
+  {
+    r = await post(submit, sub("delete-me", "Ephemeral", { consent: { terms: true, publish: true } }));
+    t("an entry to delete -> 200", r.status === 200, r.body);
+    const code = r.body.receipt, tok = r.body.token, h = hashToken(tok);
+    t("board counts it", (await get(leaderboard, { week: "1" })).body.count === 4);
+    r = await post(receiptApi, { token: tok, action: "delete" });
+    t("delete -> 200", r.status === 200 && r.body.deleted === true && r.body.receipt === code && r.body.can_refile === true, r.body);
+    t("delete removes the record, token index and handle claim",
+      emu.raw("mom:sub:" + code) === null && emu.raw("mom:tok:" + h) === null && emu.raw("mom:handle:s1w1:delete-me") === null);
+    t("delete removes the board entry", !emu.raw("mom:board:s1w1").has(code));
+    t("board count drops", (await get(leaderboard, { week: "1" })).body.count === 3);
+    r = await post(receiptApi, { token: tok });
+    t("status after delete -> 404", r.status === 404, r.body);
+    r = await post(receiptApi, { token: tok, action: "delete" });
+    t("a second delete -> 404", r.status === 404, r.body);
+    r = await post(submit, sub("delete-me", "Ephemeral Two"));
+    t("the handle can file again while the week is open", r.status === 200, r.body);
+    const again = r.body;
+
+    // A delete cut short by a storage error can be retried with the token.
+    emu.failNext("DEL");
+    r = await post(receiptApi, { token: again.token, action: "delete" });
+    t("delete interrupted -> 503 with a retry hint", r.status === 503 && /Try again/.test(r.body.message), r.body);
+    t("interrupted delete keeps the token usable", emu.raw("mom:tok:" + hashToken(again.token)) === again.receipt);
+    r = await post(receiptApi, { token: again.token, action: "delete" });
+    t("the retry finishes the delete", r.status === 200 && r.body.deleted === true, r.body);
+    t("nothing of it is left", !emu.keys().some((k) => k.key.includes(again.receipt) || k.key.endsWith(":delete-me")) &&
+      !emu.raw("mom:board:s1w1").has(again.receipt));
+  }
 
   /* --- 429 on the sixth post from one IP within a minute --- */
   {
@@ -159,6 +251,8 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   lib.setClock(() => Date.parse(PACK.closes));
   r = await post(submit, sub("late-player", "Latecomer"));
   t("after close -> 409, nothing stored", r.status === 409 && !emu.raw("mom:handle:s1w1:late-player"), r.body);
+  r = await post(receiptApi, { token: secret });
+  t("after close: status still works and says closed", r.status === 200 && r.body.week_state === "closed", r.body);
   lib.setClock(() => Date.parse(PACK.opens) - 1000);
   r = await post(submit, sub("early-player", "Early Bird"));
   t("before open -> 409, nothing stored", r.status === 409 && !emu.raw("mom:handle:s1w1:early-player"), r.body);

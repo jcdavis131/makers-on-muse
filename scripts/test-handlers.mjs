@@ -1,6 +1,8 @@
 /* Handler tests with NO storage configured, plus every intake gate that
    works without storage. Every endpoint must fail honestly (400, 403,
    404, 405, 409, 413, 415, 503 JSON), never fake success and never throw.
+   /api/receipt takes its token only in a POST body and never accepts a
+   receipt code.
    Also: the pack manifest agrees with assets/js/season.js, dependencies
    are pinned with a lockfile, and scripts/check-health.mjs passes only
    on storage "reachable".
@@ -24,6 +26,7 @@ const lib = require("../api/_lib.js");
 const health = require("../api/health.js");
 const submit = require("../api/submit.js");
 const leaderboard = require("../api/leaderboard.js");
+const receipt = require("../api/receipt.js");
 const runEvent = require("../api/run-event.js");
 const runState = require("../api/run-state.js");
 const runStream = require("../api/run-stream.js");
@@ -192,6 +195,37 @@ console.warn = (...a) => { warnings.push(a.join(" ")); };
   t("leaderboard unknown week -> 404", r.status === 404);
   r = await call(leaderboard, mockReq("GET", { query: { week: "1" } }));
   t("leaderboard no storage -> honest 503", r.status === 503 && r.body.error === "storage unavailable");
+
+  /* ---------- receipt (status and delete by secret token) ---------- */
+  {
+    const TOKEN = "mom_" + "A".repeat(22);
+    r = await call(receipt, mockReq("GET", { query: { token: TOKEN } }));
+    t("receipt rejects GET (the token never goes in a URL)", r.status === 405 && r.headers.allow === "POST", r);
+    r = await post(receipt, { token: TOKEN }, withOrigin("https://evil.example"));
+    t("receipt foreign Origin -> 403", r.status === 403, r.status);
+    r = await post(receipt, JSON.stringify({ token: TOKEN }), { "content-type": "text/plain" });
+    t("receipt text/plain -> 415", r.status === 415, r.status);
+    r = await post(receipt, { token: TOKEN, pad: "x".repeat(70 * 1024) });
+    t("receipt oversized -> 413", r.status === 413, r.status);
+    r = await post(receipt, { token: "1-a3f5c9e2" });
+    t("receipt refuses a receipt code as a credential -> 400", r.status === 400 && /token:/.test(r.body.errors[0]), r.body);
+    r = await post(receipt, { token: TOKEN.slice(0, -1) });
+    t("receipt short token -> 400", r.status === 400, r.status);
+    r = await post(receipt, { token: TOKEN, code: "1-a3f5c9e2" });
+    t("receipt unknown key -> 400", r.status === 400 && /unknown field "code"/.test(r.body.errors[0]), r.body);
+    r = await post(receipt, { token: TOKEN, action: "edit" });
+    t("receipt unknown action -> 400", r.status === 400 && /action/.test(r.body.errors[0]), r.body);
+    r = await post(receipt, [TOKEN]);
+    t("receipt array body -> 400", r.status === 400, r.status);
+    r = await post(receipt, { token: TOKEN });
+    t("receipt status, no storage -> honest 503", r.status === 503 && r.body.error === "storage unavailable", r.body);
+    r = await post(receipt, { token: TOKEN, action: "delete" });
+    t("receipt delete, no storage -> honest 503", r.status === 503, r.status);
+    t("receipt responses are no-store", r.headers["cache-control"] === "no-store", r.headers);
+    warnings.length = 0;
+    for (let i = 0; i < 12; i++) r = await post(receipt, { token: TOKEN }, { ...JSON_HEADERS, "x-real-ip": "198.51.100.8" });
+    t("no storage: receipt lookups aren't limited (503, not 429)", r.status === 503, r.status);
+  }
 
   /* ---------- run-event ---------- */
   const ev = (extra) => ({ run_id: "x", event: { type: "note", text: "hi" }, secret: "s3cret", ...extra });

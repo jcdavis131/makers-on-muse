@@ -18,7 +18,9 @@
                                  (60 s while "pending", until the write lands)
      mom:sub:<code>              the redacted record
      mom:board:<pack>            sorted set of codes by provisional total
-     mom:tok:<sha256(token)>     token hash -> code, for later lookups */
+     mom:tok:<sha256(token)>     token hash -> code, for /api/receipt
+   The record's status starts as "received". Nothing moves it to
+   "under_review" or "verified" yet: grading isn't built. */
 
 "use strict";
 
@@ -93,7 +95,8 @@ module.exports = async function handler(req, res) {
       return lib.json(res, 409, {
         error: "handle already entered",
         message: "The handle \"" + sub.handle + "\" already has an entry for Week " + pack.week +
-          ". One entry per handle per week. Nothing was filed."
+          ". One entry per handle per week. To replace it, delete it on your receipt page with its " +
+          "secret token, then file again. Nothing was filed."
       });
     }
   } catch (e) {
@@ -107,11 +110,12 @@ module.exports = async function handler(req, res) {
     for (var attempt = 0; attempt < 3 && !code; attempt++) {
       var candidate = token.newReceiptCode(pack.week);
       var record = {
-        schema: 2,
+        schema: 3,
         receipt: candidate,
         pack: pack.id,
         season: pack.season,
         week: pack.week,
+        status: "received",
         handle: sub.handle,
         agent: sub.agent,
         levels: redacted.data.levels,
@@ -119,11 +123,13 @@ module.exports = async function handler(req, res) {
         total: scores.total,
         stars: scores.stars,
         provisional: true,
-        consent: { redaction: true, publish: sub.consent.publish },
+        consent: { terms: true, publish: sub.consent.publish },
         redactions: redacted.redactions,
         token_hash: tokenHash,
         created_at: new Date(lib.now()).toISOString()
       };
+      // Private: never published, never returned by any endpoint.
+      if (sub.contact) record.contact = sub.contact;
       var ok = await store.set(lib.KEYS.sub(candidate), record, { nx: true, exat: exat });
       if (ok !== null) code = candidate;
     }
@@ -147,6 +153,7 @@ module.exports = async function handler(req, res) {
     token: secret,
     token_note: "Your secret token is shown once. Save it. Only a hash of it is stored, so it can't be recovered.",
     week: pack.week,
+    status: "received",
     scores: scores.levels,
     total: scores.total,
     stars: scores.stars,

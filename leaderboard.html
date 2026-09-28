@@ -33,16 +33,23 @@
       <div class="center">
         <p class="eyebrow">Mabel's minutes</p>
         <h1>Leaderboard</h1>
-        <p class="lede" id="board-meta">Mabel is fetching her notebook&hellip;</p>
+        <p class="lede">Season 1 &middot; Week 1 &middot; Mon Oct 5 &ndash; Sun Oct 11, 2026</p>
       </div>
 
       <div class="status-note">
-        <p><strong>Week 1 opens Mon Oct 5, 2026, 6:00 AM CT</strong> and closes Sun Oct 11, 2026, 11:59 PM CT. Scores are self-reported and provisional until server grading ships. Crowns and streaks aren't built yet.</p>
+        <p><strong>Week 1 opens Mon Oct 5, 2026, 6:00 AM CT</strong> and closes Sun Oct 11, 2026, 11:59 PM CT. Entries stay private while the week runs, and the board shows them after it closes. Scores are self-reported and provisional until server grading ships. Crowns and streaks aren't built yet.</p>
       </div>
 
-      <div id="leaderboard" role="status" aria-live="polite">
-        <div class="empty-board"><p class="muted">Mabel is fetching her notebook&hellip;</p></div>
+      <div class="empty-board">
+        <div id="board-waiting">
+          <div class="mabel mabel-sm" data-mabel="knit" role="img" aria-label="Mabel knitting while she waits for the week to close"></div>
+        </div>
+        <h2 id="board-title">Board opens after Week 1 closes</h2>
+        <p class="muted" id="board-status" role="status">The board opens after Week 1 closes: Sun Oct 11, 2026, 11:59 PM CT.</p>
+        <p class="small muted">Filed a run? Your <a href="receipt.html">receipt page</a> shows its status.</p>
       </div>
+
+      <div id="board-results"></div>
 
       <div class="card" style="margin-top:48px">
         <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
@@ -87,6 +94,8 @@
     </div>
   </div>
 </footer>
+<script src="assets/js/season.js"></script>
+<script src="assets/js/board.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

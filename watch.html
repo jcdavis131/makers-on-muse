@@ -98,15 +98,7 @@
   background:var(--card);border:2px solid var(--moss);border-radius:var(--radius-l);
   box-shadow:var(--shadow-lift);padding:36px;text-align:center;margin:24px 0;
 }
-.run-end img{max-width:280px;margin:0 auto 20px;border-radius:var(--radius-m);box-shadow:var(--shadow)}
-/* plush rebuild removed the watercolor webp assets; watch.js should point the
-   run-end image at assets/img/mabel-plush.svg. Hide the dead reference meanwhile. */
-.run-end img[src$=".webp"]{display:none}
-/* Plush Mabel for the run-end panel, rendered in CSS so the data layer
-   (watch.js, owned elsewhere) needs no changes: the dead webp <img>
-   watch.js injects stays hidden, and this ::before paints the plush SVG. */
-.run-end::before{content:"";display:block;width:132px;height:152px;margin:0 auto 4px;
-  background:url("assets/img/mabel-plush.svg") center/contain no-repeat;flex:none}
+.run-end img{display:block;width:132px;height:auto;margin:0 auto 4px}
 .run-end .mabel{margin:0 auto 20px}
 .run-end .big-score{font-family:var(--mono);font-size:52px;font-weight:700;line-height:1;margin:8px 0}
 .run-end .stars{font-size:26px;color:var(--terracotta);letter-spacing:.2em}

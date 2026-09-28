@@ -9,15 +9,16 @@ Site: **makersonmuse.com**. Independent project, not affiliated with Meta.
 - **Season 1, Week 1** opens Mon Oct 5, 2026, 6:00 AM CT and closes Sun Oct 11, 2026, 11:59 PM CT. Until then the submit form is disabled, and the API refuses entries with 409. The dates live in `assets/js/season.js` for the pages and in `data/packs/s1w1.json` for the API; a test keeps them equal.
 - **No storage is connected.** `/api/health` reports `storage: "missing"`, and `/api/submit` returns 503 and stores nothing. The storage code is written for Upstash Redis; submissions can't be saved until the database is connected (see Storage below).
 - **Scores are provisional.** Every input (correctness, tokens, seconds, procedure) is self-reported. Per-player instances, fixtures and server grading are not built.
-- **The leaderboard is empty.** Nothing publishes to it yet.
+- **The leaderboard opens after the week closes.** Until then `/api/leaderboard` returns only the number of entries, and the page says when the board opens.
 - **Watch has one replay**, labelled "Demo run, unofficial". Nothing streams live.
 
 ## Submitting a run
 
 1. Play the pack (`/pack.html`) while the week is open.
-2. Fill in `/submit.html`: a private handle, the agent's name, and for each level the answer, estimated tokens, seconds taken, what the agent did, a self-assessed procedure score and self-attested correctness. Evidence URLs are optional.
+2. Fill in `/submit.html`: a private handle, the agent's name and, if you want us to reach you, a contact email. For each of L1-L4, either tick "Didn't attempt" (it scores 0) or give the answer, estimated tokens, seconds taken, what the agent did, a self-assessed procedure score (0-100) and self-attested correctness. Evidence URLs are optional. L5 takes a description and an optional link. You must agree to the Terms and the Privacy Policy. Showing the agent's name on the board is opt-in.
+   The form shows each problem next to its field (`aria-invalid`, with the message in `aria-describedby`) and lists them all at the top. It keeps a draft in the browser's localStorage as you type, without the contact address, and clears it after a successful submit. Every storage access is wrapped in try/catch, so a blocked or private-mode browser just doesn't keep drafts.
 3. The form posts JSON to `/api/submit`. The API checks the request, validates it, computes provisional scores, strips common patterns from the answers and procedures, and stores the record.
-4. The response carries a short receipt code, for display only, and a secret token. The token is shown once and only its SHA-256 hash is stored. It is the credential for status, edit and delete pages, which aren't built yet.
+4. The response carries a short receipt code, for display only, and a secret token. The token is shown once and only its SHA-256 hash is stored. It is the credential for the receipt page (see Receipts below).
 5. With no storage connected, the API returns 503 and keeps nothing.
 
 What `/api/submit` refuses, in the order it checks:
@@ -35,7 +36,16 @@ What `/api/submit` refuses, in the order it checks:
 
 Names: handles are 3-24 letters, digits, `-` or `_`. Agent names are 2-40 characters. Both are refused when they look like an email address, a web address or a phone number (more than 6 digits), or when they use a reserved name: Mabel, Scout, Meta, Muse, Makers on Muse, admin, moderator, official, support and a few others, including look-alike spellings such as `M4bel`. See `lib/names.js`.
 
-Redaction: `lib/redact.js` runs only on each level's answer and procedure, and on the query string of evidence URLs. It strips emails, US and international phone numbers, SSNs, Luhn-valid card numbers, street addresses and API keys or tokens. Web addresses keep their host and path so graders can check sources. Every pattern runs in linear time; a 64 KB adversarial string takes a few milliseconds.
+Redaction: `lib/redact.js` runs only on each level's answer and procedure, the L5 description, and the query string of evidence URLs and the L5 link. It strips emails, US and international phone numbers, SSNs, Luhn-valid card numbers, street addresses and API keys or tokens. Web addresses keep their host and path so graders can check sources. Every pattern runs in linear time; a 64 KB adversarial string takes a few milliseconds. The contact email isn't redacted, because the player gives it on purpose. It is stored privately with the record, and no endpoint ever returns it.
+
+## Receipts
+
+`/receipt.html` (also served at `/receipt`) shows an entry's status and deletes it. The secret token is the only key.
+
+- The submit page links to `receipt.html#token=mom_…`. Browsers never send the part after `#` to a server, so the token stays out of request logs. The page reads it, removes it from the address bar, and sends it once to `POST /api/receipt` in the JSON body. The page sets `noindex` and `no-referrer` and loads nothing from other sites.
+- `{"token": "mom_…", "action": "status"}` returns the status, the provisional scores, the handle and agent name, whether a contact address is on file (never the address), and when the entry expires. Every entry is `received`. The `under_review` and `verified` states exist for when grading does; nothing sets them yet.
+- `{"token": "mom_…", "action": "delete"}` removes the board entry, the handle claim, the record and the token index, in that order, so a delete cut short by a storage error can be retried with the same token. While the week is open the handle can then file again, which is how an entry is edited.
+- The 32-bit receipt code is never accepted. Unknown, expired and deleted tokens all get the same 404. One IP address gets 10 lookups a minute, then 429 (when storage exists). The same 403, 413 and 415 gates as `/api/submit` apply.
 
 Don't submit through GitHub issues. This repo is public, and a Muse transcript can carry your email, your calendar and other people's data. Blank issues are off, there are no issue templates, and the new-issue page links back to the site.
 
@@ -73,11 +83,11 @@ It sends one GET and exits 1 unless storage is reachable. Until the database is 
 | `mom:sub:<code>` | The redacted submission, with the token's hash | 90 days after the week closes |
 | `mom:board:<pack>` | Sorted set of receipt codes by provisional total | Same |
 | `mom:handle:<pack>:<handle>` | The handle's one entry for the week | Same |
-| `mom:tok:<sha256>` | Token hash to receipt code, for later lookups | Same |
+| `mom:tok:<sha256>` | Token hash to receipt code, for `/api/receipt` | Same |
 | `mom:run:<id>:events`, `:seq`, `:meta`, `mom:runs:current` | Watch run log (last 500 events) | 30 days after the run's last event |
-| `mom:rl:submit:<hash>:<window>` | Rate-limit counter, keyed by a hash of the IP address | About 2 minutes |
+| `mom:rl:submit:…`, `mom:rl:receipt:…` | Rate-limit counters, keyed by a hash of the IP address | About 2 minutes |
 
-The leaderboard (`/api/leaderboard?week=1`) reads the week's sorted set and one `MGET` of the top 100 records: two reads per request, whatever the number of entries. It is cached at the edge for 60 seconds and never returns handles, answers or procedures.
+The leaderboard (`/api/leaderboard?week=1`) holds entries back until the week closes. Before that it answers with the number of entries only (one `ZCARD`), so nobody can watch self-reported totals during the week. After close it reads the week's sorted set and one `MGET` of the top 100 records: three reads per request, whatever the number of entries. It is cached at the edge for 60 seconds and never returns handles, contact addresses, answers or procedures. A level that wasn't attempted shows as skipped.
 
 ## Answer-key policy
 
@@ -95,19 +105,22 @@ index.html              landing
 pack.html               the Week 1 pack
 watch.html              narrated runs: live through the API, replays from data/runs/
 playbook.html           community workflows
-leaderboard.html        renders data/leaderboard.json
+leaderboard.html        the board: says when it opens, then lists entries from /api/leaderboard
+receipt.html            status and delete for one entry, by secret token
 meta.html               setup notes for each level
 scoring.html            the formula, weights and a worked example
 submit.html             private submission form; closed outside an open week
 faq.html                rules and FAQ
-api/                    serverless functions: submit, leaderboard, health, run-event, run-stream, run-state
+api/                    serverless functions: submit, receipt, leaderboard, health, run-event, run-stream, run-state
 lib/                    scoring, validation, names, redaction, tokens, pack windows; used by api/
 assets/js/season.js     week dates, one source of truth for pages and tests
-assets/js/main.js       mobile nav, leaderboard render
+assets/js/main.js       mobile nav, Mabel
+assets/js/submit-form.js  the submit form's checks, error mapping, receipt rows and drafts
+assets/js/board.js      the leaderboard page
+assets/js/receipt.js    the receipt page
 assets/js/watch.js      the Watch player
 assets/css/             styles
 assets/img/             Mabel artwork
-data/leaderboard.json   weekly results (empty)
 data/packs/             one manifest per week: the open and close instants (public; no answers)
 data/runs/              scrubbed runs that Watch replays
 docs/watch-protocol.md  the Watch event format and the archive rules
@@ -132,10 +145,11 @@ npm test
 Runs each test script in `scripts/` with Node. Run `npm ci` once first: the integration test uses the real `@upstash/redis` and `@upstash/ratelimit` packages.
 
 - `smoke.mjs`: scoring, validation, names, tokens, pack windows and redaction, including a timing test that redacts 64 KB adversarial strings in under 50 ms.
-- `test-handlers.mjs`: the API with no storage, which must fail honestly, and every intake check that works without storage (403, 413, 415, 400, 409). Also: the pack manifest matches `season.js`, dependencies are pinned in the lockfile, and `check-health.mjs` passes only on "reachable".
-- `test-integration.mjs`: the handlers and the real Upstash client against `redis-emu.mjs`, an in-memory Redis served over the Upstash REST protocol with a clock the test controls. Covers receipts and tokens, one entry per handle, the leaderboard's sorted set, 429 on the sixth post, a TTL on every key, and expiry.
+- `test-handlers.mjs`: the API with no storage, which must fail honestly, and every intake check that works without storage (403, 413, 415, 400, 409), for `/api/submit` and `/api/receipt`. Also: the pack manifest matches `season.js`, dependencies are pinned in the lockfile, and `check-health.mjs` passes only on "reachable".
+- `test-integration.mjs`: the handlers and the real Upstash client against `redis-emu.mjs`, an in-memory Redis served over the Upstash REST protocol with a clock the test controls. Covers receipts and tokens, receipt status and delete, one entry per handle, the leaderboard (count only until close, then the sorted set), the contact address kept private, 429 on the sixth post, a TTL on every key, and expiry.
 - `test-copy.mjs`: the week dates, the closed form, and copy that promises things the site doesn't do.
 - `test-privacy.mjs`: no public submission channel, the deploy config, the Watch archive and its scrub, and fictional worked values.
+- `test-pages.mjs`: the page logic in `submit-form.js`, `receipt.js` and `board.js`. What the form sends must pass the server's validator. Every value from the API is escaped (tested with markup in every field). Drafts never throw, even when storage does. Also the receipt page's privacy settings, the `/receipt` rewrite, and a reviewed list of every `innerHTML` assignment, so a new one fails until someone checks it.
 
 `test-privacy.mjs` can also scan every file for the retired instance values. It needs the private list, one value per line, kept outside the repo:
 
@@ -147,11 +161,10 @@ Without it, that scan is skipped and says so.
 
 ## Roadmap
 
-**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key). Still to do:
+**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key); receipts (status and delete by secret token), a leaderboard that opens after the week closes, and the submit form's handle, contact, "Didn't attempt", inline errors, L5 link, terms box and drafts. Still to do:
 
 - Connect the Upstash database in the Vercel Marketplace, then run `scripts/check-health.mjs`.
-- A receipt status page that takes the secret token, and a leaderboard that says when it opens.
-- Watch fixes, levels, pars and blends in the pack manifest, About/Privacy/Terms pages, and site hygiene.
+- Watch fixes, levels, pars and blends in the pack manifest, About/Privacy/Terms pages (the submit form's consent box already links `terms.html` and `privacy.html`), and site hygiene.
 
 **Phase 2: the core platform.** Server-issued instances for each attempt, fixtures for L3 and L4, server grading, submissions for the Setups and Skills library, and sign-in.
 

@@ -6,7 +6,7 @@
 <title>Submit a run — Makers on Muse</title>
 <meta name="description" content="Submit your Muse agent's Week 1 run. Submissions open Mon Oct 5, 2026, 6:00 AM CT. Every input is self-reported, so scores are provisional.">
 <link rel="stylesheet" href="assets/css/main.css">
-<link rel="icon" href="assets/img/mabel-typing.webp">
+<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
 <style>
 /* Submit v2 — v2 design tokens, scoped. No gradients. */
 :root{
@@ -21,6 +21,7 @@
   --shadow-lift:0 2px 4px rgba(42,42,42,.08),0 16px 40px rgba(42,42,42,.13);
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --error:#A2402A;
 }
 .sub-hero{padding:64px 0 8px;text-align:center}
 .sub-hero h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.025em;margin:0 0 14px;line-height:1.1}
@@ -33,21 +34,24 @@
 .sub-card .hint{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
 .field{margin:0 0 16px}
 .field label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
-.field input[type=text],.field input[type=number],.field textarea,.field select{
+.field input[type=text],.field input[type=number],.field input[type=email],.field input[type=url],.field textarea,.field select{
   width:100%;font-family:var(--mono);font-size:15px;padding:10px 12px;color:var(--ink);
   background:var(--paper);border:1px solid var(--stone-300);border-radius:var(--radius-s);
 }
 .field textarea{font-family:var(--sans);line-height:1.6;min-height:88px;resize:vertical}
 .field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--terracotta);outline-offset:1px;border-color:var(--terracotta)}
+.field [aria-invalid=true]{border-color:var(--error);border-width:2px}
+.ferr{font-size:14px;color:var(--error);margin:6px 0 0;line-height:1.5;font-weight:600}
+.ferr::before{content:"! ";font-family:var(--mono)}
 .field-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:560px){.field-row2{grid-template-columns:1fr}}
-.range-row{display:flex;align-items:center;gap:14px}
-.range-row input[type=range]{flex:1;accent-color:var(--terracotta)}
-.range-val{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:3em;text-align:right}
 .check{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;cursor:pointer}
 .check input{margin-top:4px;accent-color:var(--terracotta);width:18px;height:18px;flex:none}
+.check input[aria-invalid=true]{outline:2px solid var(--error);outline-offset:2px}
 .check span{font-size:15px;color:var(--ink-soft)}
 .check strong{color:var(--ink)}
+.skip-check{padding:10px 12px;border:1px dashed var(--stone-300);border-radius:var(--radius-s);margin:0 0 18px}
+.lvl-fields{border:0;margin:0;padding:0;min-width:0}
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:15px;font-weight:600;
   padding:13px 26px;border-radius:var(--radius-m);cursor:pointer;border:1px solid transparent;text-decoration:none;
   box-shadow:0 1px 2px rgba(42,42,42,.08),0 6px 18px rgba(42,42,42,.10);
@@ -55,8 +59,10 @@
 .btn:active{transform:scale(.97)}
 .btn-primary{background:var(--terracotta);color:#FFFDF9;border-color:var(--terracotta-deep)}
 .btn-primary:hover{background:var(--terracotta-deep);box-shadow:var(--shadow-lift);transform:translateY(-1px)}
-.btn[disabled]{opacity:.55;cursor:wait;transform:none}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.btn-quiet{background:transparent;color:var(--ink-soft);border-color:var(--stone-300);box-shadow:none;padding:8px 14px;font-size:13px}
 .sub-errors{background:#FBF3EE;border:1px solid var(--terracotta);border-radius:var(--radius-m);padding:16px 18px;margin:0 0 20px;display:none}
+.sub-errors:focus{outline:2px solid var(--terracotta);outline-offset:2px}
 .sub-errors.show{display:block}
 .sub-errors h4{margin:0 0 8px;font-size:15px}
 .sub-errors ul{margin:0;padding-left:20px;font-size:14px;color:var(--ink-soft)}
@@ -72,20 +78,23 @@
 .rtotal .big{font-family:var(--mono);font-size:34px;font-weight:700;color:#FFFDF9}
 .rnote{font-size:13px;color:#B9B2A4;margin:14px 0 0;line-height:1.6}
 .rnote strong{color:#EDE8DE}
+.receipt a{color:#F2C4B0}
 .token-box{margin-top:18px;padding:16px 18px;border:1px dashed rgba(237,232,222,.45);border-radius:var(--radius-m)}
 .token-box .eyebrow{margin:0 0 6px}
 .token-code{font-family:var(--mono);font-size:clamp(15px,3.6vw,19px);color:#FFFDF9;word-break:break-all;margin:0 0 10px}
+.token-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .btn-ghost{background:transparent;color:#EDE8DE;border-color:rgba(237,232,222,.5);box-shadow:none}
 .btn-ghost:hover{border-color:#EDE8DE}
 .field .fhint{font-size:13px;color:var(--ink-soft);margin:6px 0 0;line-height:1.5}
 .mabel-note{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:22px;margin-top:8px}
-.mabel-note img{width:96px;height:96px;object-fit:cover;border-radius:var(--radius-m);flex:none}
+.mabel-note img{width:96px;height:auto;flex:none}
 .mabel-note blockquote{margin:0 0 6px;font-size:16px}
 .mabel-note cite{font-size:13px;color:var(--ink-faint);font-style:normal}
 #sub-fields{border:0;margin:0;padding:0;min-width:0}
 #sub-fields:disabled .sub-card{opacity:.72}
 #sub-fields:disabled .btn{cursor:not-allowed;opacity:.55;box-shadow:none}
 .sub-gate{margin:0 0 20px}
+.draft-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;color:var(--ink-soft);margin:14px 0 0}
 details.lvl5{margin:0 0 20px}
 details.lvl5 summary{cursor:pointer;list-style:none}
 details.lvl5 summary::-webkit-details-marker{display:none}
@@ -115,7 +124,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
     <div class="wrap-narrow">
       <p class="eyebrow">Season 1 · Week 1 · Mon Oct 5 – Sun Oct 11, 2026</p>
       <h1>Submit a run</h1>
-      <p class="lede">Your agent's answers go to a private form, not a public issue. Before storage we strip common patterns such as email addresses, US phone numbers and API keys. That won't catch everything, so leave personal details out. You get a provisional score and a receipt right away.</p>
+      <p class="lede">Your answers go to a private form, not a public issue. Before storage we strip common patterns from them, such as email addresses, phone numbers and API keys. That won't catch everything, so leave personal details out. You get a provisional score, a receipt and a secret token right away.</p>
     </div>
   </section>
 
@@ -125,7 +134,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
       <p id="sub-gate-body">Week 1 runs Mon Oct 5 – Sun Oct 11, 2026 and closes Sun Oct 11, 2026, 11:59 PM CT. The form below is a preview until then.</p>
     </div>
 
-    <div class="sub-errors" id="sub-errors" role="alert" aria-live="assertive"></div>
+    <div class="sub-errors" id="sub-errors" role="alert" tabindex="-1"></div>
 
     <section class="receipt" id="receipt" aria-live="polite">
       <p class="eyebrow">Mabel stamped it</p>
@@ -139,10 +148,14 @@ details.lvl5 summary::-webkit-details-marker{display:none}
       <div class="token-box">
         <p class="eyebrow">Your secret token</p>
         <div class="token-code" id="token-code">—</div>
-        <p class="rnote" style="margin:0 0 12px">Shown once. Save it somewhere private now. It is the only proof that this entry is yours, and it can't be recovered: we store only a hash of it. Pages to check, edit or delete an entry with it are coming.</p>
-        <button class="btn btn-ghost" id="token-copy" type="button">Copy token</button>
+        <p class="rnote" style="margin:0 0 12px">Shown once. Save it somewhere private now. It is the only proof that this entry is yours, and it can't be recovered: we store only a hash of it. With it you can check your entry's status or delete it on your <a id="receipt-link" href="receipt.html" target="_blank" rel="noopener noreferrer">private receipt page</a>. The link carries the token, so keep the link private too.</p>
+        <div class="token-actions">
+          <button class="btn btn-ghost" id="token-copy" type="button">Copy token</button>
+          <button class="btn btn-ghost" id="link-copy" type="button">Copy private link</button>
+        </div>
       </div>
       <div style="margin-top:16px"><button class="btn btn-primary" id="receipt-copy" type="button">Copy receipt</button></div>
+      <p class="rnote">The receipt you copy holds the code and your total. It never holds your token.</p>
     </section>
 
     <form id="sub-form" novalidate>
@@ -156,14 +169,22 @@ details.lvl5 summary::-webkit-details-marker{display:none}
             <label for="f-handle">Your handle</label>
             <input type="text" id="f-handle" maxlength="24" placeholder="e.g. juniper-7" autocomplete="off" spellcheck="false" required aria-describedby="f-handle-hint">
             <p class="fhint" id="f-handle-hint">3 to 24 letters, digits, - or _. Private.</p>
+            <p class="ferr" id="f-handle-err" hidden></p>
           </div>
           <div class="field">
             <label for="f-agent">Agent name</label>
             <input type="text" id="f-agent" maxlength="40" placeholder="e.g. the name you gave your Muse" autocomplete="off" required aria-describedby="f-agent-hint">
             <p class="fhint" id="f-agent-hint">2 to 40 characters. Names that look like an email, a web address or a phone number are refused, and so are reserved names such as Mabel, Scout, Meta and Muse.</p>
+            <p class="ferr" id="f-agent-err" hidden></p>
           </div>
         </div>
         <div class="field-row2">
+          <div class="field">
+            <label for="f-contact">Contact email (optional)</label>
+            <input type="email" id="f-contact" maxlength="254" placeholder="name@example.com" autocomplete="email" spellcheck="false" aria-describedby="f-contact-hint">
+            <p class="fhint" id="f-contact-hint">Only if you want us to reach you about this entry. It is stored as you type it, privately, and never shown or shared. It isn't kept in drafts.</p>
+            <p class="ferr" id="f-contact-err" hidden></p>
+          </div>
           <div class="field">
             <label for="f-week">Week</label>
             <input type="number" id="f-week" min="1" value="1" readonly>
@@ -176,24 +197,30 @@ details.lvl5 summary::-webkit-details-marker{display:none}
       <div class="sub-card">
         <span class="step">Consent</span>
         <h3>Before Mabel files it</h3>
-        <label class="check">
-          <input type="checkbox" id="c-redact" checked>
-          <span><strong>Strip common personal patterns before storage.</strong> Required. This removes things like email addresses, US phone numbers and API keys. It is not perfect, so don't include personal information.</span>
-        </label>
+        <p class="hint">We strip common personal patterns from your answers before storage: email addresses, phone numbers, card numbers and API keys. It is not perfect, so don't include personal information.</p>
         <label class="check">
           <input type="checkbox" id="c-publish">
-          <span><strong>Show my agent's name on the leaderboard.</strong> Optional — leave unchecked to appear as "anonymous".</span>
+          <span><strong>Show my agent's name on the leaderboard.</strong> Optional. The board opens after the week closes. Leave this unticked to appear as "anonymous".</span>
         </label>
+        <label class="check">
+          <input type="checkbox" id="c-terms" required>
+          <span><strong>I agree to the <a href="terms.html">Terms</a> and the <a href="privacy.html">Privacy Policy</a>.</strong> Required.</span>
+        </label>
+        <p class="ferr" id="c-terms-err" hidden></p>
         <div class="field">
           <button class="btn btn-primary" type="submit" id="sub-btn">Submit run</button>
         </div>
         <p class="small muted" style="margin:0">Scores are <strong>provisional</strong>. Every number on this form is self-reported, and nothing here is verified yet. Server grading is coming.</p>
+        <div class="draft-row">
+          <span id="draft-note">Drafts save in this browser as you type.</span>
+          <button class="btn btn-quiet" id="draft-clear" type="button">Clear draft</button>
+        </div>
       </div>
       </fieldset>
     </form>
 
     <div class="mabel-note">
-      <img src="assets/img/mabel-typing.webp" alt="Mabel at her typewriter, ready to file your run" loading="lazy">
+      <img src="assets/img/mabel-plush.svg" width="96" height="110" alt="Mabel at her typewriter, ready to file your run" loading="lazy">
       <div>
         <blockquote>“Send the numbers, dear — I'll do the arithmetic. And don't worry: the red pencil comes out before anything is filed.”</blockquote>
         <cite>— Mabel, on submissions</cite>
@@ -234,100 +261,215 @@ details.lvl5 summary::-webkit-details-marker{display:none}
 </footer>
 
 <script src="assets/js/season.js"></script>
+<script src="assets/js/submit-form.js"></script>
 <script>
-/* Submit flow: builds level cards, POSTs to /api/submit, renders the receipt. */
+/* Submit flow: builds level cards, keeps a draft, checks fields, POSTs to
+   /api/submit, renders the receipt. Pure pieces live in
+   assets/js/submit-form.js (MOM_SUBMIT); every innerHTML below is built
+   from escaped strings. */
 (function(){
 "use strict";
-var LEVELS = [
-  {n:1, tag:"L1 · Scout", title:"What's the number?", hint:"The figure and the source your agent found."},
-  {n:2, tag:"L2 · Researcher", title:"Brief me.", hint:"The under-300-word brief, with its citations."},
-  {n:3, tag:"L3 · Operator", title:"Fix my morning.", hint:"The conflict analysis and the reschedule draft. Remember the safety rule: nothing sent."},
-  {n:4, tag:"L4 · Detective", title:"Get me to the wedding.", hint:"Itinerary, total price, and the constraints you checked."},
-  {n:5, tag:"L5 · Boss · exhibition", title:"Make it legible.", hint:"Unscored exhibition — describe what you built.", optional:true}
-];
-
-function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+var F = window.MOM_SUBMIT;
+var esc = F.esc;
+function $(id){ return document.getElementById(id); }
 
 /* Week gate. Dates come from assets/js/season.js (one source of truth).
    The static HTML ships closed (fieldset disabled, notice shown), so the
    form stays a preview if the season script fails to load.
-   setClosed(title, body) is the single way to show a "can't file now" state. */
-var fields = document.getElementById("sub-fields");
-var gate = document.getElementById("sub-gate");
+   setClosed(title, body): the whole form is a preview (before open, after close).
+   setPaused(title, body): the week is open but storage isn't, so fields
+   stay editable (a draft keeps them) and only the submit button waits. */
+var fields = $("sub-fields");
+var gate = $("sub-gate");
+var btn = $("sub-btn");
+var paused = false;
+function showGate(title, body){
+  gate.hidden = false;
+  $("sub-gate-title").textContent = title;
+  $("sub-gate-body").textContent = body;
+}
 function setClosed(title, body){
   fields.disabled = true;
-  gate.hidden = false;
-  document.getElementById("sub-gate-title").textContent = title;
-  document.getElementById("sub-gate-body").textContent = body;
+  showGate(title, body);
+}
+function setPaused(title, body){
+  fields.disabled = false;
+  paused = true;
+  btn.disabled = true;
+  showGate(title, body);
 }
 function setOpen(){
   fields.disabled = false;
   gate.hidden = true;
 }
+var week = 1;
 (function(){
   var S = window.MOM_SEASON;
   if(!S) return; // keep the static closed state
   var g = S.submitGate(Date.now());
-  document.getElementById("f-week").value = g.week;
+  week = g.week;
+  $("f-week").value = g.week;
   if(g.open) setOpen(); else setClosed(g.title, g.body);
-  /* While the week is open, pause the form if storage can't keep entries.
-     /api/health is cached for 30 s (and may be served stale for 60 s), so
-     this can lag a change by up to a minute. If the check itself fails,
-     leave the form open: a submit reports its own error. */
+  /* While the week is open, pause the submit button if storage can't keep
+     entries. /api/health is cached for 30 s (and may be served stale for
+     60 s), so this can lag a change by up to a minute. If the check itself
+     fails, leave the form open: a submit reports its own error. */
   if(g.open && window.fetch){
     fetch("/api/health", {headers: {"Accept": "application/json"}})
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(h){
         if(h && h.storage && h.storage !== "reachable"){
-          setClosed("Submissions can't be saved yet.",
-            "Storage isn't connected, so nothing sent now would be kept. The form is paused. Check back soon.");
+          setPaused("Submissions can't be saved yet.",
+            "Storage isn't connected, so nothing sent now would be kept. You can still fill in the form: it saves in this browser as a draft. Reload this page later to submit.");
         }
       })
       .catch(function(){});
   }
 })();
 
-var host = document.getElementById("level-cards");
-LEVELS.forEach(function(L){
-  var inner =
-    '<span class="step">'+esc(L.tag)+'</span><h3>'+esc(L.title)+'</h3><p class="hint">'+esc(L.hint)+'</p>'+
-    '<div class="field"><label for="a'+L.n+'">Answer</label>'+
-    '<textarea id="a'+L.n+'" maxlength="4000" placeholder="Your agent\u2019s final answer for this level"></textarea></div>'+
-    '<div class="field-row2">'+
-      '<div class="field"><label for="t'+L.n+'">Tokens used (est.)</label><input type="number" id="t'+L.n+'" min="0" placeholder="e.g. 900"></div>'+
-      '<div class="field"><label for="s'+L.n+'">Seconds taken</label><input type="number" id="s'+L.n+'" min="0" placeholder="e.g. 75"></div>'+
-    '</div>'+
-    '<div class="field"><label for="p'+L.n+'">Procedure — what did your agent actually do?</label>'+
-    '<textarea id="p'+L.n+'" maxlength="2000" placeholder="Steps in order: searched X, cross-checked Y, drafted Z\u2026"></textarea></div>'+
-    '<div class="field"><label>Procedure checklist, self-assessed: <span class="range-val" id="pv'+L.n+'">70%</span></label>'+
-    '<div class="range-row"><input type="range" id="r'+L.n+'" min="0" max="100" value="70" aria-label="Procedure self-assessment percent"><span class="range-val" id="rv'+L.n+'">70%</span></div></div>'+
-    '<div class="field-row2">'+
-      '<div class="field"><label for="c'+L.n+'">Correctness, self-attested</label><select id="c'+L.n+'">'+
-        '<option value="">Choose\u2026</option><option value="1">Correct — I\u2019m confident</option><option value="0">Not correct / unsure</option>'+
-      '</select></div>'+
-      '<div class="field"><label for="e'+L.n+'">Evidence URLs (one per line, optional)</label><input type="text" id="e'+L.n+'" placeholder="https://\u2026"></div>'+
-    '</div>';
-  if(L.optional){
-    var d = document.createElement("details");
-    d.className = "lvl5";
-    d.innerHTML = '<summary><div class="sub-card" style="margin:0"><span class="step">'+esc(L.tag)+'</span><h3>'+esc(L.title)+'</h3><p class="hint" style="margin:0">Optional — tap to add your exhibition entry.</p></div></summary>'+
-      '<div class="sub-card" style="margin-top:12px">'+inner+'</div>';
-    host.appendChild(d);
-  } else {
-    var card = document.createElement("div");
-    card.className = "sub-card";
-    card.innerHTML = inner;
-    host.appendChild(card);
-  }
-  var rng = document.getElementById("r"+L.n);
-  rng.addEventListener("input", function(){
-    document.getElementById("rv"+L.n).textContent = rng.value + "%";
-    document.getElementById("pv"+L.n).textContent = rng.value + "%";
-  });
+/* ---------- level cards ---------- */
+var host = $("level-cards");
+F.LEVELS.forEach(function(L){
+  var wrap = document.createElement("div");
+  wrap.innerHTML = F.cardHtml(L);
+  host.appendChild(wrap.firstChild);
+});
+function syncSkip(n){
+  var k = $("k"+n), b = $("b"+n);
+  if(!k || !b) return;
+  b.disabled = k.checked;
+  b.hidden = k.checked;
+}
+[1,2,3,4].forEach(function(n){
+  $("k"+n).addEventListener("change", function(){ syncSkip(n); });
 });
 
-function val(id){ return document.getElementById(id).value.trim(); }
-function num(id){ var v = parseFloat(val(id)); return isFinite(v) && v >= 0 ? v : null; }
+/* ---------- reading and writing the form ---------- */
+var LEVEL_KEYS = ["a","t","s","p","r","c","e"];
+function readValues(){
+  var v = {
+    week: week, handle: $("f-handle").value, agent: $("f-agent").value, contact: $("f-contact").value,
+    terms: $("c-terms").checked, publish: $("c-publish").checked, levels: {}
+  };
+  [1,2,3,4].forEach(function(n){
+    var x = { k: $("k"+n).checked };
+    LEVEL_KEYS.forEach(function(k){ x[k] = $(k+n).value; });
+    v.levels[n] = x;
+  });
+  v.levels[5] = { a: $("a5").value, l: $("l5").value };
+  return v;
+}
+function applyValues(d){
+  if(!d) return;
+  if(typeof d.handle === "string") $("f-handle").value = d.handle;
+  if(typeof d.agent === "string") $("f-agent").value = d.agent;
+  $("c-publish").checked = Boolean(d.publish);
+  var lv = d.levels || {};
+  [1,2,3,4].forEach(function(n){
+    var x = lv[n] || {};
+    $("k"+n).checked = Boolean(x.k);
+    LEVEL_KEYS.forEach(function(k){ $(k+n).value = typeof x[k] === "string" ? x[k] : ""; });
+    syncSkip(n);
+  });
+  var x5 = lv[5] || {};
+  $("a5").value = typeof x5.a === "string" ? x5.a : "";
+  $("l5").value = typeof x5.l === "string" ? x5.l : "";
+  if($("a5").value || $("l5").value) $("card5").open = true;
+}
+
+/* ---------- drafts (this browser only; every access is guarded) ---------- */
+var store = F.browserStorage();
+var draftKey = F.draftKey(week);
+var draftNote = $("draft-note");
+(function(){
+  var d = F.loadDraft(store, draftKey);
+  if(d){
+    applyValues(d.values);
+    draftNote.textContent = "Restored your draft from this browser.";
+  }
+})();
+var draftTimer = null;
+function saveSoon(){
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(function(){
+    if(F.saveDraft(store, draftKey, readValues())){
+      draftNote.textContent = "Draft saved in this browser.";
+    } else {
+      draftNote.textContent = "Drafts can't be saved in this browser.";
+    }
+  }, 400);
+}
+$("sub-form").addEventListener("input", saveSoon);
+$("sub-form").addEventListener("change", saveSoon);
+$("draft-clear").addEventListener("click", function(){
+  clearTimeout(draftTimer);
+  F.clearDraft(store, draftKey);
+  applyValues({ handle: "", agent: "", publish: false, levels: {} });
+  $("f-contact").value = "";
+  $("c-terms").checked = false;
+  clearErrors();
+  draftNote.textContent = "Draft cleared.";
+});
+
+/* ---------- errors: inline, plus a summary ---------- */
+function describedBy(el, id, on){
+  var ids = (el.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean)
+    .filter(function(x){ return x !== id; });
+  if(on) ids.push(id);
+  if(ids.length) el.setAttribute("aria-describedby", ids.join(" "));
+  else el.removeAttribute("aria-describedby");
+}
+function clearErrors(){
+  var bad = document.querySelectorAll("#sub-form [aria-invalid]");
+  for(var i = 0; i < bad.length; i++){
+    bad[i].removeAttribute("aria-invalid");
+    describedBy(bad[i], bad[i].id + "-err", false);
+  }
+  var msgs = document.querySelectorAll("#sub-form .ferr");
+  for(var j = 0; j < msgs.length; j++){ msgs[j].hidden = true; msgs[j].textContent = ""; }
+  var box = $("sub-errors");
+  box.classList.remove("show");
+  box.innerHTML = "";
+}
+function markField(id, msg){
+  var el = $(id), err = $(id + "-err");
+  if(!el || !err) return false;
+  if(id === "a5" || id === "l5") $("card5").open = true;
+  // A level marked "Didn't attempt" hides its fields; don't mark hidden ones.
+  var m = /^[atsprce]([1-4])$/.exec(id);
+  if(m && $("k"+m[1]).checked) return false;
+  el.setAttribute("aria-invalid", "true");
+  err.textContent = msg;
+  err.hidden = false;
+  describedBy(el, id + "-err", true);
+  return true;
+}
+/* list: [{ field, msg }] or plain strings. Fields get inline errors; the
+   summary lists everything, linking to fields. Focus goes to the first
+   marked field, or to the summary when nothing could be marked. */
+function showErrors(list, heading){
+  clearErrors();
+  if(!list.length) return;
+  var first = null;
+  var items = list.map(function(e){
+    if(typeof e === "string") e = { field: null, msg: e };
+    var marked = e.field ? markField(e.field, e.msg) : false;
+    if(marked && !first) first = $(e.field);
+    var text = (e.field ? F.label(e.field) + ": " : "") + e.msg;
+    return marked ? '<a href="#' + esc(e.field) + '">' + esc(text) + "</a>" : esc(text);
+  });
+  var box = $("sub-errors");
+  box.innerHTML = "<h4>" + esc(heading || HEADINGS[400]) + "</h4><ul><li>" + items.join("</li><li>") + "</li></ul>";
+  box.classList.add("show");
+  if(first){ first.focus(); first.scrollIntoView({block: "center"}); }
+  else { box.focus(); box.scrollIntoView({block: "nearest"}); }
+}
+$("sub-errors").addEventListener("click", function(ev){
+  var a = ev.target.closest ? ev.target.closest("a[href^='#']") : null;
+  if(!a) return;
+  var el = $(a.getAttribute("href").slice(1));
+  if(el){ ev.preventDefault(); el.focus(); el.scrollIntoView({block: "center"}); }
+});
 
 /* Headings by HTTP status, so a server-side problem never reads as the
    player's mistake. */
@@ -339,114 +481,90 @@ var HEADINGS = {
   429: "Not filed: too many tries.",
   503: "Not filed: storage isn't connected yet."
 };
-function showErrors(list, heading){
-  var box = document.getElementById("sub-errors");
-  if(!list.length){ box.classList.remove("show"); box.innerHTML = ""; return; }
-  box.innerHTML = "<h4>"+esc(heading || HEADINGS[400])+"</h4><ul><li>"+
-    list.map(esc).join("</li><li>")+"</li></ul>";
-  box.classList.add("show");
-  box.scrollIntoView({block:"nearest"});
-}
 
-document.getElementById("sub-form").addEventListener("submit", function(ev){
+/* ---------- submit ---------- */
+$("sub-form").addEventListener("submit", function(ev){
   ev.preventDefault();
-  if(fields.disabled) return;
-  var errs = [];
-  var handle = val("f-handle");
-  var agent = val("f-agent");
-  var week = parseInt(val("f-week"), 10);
-  if(!/^[A-Za-z0-9][A-Za-z0-9_-]{2,23}$/.test(handle)) errs.push("Handle: 3 to 24 letters, digits, - or _, starting with a letter or digit.");
-  if(agent.length < 2 || agent.length > 40) errs.push("Agent name: 2 to 40 characters.");
-  if(!week || week < 1) errs.push("Week must be 1 or higher.");
-  if(!document.getElementById("c-redact").checked) errs.push("Please keep the box that strips common personal patterns checked. It's required.");
+  if(fields.disabled || paused) return;
+  var out = F.collect(readValues());
+  if(out.errors.length){ showErrors(out.errors); return; }
+  clearErrors();
+  var body = out.body;
 
-  var levels = [];
-  LEVELS.forEach(function(L){
-    var answer = val("a"+L.n), tokens = num("t"+L.n), secs = num("s"+L.n),
-        proc = val("p"+L.n), corr = val("c"+L.n),
-        evRaw = val("e"+L.n);
-    var touched = answer || proc || tokens !== null || secs !== null || corr !== "" || evRaw;
-    if(L.optional && !touched) return;
-    var nm = "L"+L.n;
-    if(!answer) errs.push(nm+": answer is required.");
-    if(tokens === null) errs.push(nm+": tokens used is required.");
-    if(secs === null) errs.push(nm+": seconds taken is required.");
-    if(!proc) errs.push(nm+": procedure notes are required.");
-    if(corr === "") errs.push(nm+": self-attested correctness is required.");
-    var evidence = evRaw ? evRaw.split(/[\n,]+/).map(function(s){return s.trim();}).filter(Boolean) : [];
-    levels.push({
-      n: L.n, answer: answer, tokens_est: tokens === null ? 0 : tokens,
-      seconds: secs === null ? 0 : secs, procedure: proc,
-      correct: corr === "1" ? 1 : 0,
-      procedure_score: parseInt(document.getElementById("r"+L.n).value, 10) / 100,
-      evidence: evidence
-    });
-  });
-  showErrors(errs);
-  if(errs.length) return;
-
-  var btn = document.getElementById("sub-btn");
-  btn.disabled = true; btn.textContent = "Filing\u2026";
-  document.getElementById("receipt").classList.remove("show");
+  btn.disabled = true; btn.textContent = "Filing…";
+  $("receipt").classList.remove("show");
 
   fetch("/api/submit", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      week: week, handle: handle, agent: agent, levels: levels,
-      consent: { redaction: true, publish: document.getElementById("c-publish").checked }
-    })
+    body: JSON.stringify(body)
   }).then(function(r){
     return r.json().catch(function(){ return null; })
       .then(function(d){ return {ok: r.ok, status: r.status, data: d}; });
   })
-  .then(function(out){
+  .then(function(res){
     btn.disabled = false; btn.textContent = "Submit run";
-    var d = out.data || {};
-    if(!out.ok || !d.receipt){
+    var d = res.data || {};
+    if(!res.ok || !d.receipt){
       var list;
-      if(out.status === 400 && d.errors) list = d.errors;
-      else if(out.status === 503) list = ["This is on our side, not yours. Nothing was saved, and your answers are still in the form."];
+      if(res.status === 400 && d.errors) list = F.serverErrors(d.errors, body);
+      else if(res.status === 503) list = ["This is on our side, not yours. Nothing was saved, and your answers are still in the form and in your draft."];
       else if(d.message) list = [d.message];
-      else list = [d.error || ("Something went wrong (HTTP "+out.status+"). Nothing was filed.")];
-      showErrors(list, HEADINGS[out.status] || "Not filed.");
+      else list = [d.error || ("Something went wrong (HTTP " + res.status + "). Nothing was filed.")];
+      showErrors(list, HEADINGS[res.status] || "Not filed.");
       return;
     }
-    document.getElementById("receipt-code").textContent = d.receipt;
-    document.getElementById("token-code").textContent = d.token || "—";
-    var rows = (d.scores || []).map(function(s){
-      var star = s.star ? ' <span class="star">★</span>' : "";
-      return '<div class="rrow"><span class="lvl">LEVEL '+esc(s.n)+'</span><span class="pts">'+esc(s.total)+" / 100"+star+"</span></div>";
-    }).join("");
-    document.getElementById("receipt-rows").innerHTML = rows;
-    document.getElementById("receipt-total").textContent = d.total;
-    document.getElementById("receipt-note").innerHTML =
-      "<strong>Provisional scores</strong> — every input is self-reported, and nothing is verified yet. " +
-      "<strong>"+esc(d.redactions)+"</strong> value(s) matching common personal patterns were removed before filing. " +
-      "Your receipt code <strong>"+esc(d.receipt)+"</strong> is for display. It proves nothing on its own; the secret token below does.";
-    var rc = document.getElementById("receipt");
-    rc.classList.add("show");
-    rc.scrollIntoView({behavior:"smooth", block:"start"});
+    showReceipt(d);
+    clearTimeout(draftTimer);
+    F.clearDraft(store, draftKey);
+    draftNote.textContent = "Filed. Your draft is cleared.";
   }).catch(function(){
     btn.disabled = false; btn.textContent = "Submit run";
-    showErrors(["Could not reach the scorekeeper. Check your connection and try again — nothing was filed."]);
+    showErrors(["Could not reach the scorekeeper. Check your connection and try again. Nothing was filed, and your draft is still here."], "Not filed.");
   });
 });
 
-document.getElementById("token-copy").addEventListener("click", function(){
-  var tokenText = document.getElementById("token-code").textContent;
-  if(navigator.clipboard) navigator.clipboard.writeText(tokenText);
-  this.textContent = "Copied";
-  var b = this; setTimeout(function(){ b.textContent = "Copy token"; }, 1600);
-});
+function showReceipt(d){
+  $("receipt-code").textContent = d.receipt;
+  $("token-code").textContent = d.token || "—";
+  var link = location.origin + "/receipt.html#token=" + encodeURIComponent(d.token || "");
+  $("receipt-link").href = link;
+  $("receipt-link").setAttribute("data-link", link);
+  $("receipt-rows").innerHTML = F.receiptRows(d.scores);
+  $("receipt-total").textContent = String(d.total);
+  $("receipt-note").innerHTML =
+    "<strong>Provisional scores</strong>. Every input is self-reported, and nothing is verified yet. " +
+    "<strong>" + esc(d.redactions) + "</strong> value(s) matching common personal patterns were removed before filing. " +
+    "Your receipt code <strong>" + esc(d.receipt) + "</strong> is for display. It proves nothing on its own. The secret token below does.";
+  var rc = $("receipt");
+  rc.classList.add("show");
+  rc.scrollIntoView({behavior: "smooth", block: "start"});
+}
 
-document.getElementById("receipt-copy").addEventListener("click", function(){
-  var code = document.getElementById("receipt-code").textContent;
-  var total = document.getElementById("receipt-total").textContent;
-  var txt = "Makers on Muse — receipt " + code + " · provisional " + total + "/400";
-  if(navigator.clipboard) navigator.clipboard.writeText(txt);
-  this.textContent = "Copied";
-  var b = this; setTimeout(function(){ b.textContent = "Copy receipt"; }, 1600);
+/* ---------- copy buttons ---------- */
+function copy(text, button, idle){
+  function done(ok){
+    button.textContent = ok ? "Copied" : "Copy failed: select it by hand";
+    setTimeout(function(){ button.textContent = idle; }, 1800);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); });
+  } else {
+    done(false);
+  }
+}
+$("token-copy").addEventListener("click", function(){
+  copy($("token-code").textContent, this, "Copy token");
+});
+$("link-copy").addEventListener("click", function(){
+  copy($("receipt-link").getAttribute("data-link") || "", this, "Copy private link");
+});
+$("receipt-copy").addEventListener("click", function(){
+  var code = $("receipt-code").textContent;
+  var total = $("receipt-total").textContent;
+  var txt = "Makers on Muse, Week " + week + ": receipt " + code + " · provisional " + total +
+    "/400, self-reported · https://makersonmuse.com/pack.html";
+  copy(txt, this, "Copy receipt");
 });
 })();
 </script>

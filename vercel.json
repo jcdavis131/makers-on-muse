@@ -4,6 +4,9 @@
       "memory": 256
     }
   },
+  "rewrites": [
+    { "source": "/receipt", "destination": "/receipt.html" }
+  ],
   "git": {
     "deploymentEnabled": {
       "live-runs": false

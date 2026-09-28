@@ -69,7 +69,7 @@ export function goodSubmission(overrides = {}) {
       n, answer: "a fictional answer", tokens_est: 100, seconds: 10,
       procedure: "did things in order", correct: 1, procedure_score: 0.5
     })),
-    consent: { redaction: true, publish: false },
+    consent: { terms: true, publish: false },
     ...overrides
   };
 }

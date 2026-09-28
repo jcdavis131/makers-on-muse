@@ -135,9 +135,9 @@ const good = {
     { n: 2, answer: "brief text", tokens_est: 8000, seconds: 500, procedure: "researched 5 sources then wrote", correct: 1, procedure_score: 0.85 },
     { n: 3, answer: "draft (unsent): move the fictional test meeting", tokens_est: 4000, seconds: 300, procedure: "listed events, named the overlap, drafted", correct: 1, procedure_score: 1 },
     { n: 4, answer: "itinerary text", tokens_est: 6000, seconds: 420, procedure: "compared 3 options, killed traps", correct: 1, procedure_score: 0.9 },
-    { n: 5, answer: "dashboard concept", tokens_est: 2000, seconds: 200, procedure: "sketched layout", correct: 1, procedure_score: 0.7 }
+    { n: 5, answer: "dashboard concept", link: "https://example.com/my-build.html" }
   ],
-  consent: { redaction: true, publish: true }
+  consent: { terms: true, publish: true }
 };
 const gv = validateSubmission(good);
 t("good submission validates", gv.ok);
@@ -154,7 +154,9 @@ bad("missing L2 fails", (b) => { b.levels = b.levels.filter((l) => l.n !== 2); }
 bad("agent too long fails", (b) => { b.agent = "x".repeat(41); }, /^agent:/);
 bad("reserved agent fails", (b) => { b.agent = "Scout"; }, /reserved/);
 bad("missing handle fails", (b) => { delete b.handle; }, /^handle:/);
-bad("redaction consent required", (b) => { b.consent.redaction = false; }, /consent\.redaction/);
+bad("terms consent required", (b) => { b.consent.terms = false; }, /consent\.terms: required/);
+bad("terms consent missing", (b) => { delete b.consent.terms; }, /consent\.terms: required/);
+bad("the old redaction consent key is refused", (b) => { b.consent.redaction = true; }, /consent: unknown field "redaction"/);
 bad("bad evidence url fails", (b) => { b.levels[0].evidence = ["not a url"]; }, /evidence\[0\]/);
 bad("too many evidence urls fail", (b) => { b.levels[0].evidence = Array(6).fill("https://x.example/"); }, /up to 5/);
 bad("negative tokens fails", (b) => { b.levels[0].tokens_est = -5; }, /tokens_est/);
@@ -178,6 +180,64 @@ bad("duplicate level fails", (b) => { b.levels[4] = clone(b.levels[0]); }, /dupl
     r.errors.some((e) => /45 more unknown fields/.test(e)));
 }
 t("null body fails", !validateSubmission(null).ok);
+
+/* ---------- validate: didn't attempt, L5, contact ---------- */
+{
+  const b = clone(good);
+  b.levels[2] = { n: 3, skipped: true };
+  const r = validateSubmission(b);
+  t("a skipped level validates", r.ok);
+  eq("a skipped level keeps only n and skipped", r.ok && r.value.levels[2], { n: 3, skipped: true });
+}
+bad("a skipped level with other fields fails", (b) => { b.levels[2] = { n: 3, skipped: true, answer: "x" }; }, /didn't attempt\): unknown field "answer"/);
+bad("skipped: false fails", (b) => { b.levels[2].skipped = false; }, /skipped: must be true/);
+bad("skipping L5 fails (leave it out)", (b) => { b.levels[4] = { n: 5, skipped: true }; }, /level 5 is optional/);
+bad("all four skipped fails", (b) => { b.levels = [1, 2, 3, 4].map((n) => ({ n, skipped: true })); }, /attempt at least one of levels 1-4/);
+bad("a missing level says how to skip it", (b) => { b.levels = b.levels.filter((l) => l.n !== 4); }, /level 4 is required \(send it with skipped: true/);
+{
+  const b = clone(good);
+  b.levels = b.levels.filter((l) => l.n !== 5);
+  t("L5 is optional", validateSubmission(b).ok);
+  b.levels[0] = { n: 1, skipped: true };
+  b.levels[1] = { n: 2, skipped: true };
+  b.levels[2] = { n: 3, skipped: true };
+  t("three skipped and one attempted validates", validateSubmission(b).ok);
+}
+bad("L5 without a description fails", (b) => { b.levels[4].answer = " "; }, /levels\[4\]\.answer: required, describe what you built/);
+bad("L5 with tokens fails (unscored)", (b) => { b.levels[4].tokens_est = 10; }, /levels\[4\]: unknown field "tokens_est"/);
+bad("L5 bad link fails", (b) => { b.levels[4].link = "javascript:alert(1)"; }, /levels\[4\]\.link: must be an http\(s\) URL/);
+bad("L5 overlong link fails", (b) => { b.levels[4].link = "https://x.example/" + "a".repeat(500); }, /levels\[4\]\.link/);
+{
+  const b = clone(good);
+  b.levels[4].link = "";
+  const r = validateSubmission(b);
+  t("L5 blank link is dropped", r.ok && !("link" in r.value.levels[4]));
+  eq("L5 link kept", validateSubmission(good).value.levels[4], { n: 5, answer: "dashboard concept", link: "https://example.com/my-build.html" });
+}
+{
+  const b = clone(good);
+  b.contact = "  jane@example.com ";
+  const r = validateSubmission(b);
+  t("contact validates", r.ok);
+  eq("contact is trimmed and kept", r.ok && r.value.contact, "jane@example.com");
+  eq("no contact, no field", "contact" in validateSubmission(good).value, false);
+  b.contact = "";
+  t("blank contact means none", validateSubmission(b).ok && !("contact" in validateSubmission(b).value));
+  b.contact = null;
+  t("null contact means none", validateSubmission(b).ok);
+}
+bad("contact must look like an email", (b) => { b.contact = "call me maybe"; }, /^contact: an email address/);
+bad("contact without a dot in the domain fails", (b) => { b.contact = "jane@localhost"; }, /^contact:/);
+bad("contact too long fails", (b) => { b.contact = "a".repeat(60) + "@" + "b".repeat(200) + ".com"; }, /^contact:/);
+bad("contact must be a string", (b) => { b.contact = ["jane@example.com"]; }, /^contact:/);
+{
+  const slow = "a@" + "a.".repeat(126);
+  const t0 = performance.now();
+  for (let i = 0; i < 200; i++) validateSubmission({ ...clone(good), contact: slow });
+  const took = (performance.now() - t0) / 200;
+  t("adversarial contact checks fast (" + took.toFixed(2) + " ms)", took < 5);
+}
+eq("handleKey lowercases", checkHandle("Juniper-7").key, "juniper-7");
 t("array body fails", !validateSubmission([]).ok);
 
 /* ---------- token ---------- */
@@ -231,6 +291,26 @@ const s = provisionalSubmissionScore(good.levels);
 t("submission total is sum of L1-L4", s.total === s.levels.filter(l => l.n <= 4).reduce((a, l) => a + l.total, 0));
 t("stars counted", typeof s.stars === "number");
 t("blends match published", BLENDS[1].token === 0.5 && BLENDS[3].procedure === 0.6);
+{
+  const levels = clone(good.levels);
+  levels[1] = { n: 2, skipped: true };
+  const sk = provisionalSubmissionScore(levels);
+  eq("a skipped level scores 0, no star", sk.levels[1], { n: 2, skipped: true, total: 0, star: false, provisional: true });
+  eq("L5 is an exhibition with no points", sk.levels[4], { n: 5, exhibition: true, provisional: true });
+  eq("total counts attempted L1-L4 only",
+    sk.total, [0, 2, 3].reduce((a, i) => a + provisionalScore(levels[i]).total, 0));
+  t("stars count attempted levels only", sk.stars === [0, 2, 3].filter((i) => provisionalScore(levels[i]).star).length);
+}
+{
+  const r = redactSubmission({ levels: [
+    { n: 1, skipped: true },
+    { n: 5, answer: "built it; mail jane@example.com", link: "https://example.com/build.html?token=abc123&page=2" }
+  ] });
+  eq("redact: skipped level passes through", r.data.levels[0], { n: 1, skipped: true });
+  eq("redact: L5 answer redacted, link keeps its path", r.data.levels[1],
+    { n: 5, answer: "built it; mail [email redacted]", link: "https://example.com/build.html?token=[redacted]&page=2" });
+  eq("redact: L5 counts", r.redactions, 2);
+}
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

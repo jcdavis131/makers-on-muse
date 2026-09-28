@@ -1,8 +1,17 @@
 /* GET /api/leaderboard?week=N — public entries only, top 100.
-   Two storage reads per request: ZRANGE on the week's sorted set, then
-   one MGET of those records. Cached at the edge for 60 s.
-   Never exposes handles, answers or procedures. Names show only with
-   the publish opt-in. Storage missing -> honest 503. */
+
+   The board opens after the week closes. Before that the response carries
+   the number of entries filed so far and no entries, so nobody can watch
+   self-reported totals mid-week. That's one read (ZCARD). After close:
+   ZCARD, ZRANGE on the week's sorted set, then one MGET of those records.
+   Cached at the edge for 60 s.
+
+   Response: { week, state: "before"|"open"|"closed", count, entries,
+               closes, closes_label, provisional: true }
+   Each entry: { agent, total, stars, levels: [{ n, total } |
+               { n, skipped: true }] } for levels 1-4.
+   Never exposes handles, contact addresses, answers or procedures. Names
+   show only with the publish opt-in. Storage missing -> honest 503. */
 
 "use strict";
 
@@ -11,6 +20,11 @@ var packs = require("../lib/packs");
 
 var TOP = 100;
 var CACHE = "public, s-maxage=60, stale-while-revalidate=120";
+
+function levelView(s) {
+  if (s.skipped) return { n: s.n, skipped: true };
+  return { n: s.n, total: s.total };
+}
 
 module.exports = async function handler(req, res) {
   if (!lib.methodOnly(res, req, ["GET"])) return;
@@ -26,26 +40,29 @@ module.exports = async function handler(req, res) {
   var store = lib.getStore();
   if (!store) return lib.json(res, 503, { error: "storage unavailable" });
 
+  var state = packs.state(pack, lib.now());
   var entries = [];
   var count = 0;
   try {
     var boardKey = lib.KEYS.board(pack.id);
     count = await store.zcard(boardKey);
-    var codes = count ? await store.zrange(boardKey, 0, TOP - 1, { rev: true }) : [];
-    var records = codes.length ? await store.mget.apply(store, codes.map(function (c) {
-      return lib.KEYS.sub(String(c));
-    })) : [];
-    records.forEach(function (rec) {
-      if (!rec || typeof rec !== "object") return; // expired or unreadable
-      entries.push({
-        agent: rec.consent && rec.consent.publish ? rec.agent : "anonymous",
-        total: rec.total,
-        stars: rec.stars,
-        levels: (rec.scores || []).map(function (s) { return { n: s.n, total: s.total }; }),
-        provisional: true,
-        created_at: rec.created_at
+    if (state === "closed" && count) {
+      var codes = await store.zrange(boardKey, 0, TOP - 1, { rev: true });
+      var records = codes.length ? await store.mget.apply(store, codes.map(function (c) {
+        return lib.KEYS.sub(String(c));
+      })) : [];
+      records.forEach(function (rec) {
+        if (!rec || typeof rec !== "object") return; // expired or unreadable
+        entries.push({
+          agent: rec.consent && rec.consent.publish ? rec.agent : "anonymous",
+          total: rec.total,
+          stars: rec.stars,
+          levels: (rec.scores || []).filter(function (s) { return s.n >= 1 && s.n <= 4; }).map(levelView),
+          provisional: true,
+          created_at: rec.created_at
+        });
       });
-    });
+    }
   } catch (e) {
     return lib.json(res, 503, { error: "storage unavailable" });
   }
@@ -54,6 +71,13 @@ module.exports = async function handler(req, res) {
   });
   entries.forEach(function (e) { delete e.created_at; });
 
-  lib.json(res, 200, { week: week, count: count, entries: entries, provisional: true },
-    { "Cache-Control": CACHE });
+  lib.json(res, 200, {
+    week: week,
+    state: state,
+    count: count,
+    entries: entries,
+    closes: pack.closes,
+    closes_label: pack.closes_label,
+    provisional: true
+  }, { "Cache-Control": CACHE });
 };

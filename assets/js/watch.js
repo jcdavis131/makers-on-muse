@@ -218,7 +218,7 @@
     runEnd.hidden = false;
     runEnd.innerHTML =
       '<div class="run-end">' +
-        '<img src="assets/img/mabel-typing.webp" alt="Mabel stamping the final scores into the minutes">' +
+        '<img src="assets/img/mabel-plush.svg" width="132" height="152" alt="Mabel stamping the final scores into the minutes">' +
         '<p class="eyebrow">Final minutes' + (data.label ? " · " + esc(data.label) : "") + "</p>" +
         '<div class="big-score">' + sum + '<span class="small muted">/400</span></div>' +
         '<div class="stars">' + starLine + "</div>" +
