@@ -1,7 +1,8 @@
 /* Copy and pre-launch checks. Run: node scripts/test-copy.mjs (or npm test).
    1. assets/js/season.js: Week 1 dates, labels, status and submit gate.
    2. Pages: the static date copy matches season.js, the submit form ships
-      closed, and every page carries the same footer date line.
+      closed, and every page carries the footer date line and the
+      independent-project and trademark line.
    3. Honest copy: phrases that promise things the site doesn't do yet
       must not come back.
    4. Canonical scoring line: 4 scored levels, 400 points, 0-4 stars, L5
@@ -92,12 +93,15 @@ t("gate closed after close", gAfter.open === false && /closed/i.test(gAfter.titl
 const pages = readdirSync(ROOT).filter((f) => f.endsWith(".html")).sort();
 t("found the 9 pages", pages.length >= 9);
 
+// The shared footer (partials/footer.html) carries it; scripts/test-layout.mjs
+// checks every page has that footer.
+const TRADEMARK = "Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.";
 const footerLine = `Season ${wk.season} · Week ${wk.week}: ${wk.range}, closes ${wk.closesLabel.split(", ").pop()}`;
 for (const p of pages) {
   const html = read(p);
   const text = decode(html);
   t(p + ": footer date line", text.includes(footerLine));
-  t(p + ": not-affiliated line", text.includes("Not affiliated with Meta."));
+  t(p + ": trademark line", text.includes(TRADEMARK));
 
   // Every [data-season-status] element: static text is the "before" line,
   // and the page loads season.js to update it.
@@ -227,6 +231,7 @@ const SOURCES = new Set([
   "https://www.meta.com/help/artificial-intelligence/2074655449783957/",
   "https://www.meta.com/help/artificial-intelligence/2225571704857152/",
   "https://www.meta.com/help/artificial-intelligence/2797651547267109/",
+  "https://www.meta.com/help/artificial-intelligence/995796179982326/",
   "https://about.fb.com/news/2026/09/the-biggest-news-from-connect-2026/",
   "https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/",
   "https://dev.meta.ai/docs/muse-code/extending"

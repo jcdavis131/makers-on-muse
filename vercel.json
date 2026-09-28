@@ -4,8 +4,17 @@
       "memory": 256
     }
   },
+  "redirects": [
+    { "source": "/meta.html", "destination": "/setups", "permanent": true },
+    { "source": "/meta", "destination": "/setups", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/receipt", "destination": "/receipt.html" }
+    { "source": "/receipt", "destination": "/receipt.html" },
+    { "source": "/setups", "destination": "/setups.html" },
+    { "source": "/skills", "destination": "/skills.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" }
   ],
   "git": {
     "deploymentEnabled": {

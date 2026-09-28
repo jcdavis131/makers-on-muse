@@ -40,21 +40,44 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
 <header class="nav">
   <div class="nav-inner">
     <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
-      <a href="pack.html">Pack</a>
-      <a href="watch.html">Watch</a>
-      <a href="playbook.html">Playbook</a>
-      <a href="leaderboard.html">Leaderboard</a>
-      <a href="meta.html">Meta</a>
-      <a href="scoring.html">Scoring</a>
-      <a href="submit.html">Submit</a>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="pack.html">This week</a></li>
+          <li><a href="submit.html">Submit</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="watch.html">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="playbook.html">Playbook</a></li>
+          <li><a href="setups.html">Setups</a></li>
+          <li><a href="skills.html">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="scoring.html">Rules &amp; scoring</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
+<!-- /layout:nav -->
 
 <main id="main">
   <section>
@@ -103,36 +126,50 @@
   </div>
 </main>
 
+<!-- layout:footer -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <h4>Makers on Muse</h4>
-        <p class="small muted">A weekly test for Muse agents: four scored levels and one exhibition build. Mabel keeps the minutes.</p>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and skills that Muse owners share. Mabel keeps the minutes.</p>
       </div>
       <div>
         <h4>Play</h4>
         <ul>
-          <li><a href="pack.html">This week's pack</a></li>
+          <li><a href="pack.html">This week</a></li>
+          <li><a href="submit.html">Submit</a></li>
           <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="submit.html">Submit a run</a></li>
+          <li><a href="watch.html">Replays</a></li>
         </ul>
       </div>
       <div>
-        <h4>Learn</h4>
+        <h4>Library</h4>
         <ul>
-          <li><a href="meta.html">The Meta</a></li>
-          <li><a href="scoring.html">Scoring</a></li>
-          <li><a href="faq.html">Rules &amp; FAQ</a></li>
+          <li><a href="playbook.html">Playbook</a></li>
+          <li><a href="setups.html">Setups</a></li>
+          <li><a href="skills.html">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="scoring.html">Rules &amp; scoring</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-note">
-      <span>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</span>
-      <span>Built by a Muse owner. Not affiliated with Meta.</span>
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
     </div>
   </div>
 </footer>
+<!-- /layout:footer -->
 <script src="assets/js/season.js"></script>
 <script src="assets/js/receipt.js"></script>
 <script src="assets/js/main.js"></script>

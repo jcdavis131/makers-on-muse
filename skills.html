@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skills — Makers on Muse</title>
+<meta name="description" content="Skills for Muse Code, Meta's developer CLI: what a SKILL.md skill is, where Muse Code finds it, and how sharing skills here will work.">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/mabel.css">
+<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
+<style>
+.skill-paths{list-style:none;padding:0;margin:22px 0}
+.skill-paths li{background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-m);padding:14px 18px;margin:0 0 10px}
+.skill-paths strong{display:block}
+code,.cmd{font-family:var(--mono);font-size:14px}
+code{background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.7;margin:16px 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="pack.html">This week</a></li>
+          <li><a href="submit.html">Submit</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="watch.html">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="playbook.html">Playbook</a></li>
+          <li><a href="setups.html">Setups</a></li>
+          <li><a href="skills.html" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="scoring.html">Rules &amp; scoring</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow">Library &middot; Muse Code</p>
+      <h1>Skills</h1>
+      <p class="lede">Skills are the second track of the library, for Muse Code, Meta's developer CLI. A skill is a folder with a SKILL.md file in it: written instructions that Muse Code loads when a task calls for them.</p>
+      <div class="status-note">
+        <p><strong>Sharing skills here isn't open yet.</strong> Submissions come in <a href="about.html#phases">Phase 2</a>. This page explains what a skill is and how sharing will work.</p>
+        <p>Using the Muse app, not Muse Code? What you can change there is a <a href="setups.html">Setup</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap-narrow">
+      <h2>What a SKILL.md skill is</h2>
+      <p>Meta's Muse Code docs list four places skills load from:</p>
+      <ul class="skill-paths">
+        <li><strong>Built in</strong><span class="muted">Skills that ship with Muse Code.</span></li>
+        <li><strong>Your account</strong><span class="muted">Skills in <code>~/.agents/skills</code>, and a few other user folders the docs list.</span></li>
+        <li><strong>A project</strong><span class="muted">Skills committed to a repo under <code>&lt;repo&gt;/.agents/skills/&lt;skill-id&gt;/SKILL.md</code>, shared with anyone who clones it.</span></li>
+        <li><strong>Plugins</strong><span class="muted">Skills that come with a plugin you turn on.</span></li>
+      </ul>
+      <p>In a session you run a skill with its slash shortcut. Muse Code can also load a relevant skill on its own. The docs give these commands:</p>
+<pre class="cmd">muse skills list
+muse skills inspect &lt;skill-id&gt;
+muse skills enable &lt;skill-id&gt; --scope project
+muse skills install ./my-skill --scope user</pre>
+      <p class="small muted">Source: <a href="https://dev.meta.ai/docs/muse-code/extending">Muse Code docs: extending Muse Code</a>. Read them for the file format; this page doesn't restate it.</p>
+
+      <h2 style="margin-top:48px">Skills in the Muse app</h2>
+      <p>The Muse app works differently. Meta's Help Center says its skills &ldquo;are developed by Meta and are already part of Muse&rdquo;, and that you can see which ones Muse used in your Activity log. So for the app, this site talks about <a href="setups.html">Setups</a>: the parts you can change yourself.</p>
+      <p class="small muted">Source: <a href="https://www.meta.com/help/artificial-intelligence/2797651547267109/">Meta Help Center: how Muse works with skills</a></p>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="sharing">
+    <div class="wrap-narrow">
+      <p class="eyebrow">Coming in Phase 2</p>
+      <h2>How sharing will work</h2>
+      <p class="muted">This is the plan. It isn't built, and the details may change.</p>
+      <ul>
+        <li>You share a link to a public git repo that holds the skill folder. We don't take file uploads.</li>
+        <li>Each skill is read before it is listed. The listing says what the skill asks the agent to do, and flags any step that sends, deletes, pays, or shares.</li>
+        <li>A skill is refused if it holds a key or password, hides text (such as zero-width characters), or tells the agent to fetch and follow instructions from another address.</li>
+        <li>Nothing installs from this site. You read the skill, then copy it into your own repo.</li>
+      </ul>
+      <div class="card" style="margin-top:36px">
+        <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+          <div class="mabel mabel-xs" data-mabel="type" role="img" aria-label="Mabel reading a skill file" style="flex:none"></div>
+          <p class="muted" style="margin:0;flex:1;min-width:220px">&ldquo;A skill is a set of instructions your agent will follow, dear. Read every line before you add one.&rdquo; &mdash; Mabel</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Makers on Muse</h4>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and skills that Muse owners share. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h4>Play</h4>
+        <ul>
+          <li><a href="pack.html">This week</a></li>
+          <li><a href="submit.html">Submit</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="watch.html">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Library</h4>
+        <ul>
+          <li><a href="playbook.html">Playbook</a></li>
+          <li><a href="setups.html">Setups</a></li>
+          <li><a href="skills.html" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="scoring.html">Rules &amp; scoring</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="assets/js/main.js"></script>
+</body>
+</html>

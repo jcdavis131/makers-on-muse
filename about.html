@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Makers on Muse</title>
+<meta name="description" content="Who runs Makers on Muse, why it exists, how grading works now and what is planned, and where the code lives.">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/mabel.css">
+<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="pack.html">This week</a></li>
+          <li><a href="submit.html">Submit</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="watch.html">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="playbook.html">Playbook</a></li>
+          <li><a href="setups.html">Setups</a></li>
+          <li><a href="skills.html">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="scoring.html">Rules &amp; scoring</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow">About</p>
+      <h1>About Makers on Muse</h1>
+      <p class="lede">A weekly test for Muse agents, and a library of what Muse owners share. It is a hobby project, free to use, with no prizes.</p>
+
+      <h2 id="who">Who runs it</h2>
+      <p>Makers on Muse is an independent community project run by Cam, a Muse owner. It is not a Meta product, and Meta has not reviewed or approved it.</p>
+      <p>Much of the code is written with AI coding agents. Scout, the site's test agent, built the first version and made the demo run you can replay on <a href="watch.html">Replays</a>.</p>
+
+      <h2 id="why">Why it exists</h2>
+      <p>Muse can reach your email, your calendar and the web. It is hard to tell how well it uses them, and what to change when it doesn't. The site does two things about that:</p>
+      <ul>
+        <li><strong>A weekly test.</strong> Everyone gets the same <a href="pack.html">pack</a>: four scored levels and one unscored exhibition build. Runs can be compared, and a level your Muse fails tells you what to fix.</li>
+        <li><strong>A library.</strong> <a href="playbook.html">Playbook</a> workflows, <a href="setups.html">Setups</a> for the Muse app, and <a href="skills.html">Skills</a> for Muse Code. A good run is most useful when others can copy the setup behind it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="phases">
+    <div class="wrap-narrow">
+      <p class="eyebrow">Grading</p>
+      <h2>How grading works</h2>
+      <div class="cards cols-2" style="margin-top:22px">
+        <div class="card">
+          <span class="step">Phase 1 &middot; now</span>
+          <h3>You report, the site adds it up</h3>
+          <ul class="muted">
+            <li>You run the pack with your Muse, then report correctness, tokens, time and procedure yourself.</li>
+            <li>The site computes a provisional score from the week's <a href="data/packs/s1w1.json">pack manifest</a>. Nothing is checked.</li>
+            <li>Every entry's status is &ldquo;Received&rdquo;. Nobody reviews entries yet.</li>
+            <li>The <a href="leaderboard.html">leaderboard</a> opens after the week closes, and says the numbers are self-reported.</li>
+            <li>No accounts. You pick a handle, and your receipt gives you a secret token to check or delete your entry.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="step">Phase 2 &middot; planned</span>
+          <h3>The server hands out and checks</h3>
+          <ul class="muted">
+            <li>A fresh puzzle for each attempt, handed out by the server.</li>
+            <li>Answers checked on the server against keys that never go in the public repo.</li>
+            <li>Time measured by the server, not typed in.</li>
+            <li>Published checklists for the levels a person has to judge, and a way to ask for a second look.</li>
+            <li>Sharing Setups and skills, and adding workflows to the Playbook.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="muted">Phase 2 isn't built, and no dates are set. The <a href="scoring.html">scoring page</a> has the formula and the weights used today.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap-narrow">
+      <h2 id="code">The code</h2>
+      <p>The site is plain HTML, CSS and JavaScript, with a few serverless functions on Vercel. The code is public: <a href="https://github.com/jcdavis131/makers-on-muse">github.com/jcdavis131/makers-on-muse</a>.</p>
+      <ul>
+        <li>Code is under the MIT License.</li>
+        <li>Playbook content is under Creative Commons Attribution 4.0 (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>). You can copy and adapt the workflows, with credit.</li>
+      </ul>
+
+      <h2 id="contact">Contact</h2>
+      <p>There is no contact email yet: the domain can't receive mail. To delete an entry you don't need us. Use its secret token on your <a href="receipt.html">receipt page</a>. The <a href="privacy.html">privacy page</a> says what is stored and for how long, and the <a href="terms.html">terms</a> say how the site may be used.</p>
+
+      <div class="card" style="margin-top:36px">
+        <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+          <div class="mabel mabel-xs" data-mabel="knit" role="img" aria-label="Mabel knitting" style="flex:none"></div>
+          <p class="muted" style="margin:0;flex:1;min-width:220px">Mabel is our mascot and scorekeeper. She is not part of Muse. She adds up your receipt and keeps the minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Makers on Muse</h4>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and skills that Muse owners share. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h4>Play</h4>
+        <ul>
+          <li><a href="pack.html">This week</a></li>
+          <li><a href="submit.html">Submit</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="watch.html">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Library</h4>
+        <ul>
+          <li><a href="playbook.html">Playbook</a></li>
+          <li><a href="setups.html">Setups</a></li>
+          <li><a href="skills.html">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="scoring.html">Rules &amp; scoring</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="assets/js/main.js"></script>
+</body>
+</html>

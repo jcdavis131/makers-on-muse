@@ -71,6 +71,7 @@ function t(name, cond) {
     "scripts/smoke.mjs", "scripts/test-privacy.mjs", "docs/watch-protocol.md",
     ".github/ISSUE_TEMPLATE/config.yml", "README.md", "data/runs/README.md", "data/packs/README.md",
     "scripts/redis-emu.mjs", "scripts/check-health.mjs",
+    "partials/nav.html", "partials/footer.html", "scripts/stamp-layout.mjs",
     "lib/score.test.js", "lib/sub/redact.spec.js"
   ];
   const tracked = execFileSync("git", ["ls-files"], { cwd: ROOT, encoding: "utf8" }).split("\n").filter(Boolean);

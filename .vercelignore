@@ -7,3 +7,4 @@
 README.md
 lib/**/*.test.js
 lib/**/*.spec.js
+/partials/

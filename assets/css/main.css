@@ -70,13 +70,43 @@ h3{font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
 .nav-inner{max-width:1020px;margin:0 auto;padding:0 22px;height:44px;display:flex;align-items:center;gap:18px;position:relative}
 .brand{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--ink);text-decoration:none;white-space:nowrap}
 .brand .dot{color:var(--terracotta)}
-.nav-links{display:flex;gap:4px;margin-left:auto;align-items:center}
+/* Three groups (Play, Library, About). Each is a disclosure button with
+   a dropdown list. The markup lives in partials/nav.html and is stamped
+   into every page (scripts/stamp-layout.mjs). main.js adds .js to <html>
+   and runs the buttons; without JavaScript, hover and keyboard focus open
+   a group, and the footer lists every link. */
+.nav-links{display:flex;gap:2px;margin-left:auto;align-items:center}
+.nav-group{position:relative}
+.nav-label{display:none}
+.nav-group-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:13px;color:var(--ink-soft);background:none;border:0;
+  padding:6px 11px;border-radius:var(--radius-s);cursor:pointer;
+  transition:background .18s ease,color .18s ease;
+}
+.nav-group-btn::after{
+  content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .18s ease;
+}
+.nav-group-btn[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+.nav-group-btn:hover,.nav-group-btn[aria-expanded="true"]{background:var(--stone-100);color:var(--ink)}
+.nav-group.is-current .nav-group-btn{color:var(--ink);box-shadow:inset 0 -2px 0 var(--terracotta)}
+.nav-menu{
+  display:none;position:absolute;top:100%;right:0;z-index:60;min-width:200px;
+  list-style:none;margin:6px 0 0;padding:6px;
+  background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-m);box-shadow:var(--shadow-lift);
+}
+.nav-group-btn[aria-expanded="true"] + .nav-menu{display:block}
+html:not(.js) .nav-group:hover .nav-menu,
+html:not(.js) .nav-group:focus-within .nav-menu{display:block}
+html:not(.js) .nav-menu{margin-top:0}
+.nav-menu li{margin:0}
 .nav-links a{
-  font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-decoration:none;
-  padding:6px 11px;border-radius:var(--radius-s);transition:background .18s ease,color .18s ease;
+  display:block;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-decoration:none;
+  padding:8px 12px;border-radius:var(--radius-s);white-space:nowrap;transition:background .18s ease,color .18s ease;
 }
 .nav-links a:hover{background:var(--stone-100);color:var(--ink)}
-.nav-links a.active{background:var(--ink);color:var(--paper)}
+.nav-links a[aria-current="page"]{background:var(--ink);color:var(--paper)}
 .nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--stone-300);border-radius:var(--radius-s);padding:5px 10px;font-family:var(--mono);font-size:13px;color:var(--ink);cursor:pointer}
 
 /* ---------- Kubrick stage hero ---------- */
@@ -85,6 +115,19 @@ h3{font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
 .stage h1{max-width:14em;margin-left:auto;margin-right:auto}
 .stage .lede{margin:0 auto}
 .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+
+/* ---------- home hero: text and both buttons first, Mabel beside ---------- */
+.hero{padding:72px 0 56px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center}
+.hero h1{max-width:12em}
+.hero .btn-row{justify-content:flex-start}
+.hero .hero-mabel{width:100%;max-width:300px;aspect-ratio:400 / 460;margin:0 auto}
+
+/* a whole card that is one link */
+.card-link{display:block;color:inherit;text-decoration:none}
+.card-link:hover,.card-link:focus-visible{color:inherit}
+.card-link h3{color:var(--ink)}
+.card-link:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
 
 /* ---------- tactile buttons (Dye) ---------- */
 .btn{
@@ -210,13 +253,16 @@ details.acc .acc-body{padding:0 22px 20px;color:var(--ink-soft)}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--stone-200);margin-top:40px;padding:44px 0 54px;background:var(--stone-100)}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
 .foot-grid h4{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin:0 0 12px}
 .foot-grid ul{list-style:none;margin:0;padding:0}
 .foot-grid li{margin:7px 0}
 .foot-grid a{color:var(--ink-soft);text-decoration:none;font-size:15px}
 .foot-grid a:hover{color:var(--terracotta-deep)}
-.foot-note{margin-top:34px;padding-top:20px;border-top:1px solid var(--stone-200);font-size:13px;color:var(--ink-faint);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot-note{margin-top:34px;padding-top:20px;border-top:1px solid var(--stone-200);font-size:13px;color:var(--ink-soft);display:grid;gap:8px}
+.foot-note p{margin:0;max-width:62em}
+.foot-note a{color:var(--ink-soft)}
+.foot-note a:hover{color:var(--terracotta-deep)}
 
 /* ---------- status note: what is true today ---------- */
 .status-note{
@@ -249,19 +295,39 @@ footer{border-top:1px solid var(--stone-200);margin-top:40px;padding:44px 0 54px
   .level-mabel .mabel{max-width:130px}
   .meta-grid{grid-template-columns:1fr}
   .field-row{grid-template-columns:repeat(2,1fr)}
-  .foot-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid > div:first-child{grid-column:1 / -1}
   .stage{padding:64px 0 56px}
   section{padding:48px 0}
+  .hero{padding:40px 0 40px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero .hero-mabel{max-width:160px}
 }
 @media (max-width:720px){
+  /* Phones: the Menu button opens one panel with all three groups
+     listed under their labels. The group buttons are desktop-only. */
   .nav-links{
     display:none;position:absolute;top:44px;left:0;right:0;flex-direction:column;align-items:stretch;
-    background:var(--paper);border-bottom:1px solid var(--stone-200);padding:8px;gap:2px;
+    background:var(--paper);border-bottom:1px solid var(--stone-200);padding:8px 16px 14px;gap:10px;
+    max-height:calc(100vh - 44px);overflow-y:auto;
   }
   .nav-links.open{display:flex}
+  .nav-group-btn{display:none}
+  .nav-label{
+    display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);padding:6px 14px 2px;
+  }
+  .nav-menu,
+  html:not(.js) .nav-group:hover .nav-menu{
+    display:block;position:static;min-width:0;margin:0;padding:0;
+    background:none;border:0;box-shadow:none;
+  }
   .nav-links a{padding:10px 14px}
   .nav-toggle{display:block}
   .nav-inner{gap:12px}
+}
+@media (max-width:480px){
+  .foot-grid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}

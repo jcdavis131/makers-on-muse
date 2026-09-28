@@ -2,7 +2,7 @@
 
 **How capable is your Muse?** A weekly test pack for Muse owners: four scored levels, from a simple lookup to multi-step planning, plus one unscored exhibition build (L5). Run it with your Muse, then submit your answers and your own numbers. Mabel, the grandma stenographer, keeps the minutes.
 
-Site: **makersonmuse.com**. Independent project, not affiliated with Meta.
+Site: **makersonmuse.com**. Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.
 
 ## Status (Sep 27, 2026)
 
@@ -103,23 +103,36 @@ The leaderboard (`/api/leaderboard?week=1`) holds entries back until the week cl
 
 ## This repo
 
-Plain HTML, CSS and JS, with no framework. Vercel serves the root as static files and runs `api/*.js` as functions. There is no build on Vercel: `npm run build:pack` stamps the pack manifest's numbers into the pages, and its output is committed. `.vercelignore` keeps `scripts/`, `docs/`, `.github/` and the READMEs off the site. `lib/` has to stay deployed because `api/` requires it.
+Plain HTML, CSS and JS, with no framework. Vercel serves the root as static files and runs `api/*.js` as functions. There is no build on Vercel. Two small Node scripts with no dependencies write into the pages, and their output is committed:
+
+- `npm run build:pack` (`scripts/stamp-pack.mjs`) stamps the pack manifest's numbers into the pages.
+- `npm run build:layout` (`scripts/stamp-layout.mjs`) copies the shared nav and footer from `partials/nav.html` and `partials/footer.html` into every page, between `<!-- layout:nav -->` and `<!-- layout:footer -->` markers. It marks the page's own link with `aria-current="page"`, so the current page shows without JavaScript. To change the nav or footer, edit the partial, run `npm run build:layout`, and commit the partial and the pages together. A new page needs both marker pairs. `scripts/test-layout.mjs` fails if any page differs from the partials.
+
+The nav has three groups: Play (This week, Submit, Leaderboard, Replays), Library (Playbook, Setups, Skills) and About (Rules & scoring, FAQ, About). On wide screens each group is a button with a dropdown; on phones the Menu button opens all three. The footer carries the independent-project and trademark line on every page.
+
+`.vercelignore` keeps `scripts/`, `docs/`, `.github/`, `partials/` and the READMEs off the site. `lib/` has to stay deployed because `api/` requires it. `vercel.json` redirects `/meta.html` and `/meta` to `/setups` (the page was renamed), and serves `/setups`, `/skills`, `/about`, `/privacy`, `/terms` and `/receipt` from their `.html` files.
 
 ```
-index.html              landing
+index.html              landing: the test and the library, a Playbook strip
 pack.html               the Week 1 pack
 watch.html              narrated runs: live through the API, replays from data/runs/
-playbook.html           community workflows
+playbook.html           community workflows: filters and permalinks in the query string (?w=<id>)
 leaderboard.html        the board: says when it opens, then lists entries from /api/leaderboard
 receipt.html            status and delete for one entry, by secret token
-meta.html               setup notes for each level
+setups.html             Setups for the Muse app, and setup notes for each level (was meta.html)
+skills.html             Skills for Muse Code: SKILL.md, and how sharing will work
+about.html              who runs the site, why, grading now and planned, the code
+privacy.html            what is stored, for how long, processors, deletion by token
+terms.html              18+, no prizes, what entries let us show, acceptable use
 scoring.html            the formula, weights and a worked example
 submit.html             private submission form; closed outside an open week
 faq.html                rules and FAQ
 api/                    serverless functions: submit, receipt, leaderboard, health, run-event, run-stream, run-state
 lib/                    scoring, validation, names, redaction, tokens, pack windows; used by api/
 assets/js/season.js     week dates, one source of truth for pages and tests
-assets/js/main.js       mobile nav, Mabel
+assets/js/main.js       nav groups and the phone menu, Mabel
+assets/js/playbook-data.js  the Playbook's workflows (content under CC BY 4.0)
+assets/js/playbook.js   the Playbook page: query-string filters, permalinks, cards
 assets/js/submit-form.js  the submit form's checks, error mapping, receipt rows and drafts
 assets/js/board.js      the leaderboard page
 assets/js/receipt.js    the receipt page
@@ -129,7 +142,10 @@ assets/img/             Mabel artwork
 data/packs/             one manifest per week: dates, levels, pars, blends, the star rule (public; no answers)
 data/runs/              scrubbed runs that Watch replays
 docs/watch-protocol.md  the Watch event format and the archive rules
-scripts/                tests, an in-memory Redis for them, the pack stamp, the post-deploy health check
+partials/               the shared nav and footer (repo only; stamped into the pages)
+scripts/                tests, an in-memory Redis for them, the pack and layout stamps, the post-deploy health check
+LICENSE                 MIT, for the code
+LICENSE-CONTENT         CC BY 4.0, for the Playbook content
 ```
 
 ## Running it locally
@@ -156,6 +172,8 @@ Runs each test script in `scripts/` with Node. Run `npm ci` once first: the inte
 - `test-privacy.mjs`: no public submission channel, the deploy config, the Watch archive and its scrub, and fictional worked values.
 - `test-pages.mjs`: the page logic in `submit-form.js`, `receipt.js` and `board.js`. What the form sends must pass the server's validator. Every value from the API is escaped (tested with markup in every field). Drafts never throw, even when storage does. Also the receipt page's privacy settings, the `/receipt` rewrite, and a reviewed list of every `innerHTML` assignment, so a new one fails until someone checks it.
 - `test-pack.mjs`: the pack manifest contract. The manifest is well formed. The pages' marked numbers match it, and no page has lost a marker. `scoring.html`'s worked example is what `lib/score.js` computes. The scorer moves with the manifest. `api/submit.js` scores with it. The validator asks for its scored levels. The archived runs' scores reproduce under its pars.
+- `test-layout.mjs`: every page carries the shared nav and footer from `partials/`, with the trademark line and its own link marked; the nav groups and their order; every nav and footer link points at a page that exists; the `/meta` redirects and page rewrites; no page links `meta.html`; the trust pages state what the code does (TTLs, processors, deletion by token, no cookies); `main.js` runs the nav without `innerHTML`; the Mabel emblem uses no gradient; both license files.
+- `test-playbook.mjs`: the Playbook's data and page logic. Ids are unique and URL-safe, every setup tag is explained in the page's tag legend, no tag names a connector no source lists, the stats and the home page strip match the data, the query string round-trips and ignores anything it doesn't know, every card value is escaped, and a reviewed list of `innerHTML` assignments.
 - `test-watch.mjs`: the Watch player. Run time is the last event minus the start. Tokens are only what the agent reported, or "—". A reconnect adds no beat twice. The result is out of the manifest's maximum. The page follows the feed only when the reader has scrolled to its end. Also escaping, the page's first state ("Connecting…"), the demo badge, and a reviewed list of `innerHTML` assignments.
 
 `test-privacy.mjs` can also scan every file for the retired instance values. It needs the private list, one value per line, kept outside the repo:
@@ -168,13 +186,14 @@ Without it, that scan is skipped and says so.
 
 ## Roadmap
 
-**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key); receipts (status and delete by secret token), a leaderboard that opens after the week closes, and the submit form's handle, contact, "Didn't attempt", inline errors, L5 link, terms box and drafts; one pack manifest for pars, blends, totals and stars, and the Watch fixes (no forced scrolling, one final panel, "Connecting…", no invented tokens, run time from the events, the demo replay by default). Still to do:
+**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key); receipts (status and delete by secret token), a leaderboard that opens after the week closes, and the submit form's handle, contact, "Didn't attempt", inline errors, L5 link, terms box and drafts; one pack manifest for pars, blends, totals and stars, and the Watch fixes (no forced scrolling, one final panel, "Connecting…", no invented tokens, run time from the events, the demo replay by default); the trust pages (About, Privacy, Terms), one shared nav and footer with the trademark line, the Setups and Skills library tracks, licenses, and Playbook permalinks. Still to do:
 
 - Connect the Upstash database in the Vercel Marketplace, then run `scripts/check-health.mjs`.
-- About/Privacy/Terms pages (the submit form's consent box already links `terms.html` and `privacy.html`), and site hygiene.
+- Site hygiene: clean URLs and the www redirect, 404, robots and sitemap, OG tags, security headers, contrast tokens, CI.
+- A contact address: the domain has no mail records yet.
 
 **Phase 2: the core platform.** Server-issued instances for each attempt, fixtures for L3 and L4, server grading, submissions for the Setups and Skills library, and sign-in.
 
 ## License
 
-Not chosen yet.
+Code: MIT (`LICENSE`). Playbook content, the workflows in `assets/js/playbook-data.js`: CC BY 4.0 (`LICENSE-CONTENT`).
