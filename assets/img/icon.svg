@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Makers on Muse">
+  <!-- The site mark: Mabel's round glasses on a terracotta tile.
+       Drawn for 16-32 px. scripts/render-images.mjs turns it into
+       favicon.ico, icon-32.png and apple-touch-icon.png. -->
+  <rect width="32" height="32" rx="7" fill="#9A5A42"/>
+  <g fill="none" stroke="#FFFDF9" stroke-linecap="round">
+    <circle cx="10" cy="17" r="4.5" stroke-width="2.3"/>
+    <circle cx="22" cy="17" r="4.5" stroke-width="2.3"/>
+    <path d="M14.4 15.9 Q16 14.4 17.6 15.9" stroke-width="1.8"/>
+    <path d="M5.5 16.2 L3 14.8 M26.5 16.2 L29 14.8" stroke-width="1.8"/>
+  </g>
+</svg>

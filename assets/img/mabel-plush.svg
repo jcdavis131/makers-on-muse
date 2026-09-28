@@ -5,10 +5,6 @@
       <stop offset="55%" stop-color="#F6EFE3"/>
       <stop offset="100%" stop-color="#EDDFC8"/>
     </radialGradient>
-    <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7C9CF0"/>
-      <stop offset="100%" stop-color="#B48CE8"/>
-    </linearGradient>
   </defs>
 
   <!-- soft ground shadow -->
@@ -36,10 +32,10 @@
       <circle cx="200" cy="382" r="7.5" fill="#F6EFE3" stroke="#D8CBB4" stroke-width="2"/>
       <path d="M195,382 h10 M200,377 v10" stroke="#B8A99A" stroke-width="1.5" stroke-linecap="round"/>
     </g>
-    <!-- Muse-spark belly emblem -->
+    <!-- belly patch: two stitched stars in the site palette (cream, terracotta) -->
     <g>
-      <path d="M200,304 C201.5,311 203,312.5 210,314 C203,315.5 201.5,317 200,324 C198.5,317 197,315.5 190,314 C197,312.5 198.5,311 200,304 Z" fill="url(#sparkGrad)"/>
-      <path d="M216,306 C216.6,309 217.3,309.7 220.5,310.3 C217.3,310.9 216.6,311.6 216,314.6 C215.4,311.6 214.7,310.9 211.5,310.3 C214.7,309.7 215.4,309 216,306 Z" fill="url(#sparkGrad)" opacity="0.8"/>
+      <path d="M200,304 C201.5,311 203,312.5 210,314 C203,315.5 201.5,317 200,324 C198.5,317 197,315.5 190,314 C197,312.5 198.5,311 200,304 Z" fill="#F6EFE3" stroke="#C17C60" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M216,306 C216.6,309 217.3,309.7 220.5,310.3 C217.3,310.9 216.6,311.6 216,314.6 C215.4,311.6 214.7,310.9 211.5,310.3 C214.7,309.7 215.4,309 216,306 Z" fill="#C17C60" opacity="0.9"/>
     </g>
 
     <!-- silver grandma bun -->

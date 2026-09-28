@@ -4,24 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Submit a run — Makers on Muse</title>
-<meta name="description" content="Submit your Muse agent's weekly run: answers, efficiency numbers, and procedure notes. Private intake, PII redacted, provisional scores instantly.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="icon" href="assets/img/mabel-typing.webp">
+<meta name="description" content="Submit your Muse agent's Week 1 run. Submissions open Mon Oct 5, 2026, 6:00 AM CT. Every input is self-reported, so scores are provisional.">
+<link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/submit">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/submit">
+<meta property="og:title" content="Submit a run — Makers on Muse">
+<meta property="og:description" content="Submit your Muse agent's Week 1 run. Submissions open Mon Oct 5, 2026, 6:00 AM CT. Every input is self-reported, so scores are provisional.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Submit a run — Makers on Muse">
+<meta name="twitter:description" content="Submit your Muse agent's Week 1 run. Submissions open Mon Oct 5, 2026, 6:00 AM CT. Every input is self-reported, so scores are provisional.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
 <style>
-/* Submit v2 — v2 design tokens, scoped. No gradients. */
-:root{
-  --paper:#F9F6F0; --stone-100:#F5F1EB; --stone-200:#E8E0D5; --stone-300:#D4C4B0;
-  --ink:#2A2A2A; --ink-soft:#5A564F; --ink-faint:#8A8478;
-  --terracotta:#C17C60; --terracotta-deep:#A5664F;
-  --moss:#8A9A8B; --moss-deep:#6F7F70; --clay:#A67B5B;
-  --card:#FFFDF9; --void:#1E2022;
-  --radius-s:8px; --radius-m:12px; --radius-l:16px;
-  --spring:cubic-bezier(0.34,1.56,0.64,1);
-  --shadow:0 1px 2px rgba(42,42,42,.07),0 6px 18px rgba(42,42,42,.08);
-  --shadow-lift:0 2px 4px rgba(42,42,42,.08),0 16px 40px rgba(42,42,42,.13);
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
-}
+/* Submit page. Colours, radii and buttons come from main.css (one set of
+   tokens for the site); only the error colour is page-specific. */
+:root{--error:#A2402A}
 .sub-hero{padding:64px 0 8px;text-align:center}
 .sub-hero h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.025em;margin:0 0 14px;line-height:1.1}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin:0 0 14px}
@@ -29,36 +38,34 @@
 .sub-form{max-width:760px;margin:0 auto;padding:34px 22px 64px}
 .sub-card{background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:26px;margin:0 0 20px}
 .sub-card .step{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:8px}
-.sub-card h3{margin:0 0 6px;font-size:20px;letter-spacing:-.01em}
+.sub-card h2{margin:0 0 6px;font-size:20px;line-height:1.3;letter-spacing:-.01em}
 .sub-card .hint{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
 .field{margin:0 0 16px}
 .field label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
-.field input[type=text],.field input[type=number],.field textarea,.field select{
+.field input[type=text],.field input[type=number],.field input[type=email],.field input[type=url],.field textarea,.field select{
   width:100%;font-family:var(--mono);font-size:15px;padding:10px 12px;color:var(--ink);
-  background:var(--paper);border:1px solid var(--stone-300);border-radius:var(--radius-s);
+  background:var(--paper);border:1px solid var(--field-border);border-radius:var(--radius-s);
 }
 .field textarea{font-family:var(--sans);line-height:1.6;min-height:88px;resize:vertical}
 .field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--terracotta);outline-offset:1px;border-color:var(--terracotta)}
+.field [aria-invalid=true]{border-color:var(--error);border-width:2px}
+.ferr{font-size:14px;color:var(--error);margin:6px 0 0;line-height:1.5;font-weight:600}
+.ferr::before{content:"! ";font-family:var(--mono)}
 .field-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:560px){.field-row2{grid-template-columns:1fr}}
-.range-row{display:flex;align-items:center;gap:14px}
-.range-row input[type=range]{flex:1;accent-color:var(--terracotta)}
-.range-val{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:3em;text-align:right}
 .check{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;cursor:pointer}
-.check input{margin-top:4px;accent-color:var(--terracotta);width:18px;height:18px;flex:none}
+.check input{margin-top:4px;accent-color:var(--accent);width:18px;height:18px;flex:none}
+.check input[aria-invalid=true]{outline:2px solid var(--error);outline-offset:2px}
 .check span{font-size:15px;color:var(--ink-soft)}
 .check strong{color:var(--ink)}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:15px;font-weight:600;
-  padding:13px 26px;border-radius:var(--radius-m);cursor:pointer;border:1px solid transparent;text-decoration:none;
-  box-shadow:0 1px 2px rgba(42,42,42,.08),0 6px 18px rgba(42,42,42,.10);
-  transition:transform .18s var(--spring),box-shadow .22s ease,background .18s ease}
-.btn:active{transform:scale(.97)}
-.btn-primary{background:var(--terracotta);color:#FFFDF9;border-color:var(--terracotta-deep)}
-.btn-primary:hover{background:var(--terracotta-deep);box-shadow:var(--shadow-lift);transform:translateY(-1px)}
-.btn[disabled]{opacity:.55;cursor:wait;transform:none}
+.skip-check{padding:10px 12px;border:1px dashed var(--stone-300);border-radius:var(--radius-s);margin:0 0 18px}
+.lvl-fields{border:0;margin:0;padding:0;min-width:0}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.btn-quiet{background:transparent;color:var(--ink-soft);border-color:var(--stone-300);box-shadow:none;padding:8px 14px;font-size:13px}
 .sub-errors{background:#FBF3EE;border:1px solid var(--terracotta);border-radius:var(--radius-m);padding:16px 18px;margin:0 0 20px;display:none}
+.sub-errors:focus{outline:2px solid var(--terracotta);outline-offset:2px}
 .sub-errors.show{display:block}
-.sub-errors h4{margin:0 0 8px;font-size:15px}
+.sub-errors h2{margin:0 0 8px;font-size:15px;line-height:1.4;letter-spacing:0}
 .sub-errors ul{margin:0;padding-left:20px;font-size:14px;color:var(--ink-soft)}
 .receipt{background:var(--void);color:#EDE8DE;border-radius:var(--radius-l);padding:28px;margin:0 0 20px;display:none;box-shadow:var(--shadow)}
 .receipt.show{display:block}
@@ -72,45 +79,89 @@
 .rtotal .big{font-family:var(--mono);font-size:34px;font-weight:700;color:#FFFDF9}
 .rnote{font-size:13px;color:#B9B2A4;margin:14px 0 0;line-height:1.6}
 .rnote strong{color:#EDE8DE}
+.receipt a{color:#F2C4B0}
+.token-box{margin-top:18px;padding:16px 18px;border:1px dashed rgba(237,232,222,.45);border-radius:var(--radius-m)}
+.token-box .eyebrow{margin:0 0 6px}
+.token-code{font-family:var(--mono);font-size:clamp(15px,3.6vw,19px);color:#FFFDF9;word-break:break-all;margin:0 0 10px}
+.token-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn-ghost{background:transparent;color:#EDE8DE;border-color:rgba(237,232,222,.5);box-shadow:none}
+.btn-ghost:hover{border-color:#EDE8DE}
+.field .fhint{font-size:13px;color:var(--ink-soft);margin:6px 0 0;line-height:1.5}
 .mabel-note{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:22px;margin-top:8px}
-.mabel-note img{width:96px;height:96px;object-fit:cover;border-radius:var(--radius-m);flex:none}
+.mabel-note img{width:96px;height:auto;flex:none}
 .mabel-note blockquote{margin:0 0 6px;font-size:16px}
 .mabel-note cite{font-size:13px;color:var(--ink-faint);font-style:normal}
+#sub-fields{border:0;margin:0;padding:0;min-width:0}
+/* Closed week: dim the controls only. Headings, hints and the Terms and
+   Privacy links stay at full contrast, since the page invites a read. */
+#sub-fields:disabled :is(input,textarea,select){opacity:.6}
+#sub-fields:disabled .btn{cursor:not-allowed;opacity:.55;box-shadow:none}
+.sub-gate{margin:0 0 20px}
+.draft-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;color:var(--ink-soft);margin:14px 0 0}
 details.lvl5{margin:0 0 20px}
 details.lvl5 summary{cursor:pointer;list-style:none}
+details.lvl5 summary .hint{display:block}
+details.lvl5 summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 details.lvl5 summary::-webkit-details-marker{display:none}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
-      <a href="pack.html">This week's pack</a>
-      <a href="watch.html">Watch</a>
-      <a href="playbook.html">Playbook</a>
-      <a href="leaderboard.html">Leaderboard</a>
-      <a href="meta.html">The Meta</a>
-      <a href="scoring.html">Scoring</a>
-      <a href="faq.html">Rules &amp; FAQ</a>
-      <a href="submit.html" class="active" aria-current="page">Submit</a>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit" aria-current="page">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
+<!-- /layout:nav -->
 
 <main id="main">
   <section class="sub-hero">
     <div class="wrap-narrow">
-      <p class="eyebrow">Season 1 · Private intake</p>
+      <p class="eyebrow">Season 1 · Week 1 · Mon Oct 5 – Sun Oct 11, 2026</p>
       <h1>Submit a run</h1>
-      <p class="lede">Your agent's answers go through a private, consent-aware intake — never a public issue. We redact emails, phone numbers, addresses, and API keys before anything is stored, score you provisionally on the spot, and hand you a receipt.</p>
+      <p class="lede">Your answers go to a private form, not a public issue. Before storage we strip common patterns from them, such as email addresses, phone numbers and API keys. That won't catch everything, so leave personal details out. You get a provisional score, a receipt and a secret token right away.</p>
     </div>
   </section>
 
   <div class="sub-form">
-    <div class="sub-errors" id="sub-errors" role="alert" aria-live="assertive"></div>
+    <div class="status-note sub-gate" id="sub-gate" role="status">
+      <p><strong id="sub-gate-title">Submissions open Mon Oct 5, 2026, 6:00 AM CT.</strong></p>
+      <p id="sub-gate-body">Week 1 runs Mon Oct 5 – Sun Oct 11, 2026 and closes Sun Oct 11, 2026, 11:59 PM CT. The form below is a preview until then.</p>
+    </div>
+
+    <div class="sub-errors" id="sub-errors" role="alert" tabindex="-1"></div>
 
     <section class="receipt" id="receipt" aria-live="polite">
       <p class="eyebrow">Mabel stamped it</p>
@@ -118,25 +169,52 @@ details.lvl5 summary::-webkit-details-marker{display:none}
       <div id="receipt-rows"></div>
       <div class="rtotal">
         <span style="font-family:var(--mono);font-size:13px;color:#B9B2A4">Provisional total</span>
-        <span class="big"><span id="receipt-total">0</span><span style="font-size:16px;color:#B9B2A4">/400</span></span>
+        <span class="big"><span id="receipt-total">0</span><span style="font-size:16px;color:#B9B2A4">/<span id="receipt-max" data-pack="scoring.max_total">400</span></span></span>
       </div>
       <p class="rnote" id="receipt-note"></p>
+      <div class="token-box">
+        <p class="eyebrow">Your secret token</p>
+        <div class="token-code" id="token-code">—</div>
+        <p class="rnote" style="margin:0 0 12px">Shown once. Save it somewhere private now. It is the only proof that this entry is yours, and it can't be recovered: we store only a hash of it. With it you can check your entry's status or delete it on your <a id="receipt-link" href="/receipt" target="_blank" rel="noopener noreferrer">private receipt page</a>. The link carries the token, so keep the link private too.</p>
+        <div class="token-actions">
+          <button class="btn btn-ghost" id="token-copy" type="button">Copy token</button>
+          <button class="btn btn-ghost" id="link-copy" type="button">Copy private link</button>
+        </div>
+      </div>
       <div style="margin-top:16px"><button class="btn btn-primary" id="receipt-copy" type="button">Copy receipt</button></div>
+      <p class="rnote">The receipt you copy holds the code and your total. It never holds your token.</p>
     </section>
 
     <form id="sub-form" novalidate>
+      <fieldset id="sub-fields" disabled>
       <div class="sub-card">
-        <span class="step">Your agent</span>
-        <h3>Who ran the pack?</h3>
-        <p class="hint">The name that appears on the leaderboard — your agent's name, not yours.</p>
+        <span class="step">You and your agent</span>
+        <h2>Who ran the pack?</h2>
+        <p class="hint">Your handle is private. It keeps one entry per player each week. Your agent's name shows on the leaderboard only if you tick the box at the end.</p>
         <div class="field-row2">
           <div class="field">
+            <label for="f-handle">Your handle</label>
+            <input type="text" id="f-handle" maxlength="24" placeholder="e.g. juniper-7" autocomplete="off" spellcheck="false" required aria-describedby="f-handle-hint">
+            <p class="fhint" id="f-handle-hint">3 to 24 letters, digits, - or _. Private.</p>
+            <p class="ferr" id="f-handle-err" hidden></p>
+          </div>
+          <div class="field">
             <label for="f-agent">Agent name</label>
-            <input type="text" id="f-agent" maxlength="40" placeholder="e.g. Scout" autocomplete="off" required>
+            <input type="text" id="f-agent" maxlength="40" placeholder="e.g. the name you gave your Muse" autocomplete="off" required aria-describedby="f-agent-hint">
+            <p class="fhint" id="f-agent-hint">2 to 40 characters. Names that look like an email, a web address or a phone number are refused, and so are reserved names such as Mabel, Scout, Meta and Muse.</p>
+            <p class="ferr" id="f-agent-err" hidden></p>
+          </div>
+        </div>
+        <div class="field-row2">
+          <div class="field">
+            <label for="f-contact">Contact email (optional)</label>
+            <input type="email" id="f-contact" maxlength="254" placeholder="name@example.com" autocomplete="email" spellcheck="false" aria-describedby="f-contact-hint">
+            <p class="fhint" id="f-contact-hint">Only if you want us to reach you about this entry. It is stored as you type it, privately, and never shown or shared. It isn't kept in drafts.</p>
+            <p class="ferr" id="f-contact-err" hidden></p>
           </div>
           <div class="field">
             <label for="f-week">Week</label>
-            <input type="number" id="f-week" min="1" value="1">
+            <input type="number" id="f-week" min="1" value="1" readonly>
           </div>
         </div>
       </div>
@@ -145,24 +223,31 @@ details.lvl5 summary::-webkit-details-marker{display:none}
 
       <div class="sub-card">
         <span class="step">Consent</span>
-        <h3>Before Mabel files it</h3>
-        <label class="check">
-          <input type="checkbox" id="c-redact" checked>
-          <span><strong>Redact my submission.</strong> Required — emails, phone numbers, street addresses, and API keys/tokens are stripped before storage. Nothing identifiable is kept in the clear.</span>
-        </label>
+        <h2>Before Mabel files it</h2>
+        <p class="hint">We strip common personal patterns from your answers before storage: email addresses, phone numbers, card numbers and API keys. It is not perfect, so don't include personal information.</p>
         <label class="check">
           <input type="checkbox" id="c-publish">
-          <span><strong>Show my agent's name on the leaderboard.</strong> Optional — leave unchecked to appear as "anonymous".</span>
+          <span><strong>Show my agent's name on the leaderboard.</strong> Optional. The board opens after the week closes. Leave this unticked to appear as "anonymous".</span>
         </label>
+        <label class="check">
+          <input type="checkbox" id="c-terms" required>
+          <span><strong>I agree to the <a href="/terms">Terms</a> and the <a href="/privacy">Privacy Policy</a>.</strong> Required.</span>
+        </label>
+        <p class="ferr" id="c-terms-err" hidden></p>
         <div class="field">
           <button class="btn btn-primary" type="submit" id="sub-btn">Submit run</button>
         </div>
-        <p class="small muted" style="margin:0">Scores are <strong>provisional</strong>: correctness and procedure are self-attested. Verified scoring reads your transcript; final standings publish Monday with the new pack.</p>
+        <p class="small muted" style="margin:0">Scores are <strong>provisional</strong>. Every number on this form is self-reported, and nothing here is verified yet. Server grading is coming.</p>
+        <div class="draft-row">
+          <span id="draft-note">Drafts save in this browser as you type.</span>
+          <button class="btn btn-quiet" id="draft-clear" type="button">Clear draft</button>
+        </div>
       </div>
+      </fieldset>
     </form>
 
     <div class="mabel-note">
-      <img src="assets/img/mabel-typing.webp" alt="Mabel at her typewriter, ready to file your run" loading="lazy">
+      <img src="/assets/img/mabel-plush.svg" width="96" height="110" alt="Mabel at her typewriter, ready to file your run" loading="lazy">
       <div>
         <blockquote>“Send the numbers, dear — I'll do the arithmetic. And don't worry: the red pencil comes out before anything is filed.”</blockquote>
         <cite>— Mabel, on submissions</cite>
@@ -171,191 +256,54 @@ details.lvl5 summary::-webkit-details-marker{display:none}
   </div>
 </main>
 
+<!-- layout:footer -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4>Makers on Muse</h4>
-        <p class="small muted">A weekly game for Muse-agent owners. Five levels, one leaderboard, and a living guide to the setups that win.</p>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
       </div>
       <div>
-        <h4>Play</h4>
+        <h2 class="foot-h">Play</h2>
         <ul>
-          <li><a href="pack.html">This week's pack</a></li>
-          <li><a href="submit.html">Submit a run</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit" aria-current="page">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div>
-        <h4>Learn</h4>
+        <h2 class="foot-h">Library</h2>
         <ul>
-          <li><a href="scoring.html">How scoring works</a></li>
-          <li><a href="meta.html">The Meta setup guide</a></li>
-          <li><a href="faq.html">Rules &amp; FAQ</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
     </div>
-    <p class="fineprint">A community game for Muse owners, built by a Muse owner. Not affiliated with Meta. Scorekeeping by Mabel.</p>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
   </div>
 </footer>
+<!-- /layout:footer -->
 
-<script>
-/* Submit flow: builds level cards, POSTs to /api/submit, renders the receipt. */
-(function(){
-"use strict";
-var LEVELS = [
-  {n:1, tag:"L1 · Scout", title:"What's the number?", hint:"The figure and the source your agent found."},
-  {n:2, tag:"L2 · Researcher", title:"Brief me.", hint:"The under-300-word brief, with its citations."},
-  {n:3, tag:"L3 · Operator", title:"Fix my morning.", hint:"The conflict analysis and the reschedule draft. Remember the safety gate: nothing sent."},
-  {n:4, tag:"L4 · Detective", title:"Get me to the wedding.", hint:"Itinerary, total price, and the constraints you checked."},
-  {n:5, tag:"L5 · Boss · exhibition", title:"Make it legible.", hint:"Unscored showcase — describe what you built.", optional:true}
-];
-
-function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-
-/* Default week: Season 1 week 1 opens Mon 2026-10-05, 6 AM CT (held one week). */
-(function(){
-  var start = Date.parse("2026-10-05T06:00:00-05:00");
-  var w = Math.floor((Date.now() - start) / (7*24*3600*1000)) + 1;
-  document.getElementById("f-week").value = w < 1 ? 1 : w;
-})();
-
-var host = document.getElementById("level-cards");
-LEVELS.forEach(function(L){
-  var inner =
-    '<span class="step">'+esc(L.tag)+'</span><h3>'+esc(L.title)+'</h3><p class="hint">'+esc(L.hint)+'</p>'+
-    '<div class="field"><label for="a'+L.n+'">Answer</label>'+
-    '<textarea id="a'+L.n+'" maxlength="4000" placeholder="Your agent\u2019s final answer for this level"></textarea></div>'+
-    '<div class="field-row2">'+
-      '<div class="field"><label for="t'+L.n+'">Tokens used (est.)</label><input type="number" id="t'+L.n+'" min="0" placeholder="e.g. 900"></div>'+
-      '<div class="field"><label for="s'+L.n+'">Seconds taken</label><input type="number" id="s'+L.n+'" min="0" placeholder="e.g. 75"></div>'+
-    '</div>'+
-    '<div class="field"><label for="p'+L.n+'">Procedure — what did your agent actually do?</label>'+
-    '<textarea id="p'+L.n+'" maxlength="2000" placeholder="Steps in order: searched X, cross-checked Y, drafted Z\u2026"></textarea></div>'+
-    '<div class="field"><label>Procedure checklist, self-assessed: <span class="range-val" id="pv'+L.n+'">70%</span></label>'+
-    '<div class="range-row"><input type="range" id="r'+L.n+'" min="0" max="100" value="70" aria-label="Procedure self-assessment percent"><span class="range-val" id="rv'+L.n+'">70%</span></div></div>'+
-    '<div class="field-row2">'+
-      '<div class="field"><label for="c'+L.n+'">Correctness, self-attested</label><select id="c'+L.n+'">'+
-        '<option value="">Choose\u2026</option><option value="1">Correct — I\u2019m confident</option><option value="0">Not correct / unsure</option>'+
-      '</select></div>'+
-      '<div class="field"><label for="e'+L.n+'">Evidence URLs (one per line, optional)</label><input type="text" id="e'+L.n+'" placeholder="https://\u2026"></div>'+
-    '</div>';
-  if(L.optional){
-    var d = document.createElement("details");
-    d.className = "lvl5";
-    d.innerHTML = '<summary><div class="sub-card" style="margin:0"><span class="step">'+esc(L.tag)+'</span><h3>'+esc(L.title)+'</h3><p class="hint" style="margin:0">Optional — tap to add your exhibition entry.</p></div></summary>'+
-      '<div class="sub-card" style="margin-top:12px">'+inner+'</div>';
-    host.appendChild(d);
-  } else {
-    var card = document.createElement("div");
-    card.className = "sub-card";
-    card.innerHTML = inner;
-    host.appendChild(card);
-  }
-  var rng = document.getElementById("r"+L.n);
-  rng.addEventListener("input", function(){
-    document.getElementById("rv"+L.n).textContent = rng.value + "%";
-    document.getElementById("pv"+L.n).textContent = rng.value + "%";
-  });
-});
-
-function val(id){ return document.getElementById(id).value.trim(); }
-function num(id){ var v = parseFloat(val(id)); return isFinite(v) && v >= 0 ? v : null; }
-
-function showErrors(list){
-  var box = document.getElementById("sub-errors");
-  if(!list.length){ box.classList.remove("show"); box.innerHTML = ""; return; }
-  box.innerHTML = "<h4>Almost — a few things need attention:</h4><ul><li>"+
-    list.map(esc).join("</li><li>")+"</li></ul>";
-  box.classList.add("show");
-  box.scrollIntoView({block:"nearest"});
-}
-
-document.getElementById("sub-form").addEventListener("submit", function(ev){
-  ev.preventDefault();
-  var errs = [];
-  var agent = val("f-agent");
-  var week = parseInt(val("f-week"), 10);
-  if(!agent) errs.push("Agent name is required.");
-  if(agent.length > 40) errs.push("Agent name must be 40 characters or fewer.");
-  if(!week || week < 1) errs.push("Week must be 1 or higher.");
-  if(!document.getElementById("c-redact").checked) errs.push("Redaction consent is required — it protects you.");
-
-  var levels = [];
-  LEVELS.forEach(function(L){
-    var answer = val("a"+L.n), tokens = num("t"+L.n), secs = num("s"+L.n),
-        proc = val("p"+L.n), corr = val("c"+L.n),
-        evRaw = val("e"+L.n);
-    var touched = answer || proc || tokens !== null || secs !== null || corr !== "" || evRaw;
-    if(L.optional && !touched) return;
-    var nm = "L"+L.n;
-    if(!answer) errs.push(nm+": answer is required.");
-    if(tokens === null) errs.push(nm+": tokens used is required.");
-    if(secs === null) errs.push(nm+": seconds taken is required.");
-    if(!proc) errs.push(nm+": procedure notes are required.");
-    if(corr === "") errs.push(nm+": self-attested correctness is required.");
-    var evidence = evRaw ? evRaw.split(/[\n,]+/).map(function(s){return s.trim();}).filter(Boolean) : [];
-    levels.push({
-      n: L.n, answer: answer, tokens_est: tokens === null ? 0 : tokens,
-      seconds: secs === null ? 0 : secs, procedure: proc,
-      correct: corr === "1" ? 1 : 0,
-      procedure_score: parseInt(document.getElementById("r"+L.n).value, 10) / 100,
-      evidence: evidence
-    });
-  });
-  showErrors(errs);
-  if(errs.length) return;
-
-  var btn = document.getElementById("sub-btn");
-  btn.disabled = true; btn.textContent = "Filing\u2026";
-  document.getElementById("receipt").classList.remove("show");
-
-  fetch("/api/submit", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      week: week, agent: agent, levels: levels,
-      consent: { redaction: true, publish: document.getElementById("c-publish").checked }
-    })
-  }).then(function(r){ return r.json().then(function(d){ return {ok: r.ok, status: r.status, data: d}; }); })
-  .then(function(out){
-    btn.disabled = false; btn.textContent = "Submit run";
-    if(!out.ok){
-      var list = out.data && out.data.errors ? out.data.errors : [(out.data && out.data.error) || ("HTTP "+out.status)];
-      showErrors(list);
-      return;
-    }
-    var d = out.data;
-    document.getElementById("receipt-code").textContent = d.receipt;
-    var rows = d.scores.map(function(s){
-      var star = s.star ? ' <span class="star">★</span>' : "";
-      return '<div class="rrow"><span class="lvl">LEVEL '+s.n+'</span><span class="pts">'+s.total+" / 100"+star+"</span></div>";
-    }).join("");
-    document.getElementById("receipt-rows").innerHTML = rows;
-    document.getElementById("receipt-total").textContent = d.total;
-    document.getElementById("receipt-note").innerHTML =
-      "<strong>Provisional scores</strong> — correctness and procedure are self-attested, not verified. " +
-      "Mabel redacted <strong>"+esc(d.redactions)+"</strong> sensitive value(s) before filing. " +
-      "Keep your receipt: <strong>"+esc(d.receipt)+"</strong>. Final standings publish Monday.";
-    var rc = document.getElementById("receipt");
-    rc.classList.add("show");
-    rc.scrollIntoView({behavior:"smooth", block:"start"});
-  }).catch(function(){
-    btn.disabled = false; btn.textContent = "Submit run";
-    showErrors(["Could not reach the scorekeeper. Check your connection and try again — nothing was filed."]);
-  });
-});
-
-document.getElementById("receipt-copy").addEventListener("click", function(){
-  var code = document.getElementById("receipt-code").textContent;
-  var total = document.getElementById("receipt-total").textContent;
-  var txt = "Makers on Muse — receipt " + code + " · provisional " + total + "/400";
-  if(navigator.clipboard) navigator.clipboard.writeText(txt);
-  this.textContent = "Copied";
-  var b = this; setTimeout(function(){ b.textContent = "Copy receipt"; }, 1600);
-});
-})();
-</script>
-<script src="assets/js/main.js" defer></script>
+<script src="/assets/js/season.js?v=f4a56fe802"></script>
+<script src="/assets/js/submit-form.js?v=46badab916"></script>
+<script src="/assets/js/submit.js?v=e22305ad3c"></script>
+<script src="/assets/js/main.js?v=4f9c205a29" defer></script>
 </body>
 </html>

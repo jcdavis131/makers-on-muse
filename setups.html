@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setups — Makers on Muse</title>
+<meta name="description" content="Setups for the Muse app: prompt recipes, connectors, custom connectors, permission levels, scheduled tasks, and personality and memory. What each part is, and which ones matter for each level.">
+<link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
+<link rel="stylesheet" href="/assets/css/mabel.css?v=3b78d380a1">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/setups">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/setups">
+<meta property="og:title" content="Setups — Makers on Muse">
+<meta property="og:description" content="Setups for the Muse app: prompt recipes, connectors, custom connectors, permission levels, scheduled tasks, and personality and memory. What each part is, and which ones matter for each level.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Setups — Makers on Muse">
+<meta name="twitter:description" content="Setups for the Muse app: prompt recipes, connectors, custom connectors, permission levels, scheduled tasks, and personality and memory. What each part is, and which ones matter for each level.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups" aria-current="page">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+
+<main id="main">
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">Library &middot; the Muse app</p>
+        <h1>Setups</h1>
+        <p class="lede">A Setup is what you change in the Muse app to make it better at a job. It has six parts. You can copy any of them from another owner by hand.</p>
+      </div>
+      <div class="wrap-narrow" style="padding:0">
+        <div class="status-note">
+          <p><strong>Sharing a Setup isn't built yet.</strong> For now this page is Mabel's notes on each part, and on the settings that matter for Week 1. Nothing here is counted from real runs. When sharing opens in <a href="/about#phases">Phase 2</a>, a run can carry the Setup behind it.</p>
+          <p>Muse is rolling out in the US first, on iOS, Android and muse.ai (<a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/">Meta newsroom</a>). Using Muse Code, Meta's developer CLI? Its skills are the other track: <a href="/skills">Skills</a>.</p>
+        </div>
+      </div>
+
+      <h2 class="center" style="margin-top:48px">The six parts of a Setup</h2>
+      <div class="meta-grid">
+        <div class="card" id="recipes">
+          <span class="badge medium">You write</span>
+          <h3>Prompt recipes</h3>
+          <p class="muted">The words you give Muse, step by step. Copy a recipe, run it, and keep the version that works. The <a href="/playbook">Playbook</a> has 28 community workflows to start from.</p>
+        </div>
+        <div class="card" id="connectors">
+          <span class="badge medium">Connector</span>
+          <h3>Connectors</h3>
+          <p class="muted">The apps Muse can reach, such as Gmail and Google Calendar. Add them under Settings &gt; Connectors. Write down which ones you use; that is the part other owners copy.</p>
+          <p class="small muted">Sources: <a href="https://www.meta.com/help/artificial-intelligence/1687253048996149/">connectors</a> &middot; <a href="https://www.meta.com/help/artificial-intelligence/1331373868832401/">get started</a></p>
+        </div>
+        <div class="card" id="custom-connectors">
+          <span class="badge involved">You write</span>
+          <h3>Custom connectors</h3>
+          <p class="muted">For a service with no built-in connector. Muse can write its own connector for a service that has an API or a command-line tool. A shareable spec says which API, how to sign in, and the instruction you gave Muse. Never put a key or password in a spec.</p>
+          <p class="small muted">Source: <a href="https://research.meta.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse">Meta research blog</a></p>
+        </div>
+        <div class="card" id="permissions">
+          <span class="badge involved">Setting</span>
+          <h3>Permission levels</h3>
+          <p class="muted">Connectors and Web access each have a permission level. &ldquo;Ask for some actions&rdquo; asks you before write actions, such as sending an email. Set it before L3.</p>
+          <p class="small muted">Source: <a href="https://www.meta.com/help/artificial-intelligence/1385290430137537/">permissions</a></p>
+        </div>
+        <div class="card" id="scheduled-tasks">
+          <span class="badge easy">Built in</span>
+          <h3>Scheduled tasks</h3>
+          <p class="muted">Ask in plain words, for example &ldquo;Every Monday at 9am, remind me&hellip;&rdquo;. A shared task is the sentence you used and when it runs.</p>
+          <p class="small muted">Source: <a href="https://www.meta.com/help/artificial-intelligence/1484325780075655/">scheduled tasks</a></p>
+        </div>
+        <div class="card" id="personality-memory">
+          <span class="badge easy">Built in</span>
+          <h3>Personality and memory</h3>
+          <p class="muted">You can rename your Muse, set its personality and how it answers, and tell it what to remember, such as &ldquo;always cite the page you read&rdquo;. You can also edit what it remembers. Muse may still remember what it learned from something you delete.</p>
+          <p class="small muted">Sources: <a href="https://www.meta.com/help/artificial-intelligence/995796179982326/">personalize Muse</a> &middot; <a href="https://www.meta.com/help/artificial-intelligence/2225571704857152/">your data</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">Setup notes</p>
+        <h2>Settings that matter for Week 1</h2>
+        <p class="lede">What is built in, which connectors to add, and what each one helps with.</p>
+      </div>
+      <div class="meta-grid">
+        <div class="card">
+          <span class="badge easy">Built in</span>
+          <h3>Web access</h3>
+          <p class="muted">Every Muse has a built-in browser. If L1 stalls, check the Web access permission level in Muse's settings, and ask it to cite the page it read.</p>
+          <p class="unlock">Helps: L1 Scout &middot; L2 Researcher</p>
+          <p class="small muted">Sources: <a href="https://research.meta.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse">Meta research blog</a> &middot; <a href="https://www.meta.com/help/artificial-intelligence/1385290430137537/">permissions</a></p>
+        </div>
+        <div class="card">
+          <span class="badge medium">Connector</span>
+          <h3>Gmail</h3>
+          <p class="muted">Drafting, never sending without your OK. Connect it under Settings &gt; Connectors.</p>
+          <p class="unlock">Helps: L3 Operator</p>
+          <p class="small muted">Sources: <a href="https://www.meta.com/help/artificial-intelligence/1331373868832401/">get started</a> &middot; <a href="https://www.meta.com/help/artificial-intelligence/1687253048996149/">connectors</a></p>
+        </div>
+        <div class="card">
+          <span class="badge medium">Connector</span>
+          <h3>Google Calendar</h3>
+          <p class="muted">Conflict detection and schedule reasoning. Pairs with Gmail for the full L3 loop: see the clash, draft the fix. Also under Settings &gt; Connectors.</p>
+          <p class="unlock">Helps: L3 Operator</p>
+          <p class="small muted">Source: <a href="https://www.meta.com/help/artificial-intelligence/1687253048996149/">connectors</a></p>
+        </div>
+        <div class="card">
+          <span class="badge medium">Connector</span>
+          <h3>GitHub</h3>
+          <p class="muted">A GitHub connector, announced at Connect 2026. Useful for L5 builds.</p>
+          <p class="unlock">Helps: L5 builds</p>
+          <p class="small muted">Source: <a href="https://about.fb.com/news/2026/09/the-biggest-news-from-connect-2026/">Connect 2026 announcements</a></p>
+        </div>
+        <div class="card">
+          <span class="badge easy">Built in</span>
+          <h3>Artifacts</h3>
+          <p class="muted">Muse can make single-page tools and visualizations that open in your browser, saved to your Library. That's the L5 format.</p>
+          <p class="unlock">Helps: L5 Boss builds</p>
+          <p class="small muted">Source: <a href="https://www.meta.com/help/artificial-intelligence/2074655449783957/">artifacts</a></p>
+        </div>
+        <div class="card" style="display:flex;align-items:center;justify-content:center">
+          <div class="mabel mabel-xs" data-mabel="type" role="img" aria-label="Mabel taking notes on setups"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap-narrow">
+      <p class="eyebrow">The diagnostic index</p>
+      <h2>If you stalled at&hellip;</h2>
+      <p class="lede">The pack is a diagnostic. Find where your agent stopped, then change one part of your Setup and retry.</p>
+      <ul class="diag">
+        <li><strong>Stalled at L1?</strong> <span class="muted">Muse has a built-in browser, so this is rarely missing tools. &rarr; Check the <strong>Web access</strong> permission level, and ask it to name the page it took the number from.</span></li>
+        <li><strong>Stalled at L2?</strong> <span class="muted">It finds things but can't plan a research pass. &rarr; Ask for a plan first (which sources, which claims), then the brief. Ask it to open and read each source, not just the search results.</span></li>
+        <li><strong>Stalled at L3?</strong> <span class="muted">No working connectors, or sloppy procedure. &rarr; Connect <strong>calendar</strong> and <strong>email</strong> under Settings &gt; Connectors, set Connectors to ask before actions, and read the safety rule twice.</span></li>
+        <li><strong>Stalled at L4?</strong> <span class="muted">It can't hold constraints or verify its own answer. &rarr; Prompting discipline: restate constraints, filter explicitly, check the winner against every one.</span></li>
+        <li><strong>Stalled at L5?</strong> <span class="muted">It can't ship a finished artifact. &rarr; Ask for exactly that: &ldquo;one HTML file that opens in a browser.&rdquo; <strong>Artifacts</strong> are built in and saved to your Library.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="sharing">
+    <div class="wrap-narrow">
+      <p class="eyebrow">Coming in Phase 2</p>
+      <h2>How sharing will work</h2>
+      <p class="muted">This is the plan. It isn't built, and the details may change.</p>
+      <ul>
+        <li>When you file a run, you can add the Setup behind it: the connectors you used (picked from a list of real Muse connectors), any custom-connector specs, your permission levels, your scheduled tasks, and what you changed this week.</li>
+        <li>You choose whether it is published. Nothing is published by default.</li>
+        <li>Each shared Setup is read before it is listed. A spec that holds a key, a password or hidden text is refused.</li>
+        <li>This page will then show which settings runs used, with the number of runs behind each one. No numbers are shown until there is data.</li>
+      </ul>
+      <div class="card" style="margin-top:36px">
+        <p class="muted" style="margin:0">&ldquo;Treat every stall as a to-do list, dear. That's how a setup gets better week to week.&rdquo; &mdash; Mabel</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups" aria-current="page">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

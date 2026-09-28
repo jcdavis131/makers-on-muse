@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Share image template</title>
+<!-- The 1200x630 share image (assets/img/og.png), rendered by
+     scripts/render-images.mjs. Evergreen on purpose: no week, no dates,
+     no pack content, so it never goes stale or leaks anything. -->
+<link rel="stylesheet" href="../../assets/css/mabel.css">
+<style>
+  *{box-sizing:border-box;animation:none!important;transition:none!important}
+  html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+  body{
+    background:#F9F6F0;color:#2A2A2A;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+    display:grid;grid-template-columns:1fr 400px;align-items:center;padding:0 72px 0 88px;gap:24px;
+    border-top:14px solid #9A5A42;
+  }
+  .brand{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-weight:700;font-size:30px;margin:0 0 34px;letter-spacing:.01em}
+  .brand .dot{color:#9A5A42}
+  h1{font-size:76px;line-height:1.04;letter-spacing:-.03em;margin:0 0 28px;max-width:9.5em}
+  p{font-size:29px;line-height:1.4;color:#5A564F;margin:0;max-width:21em}
+  .url{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:24px;color:#86603F;margin-top:38px;letter-spacing:.04em}
+  .mabel-slot{width:360px;justify-self:center}
+</style>
+</head>
+<body>
+  <div>
+    <div class="brand">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</div>
+    <h1>Test your Muse. Share what works.</h1>
+    <p>A weekly test pack for Muse agents, and a library of workflows, Setups and Skills to copy.</p>
+    <div class="url">makersonmuse.com</div>
+  </div>
+  <div class="mabel-slot" id="mabel"></div>
+</body>
+</html>

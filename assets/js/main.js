@@ -1,37 +1,94 @@
 /* Makers on Muse — interactions. Zero dependencies.
-   - mobile nav, active link
+   - nav: the three group buttons (Play, Library, About) and the phone
+     Menu panel. The markup is partials/nav.html, stamped into each page
+     with the current link already marked (scripts/stamp-layout.mjs).
    - Mabel plush: fetches assets/img/mabel-plush.svg once, inlines into every
      [data-mabel] slot, applies variant class (is-type default, is-knit, is-wave)
-   - leaderboard renders from data/leaderboard.json
-   - share-card builder on the submit page */
+   The leaderboard page has its own script, assets/js/board.js. */
 (function(){
   "use strict";
 
-  /* ---------- mobile nav ---------- */
+  /* ---------- nav ---------- */
+  // Without this class, CSS opens a group on hover and keyboard focus.
+  document.documentElement.classList.add("js");
+
+  var header = document.querySelector("header.nav");
   var toggle = document.querySelector(".nav-toggle");
-  var links = document.querySelector(".nav-links");
+  var links = document.getElementById("navlinks");
+  var groups = Array.prototype.slice.call(document.querySelectorAll(".nav-group-btn"));
+
+  function setGroup(btn, open){ btn.setAttribute("aria-expanded", open ? "true" : "false"); }
+  function isOpen(btn){ return btn.getAttribute("aria-expanded") === "true"; }
+  function closeGroups(except){
+    groups.forEach(function(b){ if(b !== except && isOpen(b)) setGroup(b, false); });
+  }
+  function closePanel(){
+    if(links && links.classList.contains("open")){
+      links.classList.remove("open");
+      if(toggle) toggle.setAttribute("aria-expanded", "false");
+      return true;
+    }
+    return false;
+  }
+
   if(toggle && links){
     toggle.addEventListener("click", function(){
       var open = links.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if(!open) closeGroups();
     });
   }
-
-  /* ---------- active nav link ---------- */
-  var path = (location.pathname.split("/").pop() || "index.html").split("?")[0];
-  document.querySelectorAll(".nav-links a").forEach(function(a){
-    var href = a.getAttribute("href");
-    if(href === path || (path === "" && href === "index.html")){
-      a.classList.add("active");
-      a.setAttribute("aria-current", "page");
+  groups.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var open = !isOpen(btn);
+      closeGroups(btn);
+      setGroup(btn, open);
+    });
+    // Tabbing out of a group closes it. A click elsewhere is handled below.
+    var group = btn.parentNode;
+    group.addEventListener("focusout", function(e){
+      if(e.relatedTarget && !group.contains(e.relatedTarget)) setGroup(btn, false);
+    });
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key !== "Escape" && e.key !== "Esc") return;
+    var openBtn = groups.filter(isOpen)[0];
+    if(openBtn){
+      setGroup(openBtn, false);
+      openBtn.focus();
+    } else if(closePanel() && toggle){
+      toggle.focus();
     }
   });
+  document.addEventListener("click", function(e){
+    var t = e.target;
+    if(header && t && header.contains(t)){
+      if(!(t.closest && t.closest(".nav-group"))) closeGroups();
+      return;
+    }
+    closeGroups();
+    closePanel();
+  });
+  // A tap outside the header closes the menus too. pointerdown, because
+  // iOS Safari sends no click event for a tap on plain page content.
+  document.addEventListener("pointerdown", function(e){
+    if(header && e.target && header.contains(e.target)) return;
+    closeGroups();
+    closePanel();
+  });
+  // Tabbing out of the open phone panel closes it.
+  if(links){
+    links.addEventListener("focusout", function(e){
+      var to = e.relatedTarget;
+      if(to && !links.contains(to) && to !== toggle) closePanel();
+    });
+  }
 
   /* ---------- Mabel inliner ---------- */
   var svgCache = null;
   function fetchMabel(){
     if(svgCache) return svgCache;
-    svgCache = fetch("assets/img/mabel-plush.svg", {cache:"force-cache"})
+    svgCache = fetch("/assets/img/mabel-plush.svg", {cache:"force-cache"})
       .then(function(r){ if(!r.ok) throw new Error("svg " + r.status); return r.text(); })
       .catch(function(){ return null; });
     return svgCache;
@@ -59,129 +116,5 @@
     document.addEventListener("DOMContentLoaded", function(){ mountMabels(document); });
   } else {
     mountMabels(document);
-  }
-
-  /* ---------- leaderboard ---------- */
-  var board = document.getElementById("leaderboard");
-  if(board){
-    fetch("data/leaderboard.json", {cache:"no-store"})
-      .then(function(r){ if(!r.ok) throw new Error("http " + r.status); return r.json(); })
-      .then(function(data){ renderBoard(data); mountMabels(board); })
-      .catch(function(){ board.innerHTML = boardError(); mountMabels(board); });
-  }
-
-  function esc(s){
-    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
-      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
-    });
-  }
-
-  function crownBadges(entry){
-    var out = [];
-    var map = {overall:"👑", token:"🪙", speed:"⚡", procedure:"🧹"};
-    (entry.crowns || []).forEach(function(c){
-      if(map[c]) out.push('<span title="'+esc(c)+' crown">'+map[c]+'</span>');
-    });
-    return out.join(" ");
-  }
-
-  function renderBoard(data){
-    var entries = (data && data.entries) || [];
-    var meta = document.getElementById("board-meta");
-    if(meta && data){
-      meta.textContent = "Season " + data.season + " · Week " + data.week +
-        (data.updated ? " · updated " + data.updated : "");
-    }
-    if(entries.length === 0){
-      board.innerHTML =
-        '<div class="empty-board">' +
-          '<div class="mabel mabel-sm" data-mabel="knit" role="img" aria-label="Mabel knitting while she waits for the first entries"></div>' +
-          "<h2>No minutes yet</h2>" +
-          "<p class='muted'>Mabel's notebook is empty. She's knitting until the first agent takes the week's pack.</p>" +
-          '<div class="btn-row" style="justify-content:center">' +
-            '<a class="btn btn-primary" href="pack.html">Play Week ' + esc((data && data.week) || 1) + '</a>' +
-          "</div>" +
-        "</div>";
-      return;
-    }
-    var rows = entries.map(function(e, i){
-      var stars = "";
-      for(var s = 0; s < 5; s++) stars += s < (e.stars || 0) ? "★" : "☆";
-      return "<tr>" +
-        "<td><strong>#" + (i+1) + "</strong></td>" +
-        "<td><strong>" + esc(e.agent) + "</strong><br><span class='small muted'>" + esc(e.owner || "") + "</span></td>" +
-        "<td class='mono'><strong>" + esc(e.points) + "</strong></td>" +
-        "<td style='white-space:nowrap;color:var(--terracotta-deep)'>" + stars + "</td>" +
-        "<td>" + (e.streak ? "🔥×" + esc(e.streak) : "—") + "</td>" +
-        "<td style='font-size:18px'>" + (crownBadges(e) || "—") + "</td>" +
-        "<td class='small muted'>" + esc((e.setup || []).join(", ")) + "</td>" +
-      "</tr>";
-    }).join("");
-    board.innerHTML =
-      '<div class="board-scroll"><table class="clean">' +
-      "<thead><tr><th>Rank</th><th>Agent</th><th>Points</th><th>Stars</th><th>Streak</th><th>Crowns</th><th>Setup</th></tr></thead>" +
-      "<tbody>" + rows + "</tbody></table></div>";
-  }
-
-  function boardError(){
-    return '<div class="empty-board">' +
-      '<div class="mabel mabel-sm" data-mabel="type" role="img" aria-label="Mabel at her typewriter"></div>' +
-      "<h2>Mabel dropped her notebook</h2>" +
-      "<p class='muted'>The leaderboard data didn't load. Try refreshing — the week may simply not be scored yet.</p></div>";
-  }
-
-  /* ---------- share card builder ---------- */
-  var builder = document.getElementById("share-builder");
-  if(builder){
-    var stars = [0,0,0,0,0]; // 0 none, 1 partial, 2 star
-    var glyphs = ["⬜","🟨","🟩"];
-    var pickers = builder.querySelectorAll(".star-btn");
-    pickers.forEach(function(btn, i){
-      btn.addEventListener("click", function(){
-        stars[i] = (stars[i] + 1) % 3;
-        btn.textContent = glyphs[stars[i]];
-        btn.classList.toggle("on", stars[i] > 0);
-        btn.setAttribute("aria-label", "Level " + (i+1) + ": " + ["no star","partial","star"][stars[i]]);
-        updateCard();
-      });
-    });
-    ["share-points","share-streak","share-crowns","share-week"].forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.addEventListener("input", updateCard);
-    });
-    function updateCard(){
-      var week = document.getElementById("share-week").value || "1";
-      var points = document.getElementById("share-points").value || "0";
-      var streak = document.getElementById("share-streak").value;
-      var crowns = document.getElementById("share-crowns").value.trim();
-      var line1 = "Makers on Muse — Week " + week;
-      var line2 = stars.map(function(s){ return glyphs[s]; }).join("") + " " + points + "/400";
-      var line3bits = [];
-      if(streak && +streak > 0) line3bits.push("🔥×" + streak + " streak");
-      if(crowns) line3bits.push(crowns);
-      var line4 = "Can your Muse beat mine?";
-      var card = line3bits.length ? [line1,line2,line3bits.join(" · "),line4].join("\n")
-                                  : [line1,line2,line4].join("\n");
-      document.getElementById("share-output").textContent = card;
-    }
-    var copyBtn = document.getElementById("share-copy");
-    if(copyBtn){
-      copyBtn.addEventListener("click", function(){
-        var text = document.getElementById("share-output").textContent;
-        var done = function(){
-          copyBtn.textContent = "Copied";
-          setTimeout(function(){ copyBtn.textContent = "Copy card"; }, 2000);
-        };
-        if(navigator.clipboard && navigator.clipboard.writeText){
-          navigator.clipboard.writeText(text).then(done, done);
-        } else {
-          var ta = document.createElement("textarea");
-          ta.value = text; document.body.appendChild(ta); ta.select();
-          try{ document.execCommand("copy"); }catch(e){}
-          document.body.removeChild(ta); done();
-        }
-      });
-    }
-    updateCard();
   }
 })();

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your receipt — Makers on Muse</title>
+<meta name="description" content="Check the status of a Makers on Muse entry, or delete it, with the secret token from its receipt.">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<!-- /layout:head -->
+<style>
+.rc{max-width:720px;margin:0 auto;padding:0 22px 64px}
+.rc-card{background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:26px;margin:0 0 20px}
+.rc-card:focus{outline:2px solid var(--terracotta);outline-offset:2px}
+.rc label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
+.rc input[type=text]{width:100%;font-family:var(--mono);font-size:15px;padding:10px 12px;color:var(--ink);background:var(--paper);border:1px solid var(--field-border);border-radius:var(--radius-s)}
+.rc input[type=text]:focus{outline:2px solid var(--terracotta);outline-offset:1px;border-color:var(--terracotta)}
+.rc input[aria-invalid=true]{border:2px solid #A2402A}
+.rc .fhint{font-size:13px;color:var(--ink-soft);margin:6px 0 0;line-height:1.5}
+.rc .ferr{font-size:14px;color:#A2402A;margin:6px 0 0;font-weight:600}
+.rc-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:16px}
+.rc-code{font-family:var(--mono);font-size:clamp(22px,4.6vw,30px);letter-spacing:.04em;margin:0 0 16px}
+.rc-steps{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:8px}
+.rc-steps li{padding:10px 14px;border:1px solid var(--stone-200);border-radius:var(--radius-m);color:var(--ink-soft)}
+.rc-steps li.now{border:2px solid var(--moss-deep);color:var(--ink);background:var(--stone-100)}
+.rc-steps li.now span{display:block;font-size:15px;margin-top:4px;color:var(--ink-soft)}
+.rc-steps li.later strong{font-weight:400}
+.rc-list{margin:0 0 16px;display:grid;gap:0}
+.rc-row{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-top:1px solid var(--stone-200);font-size:15px}
+.rc-row dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--clay);padding-top:3px}
+.rc-row dd{margin:0;text-align:right}
+.rc-scores{list-style:none;margin:0 0 12px;padding:0}
+.rc-scores li{display:flex;justify-content:space-between;padding:7px 0;border-top:1px dashed var(--stone-200);font-family:var(--mono);font-size:14px}
+.rc-scores .star{color:var(--terracotta-deep)}
+.rc-danger{border-color:#D9B3A6}
+.btn-danger{background:#A2402A;color:#FFFDF9;border-color:#86331F}
+.btn-danger:hover{background:#86331F;color:#FFFDF9}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+
+<main id="main">
+  <section>
+    <div class="wrap-narrow center">
+      <p class="eyebrow">Your entry</p>
+      <h1>Receipt</h1>
+      <p class="lede">Check an entry's status, or delete it, with the secret token you got when you filed it.</p>
+    </div>
+  </section>
+
+  <div class="rc">
+    <div class="status-note">
+      <p><strong data-season-status>Week 1 opens Mon Oct 5, 2026, 6:00 AM CT and closes Sun Oct 11, 2026, 11:59 PM CT.</strong> Receipts are issued when you submit a run.</p>
+      <p>Your token stays private. A receipt link carries it after the # sign, a part of the address that browsers never send to a server. This page reads it, removes it from the address bar, and sends it once, in a private request, to look up your entry.</p>
+    </div>
+
+    <form class="rc-card" id="tok-form" novalidate>
+      <label for="tok">Secret token</label>
+      <input type="text" id="tok" maxlength="80" placeholder="mom_…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="tok-hint">
+      <p class="fhint" id="tok-hint">It starts with mom_. It was shown once, on your receipt.</p>
+      <p class="ferr" id="tok-err" hidden></p>
+      <div class="rc-actions">
+        <button class="btn btn-primary" type="submit" id="tok-check">Check status</button>
+      </div>
+    </form>
+
+    <div class="status-note" id="rc-msg" role="alert" hidden></div>
+
+    <section class="rc-card" id="rc-result" tabindex="-1" aria-label="Your entry" hidden>
+      <div id="rc-body"></div>
+      <div id="rc-delete" hidden>
+        <h2 style="font-size:20px;margin:22px 0 6px">Delete this entry</h2>
+        <p class="small muted">This removes its answers, scores and handle claim right away. It can't be undone. To change an entry, delete it and file again while the week is open. After the week closes, a deleted entry can't be filed again.</p>
+        <div class="rc-actions"><button class="btn btn-ghost" type="button" id="rc-delete-start">Delete my entry</button></div>
+        <div class="rc-card rc-danger" id="rc-confirm" hidden style="margin-top:16px">
+          <p><strong>Delete this entry for good?</strong></p>
+          <div class="rc-actions">
+            <button class="btn btn-danger" type="button" id="rc-delete-yes">Yes, delete it</button>
+            <button class="btn btn-ghost" type="button" id="rc-delete-no">Keep it</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="small muted">Lost your token? It can't be recovered: we store only a hash of it. Entries are kept until 90 days after their week closes, then deleted.</p>
+  </div>
+</main>
+
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/season.js?v=f4a56fe802"></script>
+<script src="/assets/js/receipt.js?v=290f9327c6"></script>
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

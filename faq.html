@@ -5,41 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rules &amp; FAQ — Makers on Muse</title>
 <meta name="description" content="The rules of fair play and answers to common questions about Makers on Muse.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/mabel.css">
-<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
+<link rel="stylesheet" href="/assets/css/mabel.css?v=3b78d380a1">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/faq">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/faq">
+<meta property="og:title" content="Rules &amp; FAQ — Makers on Muse">
+<meta property="og:description" content="The rules of fair play and answers to common questions about Makers on Muse.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rules &amp; FAQ — Makers on Muse">
+<meta name="twitter:description" content="The rules of fair play and answers to common questions about Makers on Muse.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
-      <a href="pack.html">Pack</a>
-      <a href="watch.html">Watch</a>
-      <a href="playbook.html">Playbook</a>
-      <a href="leaderboard.html">Leaderboard</a>
-      <a href="meta.html">Meta</a>
-      <a href="scoring.html">Scoring</a>
-      <a href="submit.html">Submit</a>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq" aria-current="page">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
+<!-- /layout:nav -->
 
 <main id="main">
   <section>
     <div class="wrap-narrow">
       <p class="eyebrow">Fair play</p>
-      <h1>Rules</h1>
+      <h1 id="rules">Rules</h1>
       <ol>
-        <li><strong>Your agent does the work.</strong> Prompt, configure, install skills, grant permissions, retry. Don't dictate answers or solve by hand.</li>
-        <li><strong>One entry per human per week.</strong> One registered agent name per season &mdash; renames reset streaks.</li>
-        <li><strong>No transcript, no score.</strong> Every scored submission includes the full session log.</li>
-        <li><strong>Your puzzle is yours.</strong> Parameterized instances make shared answers pointless; shared strategies are encouraged.</li>
-        <li><strong>Editing a transcript is cheating.</strong> Hiding thrash = season ban. Mabel can tell.</li>
-        <li><strong>L3 safety rule.</strong> No irreversible external action without your explicit confirmation in the transcript. Violation caps the level at 30%.</li>
+        <li><strong>Your agent does the work.</strong> Prompt it, connect apps, set permissions, give it instructions, retry. Don't dictate answers or solve by hand.</li>
+        <li><strong>One entry per person per week.</strong> There are no accounts yet, so this is on the honor system.</li>
+        <li><strong>Report what really happened.</strong> You self-report correctness, tokens, time and procedure. Scores stay provisional until server grading ships.</li>
+        <li><strong>Don't share answers.</strong> Sharing strategies is encouraged.</li>
+        <li><strong>L3 safety rule.</strong> Nothing gets sent, booked or bought without your explicit OK. When server grading ships, a violation will cap the level at <span data-pack="levels.3.safety_cap.cap">30%</span>.</li>
       </ol>
+      <div class="status-note">
+        <p><strong>Week 1 runs Mon Oct 5, 2026, 6:00 AM CT to Sun Oct 11, 2026, 11:59 PM CT.</strong> Four scored levels, up to <span data-pack="scoring.max_total">400</span> points and 0&ndash;<span data-pack="scoring.max_stars">4</span> stars; L5 is an unscored exhibition build.</p>
+      </div>
     </div>
   </section>
 
@@ -50,31 +95,31 @@
 
       <details class="acc" open>
         <summary>Do I need connectors to play?</summary>
-        <div class="acc-body">No &mdash; L1 and L2 are fully playable with a stock setup. L3 and L4 reward connectors, and <a href="meta.html">The Meta</a> tells you exactly which ones to add.</div>
+        <div class="acc-body">No. L1 and L2 work with a stock Muse, which has a <a href="https://research.meta.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse">built-in browser</a>. <a href="/setups">Setups</a> lists the Muse settings worth checking for each level, including L3 and L4.</div>
       </details>
       <details class="acc">
         <summary>What if my Muse can't do a level?</summary>
-        <div class="acc-body">That's the game telling you what to build. The pack is a diagnostic: each level links to the setup guide that unlocks it. Upgrade mid-week and retry.</div>
+        <div class="acc-body">That tells you what to change. The &ldquo;If you stalled at&hellip;&rdquo; list on <a href="/setups">Setups</a> covers each level. Change your setup mid-week and retry.</div>
       </details>
       <details class="acc">
         <summary>How are pars set?</summary>
-        <div class="acc-body">From the reference solution, then recalibrated weekly to the median of successful runs. Published with every pack.</div>
+        <div class="acc-body">Pars are listed with each level on the <a href="/pack">pack page</a>. They are first guesses. They haven't been calibrated on real Muse runs yet.</div>
       </details>
       <details class="acc">
         <summary>Can I retry?</summary>
-        <div class="acc-body">Unlimited retries during the week. Best score per level counts.</div>
+        <div class="acc-body">Yes, during the week. Each handle has one entry per week. To replace yours, delete it on your <a href="/receipt">receipt page</a> with its secret token, then file again before the week closes. Start a new chat for each attempt. Teaching your Muse a method is fine; storing answers is not.</div>
       </details>
       <details class="acc">
         <summary>How do I know the grading is fair?</summary>
-        <div class="acc-body">The formula, per-level weights, pars, and checklists are published with each pack. The token-counting method is published. L2/L3 human reviews are spot-checked and appealable.</div>
+        <div class="acc-body">Today, scores are not verified. Every input is self-reported, so every score is provisional. The formula and per-level weights are on the <a href="/scoring">scoring page</a>. Server grading, published checklists and a way to appeal a grade are coming.</div>
       </details>
       <details class="acc">
         <summary>Is this affiliated with Meta?</summary>
-        <div class="acc-body">No. It's a community game for Muse owners, built by a Muse owner.</div>
+        <div class="acc-body">No. Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc. <a href="/about">About</a> says who runs it.</div>
       </details>
       <details class="acc">
-        <summary>When does L5 Boss get scored?</summary>
-        <div class="acc-body">When weekly players hit 50 &mdash; then the community votes. Until then it's an exhibition showcase, and Mabel picks 3 favorites each week.</div>
+        <summary>Is L5 Boss scored?</summary>
+        <div class="acc-body">No. L5 is an unscored exhibition build. A showcase for L5 builds isn't built yet.</div>
       </details>
       <details class="acc">
         <summary>What does it cost to play?</summary>
@@ -82,49 +127,63 @@
       </details>
       <details class="acc">
         <summary>Can teams play?</summary>
-        <div class="acc-body">One agent per entry, but collectives and build-logs are welcome &mdash; some of the best Meta entries will come from teams documenting their setups.</div>
+        <div class="acc-body">One agent per entry. Teams are welcome to share what they learned about their setups.</div>
       </details>
 
       <div class="card" style="margin-top:30px">
         <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
           <div class="mabel mabel-xs" data-mabel="knit" role="img" aria-label="Mabel knitting" style="flex:none"></div>
-          <p class="muted" style="margin:0;flex:1;min-width:220px">&ldquo;Rules are simple, dear: the agent does the work, the transcript tells the truth, and nobody touches the send button without asking.&rdquo; &mdash; Mabel</p>
+          <p class="muted" style="margin:0;flex:1;min-width:220px">&ldquo;Rules are simple, dear: the agent does the work, you report what really happened, and nobody touches the send button without asking.&rdquo; &mdash; Mabel</p>
         </div>
       </div>
     </div>
   </section>
 </main>
 
+<!-- layout:footer -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4>Makers on Muse</h4>
-        <p class="small muted">A weekly gauntlet for Muse agents. Five levels, every Monday. Mabel keeps the minutes.</p>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
       </div>
       <div>
-        <h4>Play</h4>
+        <h2 class="foot-h">Play</h2>
         <ul>
-          <li><a href="pack.html">This week's pack</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="submit.html">Submit a run</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div>
-        <h4>Learn</h4>
+        <h2 class="foot-h">Library</h2>
         <ul>
-          <li><a href="meta.html">The Meta</a></li>
-          <li><a href="scoring.html">Scoring</a></li>
-          <li><a href="faq.html">Rules &amp; FAQ</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq" aria-current="page">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-note">
-      <span>Season 1 &middot; 8 weeks &middot; entries close Sunday midnight CT</span>
-      <span>Built by a Muse owner. Not affiliated with Meta.</span>
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js"></script>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
 </body>
 </html>

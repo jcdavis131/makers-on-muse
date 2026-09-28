@@ -3,42 +3,87 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Makers on Muse — How capable is your Muse?</title>
-<meta name="description" content="A weekly five-level gauntlet for Muse agents. Run the pack, get scored on correctness, tokens, speed, and procedure.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/mabel.css">
-<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
+<title>Makers on Muse — Test your Muse, share what works</title>
+<meta name="description" content="A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Week 1 runs Mon Oct 5 to Sun Oct 11, 2026. Scores are self-reported and provisional for now.">
+<link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
+<link rel="stylesheet" href="/assets/css/mabel.css?v=3b78d380a1">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/">
+<meta property="og:title" content="Makers on Muse — Test your Muse, share what works">
+<meta property="og:description" content="A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Week 1 runs Mon Oct 5 to Sun Oct 11, 2026. Scores are self-reported and provisional for now.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Makers on Muse — Test your Muse, share what works">
+<meta name="twitter:description" content="A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Week 1 runs Mon Oct 5 to Sun Oct 11, 2026. Scores are self-reported and provisional for now.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
-      <a href="pack.html">Pack</a>
-      <a href="watch.html">Watch</a>
-      <a href="playbook.html">Playbook</a>
-      <a href="leaderboard.html">Leaderboard</a>
-      <a href="meta.html">Meta</a>
-      <a href="scoring.html">Scoring</a>
-      <a href="submit.html">Submit</a>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
+<!-- /layout:nav -->
 
 <main id="main">
-  <!-- Kubrick stage: one idea, symmetrical, character center-frame -->
-  <section class="stage">
-    <div class="wrap-narrow">
-      <p class="eyebrow rise rise-1">Season 1 &middot; Week 1 opens Mon Oct 5</p>
-      <h1 class="rise rise-1">How capable is your Muse?</h1>
-      <p class="lede rise rise-2">A weekly five-level gauntlet for Muse agents. Run the pack, get scored on correctness, tokens, speed, and procedure &mdash; and find out what your setup is really made of.</p>
-      <div class="mabel spotlight rise rise-3" data-mabel="type" role="img" aria-label="Mabel, a plush grandma stenographer, typing up the week's pack at her tiny typewriter"></div>
-      <div class="btn-row rise rise-4">
-        <a class="btn btn-primary" href="pack.html">Play this week's pack</a>
-        <a class="btn btn-ghost" href="scoring.html">How scoring works</a>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow rise rise-1">Season 1 &middot; Week 1 &middot; Mon Oct 5 &ndash; Sun Oct 11, 2026</p>
+        <h1 class="rise rise-1">Test your Muse. Share what works.</h1>
+        <p class="lede rise rise-2">A weekly test pack for Muse agents, and a library of workflows, Setups and Skills to copy. Run the pack to see what your Muse can do. Copy a workflow to make it better.</p>
+        <p class="small muted rise rise-2" style="margin:16px 0 0;max-width:36em"><strong data-season-status>Week 1 opens Mon Oct 5, 2026, 6:00 AM CT and closes Sun Oct 11, 2026, 11:59 PM CT.</strong> For now you report your own numbers, so every score is provisional.</p>
+        <div class="btn-row rise rise-3">
+          <a class="btn btn-primary" href="/pack">Take the Week 1 pack</a>
+          <a class="btn btn-ghost" href="/playbook">Browse the Playbook</a>
+        </div>
       </div>
+      <div class="mabel hero-mabel spotlight rise rise-4" data-mabel="type" role="img" aria-label="Mabel, a plush grandma stenographer, typing up the week's pack at her tiny typewriter"></div>
     </div>
   </section>
 
@@ -51,18 +96,18 @@
       <div class="cards cols-3">
         <div class="card">
           <span class="step">Monday 6 AM CT</span>
-          <h3>The pack drops</h3>
-          <p class="muted">Five levels, same ladder, brand-new puzzles. Last week's leaderboard publishes beside it.</p>
+          <h3>The pack opens</h3>
+          <p class="muted">Four scored levels and one exhibition build. Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026.</p>
         </div>
         <div class="card">
           <span class="step">All week</span>
           <h3>Your agent runs it</h3>
-          <p class="muted">Stuck on L3 Tuesday? Wire up the connector, teach it the skill, retry Sunday. Upgrading mid-week is the game.</p>
+          <p class="muted">Stuck on L3? Connect the app, check its permissions, sharpen your instructions, and retry. Improving your setup mid-week is part of the game.</p>
         </div>
         <div class="card">
-          <span class="step">Sunday midnight</span>
-          <h3>Best score counts</h3>
-          <p class="muted">Retry as often as you like. Clear 3 of 5 levels to keep your streak alive.</p>
+          <span class="step">Sunday 11:59 PM CT</span>
+          <h3>Entries close</h3>
+          <p class="muted">Submit before the deadline. Scores are self-reported and provisional until server grading ships.</p>
         </div>
       </div>
     </div>
@@ -76,26 +121,55 @@
         <p class="lede">Your Muse just got hired as your chief of staff. It's day one. Four scored levels, from looking up a number to getting you across the country.</p>
       </div>
       <div class="cards cols-2">
-        <div class="card"><span class="step">L1 &middot; Scout</span><h3>What's the number?</h3><p class="muted">One fact, one source of truth. Clearable by a stock Muse.</p></div>
-        <div class="card"><span class="step">L2 &middot; Researcher</span><h3>Brief me.</h3><p class="muted">Both sides of a debate, three sources, under 300 words.</p></div>
-        <div class="card"><span class="step">L3 &middot; Operator</span><h3>Fix my morning.</h3><p class="muted">Two meetings collide. Find it, decide, draft the fix &mdash; don't send it.</p></div>
-        <div class="card"><span class="step">L4 &middot; Detective</span><h3>Get me to the wedding.</h3><p class="muted">Cheapest valid itinerary under real constraints. Traps included.</p></div>
+        <a class="card card-link" href="/pack#l1"><span class="step">L1 &middot; Scout</span><h3>What's the number?</h3><p class="muted">One fact, one source of truth. A web lookup with a citation.</p></a>
+        <a class="card card-link" href="/pack#l2"><span class="step">L2 &middot; Researcher</span><h3>Brief me.</h3><p class="muted">Both sides of a debate, three sources, under 300 words.</p></a>
+        <a class="card card-link" href="/pack#l3"><span class="step">L3 &middot; Operator</span><h3>Fix my morning.</h3><p class="muted">Two meetings collide. Find it, decide, draft the fix &mdash; don't send it.</p></a>
+        <a class="card card-link" href="/pack#l4"><span class="step">L4 &middot; Detective</span><h3>Get me to the wedding.</h3><p class="muted">Cheapest valid itinerary under real constraints. The flight list isn't published yet.</p></a>
       </div>
       <div class="btn-row">
-        <a class="btn btn-primary" href="pack.html">See the full pack</a>
+        <a class="btn btn-primary" href="/pack">See the full pack</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="playbook-strip">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">From the Playbook</p>
+        <h2>Community workflows to copy</h2>
+        <p class="lede">Step-by-step prompts for real life, each with a test that tells you whether your Muse passed. None has been checked on a real Muse yet, so run one and see.</p>
+      </div>
+      <div class="cards cols-3">
+        <a class="card card-link" href="/playbook?w=pre-dawn-briefing" data-workflow="pre-dawn-briefing"><span class="step">Professional &middot; 5 min</span><h3>The Pre-Dawn Briefing</h3><p class="muted">Triage judgment plus restraint: a good chief of staff knows what not to send.</p></a>
+        <a class="card card-link" href="/playbook?w=grading-sprint" data-workflow="grading-sprint"><span class="step">Teacher &middot; 10 min</span><h3>The Grading Sprint</h3><p class="muted">Does your Muse do arithmetic honestly, or cheerfully schedule the impossible?</p></a>
+        <a class="card card-link" href="/playbook?w=fridge-dinner-rescue" data-workflow="fridge-dinner-rescue"><span class="step">Parent &middot; 10 min</span><h3>Fridge Dinner Rescue</h3><p class="muted">Does your Muse respect hard constraints, or invent a fully stocked kitchen?</p></a>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-ghost" href="/playbook">Browse all 28 workflows</a>
       </div>
     </div>
   </section>
 
   <section style="padding-top:0">
-    <div class="wrap-narrow center">
-      <p class="eyebrow">The Meta</p>
-      <h2>The leaderboard writes the guide</h2>
-      <p class="lede">Every entry lists the skills and connectors behind it. The Meta turns those setups into a living guide &mdash; so the game teaches you exactly what to build next.</p>
-      <div class="btn-row">
-        <a class="btn btn-ghost" href="meta.html">Read the Meta</a>
-        <a class="btn btn-ghost" href="leaderboard.html">Leaderboard</a>
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow">The library</p>
+        <h2>Two tracks: Setups and Skills</h2>
+        <p class="lede">What you can change depends on which Muse you use.</p>
       </div>
+      <div class="cards cols-2">
+        <a class="card card-link" href="/setups">
+          <span class="step">The Muse app</span>
+          <h3>Setups</h3>
+          <p class="muted">Prompt recipes, connectors, custom connectors, permission levels, scheduled tasks, and personality and memory: the parts of the Muse app you can change. Mabel's notes for each level are there too.</p>
+        </a>
+        <a class="card card-link" href="/skills">
+          <span class="step">Muse Code</span>
+          <h3>Skills</h3>
+          <p class="muted">SKILL.md skills for Muse Code, Meta's developer CLI: what a skill is, where Muse Code finds it, and how sharing skills here will work.</p>
+        </a>
+      </div>
+      <p class="small muted center" style="margin-top:22px">Sharing your own Setup or skill opens in <a href="/about#phases">Phase 2</a>.</p>
     </div>
   </section>
 
@@ -104,42 +178,57 @@
       <div class="card center">
         <div class="mabel mabel-xs" data-mabel="knit" role="img" aria-label="Mabel knitting during the Sunday-to-Monday break" style="margin:0 auto 18px"></div>
         <h3>Meet Mabel</h3>
-        <p class="muted">Official scorekeeper. She takes the minutes, reviews every transcript, and stamps the results. Sundays she knits. She's warm, but strict about fair play.</p>
+        <p class="muted">Our mascot and scorekeeper. She is not part of Muse. She adds up your receipt and keeps the minutes. Sundays she knits.</p>
       </div>
     </div>
   </section>
 </main>
 
+<!-- layout:footer -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4>Makers on Muse</h4>
-        <p class="small muted">A weekly gauntlet for Muse agents. Five levels, every Monday. Mabel keeps the minutes.</p>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
       </div>
       <div>
-        <h4>Play</h4>
+        <h2 class="foot-h">Play</h2>
         <ul>
-          <li><a href="pack.html">This week's pack</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="submit.html">Submit a run</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div>
-        <h4>Learn</h4>
+        <h2 class="foot-h">Library</h2>
         <ul>
-          <li><a href="meta.html">The Meta</a></li>
-          <li><a href="scoring.html">Scoring</a></li>
-          <li><a href="faq.html">Rules &amp; FAQ</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-note">
-      <span>Season 1 &middot; 8 weeks &middot; entries close Sunday midnight CT</span>
-      <span>Built by a Muse owner. Not affiliated with Meta.</span>
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js"></script>
+<!-- /layout:footer -->
+<script src="/assets/js/season.js?v=f4a56fe802"></script>
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
 </body>
 </html>

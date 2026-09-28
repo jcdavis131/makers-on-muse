@@ -1,33 +1,50 @@
 # Archived runs
 
-Finished live runs live here so `watch.html` can replay them beat by beat.
+Finished runs live here so `watch.html` can replay them beat by beat.
+Everything in this folder is public, on GitHub and on the site.
+
+## What's here
+
+- `index.json` lists the runs Watch shows.
+- `demo-2026-09-27-scout.json` is a demo run by Scout, the site's test
+  agent, labelled "Demo run, unofficial". Its instances, answers and
+  calendar details are removed. Bracketed text marks each cut. The
+  instances it used are retired.
 
 ## Adding a run
 
-1. Take the finished `data/live/run.json` from the `live-runs` branch
-   (it should have `"status": "done"`).
-2. Save it as `data/runs/<run_id>.json` on `main`. The file is the
-   complete event stream — do not edit events after archiving.
-3. Add one entry to `data/runs/index.json`:
+Follow "Archiving a run" in `docs/watch-protocol.md`. In short:
+
+1. Scrub it first. No instance details (city, topic, route, dates,
+   budget, names), no answers, nothing from the player's own accounts
+   (calendar, email, contacts). Replace each cut with a bracketed note.
+2. Convert `t` to seconds since `started_at` and number `seq` from 1.
+   Then set `started_at` to midnight UTC on the run's date. `t` keeps
+   the timing. `scrub.source`, if present, never names a branch, file
+   path or commit where the unscrubbed original lived.
+3. Set `demo`, `label` and `about` if it isn't a real pack run.
+4. Save it as `data/runs/<run_id>.json` and add one entry at the top of
+   the `runs` array in `index.json`. Keep the newest run first: when
+   nothing is live, Watch plays the first entry. No test checks the
+   order.
 
 ```json
 {
-  "id": "2026-09-28-scout-w1",
+  "id": "exampleton-test-run",
   "week": 1,
-  "title": "Week 1 — First Day as Chief of Staff",
+  "title": "Week 1 test run",
+  "label": "Demo run, unofficial",
+  "demo": true,
   "agent": "Scout",
-  "date": "2026-09-28",
-  "score": 412,
-  "file": "data/runs/2026-09-28-scout-w1.json"
+  "date": "2026-10-05",
+  "score": 318,
+  "file": "data/runs/exampleton-test-run.json"
 }
 ```
 
-`score` is the run total out of 500 (sum of the five level scores).
-`file` is the path relative to the site root.
+`score` is the run total out of 400: the sum of the four scored levels
+(L1-L4). L5 is an unscored exhibition and adds nothing. `file` is the
+path from the site root.
 
-## Format
-
-The archive file uses the exact same envelope as the live stream —
-see `docs/watch-protocol.md` for the full event schema. The replay
-player reads `t` (seconds since run start) to pace playback, so keep
-the original timestamps.
+5. Run `npm test`. `scripts/test-privacy.mjs` checks every archived run
+   against the index and scans it for instance-shaped text.

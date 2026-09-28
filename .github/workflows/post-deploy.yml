@@ -1,0 +1,38 @@
+# Runs the post-deploy check after Vercel reports a successful production
+# deploy. It needs no secrets and sends only GET requests, all to
+# https://makersonmuse.com.
+#
+# Storage: until Upstash Redis is connected, /api/health reports storage
+# "missing" and the check would fail on that line alone. So the check runs
+# with --allow-missing-storage, which makes "missing" a note, until the
+# repository variable MOM_STORAGE_CONNECTED is set to "true" (Settings >
+# Secrets and variables > Actions > Variables). Set it once Upstash is
+# connected; from then on a deploy without reachable storage fails here.
+# Everything else (pages, clean URLs, the 404, headers, redirects,
+# repo-only files) fails the run from the start.
+name: Post-deploy check
+
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: post-deploy
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: github.event.deployment_status.state == 'success' && startsWith(github.event.deployment.environment, 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the live site (GET only)
+        env:
+          STORAGE_FLAG: ${{ vars.MOM_STORAGE_CONNECTED != 'true' && '--allow-missing-storage' || '' }}
+        run: node scripts/check-deploy.mjs https://makersonmuse.com $STORAGE_FLAG
