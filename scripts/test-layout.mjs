@@ -267,6 +267,8 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
   t("main.js: group buttons toggle aria-expanded", js.includes('btn.setAttribute("aria-expanded", open ? "true" : "false")'));
   t("main.js: Escape closes and returns focus", /e\.key !== "Escape"/.test(js) && js.includes("openBtn.focus()") && js.includes("toggle.focus()"));
   t("main.js: a click outside closes", /document\.addEventListener\("click"/.test(js));
+  t("main.js: a tap outside closes (pointerdown; iOS sends no click)", /document\.addEventListener\("pointerdown"/.test(js));
+  t("main.js: tabbing out of the phone panel closes it", /links\.addEventListener\("focusout"/.test(js));
   t("main.js: no innerHTML for the nav", !/innerHTML\s*=/.test(js.replace(/tpl\.innerHTML = svgText\.trim\(\);/, "")));
   t("main.js: no JS-set active link (the stamp marks it)", !/classList\.add\("active"\)/.test(js));
   const css = read("assets/css/main.css");

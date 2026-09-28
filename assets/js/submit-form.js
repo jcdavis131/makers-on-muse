@@ -57,10 +57,13 @@
   /* The HTML for one level card. Every string is escaped, including our own. */
   function cardHtml(L) {
     var n = L.n;
-    var head = '<span class="step">' + esc(L.tag) + "</span><h3>" + esc(L.title) + '</h3><p class="hint">' + esc(L.hint) + "</p>";
+    var head = '<span class="step">' + esc(L.tag) + "</span><h2>" + esc(L.title) + '</h2><p class="hint">' + esc(L.hint) + "</p>";
     if (L.exhibition) {
-      return '<details class="lvl5" id="card' + n + '"><summary><div class="sub-card" style="margin:0">' + head +
-        '<p class="hint" style="margin:0">Optional. Open this to add your exhibition entry.</p></div></summary>' +
+      // A <summary> may hold only phrasing and heading content, so the card
+      // styling goes on the summary itself and the hints are spans.
+      return '<details class="lvl5" id="card' + n + '"><summary class="sub-card" style="margin:0">' +
+        '<span class="step">' + esc(L.tag) + "</span><h2>" + esc(L.title) + '</h2><span class="hint">' + esc(L.hint) + "</span>" +
+        '<span class="hint" style="margin:0">Optional. Open this to add your exhibition entry.</span></summary>' +
         '<div class="sub-card" style="margin-top:12px">' +
         field("a" + n, "What did you build?", '<textarea id="a' + n + '" maxlength="4000"></textarea>') +
         field("l" + n, "Link to your build (optional)",

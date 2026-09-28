@@ -195,6 +195,7 @@ Runs each test script in `scripts/` with Node. Run `npm ci` once first: the inte
 - `test-layout.mjs`: every page carries the shared nav and footer from `partials/`, with the trademark line and its own link marked; the nav groups and their order; every link is served at its clean address without a redirect; the `/meta` redirects; no page links `meta.html` or any `.html` address; the trust pages state what the code does (TTLs, processors, deletion by token, no cookies); `main.js` runs the nav without `innerHTML`; the Mabel emblem uses no gradient; both license files.
 - `test-playbook.mjs`: the Playbook's data and page logic. Ids are unique and URL-safe, every setup tag is explained in the page's tag legend, no tag names a connector no source lists, the stats and the home page strip match the data, the query string round-trips and ignores anything it doesn't know, every card value is escaped, and a reviewed list of `innerHTML` assignments.
 - `test-watch.mjs`: the Watch player. Run time is the last event minus the start. Tokens are only what the agent reported, or "—". A reconnect adds no beat twice. The result is out of the manifest's maximum. The page follows the feed only when the reader has scrolled to its end. Also escaping, the page's first state ("Connecting…"), the demo badge, and a reviewed list of `innerHTML` assignments.
+- `test-a11y.mjs`: accessibility without a browser. Contrast ratios from the tokens in `main.css` (text 4.5:1 on paper, card and stone-100; button text 4.5:1 on its fill; form-field borders 3:1; the badges 4.5:1), no page redefining the palette, no heading that skips a level (in the pages and in the headings the scripts build), scroll boxes that take keyboard focus, and the phone menu's Escape, outside-tap and tab-out handlers.
 
 `test-privacy.mjs` can also scan every file for the retired instance values. It needs the private list, one value per line, kept outside the repo:
 
@@ -212,6 +213,21 @@ node scripts/check-links.mjs --external     # also GETs each outside link
 ```
 
 Site links resolve through the same router as `serve.mjs`, so a link to `pack.html` (a 308), a file `.vercelignore` keeps off the site, or a `#fragment` with no matching id fails. Outside links are opt-in: meta.com and others often refuse automated requests, so only 404, 410 and DNS failures count as broken, and 401, 403, 429 and 5xx are listed as not verified.
+
+## Accessibility
+
+The colours are tokens in `assets/css/main.css`, and no page redefines them. The text tokens (`--ink`, `--ink-soft`, `--ink-faint`, `--clay`, `--terracotta-deep` for links, `--moss-deep`) reach 4.5:1 on paper, card and stone-100. Primary buttons use `--accent` (#9A5A42, 5.3:1 under their text); the lighter `--terracotta` is for decoration only. Form fields have `--field-border` (3:1). `scripts/test-a11y.mjs` recomputes those ratios on every `npm test`.
+
+Headings don't skip levels: footer column titles are `h2`, and a visually hidden `h2` sits above the pack's levels, the Playbook's cards and the Watch feed. Scroll boxes (wide tables, code) take keyboard focus. On phones the Menu panel closes on Escape (focus returns to the button), on a tap outside it, and when focus tabs out of it.
+
+The full check runs axe in headless Chrome through `serve.mjs`, so the CSP is live while it runs:
+
+```sh
+# once, anywhere outside the repo:  npm i puppeteer-core axe-core
+A11Y_TOOLS_DIR=/path/to/that/folder npm run check:a11y
+```
+
+It loads every page at 1280 and 390 px and requires 0 axe violations of any kind, plus no script error, CSP report or failed request. It also checks states a first load doesn't show: the submit form during an open week and its errors, a receipt error, the leaderboard after close, Watch with a replay running, a Playbook permalink, and the phone menu open, then drives the menu with touch input. It isn't in CI, because it needs Chrome and two packages the site doesn't use. Run it after changing colours, headings or the nav.
 
 ## Roadmap
 

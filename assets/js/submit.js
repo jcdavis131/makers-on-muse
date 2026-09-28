@@ -198,7 +198,7 @@ function showErrors(list, heading){
     return marked ? '<a href="#' + esc(e.field) + '">' + esc(text) + "</a>" : esc(text);
   });
   var box = $("sub-errors");
-  box.innerHTML = "<h4>" + esc(heading || HEADINGS[400]) + "</h4><ul><li>" + items.join("</li><li>") + "</li></ul>";
+  box.innerHTML = "<h2>" + esc(heading || HEADINGS[400]) + "</h2><ul><li>" + items.join("</li><li>") + "</li></ul>";
   box.classList.add("show");
   if(first){ first.focus(); first.scrollIntoView({block: "center"}); }
   else { box.focus(); box.scrollIntoView({block: "nearest"}); }

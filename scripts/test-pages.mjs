@@ -333,7 +333,7 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
     "assets/js/submit.js": [
       "F.cardHtml(L)",
       '""',
-      '"<h4>" + esc(heading || HEADINGS[400]) + "</h4><ul><li>" + items.join("</li><li>") + "</li></ul>"',
+      '"<h2>" + esc(heading || HEADINGS[400]) + "</h2><ul><li>" + items.join("</li><li>") + "</li></ul>"',
       "F.receiptRows(d.scores)",
       '"<strong>Provisional scores</strong>. Every input is self-reported, and nothing is verified yet. " + "<strong>" + esc(d.redactions) + "</strong> value(s) matching common personal patterns were removed before filing. " + "Your receipt code <strong>" + esc(d.receipt) + "</strong> is for display. It proves nothing on its own. The secret token below does."'
     ],

@@ -9,14 +9,21 @@
   --stone-400:#B8A99A;
   --ink:#2A2A2A;
   --ink-soft:#5A564F;
-  --ink-faint:#8A8478;
+  --ink-faint:#6E695F;
   --terracotta:#C17C60;
-  --terracotta-deep:#A5664F;
+  --terracotta-deep:#94573F;
   --moss:#8A9A8B;
-  --moss-deep:#6F7F70;
-  --clay:#A67B5B;
+  --moss-deep:#56655A;
+  --clay:#86603F;
   --void:#1E2022;
   --card:#FFFDF9;
+  /* Accessible steps (WCAG AA). Text tokens above reach 4.5:1 on paper,
+     card and stone-100 (scripts/test-a11y.mjs checks every pair).
+     --accent fills primary buttons (5.3:1 under #FFFDF9); --terracotta
+     stays for decoration only. --field-border gives form fields 3:1. */
+  --accent:#9A5A42;
+  --accent-deep:#7F4A36;
+  --field-border:#928474;
   --radius-s:8px;
   --radius-m:12px;
   --radius-l:16px;
@@ -36,7 +43,7 @@ body{
 }
 img,svg{max-width:100%;height:auto;display:block}
 a{color:var(--terracotta-deep);text-decoration-thickness:1px;text-underline-offset:3px}
-a:hover{color:var(--terracotta)}
+a:hover{color:var(--accent-deep)}
 ::selection{background:var(--stone-200)}
 .skip{
   position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);
@@ -138,8 +145,8 @@ html:not(.js) .nav-menu{margin-top:0}
   transition:transform .18s var(--spring),box-shadow .22s ease,background .18s ease;
 }
 .btn:active{transform:scale(.97)}
-.btn-primary{background:var(--terracotta);color:#FFFDF9;border-color:var(--terracotta-deep)}
-.btn-primary:hover{background:var(--terracotta-deep);color:#FFFDF9;box-shadow:var(--shadow-lift);transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#FFFDF9;border-color:var(--accent-deep)}
+.btn-primary:hover{background:var(--accent-deep);color:#FFFDF9;box-shadow:var(--shadow-lift);transform:translateY(-1px)}
 .btn-ghost{background:var(--card);color:var(--ink);border-color:var(--stone-300)}
 .btn-ghost:hover{box-shadow:var(--shadow-lift);transform:translateY(-1px);color:var(--ink)}
 .btn-sm{padding:9px 18px;font-size:13px}
@@ -195,6 +202,8 @@ table.clean th{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-t
 table.clean tr:last-child td{border-bottom:none}
 table.clean td.num-cell,table.clean td.mono{font-family:var(--mono)}
 .board-scroll{overflow-x:auto;margin-top:24px}
+/* Scroll boxes take keyboard focus (tabindex=0) so the hidden columns can be reached. */
+.board-scroll:focus-visible,pre[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .crown-legend{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
 .crown-legend span{font-size:14px;background:var(--card);border:1px solid var(--stone-200);border-radius:999px;padding:6px 14px}
 
@@ -206,7 +215,7 @@ table.clean td.num-cell,table.clean td.mono{font-family:var(--mono)}
 }
 .badge.easy{background:#E7EDE4;color:var(--moss-deep)}
 .badge.medium{background:#F3E8D8;color:var(--clay)}
-.badge.involved{background:#EBD9D2;color:var(--terracotta-deep)}
+.badge.involved{background:#EBD9D2;color:#8A4E39}
 .unlock{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin:8px 0 0}
 .diag{margin-top:44px}
 .diag li{margin:10px 0}
@@ -225,7 +234,7 @@ table.clean td.num-cell,table.clean td.mono{font-family:var(--mono)}
 .field label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
 .field input{
   width:100%;font-family:var(--mono);font-size:15px;padding:10px 12px;color:var(--ink);
-  background:var(--paper);border:1px solid var(--stone-300);border-radius:var(--radius-s);
+  background:var(--paper);border:1px solid var(--field-border);border-radius:var(--radius-s);
 }
 .field input:focus{outline:2px solid var(--terracotta);outline-offset:1px;border-color:var(--terracotta)}
 .share-out{
@@ -254,7 +263,8 @@ details.acc .acc-body{padding:0 22px 20px;color:var(--ink-soft)}
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--stone-200);margin-top:40px;padding:44px 0 54px;background:var(--stone-100)}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
-.foot-grid h4{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin:0 0 12px}
+/* Footer column titles are h2 (the page outline goes h1, h2, ...), styled small. */
+.foot-grid .foot-h{font-family:var(--mono);font-size:12px;line-height:1.4;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin:0 0 12px}
 .foot-grid ul{list-style:none;margin:0;padding:0}
 .foot-grid li{margin:7px 0}
 .foot-grid a{color:var(--ink-soft);text-decoration:none;font-size:15px}

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy — Makers on Muse</title>
 <meta name="description" content="What Makers on Muse stores, who can see it, how long it is kept, and how to delete it with your secret token. No cookies, no analytics.">
-<link rel="stylesheet" href="/assets/css/main.css?v=4a3e327c4a">
+<link rel="stylesheet" href="/assets/css/main.css?v=ac6aae9359">
 <!-- layout:head -->
 <meta name="theme-color" content="#F9F6F0">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -92,7 +92,7 @@
   <section style="padding-top:0">
     <div class="wrap-narrow">
       <h2 id="stored">What we store when you file a run</h2>
-      <div class="board-scroll">
+      <div class="board-scroll" tabindex="0" role="region" aria-labelledby="stored">
         <table class="clean">
           <thead><tr><th scope="col">What</th><th scope="col">Who can see it</th></tr></thead>
           <tbody>
@@ -110,7 +110,7 @@
       <p>We don't store your IP address. When storage is connected, rate limits count requests per network using a hash of the IP address, not the address itself. Those counters expire in about 2 minutes.</p>
 
       <h2 id="retention">How long we keep it</h2>
-      <div class="board-scroll">
+      <div class="board-scroll" tabindex="0" role="region" aria-labelledby="retention">
         <table class="clean">
           <thead><tr><th scope="col">Data</th><th scope="col">Kept until</th></tr></thead>
           <tbody>
@@ -152,11 +152,11 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4>Makers on Muse</h4>
+        <h2 class="foot-h">Makers on Muse</h2>
         <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and skills that Muse owners share. Mabel keeps the minutes.</p>
       </div>
       <div>
-        <h4>Play</h4>
+        <h2 class="foot-h">Play</h2>
         <ul>
           <li><a href="/pack">This week</a></li>
           <li><a href="/submit">Submit</a></li>
@@ -165,7 +165,7 @@
         </ul>
       </div>
       <div>
-        <h4>Library</h4>
+        <h2 class="foot-h">Library</h2>
         <ul>
           <li><a href="/playbook">Playbook</a></li>
           <li><a href="/setups">Setups</a></li>
@@ -173,7 +173,7 @@
         </ul>
       </div>
       <div>
-        <h4>About</h4>
+        <h2 class="foot-h">About</h2>
         <ul>
           <li><a href="/scoring">Rules &amp; scoring</a></li>
           <li><a href="/faq">FAQ</a></li>
@@ -191,6 +191,6 @@
   </div>
 </footer>
 <!-- /layout:footer -->
-<script src="/assets/js/main.js?v=95dbef13ca"></script>
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
 </body>
 </html>

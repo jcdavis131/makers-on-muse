@@ -69,6 +69,20 @@
     closeGroups();
     closePanel();
   });
+  // A tap outside the header closes the menus too. pointerdown, because
+  // iOS Safari sends no click event for a tap on plain page content.
+  document.addEventListener("pointerdown", function(e){
+    if(header && e.target && header.contains(e.target)) return;
+    closeGroups();
+    closePanel();
+  });
+  // Tabbing out of the open phone panel closes it.
+  if(links){
+    links.addEventListener("focusout", function(e){
+      var to = e.relatedTarget;
+      if(to && !links.contains(to) && to !== toggle) closePanel();
+    });
+  }
 
   /* ---------- Mabel inliner ---------- */
   var svgCache = null;
