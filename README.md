@@ -76,10 +76,11 @@ Upstash Redis on the free tier, through `@upstash/redis` and `@upstash/ratelimit
 **Check it:** `/api/health` returns `storage: "reachable"`, `"unreachable"` (configured, PING failed) or `"missing"` (not configured). It is cached at the edge for 30 seconds (`s-maxage=30, stale-while-revalidate=60`), so checks don't each cost a command. After a deploy:
 
 ```sh
-node scripts/check-health.mjs https://makersonmuse.com
+npm run check:deploy                       # https://makersonmuse.com by default
+node scripts/check-deploy.mjs <preview-url> --no-hosts
 ```
 
-It sends one GET and exits 1 unless storage is reachable. Until the database is connected it fails, on purpose.
+`scripts/check-deploy.mjs` sends GETs only and exits 1 unless `/api/health` reports storage reachable. Until the database is connected it fails on that line, on purpose; the other lines still show whether the rest of the deploy is right: the health check cached at the edge, clean URLs and the `.html` 308, the branded 404, the security headers, `robots.txt`, `sitemap.xml`, the favicon and share image, the one-year cache on versioned CSS, repo-only files not served, and the www and vercel.app 308s to the apex. Whether those redirects keep the query string is reported as a note, not a failure. `node scripts/check-health.mjs <base>` checks storage alone.
 
 **Keys.** Every key has a TTL.
 
@@ -159,7 +160,8 @@ data/packs/             one manifest per week: dates, levels, pars, blends, the 
 data/runs/              scrubbed runs that Watch replays
 docs/watch-protocol.md  the Watch event format and the archive rules
 partials/               the shared head tags, nav and footer (repo only; stamped into the pages)
-scripts/                tests, an in-memory Redis for them, the pack and layout stamps, a local server that applies vercel.json, the link check, the post-deploy health check
+scripts/                tests, an in-memory Redis for them, the stamps (pack, layout, assets), a local server that applies vercel.json, the link check, the image renderer, the axe check, the post-deploy checks
+.github/workflows/ci.yml  CI: npm ci, npm test, the link check
 LICENSE                 MIT, for the code
 LICENSE-CONTENT         CC BY 4.0, for the Playbook content
 ```
@@ -183,6 +185,8 @@ npm test
 
 Runs each test script in `scripts/` with Node. Run `npm ci` once first: the integration test uses the real `@upstash/redis` and `@upstash/ratelimit` packages.
 
+CI (`.github/workflows/ci.yml`) runs `npm ci`, `npm test` and `npm run check:links` on Node 22 for every push (except to `live-runs`) and every pull request. It needs no secrets, and nothing in it touches the network beyond the npm install.
+
 - `smoke.mjs`: scoring, validation, names, tokens, pack windows and redaction, including a timing test that redacts 64 KB adversarial strings in under 50 ms.
 - `test-handlers.mjs`: the API with no storage, which must fail honestly, and every intake check that works without storage (403, 413, 415, 400, 409), for `/api/submit` and `/api/receipt`. Also: the pack manifest matches `season.js`, dependencies are pinned in the lockfile, and `check-health.mjs` passes only on "reachable".
 - `test-integration.mjs`: the handlers and the real Upstash client against `redis-emu.mjs`, an in-memory Redis served over the Upstash REST protocol with a clock the test controls. Covers receipts and tokens, receipt status and delete, one entry per handle, the leaderboard (count only until close, then the sorted set), the contact address kept private, 429 on the sixth post, a TTL on every key, and expiry.
@@ -195,6 +199,7 @@ Runs each test script in `scripts/` with Node. Run `npm ci` once first: the inte
 - `test-layout.mjs`: every page carries the shared nav and footer from `partials/`, with the trademark line and its own link marked; the nav groups and their order; every link is served at its clean address without a redirect; the `/meta` redirects; no page links `meta.html` or any `.html` address; the trust pages state what the code does (TTLs, processors, deletion by token, no cookies); `main.js` runs the nav without `innerHTML`; the Mabel emblem uses no gradient; both license files.
 - `test-playbook.mjs`: the Playbook's data and page logic. Ids are unique and URL-safe, every setup tag is explained in the page's tag legend, no tag names a connector no source lists, the stats and the home page strip match the data, the query string round-trips and ignores anything it doesn't know, every card value is escaped, and a reviewed list of `innerHTML` assignments.
 - `test-watch.mjs`: the Watch player. Run time is the last event minus the start. Tokens are only what the agent reported, or "—". A reconnect adds no beat twice. The result is out of the manifest's maximum. The page follows the feed only when the reader has scrolled to its end. Also escaping, the page's first state ("Connecting…"), the demo badge, and a reviewed list of `innerHTML` assignments.
+- `test-deploy.mjs`: `check-deploy.mjs` against local servers. With the repo served and no storage, only the storage line fails; with the in-memory Redis it passes, and it only PINGs; a server that gets everything wrong fails on each part; an unreachable site fails without throwing. Also that CI runs the tests and the link check with no secrets.
 - `test-a11y.mjs`: accessibility without a browser. Contrast ratios from the tokens in `main.css` (text 4.5:1 on paper, card and stone-100; button text 4.5:1 on its fill; form-field borders 3:1; the badges 4.5:1), no page redefining the palette, no heading that skips a level (in the pages and in the headings the scripts build), scroll boxes that take keyboard focus, and the phone menu's Escape, outside-tap and tab-out handlers.
 
 `test-privacy.mjs` can also scan every file for the retired instance values. It needs the private list, one value per line, kept outside the repo:
@@ -231,10 +236,9 @@ It loads every page at 1280 and 390 px and requires 0 axe violations of any kind
 
 ## Roadmap
 
-**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key); receipts (status and delete by secret token), a leaderboard that opens after the week closes, and the submit form's handle, contact, "Didn't attempt", inline errors, L5 link, terms box and drafts; one pack manifest for pars, blends, totals and stars, and the Watch fixes (no forced scrolling, one final panel, "Connecting…", no invented tokens, run time from the events, the demo replay by default); the trust pages (About, Privacy, Terms), one shared nav and footer with the trademark line, the Setups and Skills library tracks, licenses, and Playbook permalinks. Still to do:
+**Phase 1: fix and harden, before any ranked week.** Done so far: absolute dates and honest copy; the privacy cleanup (no issue templates, a scrubbed demo replay, fictional test values); intake hardening and the storage code (size cap, key allowlist, Origin and Content-Type checks, rate limits, name rules, linear-time redaction, secret tokens, a TTL on every key); receipts (status and delete by secret token), a leaderboard that opens after the week closes, and the submit form's handle, contact, "Didn't attempt", inline errors, L5 link, terms box and drafts; one pack manifest for pars, blends, totals and stars, and the Watch fixes (no forced scrolling, one final panel, "Connecting…", no invented tokens, run time from the events, the demo replay by default); the trust pages (About, Privacy, Terms), one shared nav and footer with the trademark line, the Setups and Skills library tracks, licenses, and Playbook permalinks; site hygiene (clean URLs, the www and vercel.app redirects, a branded 404, robots and sitemap, canonical and share tags with a share image, a real favicon, security headers, versioned assets with long caching, contrast and heading fixes checked with axe, the phone menu, CI, and the post-deploy check). Still to do:
 
-- Connect the Upstash database in the Vercel Marketplace, then run `scripts/check-health.mjs`.
-- Site hygiene: clean URLs and the www redirect, 404, robots and sitemap, OG tags, security headers, contrast tokens, CI.
+- Connect the Upstash database in the Vercel Marketplace, then run `npm run check:deploy`.
 - A contact address: the domain has no mail records yet.
 
 **Phase 2: the core platform.** Server-issued instances for each attempt, fixtures for L3 and L4, server grading, submissions for the Setups and Skills library, and sign-in.

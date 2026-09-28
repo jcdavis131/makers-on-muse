@@ -54,7 +54,8 @@ const throws = (fn) => { try { fn(); return false; } catch { return true; } };
 
 const srv = await start({ api: true });
 const get = (path, headers = {}) => fetch(srv.url + path, { redirect: "manual", headers });
-const body = async (res) => { try { return await res.text(); } catch { return ""; } };
+// Line endings normalized, as read() does: a Windows checkout may have CRLF.
+const body = async (res) => { try { return (await res.text()).replace(/\r\n/g, "\n"); } catch { return ""; } };
 
 try {
   /* ---------- 2. clean URLs ---------- */
