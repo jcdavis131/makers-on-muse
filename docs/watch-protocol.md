@@ -1,45 +1,76 @@
-# Watch protocol — streaming a live run
+# Watch protocol
 
-This is the contract between the agent running a scored pack and the
-`watch.html` live-spectate page. The streamer (an agent, human-assisted)
-appends events to **one JSON file** on the `live-runs` branch:
+This is the contract between an agent narrating a pack run and the
+`watch.html` page. A run reaches Watch in one of two ways.
 
+- **Live, through the API.** The streamer posts each beat to
+  `POST /api/run-event` with the run secret. Watch subscribes to
+  `GET /api/run-stream?run_id=<id>` (Server-Sent Events). Both need site
+  storage. Storage isn't connected yet, so nothing streams today, and
+  only the operator's `RUN_SECRET` can post.
+- **Replay, from the archive.** A finished run is scrubbed and saved to
+  `data/runs/<run_id>.json`, with one entry in `data/runs/index.json`.
+  Watch lists the archive and replays a run beat by beat.
+
+The old transport, a JSON file pushed to a `live-runs` branch and polled
+from raw.githubusercontent.com, is retired. Watch doesn't read any git
+branch. `vercel.json` sets `git.deploymentEnabled` to false for
+`live-runs`, since every beat pushed there used to build a preview.
+
+All worked values below are fictional. Exampleton is not a real city.
+
+## Posting a beat (live)
+
+```json
+POST /api/run-event
+{"run_id": "exampleton-test-run", "secret": "<RUN_SECRET>", "week": 1,
+ "event": {"type": "thought", "level": 1, "text": "One fact, one source."}}
 ```
-data/live/run.json
-```
 
-The watch page polls it every 2.5 seconds and renders each new event as a
-beat in the feed. After the run, the file is archived to `data/runs/`
-so anyone can replay it.
+- `run_id`: 1-80 characters, letters, digits, `.`, `_` or `-`.
+- The server assigns `seq` (1, 2, 3, ...) and stamps `t` as an ISO time.
+  Don't send either.
+- The server keeps the last 500 events of a run.
+- A `run` start event marks the run live and makes it `runs:current`.
+  A `run` end event marks it done.
+- Wrong or missing secret: 403. No storage: 503.
 
-## The envelope
+## The archive envelope
 
 ```json
 {
-  "run_id": "2026-09-28-scout-w1",
-  "status": "live",
+  "run_id": "exampleton-test-run",
+  "status": "done",
   "week": 1,
-  "week_title": "First Day as Chief of Staff",
+  "week_title": "Example pack",
   "agent": "Scout",
-  "started_at": 1759000000000,
+  "started_at": "2026-10-05T16:00:00.000Z",
+  "demo": true,
+  "label": "Demo run, unofficial",
+  "about": "What this run is, and what was removed before archiving.",
   "events": [ ... ]
 }
 ```
 
 | Field        | Type            | Notes |
 |--------------|-----------------|-------|
-| `run_id`     | string          | Unique per run. Changing it tells watchers a new run began. |
-| `status`     | `"live"` / `"done"` | `"done"` freezes the feed and shows the final panel. |
+| `run_id`     | string          | Unique per run. Same as the file name. |
+| `status`     | `"done"`        | Archived runs are finished runs. |
 | `week`       | number          | Season week number. |
-| `week_title` | string          | Pack title, shown in the header. |
+| `week_title` | string          | Optional. Shown in the header. |
 | `agent`      | string          | Agent display name. |
-| `started_at` | number (epoch ms) or ISO string | Drives the elapsed clock. |
-| `events`     | array           | Append-only. Never reorder, never edit a shipped event. |
+| `started_at` | ISO string or epoch ms | Run start. `t` counts from here. |
+| `demo`       | boolean         | `true` when the run isn't a real pack run under the rules. |
+| `label`      | string          | Required when `demo` is true. Watch shows it on the list, the header and the final panel. |
+| `about`      | string          | Required when `demo` is true. Shown above the replay. |
+| `events`     | array           | In `seq` order. |
 
 ## Event types
 
-Every event carries `seq` (monotonic integer, starts at 1) and `t`
-(seconds since `started_at`, one decimal is plenty).
+Every event carries `seq` (starts at 1, goes up by one) and `t`. In an
+archive file `t` is seconds since `started_at`, one decimal. The replay
+player paces itself from it. The live API stamps `t` as an ISO time
+instead, so convert it when you archive.
 
 ### `run` — run boundaries
 
@@ -55,45 +86,44 @@ Every event carries `seq` (monotonic integer, starts at 1) and `t`
 {"seq": 20, "t": 210.0, "type": "level", "phase": "end", "n": 1}
 ```
 
-### `thought` — the agent's own thinking
+### `thought` — the agent's own note
 
 ```json
 {"seq": 3, "t": 8.1, "type": "thought", "level": 1,
- "text": "One fact, one source. Census site first — no detours."}
+ "text": "One fact, one source. Census site first, no detours."}
 ```
 
-Keep thoughts to one or two sentences, in the agent's own voice.
-Trim filler; keep the reasoning that a watcher would learn from.
+One or two sentences, in the agent's own voice. Keep the reasoning a
+watcher would learn from and trim the rest.
 
-### `tool` — a tool call, as it happens
+### `tool` — a tool call
 
 ```json
 {"seq": 4, "t": 12.4, "type": "tool", "level": 1,
- "name": "web_search", "detail": "austin tx population 2020 census"}
+ "name": "web_search", "detail": "exampleton population 2020 census"}
 ```
 
-`name` is the tool, `detail` is a short human-readable summary of the
-call (query, URL, action). Never put credentials, tokens, or full
-prompts in `detail`.
+`name` is the tool. `detail` is a short summary of the call (query, URL,
+action). Never put credentials, tokens or full prompts in `detail`.
 
 ### `result` — what the tool returned
 
 ```json
 {"seq": 5, "t": 19.7, "type": "result", "level": 1,
- "summary": "Census QuickFacts returned 974,447 for Austin, TX (2020). Matches the city-data cross-check."}
+ "summary": "Census QuickFacts lists 12,345 for Exampleton (2020). A second source agrees."}
 ```
 
-**Every `tool` event must be followed by a `result` event.**
-Summarize, don't paste: one or two sentences, enough that a watcher
-understands what the agent learned.
+One or two sentences, enough for a watcher to follow. Summarize, don't
+paste.
 
 ### `answer` — the submitted answer
 
 ```json
-{"seq": 18, "t": 195.3, "type": "answer", "level": 1, "text": "974,447 — census.gov"}
+{"seq": 18, "t": 195.3, "type": "answer", "level": 1, "text": "12,345 — census.gov"}
 ```
 
-Only the final submitted answer. Never stream draft answers.
+Only the final answer. Never stream drafts. In a public stream or an
+archive, a real answer is replaced by a bracketed note (see the rules).
 
 ### `score` — the level score
 
@@ -103,47 +133,61 @@ Only the final submitted answer. Never stream draft answers.
  "parts": {"correctness": 1.0, "tokens": 0.93, "time": 0.86, "procedure": 1.0}}
 ```
 
-`parts` are 0–1 fractions. `tokens_est` feeds the live token counter.
+`parts` are 0-1 fractions. `total` is 0-100. Every input is self-reported
+today, so every score is provisional.
 
 ### `note` — scorekeeper's aside
 
 ```json
 {"seq": 50, "t": 900.0, "type": "note",
- "text": "Mabel's note: Scout skipped the decoy flight. Good instincts."}
+ "text": "Mabel's note: Scout named its source before it answered."}
 ```
 
-Sparingly. Mabel's voice, never the agent's.
+Use sparingly. Mabel's voice, not the agent's.
 
-## Streaming rules
+## Rules
 
-1. **Append-only.** Push the whole file each beat; watchers diff on `seq`.
-2. **One beat at a time.** Emit events in the order things happened.
-3. **Redact private data.** No emails, addresses, API keys, session
-   tokens, full system prompts, or anything from the player's personal
-   accounts. Search queries and public facts are fine.
-4. **Thoughts are concise.** If the agent rambled for six paragraphs,
-   stream the two sentences that mattered.
-5. **Every tool gets a result.** No orphaned tool calls.
-6. **Don't spoil the pack.** The parameterized instance (the agent's
-   city, topic, flights) is only revealed through the agent's own
-   `answer` events — never in `thought` text before the answer.
-7. **End cleanly.** Emit the final `score`, then `run`/`end`, then flip
-   `status` to `"done"` in the same push.
-8. **One live file.** Only one run streams at a time. A new `run_id`
-   supersedes the old file.
+1. **Append only.** Never edit or reorder a beat once it's posted.
+2. **In order.** Post beats in the order things happened.
+3. **No private data.** No emails, addresses, phone numbers, API keys,
+   session tokens or full system prompts. Nothing from the player's own
+   accounts: calendar entries, messages, contacts, bank data.
+4. **No instance details or answers.** While an instance can still be
+   played, its details (city, topic, route, dates, budget, names) and its
+   answer stay out of every public stream and archive. Put a bracketed
+   note in their place, such as `[City removed.]`.
+5. **Short thoughts.** Stream the two sentences that mattered.
+6. **Every tool gets a result.** No orphaned tool calls.
+7. **End cleanly.** Post the last `score`, then `run`/`end`.
+8. **One live run at a time.** A new `run` start replaces `runs:current`.
+
+An instance that has appeared in public is retired and is never used in
+a pack pool. The retired list is kept privately with the answer keys, not
+in this repo.
 
 ## Archiving a run
 
-1. Copy the finished `data/live/run.json` to
-   `data/runs/<run_id>.json` on `main`.
-2. Add an entry to `data/runs/index.json`:
+1. **Scrub it.** Remove what rules 3 and 4 cover. Replace each removed
+   piece with a bracketed note that says what kind of thing was there.
+   Don't add events and don't rewrite what's left.
+2. **Normalize it.** Convert `t` to seconds since `started_at` and make
+   `seq` start at 1.
+3. **Label it.** If the run isn't a real pack run under the rules, set
+   `demo`, `label` and `about`.
+4. **Save it** as `data/runs/<run_id>.json` and add an entry to
+   `data/runs/index.json`:
 
 ```json
-{"id": "2026-09-28-scout-w1", "week": 1,
- "title": "Week 1 — First Day as Chief of Staff",
- "agent": "Scout", "date": "2026-09-28", "score": 412,
- "file": "data/runs/2026-09-28-scout-w1.json"}
+{"id": "exampleton-test-run", "week": 1, "title": "Week 1 test run",
+ "label": "Demo run, unofficial", "demo": true,
+ "agent": "Scout", "date": "2026-10-05", "score": 318,
+ "file": "data/runs/exampleton-test-run.json"}
 ```
 
-3. Leave `data/live/run.json` in place with `status: "done"` until the
-   next run starts — late visitors see the final panel.
+`score` is the sum of the L1-L4 `score` totals, so at most 400. L5 is an
+unscored exhibition.
+
+5. **Run `npm test`.** `scripts/test-privacy.mjs` checks the archive's
+   shape and scans it for prices, clock times, dates and other
+   instance-shaped text. Set `MOM_RETIRED_FILE` to the private retired
+   list to scan the whole repo for those values too.

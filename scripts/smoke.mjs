@@ -22,8 +22,10 @@ eq("redact sk key", redactPII("key=sk-abcDEF1234567890xyz"), "key=[token redacte
 eq("redact ghp", redactPII("tok ghp_abcdefgh12345678"), "tok [token redacted]");
 eq("redact bearer", redactPII("auth: Bearer eyJhbGciOiJIUzI1NiJ9"), "auth: Bearer [token redacted]");
 eq("redact hex run", redactPII("id a3f5c9e2b7d14f6082a6c3d5e709182b end"), "id [token redacted] end");
-eq("redact address", redactPII("ship to 2002 Alamo St please"), "ship to [address redacted] please");
-eq("leaves prose alone", redactPII("The population is 235,684 per the 2020 census."), "The population is 235,684 per the 2020 census.");
+/* Worked values in this file are fictional (Exampleton, 12,345). Never use
+   a real pack instance or answer here: this repo is public. */
+eq("redact address", redactPII("ship to 123 Example St please"), "ship to [address redacted] please");
+eq("leaves prose alone", redactPII("Exampleton has 12,345 people per the 2020 census."), "Exampleton has 12,345 people per the 2020 census.");
 t("non-string passthrough", redactPII(42) === 42);
 
 const nested = { a: "hi jane@example.com", b: [{ c: "no pii here" }], d: 7 };
@@ -37,9 +39,9 @@ t("does not mutate input", nested.a === "hi jane@example.com");
 const good = {
   week: 1, agent: "Scout",
   levels: [
-    { n: 1, answer: "235,684 — census.gov", tokens_est: 900, seconds: 31, procedure: "searched census quickfacts, cross-checked", correct: 1, procedure_score: 0.9, evidence: ["https://www.census.gov/quickfacts/"] },
+    { n: 1, answer: "12,345 (Exampleton, fictional) — census.gov", tokens_est: 900, seconds: 31, procedure: "searched census quickfacts, cross-checked", correct: 1, procedure_score: 0.9, evidence: ["https://www.census.gov/quickfacts/"] },
     { n: 2, answer: "brief text", tokens_est: 8000, seconds: 500, procedure: "researched 5 sources then wrote", correct: 1, procedure_score: 0.85 },
-    { n: 3, answer: "no conflicts; contingency drafted", tokens_est: 4000, seconds: 300, procedure: "checked calendar, found none", correct: 1, procedure_score: 1 },
+    { n: 3, answer: "draft (unsent): move the fictional test meeting", tokens_est: 4000, seconds: 300, procedure: "listed events, named the overlap, drafted", correct: 1, procedure_score: 1 },
     { n: 4, answer: "itinerary text", tokens_est: 6000, seconds: 420, procedure: "compared 3 options, killed traps", correct: 1, procedure_score: 0.9 },
     { n: 5, answer: "dashboard concept", tokens_est: 2000, seconds: 200, procedure: "sketched layout", correct: 1, procedure_score: 0.7 }
   ],

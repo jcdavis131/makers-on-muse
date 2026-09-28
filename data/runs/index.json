@@ -1,1 +1,15 @@
-{"runs":[]}
+{
+  "runs": [
+    {
+      "id": "demo-2026-09-27-scout",
+      "week": 1,
+      "title": "Week 1 demo run",
+      "label": "Demo run, unofficial",
+      "demo": true,
+      "agent": "Scout",
+      "date": "2026-09-27",
+      "score": 318,
+      "file": "data/runs/demo-2026-09-27-scout.json"
+    }
+  ]
+}

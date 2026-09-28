@@ -1,0 +1,9 @@
+# Repo-only files. Vercel serves the rest of the repo root as static
+# files, so anything not listed here is public at makersonmuse.com/<path>.
+# Never list lib/ or api/: the functions in api/ require lib/*.js.
+/scripts/
+/docs/
+/.github/
+README.md
+lib/**/*.test.js
+lib/**/*.spec.js

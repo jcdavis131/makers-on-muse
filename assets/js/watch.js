@@ -2,11 +2,12 @@
 (function(){
   "use strict";
 
-  var LIVE_URL = "https://raw.githubusercontent.com/jcdavis131/makers-on-muse/live-runs/data/live/run.json";
+  /* Archived runs (scrubbed, served from this site) are the only source
+     besides the live API stream. Watch never reads a git branch. */
   var RUNS_INDEX = "data/runs/index.json";
 
-  /* SSE transport: preferred when the API backend is up; falls back to the
-     branch poll below. Rendering logic is untouched — only how beats arrive. */
+  /* Live transport: SSE from the API. It needs site storage; when the stream
+     doesn't answer, the page stays idle and the archive is the way in. */
   function getRunId(){
     try {
       var m = /[?&]run=([^&]+)/.exec(window.location.search || "");
@@ -19,8 +20,6 @@
   var STREAM_GRACE_MS = 4000;
   var es = null, streamOk = false, streamTimer = null;
   var liveData = null; // envelope accumulator fed by SSE beats
-  var POLL_LIVE = 2500;
-  var POLL_DONE = 30000;
   var CATCHUP_AT = 6;
   var TOKEN_PER_EVENT = 40;
 
@@ -34,6 +33,7 @@
   var clockEl = $("clock"), tokEl = $("tokcount"), dotsEl = $("level-dots");
   var dots = dotsEl ? Array.prototype.slice.call(dotsEl.querySelectorAll(".dot")) : [];
   var replayList = $("replay-list"), replayControls = $("replay-controls");
+  var replayAbout = $("replay-about");
 
   /* ---------- state ---------- */
   var mode = "live";            // "live" | "replay"
@@ -43,7 +43,7 @@
   var scoreTokens = 0;
   var tokenTarget = 0, tokenShown = 0;
   var clockBase = null;         // epoch ms of run start (live ticking)
-  var clockTimer = null, pollTimer = null, tokTimer = null;
+  var clockTimer = null, tokTimer = null;
   var rp = null;                // replay session
   var stars = [false,false,false,false,false];
 
@@ -219,7 +219,7 @@
     runEnd.innerHTML =
       '<div class="run-end">' +
         '<img src="assets/img/mabel-typing.webp" alt="Mabel stamping the final scores into the minutes">' +
-        '<p class="eyebrow">Final minutes</p>' +
+        '<p class="eyebrow">Final minutes' + (data.label ? " · " + esc(data.label) : "") + "</p>" +
         '<div class="big-score">' + sum + '<span class="small muted">/400</span></div>' +
         '<div class="stars">' + starLine + "</div>" +
         "<p class='muted'>Mabel stamps the minutes. " + esc(data.agent || "Scout") +
@@ -275,26 +275,9 @@
       setLiveBadge(false);
       stopClock();
       showFinalPanel(data);
-      schedulePoll(POLL_DONE);
     } else {
       setLiveBadge(true);
-      schedulePoll(POLL_LIVE);
     }
-  }
-
-  function poll(){
-    fetch(LIVE_URL + "?cb=" + Date.now(), {cache:"no-store"})
-      .then(function(r){
-        if(r.status === 404){ showIdle(); schedulePoll(POLL_DONE); return null; }
-        if(!r.ok) throw new Error("http " + r.status);
-        return r.json();
-      })
-      .then(function(data){ if(data) handleRun(data); })
-      .catch(function(){ schedulePoll(POLL_DONE); });
-  }
-  function schedulePoll(ms){
-    if(pollTimer) clearTimeout(pollTimer);
-    pollTimer = setTimeout(poll, ms);
   }
 
   /* ---------- SSE transport: beats arrive here when the API is up ---------- */
@@ -309,14 +292,12 @@
     if(meta.agent) liveData.agent = meta.agent;
     if(meta.started_at) liveData.started_at = meta.started_at;
     handleRun(liveData);
-    if(streamOk && pollTimer){ clearTimeout(pollTimer); pollTimer = null; }
   }
   function handleBeat(ev){
     if(!ev || mode !== "live") return;
     if(!liveData) liveData = { run_id: RUN_ID, status: "live", events: [] };
     liveData.events.push(ev);
     handleRun(liveData);
-    if(streamOk && pollTimer){ clearTimeout(pollTimer); pollTimer = null; }
   }
   function closeStream(){
     if(streamTimer){ clearTimeout(streamTimer); streamTimer = null; }
@@ -345,15 +326,15 @@
     es.addEventListener("end", function(){ closeStream(); });
     /* Mid-run drops auto-reconnect (EventSource default); replays dedupe on seq. */
     es.addEventListener("error", function(){ /* noop: reconnect or grace-timer handles it */ });
-    // No message within the grace window (404/503/blocked) -> branch poll.
+    // No message within the grace window (404/503/blocked): stay idle.
     streamTimer = setTimeout(function(){
       streamTimer = null;
-      if(!streamOk){ closeStream(); poll(); }
+      if(!streamOk) closeStream();
     }, STREAM_GRACE_MS);
     return true;
   }
   function initTransport(){
-    if(!tryStream()) poll();
+    tryStream(); // no EventSource support: stay idle, the archive still works
   }
 
   /* ---------- replays ---------- */
@@ -371,7 +352,8 @@
           var b = document.createElement("button");
           b.className = "replay-item";
           b.innerHTML =
-            '<span><strong>' + esc(run.title || run.id) + "</strong><br>" +
+            '<span><strong>' + esc(run.title || run.id) + "</strong>" +
+            (run.label ? ' <span class="rlabel">' + esc(run.label) + "</span>" : "") + "<br>" +
             '<span class="rid">' + esc(run.id) + " · " + esc(run.agent || "") +
             (run.date ? " · " + esc(run.date) : "") + "</span></span>" +
             (run.score != null ? '<span class="rscore">' + esc(run.score) + "/400</span>" : "");
@@ -393,14 +375,20 @@
 
   function enterReplay(data, meta){
     mode = "replay";
-    if(pollTimer) clearTimeout(pollTimer);
     closeStream();
     resetLive();
     hideIdle();
     setLiveBadge(false);
     replayBadge.hidden = false;
     replayControls.hidden = false;
-    setHeader(data.agent || meta.agent, "Week " + (data.week || meta.week) + (data.week_title ? " — " + data.week_title : "") + " · replay");
+    var label = data.label || meta.label || "";
+    if(!data.label && label) data.label = label; // final panel reads data.label
+    setHeader(data.agent || meta.agent, "Week " + (data.week || meta.week) + (data.week_title ? " — " + data.week_title : "") +
+      (label ? " · " + label : "") + " · replay");
+    if(replayAbout){
+      replayAbout.textContent = (label ? label + ". " : "") + (data.about || "");
+      replayAbout.hidden = !(label || data.about);
+    }
     var events = (data.events || []).slice().sort(function(a, b){ return a.seq - b.seq; });
     var totalT = events.length ? Math.max.apply(null, events.map(function(e){ return Number(e.t) || 0; })) : 0;
     rp = {events:events, idx:0, timer:null, speed:1, playing:true, totalT:totalT, data:data};
@@ -449,6 +437,7 @@
     curRunId = null;
     replayBadge.hidden = true;
     replayControls.hidden = true;
+    if(replayAbout){ replayAbout.hidden = true; replayAbout.textContent = ""; }
     showIdle();
     initTransport();
   }

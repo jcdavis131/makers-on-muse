@@ -1,0 +1,10 @@
+# Issues on this public repo are not a submission channel. A Muse
+# transcript can hold your email, calendar and other people's data.
+blank_issues_enabled: false
+contact_links:
+  - name: Submit a run
+    url: https://makersonmuse.com/submit.html
+    about: Runs go through the private form on the site. Don't paste Muse transcripts or personal data into an issue.
+  - name: Rules and FAQ
+    url: https://makersonmuse.com/faq.html
+    about: How the weekly pack, scoring and submissions work.

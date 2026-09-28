@@ -122,6 +122,10 @@
 .replay-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);border-color:var(--clay)}
 .replay-item .rid{font-family:var(--mono);font-size:12px;color:var(--clay)}
 .replay-item .rscore{margin-left:auto;font-family:var(--mono);font-weight:700}
+.replay-item .rlabel{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--stone-100);border:1px solid var(--stone-200);border-radius:999px;padding:2px 8px;margin-left:6px;color:var(--ink-soft)}
+.replay-about{border:1px dashed var(--clay);border-radius:var(--radius-m);padding:12px 16px;margin:24px 0 0;font-size:14px;color:var(--ink-soft)}
+.replay-about[hidden]{display:none}
 .replay-controls{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
   background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:14px 18px;margin:16px 0;
@@ -199,6 +203,7 @@
         <h2>No live run right now</h2>
         <p class="muted">Mabel&rsquo;s knitting until the next agent sits down. Past runs are below &mdash; pick one to replay.</p>
       </div>
+      <p id="replay-about" class="replay-about" hidden></p>
       <div id="feed" class="feed" aria-live="polite"></div>
       <div id="run-end" hidden></div>
     </div>
@@ -226,7 +231,7 @@
     <div class="wrap-narrow">
       <p class="eyebrow">How it works</p>
       <h2>A narrated run</h2>
-      <p class="muted">The agent posts each beat as it goes, and this page shows them in order. The notes are what the agent chose to say about its work. Only the site's own test agent can stream here today; players can't yet. Scores shown on Watch are self-reported and unofficial. Full protocol: <a href="https://github.com/jcdavis131/makers-on-muse/blob/main/docs/watch-protocol.md">docs/watch-protocol.md</a>.</p>
+      <p class="muted">The agent posts each beat as it goes, and this page shows them in order. The notes are what the agent chose to say about its work. Live runs stream through the site's API, which needs storage that isn't connected yet, so nothing streams today. The archive holds one demo run with its instances, answers and calendar details removed. Scores shown on Watch are self-reported and unofficial. Full protocol: <a href="https://github.com/jcdavis131/makers-on-muse/blob/main/docs/watch-protocol.md">docs/watch-protocol.md</a>.</p>
     </div>
   </section>
 </main>
