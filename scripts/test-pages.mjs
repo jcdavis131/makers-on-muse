@@ -286,8 +286,8 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   t("receipt: no referrer", /<meta name="referrer" content="no-referrer">/.test(html));
   t("receipt: no third-party scripts or styles",
     [...html.matchAll(/<(?:script|link)[^>]+(?:src|href)="([^"]+)"/g)].every((m) => !/^(https?:)?\/\//.test(m[1])));
-  t("receipt: loads season.js and receipt.js", /<script src="\/assets\/js\/season\.js(\\?v=[0-9a-f]+)?"><\/script>/.test(html) &&
-    /<script src="\/assets\/js\/receipt\.js(\\?v=[0-9a-f]+)?"><\/script>/.test(html));
+  t("receipt: loads season.js and receipt.js", /<script src="\/assets\/js\/season\.js(\?v=[0-9a-f]+)?"><\/script>/.test(html) &&
+    /<script src="\/assets\/js\/receipt\.js(\?v=[0-9a-f]+)?"><\/script>/.test(html));
   t("receipt: a token field and a confirm step for delete",
     /id="tok"/.test(html) && /id="rc-delete-yes"/.test(html) && /id="rc-confirm"[^>]*hidden/.test(html));
   t("receipt: the error box is an alert", /id="rc-msg"[^>]*role="alert"/.test(html));
@@ -304,18 +304,21 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   }
 
   const sub = read("submit.html");
-  const iForm = sub.search(/<script src="\/assets\/js\/submit-form\.js(\\?v=[0-9a-f]+)?"><\/script>/);
-  t("submit: loads submit-form.js before the inline script", iForm > -1 && iForm < sub.indexOf("/* Submit flow"));
+  const subJs = read("assets/js/submit.js");
+  const iForm = sub.search(/<script src="\/assets\/js\/submit-form\.js(\?v=[0-9a-f]+)?"><\/script>/);
+  const iFlow = sub.search(/<script src="\/assets\/js\/submit\.js(\?v=[0-9a-f]+)?"><\/script>/);
+  t("submit: loads submit-form.js, then submit.js, neither deferred", iForm > -1 && iFlow > iForm);
+  t("submit: no inline script (the CSP allows scripts from this site only)", !/<script>/.test(sub) && !/<script(?![^>]*\bsrc=)[^>]*>/.test(sub));
   t("submit: contact field is an optional email", /<input type="email" id="f-contact"(?![^>]*required)[^>]*>/.test(sub));
   t("submit: terms box links Terms and Privacy", /<input type="checkbox" id="c-terms" required>/.test(sub) &&
     /href="\/terms"/.test(sub) && /href="\/privacy"/.test(sub));
   t("submit: the old redaction box is gone", !/id="c-redact"/.test(sub));
   t("submit: publish is opt-in (unchecked)", /<input type="checkbox" id="c-publish">/.test(sub));
   t("submit: every inline error slot starts hidden", [...sub.matchAll(/<p class="ferr" id="[^"]+"( hidden)?>/g)].every((m) => m[1]));
-  t("submit: localStorage only through the guarded helpers", !/localStorage/.test(sub));
-  t("submit: the receipt link uses the fragment", sub.includes('"/receipt#token="'));
-  t("submit: the shareable receipt text has no token", /var txt = "Makers on Muse, Week " \+ week \+ ": receipt " \+ code/.test(sub) &&
-    !/txt[^\n]*token/.test(sub));
+  t("submit: localStorage only through the guarded helpers", !/localStorage/.test(sub + subJs));
+  t("submit: the receipt link uses the fragment", subJs.includes('"/receipt#token="'));
+  t("submit: the shareable receipt text has no token", /var txt = "Makers on Muse, Week " \+ week \+ ": receipt " \+ code/.test(subJs) &&
+    !/txt[^\n]*token/.test(subJs));
   t("submit: the Mabel image is the plush SVG", /<img src="\/assets\/img\/mabel-plush\.svg"/.test(sub));
   t("submit: icons come from the shared head, none from the old webp", sub.includes('<link rel="icon" href="/favicon.ico" sizes="32x32">') &&
     sub.includes('<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">') && !/\.webp/.test(sub));
@@ -327,7 +330,7 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   // collapsed). Every one is either a function that escapes (checked
   // above) or a concatenation whose data parts go through esc().
   const ALLOWED = {
-    "submit.html": [
+    "assets/js/submit.js": [
       "F.cardHtml(L)",
       '""',
       '"<h4>" + esc(heading || HEADINGS[400]) + "</h4><ul><li>" + items.join("</li><li>") + "</li></ul>"',
@@ -348,8 +351,8 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
     t(f + ": has innerHTML assignments to check", found.length > 0);
     for (const rhs of found) t(f + ": innerHTML = " + rhs.slice(0, 80) + " is reviewed", allowed.includes(rhs));
   }
-  t("submit.html: the showErrors list items are escaped",
-    /return marked \? '<a href="#' \+ esc\(e\.field\) \+ '">' \+ esc\(text\) \+ "<\/a>" : esc\(text\);/.test(read("submit.html")));
+  t("submit.js: the showErrors list items are escaped",
+    /return marked \? '<a href="#' \+ esc\(e\.field\) \+ '">' \+ esc\(text\) \+ "<\/a>" : esc\(text\);/.test(read("assets/js/submit.js")));
   t("main.js has no innerHTML left", !/innerHTML\s*=/.test(read("assets/js/main.js").replace(/tpl\.innerHTML = svgText\.trim\(\);/, "")));
 }
 

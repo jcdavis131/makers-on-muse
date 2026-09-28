@@ -11,10 +11,17 @@
       so it works at /a/b/c; repo-only files are 404, not served.
    5. robots.txt and sitemap.xml.
    6. The link check passes and catches what it should.
+   7. Security headers on pages, the 404, assets and the API: a CSP that
+      allows this site only (no inline script), nosniff, a referrer
+      policy, a permissions policy, no framing. Statically: no inline
+      script, event handler, javascript: URL or eval anywhere.
+   8. Caching: versioned CSS and JS for a year, images for a day, pages
+      and data revalidated; every page's asset versions are current.
    Exits non-zero on any failure. */
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT, start, loadSite, route, compileSource, matchSource, ignoreMatcher } from "./serve.mjs";
+import { stampAssets, version } from "./stamp-assets.mjs";
 import { pages, pathFor, noindex, sitemap, ORIGIN } from "./stamp-layout.mjs";
 import { checkSite, checkRef, refs } from "./check-links.mjs";
 
@@ -148,6 +155,71 @@ try {
     t("outside links are set aside", checkRef(site, "https://www.meta.com/").external === "https://www.meta.com/");
     eq("reads literal links out of scripts", refs("js", `x = '<img src="/a.svg">' + '<a href="' + esc(u) + '">' ; fetch("/api/health", {}); new EventSource("/api/run-stream?x=" + id);`).map((r) => r.url), ["/a.svg", "/api/health"]);
     eq("skips inline script bodies and comments in pages", refs("html", '<!-- <a href="/x"> --><script>var a = \'<a href="/y">\';</script><a href="/z">').map((r) => r.url), ["/z"]);
+  }
+
+  /* ---------- 7. security headers ---------- */
+  {
+    const CSP_WANT = ["default-src 'self'", "script-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self'",
+      "frame-ancestors 'none'", "connect-src 'self'", "img-src 'self'"];
+    for (const path of ["/", "/pack", "/submit", "/watch", "/receipt", "/nope", "/api/health", "/assets/js/main.js"]) {
+      const res = await get(path);
+      const csp = res.headers.get("content-security-policy") || "";
+      const dirs = csp.split(";").map((d) => d.trim());
+      for (const d of CSP_WANT) t(path + ": CSP has " + d, dirs.includes(d), csp);
+      const script = dirs.find((d) => d.startsWith("script-src ")) || "";
+      t(path + ": no inline or eval'd script allowed", !/unsafe-inline|unsafe-eval|data:|\*/.test(script));
+      t(path + ": CSP names no other origin", !/https?:|\*/.test(csp), csp);
+      eq(path + ": nosniff", res.headers.get("x-content-type-options"), "nosniff");
+      eq(path + ": referrer policy", res.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
+      eq(path + ": no framing (old browsers)", res.headers.get("x-frame-options"), "DENY");
+      const pp = res.headers.get("permissions-policy") || "";
+      t(path + ": permissions policy turns off camera, microphone, location", ["camera=()", "microphone=()", "geolocation=()"].every((x) => pp.includes(x)), pp);
+      t(path + ": no feature Chrome rejects (interest-cohort)", !/interest-cohort/.test(pp));
+    }
+    const vj2 = JSON.parse(read("vercel.json"));
+    const all = vj2.headers.find((h) => h.source === "/(.*)");
+    t("the /(.*) rule sets no Cache-Control (functions set their own)", all && !all.headers.some((h) => /cache-control/i.test(h.key)));
+
+    // CSP compatibility, statically: nothing inline that script-src 'self' blocks.
+    const jsFiles = readdirSync(join(ROOT, "assets", "js")).filter((f) => f.endsWith(".js")).map((f) => "assets/js/" + f);
+    for (const p of pages()) {
+      const html = read(p);
+      t(p + ": no inline <script>", !/<script(?![^>]*\bsrc=)[^>]*>/.test(html));
+      t(p + ": no inline event handlers", !/<[a-z][^>]*\son[a-z]+=/i.test(html));
+      t(p + ": no javascript: URLs", !/javascript:/i.test(html));
+    }
+    for (const f of jsFiles) {
+      const js = read(f);
+      t(f + ": builds no inline event handlers", !/\son[a-z]+=["']/i.test(js));
+      t(f + ": no eval or new Function", !/\beval\(|new Function\(/.test(js));
+    }
+  }
+
+  /* ---------- 8. caching and asset versions ---------- */
+  {
+    const cc = async (path) => (await get(path)).headers.get("cache-control") || "";
+    const v = version("assets/css/main.css");
+    eq("versioned CSS is cached for a year", await cc("/assets/css/main.css?v=" + v), "public, max-age=31536000, immutable");
+    eq("versioned JS is cached for a year", await cc("/assets/js/main.js?v=" + version("assets/js/main.js")), "public, max-age=31536000, immutable");
+    eq("images get a day", await cc("/assets/img/og.png"), "public, max-age=86400, stale-while-revalidate=604800");
+    eq("favicon, robots and sitemap get a day", [await cc("/favicon.ico"), await cc("/robots.txt"), await cc("/sitemap.xml")],
+      ["public, max-age=86400", "public, max-age=86400", "public, max-age=86400"]);
+    for (const path of ["/", "/pack", "/nope", "/data/packs/s1w1.json", "/data/runs/index.json"]) {
+      eq(path + " is revalidated every time (Vercel's default)", await cc(path), "public, max-age=0, must-revalidate");
+    }
+    for (const p of pages()) {
+      const res = stampAssets(read(p));
+      eq(p + ": every stylesheet and script is versioned and current (npm run build:assets)",
+        res.refs.filter((r) => r.had !== r.want).map((r) => r.file), []);
+      eq(p + ": no reference to a missing asset", res.missing, []);
+      t(p + ": nothing loads css or js without the root path", !/(?:src|href)="(?!\/|https?:)[^"]*assets\/(?:css|js)\//.test(read(p)));
+    }
+    t("versions change with the content", stampAssets('<link href="/assets/css/main.css">', () => "abc").html === '<link href="/assets/css/main.css?v=abc">' &&
+      stampAssets('<script src="/assets/js/main.js?v=old"></script>', () => "new").refs[0].had === "old");
+    t("a version is 10 hex digits of the LF-normalized SHA-256", /^[0-9a-f]{10}$/.test(v));
+    for (const f of readdirSync(join(ROOT, "assets", "js")).filter((x) => x.endsWith(".js"))) {
+      t("assets/js/" + f + ": loads no stylesheet or script by URL (it would carry no version)", !/["']\/?assets\/(?:css|js)\//.test(read("assets/js/" + f)));
+    }
   }
 
   /* ---------- the API runs behind the router ---------- */

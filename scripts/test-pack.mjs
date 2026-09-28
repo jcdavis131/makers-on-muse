@@ -173,9 +173,9 @@ const SCORED = packs.scoredLevels(PACK);
 
 /* ---------- 5. api/submit.js ---------- */
 {
-  const page = read("submit.html");
-  t("submit.html shows the API's max_total on the receipt", page.includes('if(typeof d.max_total === "number") $("receipt-max").textContent = String(d.max_total);'));
-  t("submit.html's shareable receipt text uses it too", page.includes('"/" + $("receipt-max").textContent + ", self-reported'));
+  const page = read("assets/js/submit.js");
+  t("submit.js shows the API's max_total on the receipt", page.includes('if(typeof d.max_total === "number") $("receipt-max").textContent = String(d.max_total);'));
+  t("submit.js's shareable receipt text uses it too", page.includes('"/" + $("receipt-max").textContent + ", self-reported'));
   const src = read("api/submit.js");
   t("submit scores with the week's manifest", /provisionalSubmissionScore\(sub\.levels, pack\)/.test(src));
   t("submit stamps the manifest hash and version", /packs\.hash\(pack\)/.test(src) && /pack_version:/.test(src) && /pack_hash:/.test(src));

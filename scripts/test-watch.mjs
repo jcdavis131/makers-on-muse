@@ -181,8 +181,8 @@ const demo = JSON.parse(read(demoEntry.file));
   t("a hidden feed is hidden (its display:flex would override the attribute)", /\.feed\[hidden\]\{display:none\}/.test(html));
   t("on a phone the run bar scrolls away instead of covering the feed", /@media \(max-width:720px\)\{[^}]*\.livebar\{position:static\}/.test(html));
   t("no one-line typing effect that cut long notes off", !/\.typing|shimmer/.test(html + js));
-  t("loads main.js and watch.js", /<script src="\/assets\/js\/main\.js(\\?v=[0-9a-f]+)?" defer><\/script>/.test(html) &&
-    /<script src="\/assets\/js\/watch\.js(\\?v=[0-9a-f]+)?" defer><\/script>/.test(html));
+  t("loads main.js and watch.js", /<script src="\/assets\/js\/main\.js(\?v=[0-9a-f]+)?" defer><\/script>/.test(html) &&
+    /<script src="\/assets\/js\/watch\.js(\?v=[0-9a-f]+)?" defer><\/script>/.test(html));
   t("links the manifest", html.includes('href="/data/packs/s1w1.json"'));
 }
 

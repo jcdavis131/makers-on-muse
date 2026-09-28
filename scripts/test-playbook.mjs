@@ -79,12 +79,12 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
   eq("stats: workflows", Number(stat("workflows")), DATA.length);
   eq("stats: personas", Number(stat("personas")), g.persona.length);
   eq("stats: moments", Number(stat("moments")), g.moment.length);
-  const iD = PAGE.search(/<script src="\/assets\/js\/playbook-data\.js(\\?v=[0-9a-f]+)?"><\/script>/);
-  const iP = PAGE.search(/<script src="\/assets\/js\/playbook\.js(\\?v=[0-9a-f]+)?"><\/script>/);
-  const iM = PAGE.search(/<script src="\/assets\/js\/main\.js(\\?v=[0-9a-f]+)?"><\/script>/);
+  const iD = PAGE.search(/<script src="\/assets\/js\/playbook-data\.js(\?v=[0-9a-f]+)?"><\/script>/);
+  const iP = PAGE.search(/<script src="\/assets\/js\/playbook\.js(\?v=[0-9a-f]+)?"><\/script>/);
+  const iM = PAGE.search(/<script src="\/assets\/js\/main\.js(\?v=[0-9a-f]+)?"><\/script>/);
   t("page: loads data, then logic, then main.js", iD > -1 && iP > iD && iM > iP);
   t("page: no inline script (the data moved out)", !/<script>(?!\s*<\/script>)/.test(PAGE) && !/var PLAYBOOKS/.test(PAGE));
-  t("page: uses the shared stylesheet", /<link rel="stylesheet" href="\/assets\/css\/main\.css(\\?v=[0-9a-f]+)?">/.test(PAGE));
+  t("page: uses the shared stylesheet", /<link rel="stylesheet" href="\/assets\/css\/main\.css(\?v=[0-9a-f]+)?">/.test(PAGE));
   t("page: no copy of the design tokens", !/:root\s*\{/.test(PAGE));
   t("page: a legend at #tags", /<section[^>]*id="tags"/.test(PAGE));
   for (const [tag, dd] of legend) {
