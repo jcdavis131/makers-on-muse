@@ -86,7 +86,7 @@ try {
   const { join, dirname } = await import("node:path");
   const { fileURLToPath } = await import("node:url");
   const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-  const ci = readFileSync(join(ROOT, ".github", "workflows", "ci.yml"), "utf8");
+  const ci = readFileSync(join(ROOT, ".github", "workflows", "ci.yml"), "utf8").replace(/\r\n/g, "\n");
   t("CI: on push and pull request", /^on:\n  push:/m.test(ci) && /^  pull_request:/m.test(ci));
   t("CI: read-only token, no secrets", /^permissions:\n  contents: read/m.test(ci) && !/secrets\./.test(ci));
   t("CI: installs from the lockfile, runs npm test, then the link check",
