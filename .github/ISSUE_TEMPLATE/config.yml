@@ -3,8 +3,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Submit a run
-    url: https://makersonmuse.com/submit.html
+    url: https://makersonmuse.com/submit
     about: Runs go through the private form on the site. Don't paste Muse transcripts or personal data into an issue.
   - name: Rules and FAQ
-    url: https://makersonmuse.com/faq.html
+    url: https://makersonmuse.com/faq
     about: How the weekly pack, scoring and submissions work.

@@ -6,7 +6,7 @@
 
    None of these has been checked on a real Muse yet. Each "setup" tag
    must be one playbook.html's tag legend explains (scripts/test-playbook.mjs
-   checks it). A workflow's id is its permalink: playbook.html?w=<id>.
+   checks it). A workflow's id is its permalink: /playbook?w=<id>.
    Never change an id once published; add a new one instead.
 
    Browser: sets window.MOM_PLAYBOOKS. Node: module.exports. */

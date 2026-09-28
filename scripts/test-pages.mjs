@@ -273,7 +273,7 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   eq("static board status matches the pre-open view", text("board-status"), pre.text);
   t("board status is a polite status line", /id="board-status"[^>]*role="status"/.test(html));
   t("results container is not a live region", !/id="board-results"[^>]*aria-live/.test(html) && !/id="leaderboard"/.test(html));
-  const iS = html.indexOf('src="assets/js/season.js"'), iB = html.indexOf('src="assets/js/board.js"');
+  const iS = html.indexOf('src="/assets/js/season.js'), iB = html.indexOf('src="/assets/js/board.js');
   t("leaderboard loads season.js, then board.js", iS > -1 && iB > iS);
   t("main.js no longer reads a static leaderboard file", !/leaderboard\.json/.test(read("assets/js/main.js")));
   t("the static leaderboard file is gone", !existsSync(join(ROOT, "data/leaderboard.json")));
@@ -286,8 +286,8 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   t("receipt: no referrer", /<meta name="referrer" content="no-referrer">/.test(html));
   t("receipt: no third-party scripts or styles",
     [...html.matchAll(/<(?:script|link)[^>]+(?:src|href)="([^"]+)"/g)].every((m) => !/^(https?:)?\/\//.test(m[1])));
-  t("receipt: loads season.js and receipt.js", html.includes('<script src="assets/js/season.js"></script>') &&
-    html.includes('<script src="assets/js/receipt.js"></script>'));
+  t("receipt: loads season.js and receipt.js", /<script src="\/assets\/js\/season\.js(\\?v=[0-9a-f]+)?"><\/script>/.test(html) &&
+    /<script src="\/assets\/js\/receipt\.js(\\?v=[0-9a-f]+)?"><\/script>/.test(html));
   t("receipt: a token field and a confirm step for delete",
     /id="tok"/.test(html) && /id="rc-delete-yes"/.test(html) && /id="rc-confirm"[^>]*hidden/.test(html));
   t("receipt: the error box is an alert", /id="rc-msg"[^>]*role="alert"/.test(html));
@@ -296,8 +296,7 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   t("receipt.js posts the token in the body", /fetch\("\/api\/receipt", \{\s*method: "POST"/.test(js));
 
   const vj = JSON.parse(read("vercel.json"));
-  t("vercel.json rewrites /receipt to receipt.html",
-    (vj.rewrites || []).some((r) => r.source === "/receipt" && r.destination === "/receipt.html"));
+  t("vercel.json serves /receipt from receipt.html (cleanUrls)", vj.cleanUrls === true && existsSync(join(ROOT, "receipt.html")));
 
   // The token never travels in a query string anywhere.
   for (const f of ["submit.html", "receipt.html", "leaderboard.html", "assets/js/receipt.js", "assets/js/submit-form.js", "assets/js/board.js"]) {
@@ -305,21 +304,20 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   }
 
   const sub = read("submit.html");
-  t("submit: loads submit-form.js before the inline script",
-    sub.indexOf('<script src="assets/js/submit-form.js"></script>') > -1 &&
-    sub.indexOf('<script src="assets/js/submit-form.js"></script>') < sub.indexOf("/* Submit flow"));
+  const iForm = sub.search(/<script src="\/assets\/js\/submit-form\.js(\\?v=[0-9a-f]+)?"><\/script>/);
+  t("submit: loads submit-form.js before the inline script", iForm > -1 && iForm < sub.indexOf("/* Submit flow"));
   t("submit: contact field is an optional email", /<input type="email" id="f-contact"(?![^>]*required)[^>]*>/.test(sub));
   t("submit: terms box links Terms and Privacy", /<input type="checkbox" id="c-terms" required>/.test(sub) &&
-    /href="terms\.html"/.test(sub) && /href="privacy\.html"/.test(sub));
+    /href="\/terms"/.test(sub) && /href="\/privacy"/.test(sub));
   t("submit: the old redaction box is gone", !/id="c-redact"/.test(sub));
   t("submit: publish is opt-in (unchecked)", /<input type="checkbox" id="c-publish">/.test(sub));
   t("submit: every inline error slot starts hidden", [...sub.matchAll(/<p class="ferr" id="[^"]+"( hidden)?>/g)].every((m) => m[1]));
   t("submit: localStorage only through the guarded helpers", !/localStorage/.test(sub));
-  t("submit: the receipt link uses the fragment", sub.includes('"/receipt.html#token="'));
+  t("submit: the receipt link uses the fragment", sub.includes('"/receipt#token="'));
   t("submit: the shareable receipt text has no token", /var txt = "Makers on Muse, Week " \+ week \+ ": receipt " \+ code/.test(sub) &&
     !/txt[^\n]*token/.test(sub));
-  t("submit: the Mabel image is the plush SVG", /<img src="assets\/img\/mabel-plush\.svg"/.test(sub));
-  t("submit: favicon is the plush SVG", /<link rel="icon" href="assets\/img\/mabel-plush\.svg" type="image\/svg\+xml">/.test(sub));
+  t("submit: the Mabel image is the plush SVG", /<img src="\/assets\/img\/mabel-plush\.svg"/.test(sub));
+  t("submit: favicon is the plush SVG", /<link rel="icon" href="\/assets\/img\/mabel-plush\.svg" type="image\/svg\+xml">/.test(sub));
 }
 
 /* ---------- 5. innerHTML ratchet ---------- */

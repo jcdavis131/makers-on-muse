@@ -5,44 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — Makers on Muse</title>
 <meta name="description" content="Who runs Makers on Muse, why it exists, how grading works now and what is planned, and where the code lives.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/mabel.css">
-<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/mabel.css">
+<link rel="icon" href="/assets/img/mabel-plush.svg" type="image/svg+xml">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <!-- layout:nav -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
       <div class="nav-group">
         <span class="nav-label" aria-hidden="true">Play</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
         <ul class="nav-menu" id="nav-play" aria-label="Play">
-          <li><a href="pack.html">This week</a></li>
-          <li><a href="submit.html">Submit</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="watch.html">Replays</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div class="nav-group">
         <span class="nav-label" aria-hidden="true">Library</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
         <ul class="nav-menu" id="nav-library" aria-label="Library">
-          <li><a href="playbook.html">Playbook</a></li>
-          <li><a href="setups.html">Setups</a></li>
-          <li><a href="skills.html">Skills</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
         </ul>
       </div>
       <div class="nav-group is-current">
         <span class="nav-label" aria-hidden="true">About</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
         <ul class="nav-menu" id="nav-about" aria-label="About">
-          <li><a href="scoring.html">Rules &amp; scoring</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about" aria-current="page">About</a></li>
         </ul>
       </div>
     </nav>
@@ -59,13 +59,13 @@
 
       <h2 id="who">Who runs it</h2>
       <p>Makers on Muse is an independent community project run by Cam, a Muse owner. It is not a Meta product, and Meta has not reviewed or approved it.</p>
-      <p>Much of the code is written with AI coding agents. Scout, the site's test agent, built the first version and made the demo run you can replay on <a href="watch.html">Replays</a>.</p>
+      <p>Much of the code is written with AI coding agents. Scout, the site's test agent, built the first version and made the demo run you can replay on <a href="/watch">Replays</a>.</p>
 
       <h2 id="why">Why it exists</h2>
       <p>Muse can reach your email, your calendar and the web. It is hard to tell how well it uses them, and what to change when it doesn't. The site does two things about that:</p>
       <ul>
-        <li><strong>A weekly test.</strong> Everyone gets the same <a href="pack.html">pack</a>: four scored levels and one unscored exhibition build. Runs can be compared, and a level your Muse fails tells you what to fix.</li>
-        <li><strong>A library.</strong> <a href="playbook.html">Playbook</a> workflows, <a href="setups.html">Setups</a> for the Muse app, and <a href="skills.html">Skills</a> for Muse Code. A good run is most useful when others can copy the setup behind it.</li>
+        <li><strong>A weekly test.</strong> Everyone gets the same <a href="/pack">pack</a>: four scored levels and one unscored exhibition build. Runs can be compared, and a level your Muse fails tells you what to fix.</li>
+        <li><strong>A library.</strong> <a href="/playbook">Playbook</a> workflows, <a href="/setups">Setups</a> for the Muse app, and <a href="/skills">Skills</a> for Muse Code. A good run is most useful when others can copy the setup behind it.</li>
       </ul>
     </div>
   </section>
@@ -80,9 +80,9 @@
           <h3>You report, the site adds it up</h3>
           <ul class="muted">
             <li>You run the pack with your Muse, then report correctness, tokens, time and procedure yourself.</li>
-            <li>The site computes a provisional score from the week's <a href="data/packs/s1w1.json">pack manifest</a>. Nothing is checked.</li>
+            <li>The site computes a provisional score from the week's <a href="/data/packs/s1w1.json">pack manifest</a>. Nothing is checked.</li>
             <li>Every entry's status is &ldquo;Received&rdquo;. Nobody reviews entries yet.</li>
-            <li>The <a href="leaderboard.html">leaderboard</a> opens after the week closes, and says the numbers are self-reported.</li>
+            <li>The <a href="/leaderboard">leaderboard</a> opens after the week closes, and says the numbers are self-reported.</li>
             <li>No accounts. You pick a handle, and your receipt gives you a secret token to check or delete your entry.</li>
           </ul>
         </div>
@@ -98,7 +98,7 @@
           </ul>
         </div>
       </div>
-      <p class="muted">Phase 2 isn't built, and no dates are set. The <a href="scoring.html">scoring page</a> has the formula and the weights used today.</p>
+      <p class="muted">Phase 2 isn't built, and no dates are set. The <a href="/scoring">scoring page</a> has the formula and the weights used today.</p>
     </div>
   </section>
 
@@ -112,7 +112,7 @@
       </ul>
 
       <h2 id="contact">Contact</h2>
-      <p>There is no contact email yet: the domain can't receive mail. To delete an entry you don't need us. Use its secret token on your <a href="receipt.html">receipt page</a>. The <a href="privacy.html">privacy page</a> says what is stored and for how long, and the <a href="terms.html">terms</a> say how the site may be used.</p>
+      <p>There is no contact email yet: the domain can't receive mail. To delete an entry you don't need us. Use its secret token on your <a href="/receipt">receipt page</a>. The <a href="/privacy">privacy page</a> says what is stored and for how long, and the <a href="/terms">terms</a> say how the site may be used.</p>
 
       <div class="card" style="margin-top:36px">
         <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
@@ -135,28 +135,28 @@
       <div>
         <h4>Play</h4>
         <ul>
-          <li><a href="pack.html">This week</a></li>
-          <li><a href="submit.html">Submit</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="watch.html">Replays</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div>
         <h4>Library</h4>
         <ul>
-          <li><a href="playbook.html">Playbook</a></li>
-          <li><a href="setups.html">Setups</a></li>
-          <li><a href="skills.html">Skills</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
         </ul>
       </div>
       <div>
         <h4>About</h4>
         <ul>
-          <li><a href="scoring.html">Rules &amp; scoring</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html" aria-current="page">About</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-          <li><a href="terms.html">Terms</a></li>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about" aria-current="page">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
     </div>
@@ -168,6 +168,6 @@
   </div>
 </footer>
 <!-- /layout:footer -->
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

@@ -143,7 +143,7 @@ const demo = JSON.parse(read(demoEntry.file));
   t("final: labelled demo and unofficial", fin.includes("Final minutes · Demo run, unofficial") && fin.includes("self-reported and unofficial"));
   t("final: run time is the last event minus the start", fin.includes("Run time 3:43"));
   t("final: tokens are the agent's estimate", fin.includes("31,000 tokens, est., self-reported"));
-  t("final: points to the pack, not an empty board", fin.includes('href="pack.html"') && !fin.includes("leaderboard"));
+  t("final: points to the pack, not an empty board", fin.includes('href="/pack"') && !fin.includes("leaderboard"));
   const bare = W.finalHtml({ agent: "Juniper", events: [{ seq: 1, t: 0, type: "run", phase: "start" }], startedAt: 0, pack: null });
   t("final without a manifest: no maximum, no stars", bare.includes('<div class="big-score">0</div>') && !bare.includes("★") && !bare.includes("☆"), bare);
   t("final with no reported tokens says so", bare.includes("No tokens reported"));
@@ -181,8 +181,9 @@ const demo = JSON.parse(read(demoEntry.file));
   t("a hidden feed is hidden (its display:flex would override the attribute)", /\.feed\[hidden\]\{display:none\}/.test(html));
   t("on a phone the run bar scrolls away instead of covering the feed", /@media \(max-width:720px\)\{[^}]*\.livebar\{position:static\}/.test(html));
   t("no one-line typing effect that cut long notes off", !/\.typing|shimmer/.test(html + js));
-  t("loads main.js and watch.js", html.includes('<script src="assets/js/main.js" defer></script>') && html.includes('<script src="assets/js/watch.js" defer></script>'));
-  t("links the manifest", html.includes('href="data/packs/s1w1.json"'));
+  t("loads main.js and watch.js", /<script src="\/assets\/js\/main\.js(\\?v=[0-9a-f]+)?" defer><\/script>/.test(html) &&
+    /<script src="\/assets\/js\/watch\.js(\\?v=[0-9a-f]+)?" defer><\/script>/.test(html));
+  t("links the manifest", html.includes('href="/data/packs/s1w1.json"'));
 }
 
 /* ---------- 4. watch.js source ---------- */

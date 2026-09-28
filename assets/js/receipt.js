@@ -116,7 +116,7 @@
       "<h2>Entry " + esc(d.receipt) + " is deleted.</h2>" +
       "<p>Its answers, scores and handle claim are gone from our storage, and the token no longer works.</p>" +
       (d.can_refile
-        ? '<p>Week ' + esc(d.week) + ' is still open, so you can <a href="submit.html">file again</a> with the same handle.</p>'
+        ? '<p>Week ' + esc(d.week) + ' is still open, so you can <a href="/submit">file again</a> with the same handle.</p>'
         : "<p>The week is closed, so it can’t be filed again.</p>");
   }
 

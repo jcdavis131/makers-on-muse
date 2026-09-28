@@ -1,20 +1,27 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/**/*.js": {
       "memory": 256
     }
   },
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.makersonmuse.com" }],
+      "destination": "https://makersonmuse.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "makers-on-muse.vercel.app" }],
+      "destination": "https://makersonmuse.com/:path*",
+      "permanent": true
+    },
     { "source": "/meta.html", "destination": "/setups", "permanent": true },
     { "source": "/meta", "destination": "/setups", "permanent": true }
-  ],
-  "rewrites": [
-    { "source": "/receipt", "destination": "/receipt.html" },
-    { "source": "/setups", "destination": "/setups.html" },
-    { "source": "/skills", "destination": "/skills.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/terms", "destination": "/terms.html" }
   ],
   "git": {
     "deploymentEnabled": {

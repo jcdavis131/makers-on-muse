@@ -9,12 +9,15 @@
      ...partials/nav.html, with this page's own link marked...
      <!-- /layout:nav -->
 
-   The copy marks the page's own link with aria-current="page" (in the
-   nav and the footer) and its nav group with the class is-current, so
+   The copy marks the page's own link (its clean path, e.g. /pack for
+   pack.html) with aria-current="page" (in the nav and the footer) and its nav group with the class is-current, so
    the current page shows without JavaScript.
 
      node scripts/stamp-layout.mjs           check only; exit 1 on any drift
      node scripts/stamp-layout.mjs --write   rewrite the pages (npm run build:layout)
+
+   It also writes sitemap.xml from the page list: every root page that
+   isn't noindex, at its clean address.
 
    Edit a partial, run npm run build:layout, and commit the partial and
    the pages together. scripts/test-layout.mjs runs the check in npm test.
@@ -25,6 +28,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 export const NAMES = ["nav", "footer"];
+export const ORIGIN = "https://makersonmuse.com";
 
 const read = (p) => readFileSync(join(ROOT, p), "utf8").replace(/\r\n/g, "\n");
 
@@ -38,19 +42,43 @@ export function partial(name) {
   return read("partials/" + name + ".html").replace(/\n+$/, "");
 }
 
+/* The address a page is served at: clean URLs (vercel.json cleanUrls),
+   so pack.html is /pack and index.html is /. Links use these paths. */
+export function pathFor(page) {
+  return page === "index.html" ? "/" : "/" + page.replace(/\.html$/, "");
+}
+
 /* render(name, page) -> the partial as it appears in that page. */
 export function render(name, page, source) {
   let html = source === undefined ? partial(name) : source;
-  const link = '<a href="' + page + '">';
+  const path = pathFor(page);
+  const link = '<a href="' + path + '">';
   if (name === "nav") {
     // A group holds a label, a button and a list: no nested div.
     html = html.replace(/<div class="nav-group">([\s\S]*?)<\/div>/g, (all, inner) =>
       inner.includes(link) ? all.replace('<div class="nav-group">', '<div class="nav-group is-current">') : all);
   }
-  return html.split(link).join('<a href="' + page + '" aria-current="page">');
+  return html.split(link).join('<a href="' + path + '" aria-current="page">');
 }
 
-const BLOCK = /<!-- layout:(nav|footer) -->\n([\s\S]*?)\n<!-- \/layout:\1 -->/g;
+/* A page that asks not to be indexed (404.html, receipt.html) stays out
+   of the sitemap. */
+export function noindex(html) {
+  return /<meta name="robots" content="[^"]*\bnoindex\b/.test(html);
+}
+
+/* sitemap.xml: every indexable page at its canonical address, home first.
+   No <lastmod>: the repo has no honest per-page date to put there. */
+export function sitemap() {
+  const urls = pages().filter((p) => !noindex(read(p))).map((p) => ORIGIN + pathFor(p))
+    .sort((a, b) => (a === ORIGIN + "/" ? -1 : b === ORIGIN + "/" ? 1 : a < b ? -1 : 1));
+  return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    urls.map((u) => "  <url><loc>" + u + "</loc></url>\n").join("") +
+    "</urlset>\n";
+}
+
+const BLOCK =/<!-- layout:(nav|footer) -->\n([\s\S]*?)\n<!-- \/layout:\1 -->/g;
 
 /* stampPage(html, page) -> { html, count: {nav, footer}, drift: [name] } */
 export function stampPage(html, page, sources = {}) {
@@ -82,8 +110,16 @@ function main() {
     if (write && res.drift.length) writeFileSync(file, res.html, "utf8");
     else if (res.drift.length) problems++;
   }
+  const map = sitemap();
+  let onDisk = null;
+  try { onDisk = read("sitemap.xml"); } catch { /* not written yet */ }
+  if (onDisk !== map) {
+    console.log("sitemap.xml differs from the page list");
+    if (write) writeFileSync(join(ROOT, "sitemap.xml"), map, "utf8");
+    else problems++;
+  }
   if (problems) {
-    console.error("\nPages disagree with partials/. Run: npm run build:layout");
+    console.error("\nPages disagree with partials/, or sitemap.xml is stale. Run: npm run build:layout");
     process.exit(1);
   }
   console.log(write ? "Pages stamped from partials/" : "Every page matches partials/");

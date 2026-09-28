@@ -110,7 +110,9 @@ Plain HTML, CSS and JS, with no framework. Vercel serves the root as static file
 
 The nav has three groups: Play (This week, Submit, Leaderboard, Replays), Library (Playbook, Setups, Skills) and About (Rules & scoring, FAQ, About). On wide screens each group is a button with a dropdown; on phones the Menu button opens all three. The footer carries the independent-project and trademark line on every page.
 
-`.vercelignore` keeps `scripts/`, `docs/`, `.github/`, `partials/` and the READMEs off the site. `lib/` has to stay deployed because `api/` requires it. `vercel.json` redirects `/meta.html` and `/meta` to `/setups` (the page was renamed), and serves `/setups`, `/skills`, `/about`, `/privacy`, `/terms` and `/receipt` from their `.html` files.
+`.vercelignore` keeps `scripts/`, `docs/`, `.github/`, `partials/` and the READMEs off the site. `lib/` has to stay deployed because `api/` requires it.
+
+`vercel.json` turns on clean URLs: `/pack` serves `pack.html`, and `/pack.html` and `/pack/` answer 308 to `/pack`. Links in the pages and scripts use the clean, root-absolute form (`/pack`, `/`, `/assets/css/main.css`), so nothing costs a redirect and `404.html` works at any depth. It also 308s `www.makersonmuse.com` and `makers-on-muse.vercel.app` to `https://makersonmuse.com`, keeping the path and query (the rules match on the Host header, so preview deployments stay reachable), and redirects `/meta.html` and `/meta` to `/setups` (the page was renamed). Vercel serves `404.html`, with status 404, for any address that has no file.
 
 ```
 index.html              landing: the test and the library, a Playbook strip
@@ -127,6 +129,9 @@ terms.html              18+, no prizes, what entries let us show, acceptable use
 scoring.html            the formula, weights and a worked example
 submit.html             private submission form; closed outside an open week
 faq.html                rules and FAQ
+404.html                the page for any address that doesn't exist (noindex)
+robots.txt              allow all but /api/; points at the sitemap
+sitemap.xml             every indexable page at its clean address (written by build:layout)
 api/                    serverless functions: submit, receipt, leaderboard, health, run-event, run-stream, run-state
 lib/                    scoring, validation, names, redaction, tokens, pack windows; used by api/
 assets/js/season.js     week dates, one source of truth for pages and tests
@@ -143,7 +148,7 @@ data/packs/             one manifest per week: dates, levels, pars, blends, the 
 data/runs/              scrubbed runs that Watch replays
 docs/watch-protocol.md  the Watch event format and the archive rules
 partials/               the shared nav and footer (repo only; stamped into the pages)
-scripts/                tests, an in-memory Redis for them, the pack and layout stamps, the post-deploy health check
+scripts/                tests, an in-memory Redis for them, the pack and layout stamps, a local server that applies vercel.json, the link check, the post-deploy health check
 LICENSE                 MIT, for the code
 LICENSE-CONTENT         CC BY 4.0, for the Playbook content
 ```
@@ -151,11 +156,13 @@ LICENSE-CONTENT         CC BY 4.0, for the Playbook content
 ## Running it locally
 
 ```sh
-python -m http.server 8000
-# open http://localhost:8000
+npm run serve
+# open http://localhost:8080
 ```
 
-The pages work from any static server. The `api/` functions run on Vercel. The tests call the handlers directly.
+`scripts/serve.mjs` serves the repo the way `vercel.json` says Vercel will: clean URLs, the redirects (send an `X-Forwarded-Host` header to try the host ones), the headers, `404.html`, and nothing that `.vercelignore` leaves out. It runs the real `api/` handlers too. With no storage env vars, `/api/health` says storage is "missing" and writes answer 503, as on a deploy without Upstash. It emulates only what this site's `vercel.json` uses, and it refuses to start on anything else in there, so a config change can't pass locally by accident. It is not Vercel: `scripts/check-deploy.mjs` checks the real site after a deploy.
+
+A plain static server (`python -m http.server`) still shows the pages, but not the clean URLs, so links like `/pack` 404 there.
 
 ## Tests
 
@@ -170,9 +177,10 @@ Runs each test script in `scripts/` with Node. Run `npm ci` once first: the inte
 - `test-integration.mjs`: the handlers and the real Upstash client against `redis-emu.mjs`, an in-memory Redis served over the Upstash REST protocol with a clock the test controls. Covers receipts and tokens, receipt status and delete, one entry per handle, the leaderboard (count only until close, then the sorted set), the contact address kept private, 429 on the sixth post, a TTL on every key, and expiry.
 - `test-copy.mjs`: the week dates, the closed form, and copy that promises things the site doesn't do.
 - `test-privacy.mjs`: no public submission channel, the deploy config, the Watch archive and its scrub, and fictional worked values.
-- `test-pages.mjs`: the page logic in `submit-form.js`, `receipt.js` and `board.js`. What the form sends must pass the server's validator. Every value from the API is escaped (tested with markup in every field). Drafts never throw, even when storage does. Also the receipt page's privacy settings, the `/receipt` rewrite, and a reviewed list of every `innerHTML` assignment, so a new one fails until someone checks it.
+- `test-pages.mjs`: the page logic in `submit-form.js`, `receipt.js` and `board.js`. What the form sends must pass the server's validator. Every value from the API is escaped (tested with markup in every field). Drafts never throw, even when storage does. Also the receipt page's privacy settings, its `/receipt` address, and a reviewed list of every `innerHTML` assignment, so a new one fails until someone checks it.
 - `test-pack.mjs`: the pack manifest contract. The manifest is well formed. The pages' marked numbers match it, and no page has lost a marker. `scoring.html`'s worked example is what `lib/score.js` computes. The scorer moves with the manifest. `api/submit.js` scores with it. The validator asks for its scored levels. The archived runs' scores reproduce under its pars.
-- `test-layout.mjs`: every page carries the shared nav and footer from `partials/`, with the trademark line and its own link marked; the nav groups and their order; every nav and footer link points at a page that exists; the `/meta` redirects and page rewrites; no page links `meta.html`; the trust pages state what the code does (TTLs, processors, deletion by token, no cookies); `main.js` runs the nav without `innerHTML`; the Mabel emblem uses no gradient; both license files.
+- `test-site.mjs`: how the site is served, through `serve.mjs`. Clean URLs and their 308s, the www and vercel.app redirects to the apex (path and query kept; previews not redirected), the branded 404 at any depth, repo-only files not served, `robots.txt`, a current `sitemap.xml`, and the link check.
+- `test-layout.mjs`: every page carries the shared nav and footer from `partials/`, with the trademark line and its own link marked; the nav groups and their order; every link is served at its clean address without a redirect; the `/meta` redirects; no page links `meta.html` or any `.html` address; the trust pages state what the code does (TTLs, processors, deletion by token, no cookies); `main.js` runs the nav without `innerHTML`; the Mabel emblem uses no gradient; both license files.
 - `test-playbook.mjs`: the Playbook's data and page logic. Ids are unique and URL-safe, every setup tag is explained in the page's tag legend, no tag names a connector no source lists, the stats and the home page strip match the data, the query string round-trips and ignores anything it doesn't know, every card value is escaped, and a reviewed list of `innerHTML` assignments.
 - `test-watch.mjs`: the Watch player. Run time is the last event minus the start. Tokens are only what the agent reported, or "—". A reconnect adds no beat twice. The result is out of the manifest's maximum. The page follows the feed only when the reader has scrolled to its end. Also escaping, the page's first state ("Connecting…"), the demo badge, and a reviewed list of `innerHTML` assignments.
 
@@ -183,6 +191,15 @@ MOM_RETIRED_FILE=/path/outside/the/repo/retired.txt npm test
 ```
 
 Without it, that scan is skipped and says so.
+
+The link check runs on its own too:
+
+```sh
+npm run check:links                         # every link and asset in the pages and assets/js, offline
+node scripts/check-links.mjs --external     # also GETs each outside link
+```
+
+Site links resolve through the same router as `serve.mjs`, so a link to `pack.html` (a 308), a file `.vercelignore` keeps off the site, or a `#fragment` with no matching id fails. Outside links are opt-in: meta.com and others often refuse automated requests, so only 404, 410 and DNS failures count as broken, and 401, 403, 429 and 5xx are listed as not verified.
 
 ## Roadmap
 

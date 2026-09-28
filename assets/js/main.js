@@ -74,7 +74,7 @@
   var svgCache = null;
   function fetchMabel(){
     if(svgCache) return svgCache;
-    svgCache = fetch("assets/img/mabel-plush.svg", {cache:"force-cache"})
+    svgCache = fetch("/assets/img/mabel-plush.svg", {cache:"force-cache"})
       .then(function(r){ if(!r.ok) throw new Error("svg " + r.status); return r.text(); })
       .catch(function(){ return null; });
     return svgCache;

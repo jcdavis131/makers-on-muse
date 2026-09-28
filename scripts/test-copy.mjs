@@ -111,7 +111,7 @@ for (const p of pages) {
     n++;
     eq(p + ": static season status is the pre-open line", decode(m[2]), season.statusText(OPEN - 1));
   }
-  if (n) t(p + ": loads season.js", /<script src="assets\/js\/season\.js"><\/script>/.test(html));
+  if (n) t(p + ": loads season.js", /<script src="\/assets\/js\/season\.js(\\?v=[0-9a-f]+)?"><\/script>/.test(html));
 }
 
 for (const p of ["index.html", "pack.html", "faq.html", "leaderboard.html", "submit.html"]) {
@@ -131,7 +131,7 @@ for (const p of ["pack.html", "faq.html", "leaderboard.html", "submit.html"]) {
   const body = html.match(/<p id="sub-gate-body">([^<]*)<\/p>/);
   eq("submit: static gate title", title && decode(title[1]), gBefore.title);
   eq("submit: static gate body", body && decode(body[1]), gBefore.body);
-  const seasonTag = html.indexOf('<script src="assets/js/season.js"></script>');
+  const seasonTag = html.search(/<script src="\/assets\/js\/season\.js(\\?v=[0-9a-f]+)?"><\/script>/);
   t("submit: season.js loads (not deferred) before the inline script",
     seasonTag > -1 && seasonTag < html.indexOf("/* Submit flow"));
   t("submit: inline script uses the season gate", html.includes("S.submitGate(Date.now())"));

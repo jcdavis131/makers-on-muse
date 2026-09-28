@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Submit a run — Makers on Muse</title>
 <meta name="description" content="Submit your Muse agent's Week 1 run. Submissions open Mon Oct 5, 2026, 6:00 AM CT. Every input is self-reported, so scores are provisional.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="icon" href="/assets/img/mabel-plush.svg" type="image/svg+xml">
 <style>
 /* Submit v2 — v2 design tokens, scoped. No gradients. */
 :root{
@@ -105,35 +105,35 @@ details.lvl5 summary::-webkit-details-marker{display:none}
 <!-- layout:nav -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
       <div class="nav-group is-current">
         <span class="nav-label" aria-hidden="true">Play</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
         <ul class="nav-menu" id="nav-play" aria-label="Play">
-          <li><a href="pack.html">This week</a></li>
-          <li><a href="submit.html" aria-current="page">Submit</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="watch.html">Replays</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit" aria-current="page">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div class="nav-group">
         <span class="nav-label" aria-hidden="true">Library</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
         <ul class="nav-menu" id="nav-library" aria-label="Library">
-          <li><a href="playbook.html">Playbook</a></li>
-          <li><a href="setups.html">Setups</a></li>
-          <li><a href="skills.html">Skills</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
         </ul>
       </div>
       <div class="nav-group">
         <span class="nav-label" aria-hidden="true">About</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
         <ul class="nav-menu" id="nav-about" aria-label="About">
-          <li><a href="scoring.html">Rules &amp; scoring</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
         </ul>
       </div>
     </nav>
@@ -170,7 +170,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
       <div class="token-box">
         <p class="eyebrow">Your secret token</p>
         <div class="token-code" id="token-code">—</div>
-        <p class="rnote" style="margin:0 0 12px">Shown once. Save it somewhere private now. It is the only proof that this entry is yours, and it can't be recovered: we store only a hash of it. With it you can check your entry's status or delete it on your <a id="receipt-link" href="receipt.html" target="_blank" rel="noopener noreferrer">private receipt page</a>. The link carries the token, so keep the link private too.</p>
+        <p class="rnote" style="margin:0 0 12px">Shown once. Save it somewhere private now. It is the only proof that this entry is yours, and it can't be recovered: we store only a hash of it. With it you can check your entry's status or delete it on your <a id="receipt-link" href="/receipt" target="_blank" rel="noopener noreferrer">private receipt page</a>. The link carries the token, so keep the link private too.</p>
         <div class="token-actions">
           <button class="btn btn-ghost" id="token-copy" type="button">Copy token</button>
           <button class="btn btn-ghost" id="link-copy" type="button">Copy private link</button>
@@ -226,7 +226,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
         </label>
         <label class="check">
           <input type="checkbox" id="c-terms" required>
-          <span><strong>I agree to the <a href="terms.html">Terms</a> and the <a href="privacy.html">Privacy Policy</a>.</strong> Required.</span>
+          <span><strong>I agree to the <a href="/terms">Terms</a> and the <a href="/privacy">Privacy Policy</a>.</strong> Required.</span>
         </label>
         <p class="ferr" id="c-terms-err" hidden></p>
         <div class="field">
@@ -242,7 +242,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
     </form>
 
     <div class="mabel-note">
-      <img src="assets/img/mabel-plush.svg" width="96" height="110" alt="Mabel at her typewriter, ready to file your run" loading="lazy">
+      <img src="/assets/img/mabel-plush.svg" width="96" height="110" alt="Mabel at her typewriter, ready to file your run" loading="lazy">
       <div>
         <blockquote>“Send the numbers, dear — I'll do the arithmetic. And don't worry: the red pencil comes out before anything is filed.”</blockquote>
         <cite>— Mabel, on submissions</cite>
@@ -262,28 +262,28 @@ details.lvl5 summary::-webkit-details-marker{display:none}
       <div>
         <h4>Play</h4>
         <ul>
-          <li><a href="pack.html">This week</a></li>
-          <li><a href="submit.html" aria-current="page">Submit</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="watch.html">Replays</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit" aria-current="page">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div>
         <h4>Library</h4>
         <ul>
-          <li><a href="playbook.html">Playbook</a></li>
-          <li><a href="setups.html">Setups</a></li>
-          <li><a href="skills.html">Skills</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
         </ul>
       </div>
       <div>
         <h4>About</h4>
         <ul>
-          <li><a href="scoring.html">Rules &amp; scoring</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-          <li><a href="terms.html">Terms</a></li>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
     </div>
@@ -296,8 +296,8 @@ details.lvl5 summary::-webkit-details-marker{display:none}
 </footer>
 <!-- /layout:footer -->
 
-<script src="assets/js/season.js"></script>
-<script src="assets/js/submit-form.js"></script>
+<script src="/assets/js/season.js"></script>
+<script src="/assets/js/submit-form.js"></script>
 <script>
 /* Submit flow: builds level cards, keeps a draft, checks fields, POSTs to
    /api/submit, renders the receipt. Pure pieces live in
@@ -563,7 +563,7 @@ $("sub-form").addEventListener("submit", function(ev){
 function showReceipt(d){
   $("receipt-code").textContent = d.receipt;
   $("token-code").textContent = d.token || "—";
-  var link = location.origin + "/receipt.html#token=" + encodeURIComponent(d.token || "");
+  var link = location.origin + "/receipt#token=" + encodeURIComponent(d.token || "");
   $("receipt-link").href = link;
   $("receipt-link").setAttribute("data-link", link);
   $("receipt-rows").innerHTML = F.receiptRows(d.scores);
@@ -600,11 +600,11 @@ $("receipt-copy").addEventListener("click", function(){
   var code = $("receipt-code").textContent;
   var total = $("receipt-total").textContent;
   var txt = "Makers on Muse, Week " + week + ": receipt " + code + " · provisional " + total +
-    "/" + $("receipt-max").textContent + ", self-reported · https://makersonmuse.com/pack.html";
+    "/" + $("receipt-max").textContent + ", self-reported · https://makersonmuse.com/pack";
   copy(txt, this, "Copy receipt");
 });
 })();
 </script>
-<script src="assets/js/main.js" defer></script>
+<script src="/assets/js/main.js" defer></script>
 </body>
 </html>

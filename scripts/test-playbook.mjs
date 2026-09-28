@@ -79,12 +79,12 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
   eq("stats: workflows", Number(stat("workflows")), DATA.length);
   eq("stats: personas", Number(stat("personas")), g.persona.length);
   eq("stats: moments", Number(stat("moments")), g.moment.length);
-  const iD = PAGE.indexOf('<script src="assets/js/playbook-data.js"></script>');
-  const iP = PAGE.indexOf('<script src="assets/js/playbook.js"></script>');
-  const iM = PAGE.indexOf('<script src="assets/js/main.js"></script>');
+  const iD = PAGE.search(/<script src="\/assets\/js\/playbook-data\.js(\\?v=[0-9a-f]+)?"><\/script>/);
+  const iP = PAGE.search(/<script src="\/assets\/js\/playbook\.js(\\?v=[0-9a-f]+)?"><\/script>/);
+  const iM = PAGE.search(/<script src="\/assets\/js\/main\.js(\\?v=[0-9a-f]+)?"><\/script>/);
   t("page: loads data, then logic, then main.js", iD > -1 && iP > iD && iM > iP);
   t("page: no inline script (the data moved out)", !/<script>(?!\s*<\/script>)/.test(PAGE) && !/var PLAYBOOKS/.test(PAGE));
-  t("page: uses the shared stylesheet", PAGE.includes('<link rel="stylesheet" href="assets/css/main.css">'));
+  t("page: uses the shared stylesheet", /<link rel="stylesheet" href="\/assets\/css\/main\.css(\\?v=[0-9a-f]+)?">/.test(PAGE));
   t("page: no copy of the design tokens", !/:root\s*\{/.test(PAGE));
   t("page: a legend at #tags", /<section[^>]*id="tags"/.test(PAGE));
   for (const [tag, dd] of legend) {
@@ -105,11 +105,11 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
     const w = DATA.find((x) => x.id === id);
     t("home strip: " + id + " exists", Boolean(w));
     if (!w) continue;
-    eq("home strip: " + id + " links its permalink", href, "playbook.html?w=" + id);
+    eq("home strip: " + id + " links its permalink", href, "/playbook?w=" + id);
     eq("home strip: " + id + " title", decode(title), w.title);
     eq("home strip: " + id + " group and time", decode(step), P.human(w.group) + " · " + w.time);
   }
-  t("home: links the whole Playbook", idx.includes('<a class="btn btn-ghost" href="playbook.html">Browse all ' + DATA.length + " workflows</a>"));
+  t("home: links the whole Playbook", idx.includes('<a class="btn btn-ghost" href="/playbook">Browse all ' + DATA.length + " workflows</a>"));
 }
 
 /* ---------- 4. query string ---------- */
@@ -139,8 +139,9 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
   eq("q is trimmed and capped at 100", P.parseQuery("?q=" + encodeURIComponent("  " + "a".repeat(150) + " "), DATA).q.length, 100);
   eq("a leading ? is optional", P.parseQuery("track=moment", DATA).track, "moment");
   t("junk never throws", P.parseQuery(null, DATA).track === "all" && P.parseQuery("?%E0%A4%A", DATA).track === "all");
-  eq("permalink from a page URL", P.permalink("https://makersonmuse.com/playbook.html?track=persona#tags", "fridge-dinner-rescue"),
-    "https://makersonmuse.com/playbook.html?w=fridge-dinner-rescue");
+  eq("permalink from a page URL", P.permalink("https://makersonmuse.com/playbook?track=persona#tags", "fridge-dinner-rescue"),
+    "https://makersonmuse.com/playbook?w=fridge-dinner-rescue");
+  eq("permalink default is the clean path", P.permalink("", "grading-sprint"), "/playbook?w=grading-sprint");
 
   eq("filter: a permalink shows one workflow", P.filter(DATA, S({ w: "grading-sprint", track: "moment" })).map((w) => w.id), ["grading-sprint"]);
   eq("filter: all", P.filter(DATA, P.emptyState()).length, DATA.length);
@@ -166,11 +167,11 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
   const w = DATA.find((x) => x.id === "pre-dawn-briefing");
   const card = P.cardHtml(w);
   t("card: id attribute for the permalink", card.includes('id="w-pre-dawn-briefing"'));
-  t("card: title links the permalink", card.includes('<h3><a href="playbook.html?w=pre-dawn-briefing">The Pre-Dawn Briefing</a></h3>'));
+  t("card: title links the permalink", card.includes('<a href="/playbook?w=pre-dawn-briefing">The Pre-Dawn Briefing</a></h3>'));
   t("card: Copy sits in a header row above each prompt",
     (card.match(/<div class="pb-step-head"><span>Step \d<\/span><button type="button" class="pb-copy" aria-label="Copy step \d of [^"]+">Copy<\/button><\/div><pre>/g) || []).length === w.recipe.length);
   t("card: a Copy link button", card.includes('<button type="button" class="pb-link" data-id="pre-dawn-briefing">Copy link</button>'));
-  t("card: links Setups, not the old Meta page", card.includes('href="setups.html"') && !card.includes("meta.html"));
+  t("card: links Setups, not the old Meta page", card.includes('href="/setups"') && !card.includes("meta.html") && !card.includes('href="/meta"'));
   t("card: recipe closed by default, open for a permalink", !/<details class="pb-recipe" open>/.test(card) &&
     /<details class="pb-recipe" open>/.test(P.cardHtml(w, { open: true })));
   t("card: tags link the legend", card.includes('<a class="pb-tagchip" href="#tags">gmail</a>'));

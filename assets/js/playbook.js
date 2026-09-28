@@ -99,7 +99,7 @@
 
   /* permalink(pageUrl, id) -> the page's address with ?w=<id>. */
   function permalink(pageUrl, id) {
-    var base = String(pageUrl || "playbook.html").split("#")[0].split("?")[0];
+    var base = String(pageUrl || "/playbook").split("#")[0].split("?")[0];
     return base + "?w=" + encodeURIComponent(id);
   }
 
@@ -122,7 +122,7 @@
         '<button type="button" class="pb-copy" aria-label="Copy step ' + (i + 1) + " of " + esc(w.title) + '">Copy</button></div>' +
         "<pre><code>" + esc(s) + "</code></pre></li>";
     }).join("");
-    var link = permalink("playbook.html", w.id);
+    var link = permalink("/playbook", w.id);
     return '<article class="pb-card" id="w-' + esc(w.id) + '" data-id="' + esc(w.id) + '">' +
       '<div class="pb-card-top"><span class="pb-tag ' + tag + '">' + esc(human(w.group)) + "</span>" + dots(w.difficulty) + "</div>" +
       '<h3><a href="' + esc(link) + '">' + esc(w.title) + "</a></h3>" +
@@ -133,7 +133,7 @@
       '<p class="pb-test"><strong>The test</strong>' + esc(w.test) + "</p>" +
       '<p class="pb-proves"><strong>Proves</strong>' + esc(w.proves) + "</p>" +
       '<div class="pb-links"><button type="button" class="pb-link" data-id="' + esc(w.id) + '">Copy link</button>' +
-      '<a href="pack.html">Train this muscle &rarr;</a><a href="setups.html">Setup notes &rarr;</a></div>' +
+      '<a href="/pack">Train this muscle &rarr;</a><a href="/setups">Setup notes &rarr;</a></div>' +
       "</article>";
   }
 

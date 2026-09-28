@@ -22,7 +22,8 @@
 import { createRequire } from "node:module";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { ROOT, NAMES, pages, partial, render, stampPage } from "./stamp-layout.mjs";
+import { ROOT, NAMES, pages, partial, render, stampPage, pathFor } from "./stamp-layout.mjs";
+import { loadSite, route } from "./serve.mjs";
 
 const require = createRequire(import.meta.url);
 const packs = require("../lib/packs.js");
@@ -48,7 +49,7 @@ const FOOTER = partial("footer");
 
 /* ---------- 1. every page carries the stamped partials ---------- */
 {
-  const expected = ["about.html", "faq.html", "index.html", "leaderboard.html", "pack.html", "playbook.html",
+  const expected = ["404.html", "about.html", "faq.html", "index.html", "leaderboard.html", "pack.html", "playbook.html",
     "privacy.html", "receipt.html", "scoring.html", "setups.html", "skills.html", "submit.html", "terms.html", "watch.html"];
   eq("the site's pages", PAGES, expected);
   for (const p of PAGES) {
@@ -60,8 +61,8 @@ const FOOTER = partial("footer");
       html.indexOf("<!-- layout:nav -->") < html.indexOf("<main") && html.indexOf("</main>") < html.indexOf("<!-- layout:footer -->"));
     t(p + ": one <header> and one <footer>", (html.match(/<header\b/g) || []).length === 1 && (html.match(/<footer\b/g) || []).length === 1);
     t(p + ": skip link to #main, and a main#main", html.includes('<a class="skip" href="#main">') && html.includes('<main id="main">'));
-    t(p + ": loads main.js", /<script src="assets\/js\/main\.js"( defer)?><\/script>/.test(html));
-    t(p + ": loads main.css", html.includes('<link rel="stylesheet" href="assets/css/main.css">'));
+    t(p + ": loads main.js", /<script src="\/assets\/js\/main\.js(\?v=[0-9a-f]+)?"( defer)?><\/script>/.test(html));
+    t(p + ": loads main.css", /<link rel="stylesheet" href="\/assets\/css\/main\.css(\?v=[0-9a-f]+)?">/.test(html));
   }
   // The stamp itself: a drifted page is caught, and --write fixes it.
   const page = read("faq.html");
@@ -87,10 +88,10 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
     [["nav-library", "Library"], ["nav-library", "Library"], "Library"],
     [["nav-about", "About"], ["nav-about", "About"], "About"]
   ]);
-  eq("Play group", got[0].links, [["pack.html", "This week"], ["submit.html", "Submit"], ["leaderboard.html", "Leaderboard"], ["watch.html", "Replays"]]);
-  eq("Library group", got[1].links, [["playbook.html", "Playbook"], ["setups.html", "Setups"], ["skills.html", "Skills"]]);
-  eq("About group", got[2].links, [["scoring.html", "Rules & scoring"], ["faq.html", "FAQ"], ["about.html", "About"]]);
-  t("nav: brand links home", NAV.includes('<a class="brand" href="index.html">'));
+  eq("Play group", got[0].links, [["/pack", "This week"], ["/submit", "Submit"], ["/leaderboard", "Leaderboard"], ["/watch", "Replays"]]);
+  eq("Library group", got[1].links, [["/playbook", "Playbook"], ["/setups", "Setups"], ["/skills", "Skills"]]);
+  eq("About group", got[2].links, [["/scoring", "Rules & scoring"], ["/faq", "FAQ"], ["/about", "About"]]);
+  t("nav: brand links home", NAV.includes('<a class="brand" href="/">'));
   t("nav: Menu toggle controls the link panel", NAV.includes('<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>') &&
     NAV.includes('<nav class="nav-links" id="navlinks" aria-label="Primary">'));
   t("nav: no aria-current in the partial itself", !NAV.includes("aria-current") && !FOOTER.includes("aria-current"));
@@ -99,23 +100,25 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
   t("footer: the trademark line, word for word", ft.includes(TRADEMARK));
   t("footer: the week line", ft.includes("Season 1 · Week 1: Mon Oct 5 – Sun Oct 11, 2026, closes 11:59 PM CT"));
   const fl = hrefs(FOOTER).map((x) => x[0]);
-  for (const h of ["pack.html", "submit.html", "leaderboard.html", "watch.html", "playbook.html", "setups.html", "skills.html",
-    "scoring.html", "faq.html", "about.html", "privacy.html", "terms.html", "https://github.com/jcdavis131/makers-on-muse"]) {
+  for (const h of ["/pack", "/submit", "/leaderboard", "/watch", "/playbook", "/setups", "/skills",
+    "/scoring", "/faq", "/about", "/privacy", "/terms", "https://github.com/jcdavis131/makers-on-muse"]) {
     t("footer links " + h, fl.includes(h));
   }
   t("footer: names both licenses", ft.includes("MIT License") && ft.includes("CC BY 4.0"));
 
   // Current-page marking, per page.
-  const navLinks = hrefs(NAV).map((x) => x[0]).filter((h) => h !== "index.html");
+  const navLinks = hrefs(NAV).map((x) => x[0]).filter((h) => h !== "/");
+  eq("clean paths", [pathFor("index.html"), pathFor("pack.html"), pathFor("404.html")], ["/", "/pack", "/404"]);
   for (const p of PAGES) {
+    const path = pathFor(p);
     const nav = render("nav", p);
     const marked = [...nav.matchAll(/<a href="([^"]+)" aria-current="page">/g)].map((m) => m[1]);
-    eq(p + ": nav marks only its own link", marked, navLinks.includes(p) ? [p] : []);
+    eq(p + ": nav marks only its own link", marked, navLinks.includes(path) ? [path] : []);
     const cur = [...nav.matchAll(/<div class="nav-group is-current">([\s\S]*?)<\/div>/g)];
-    t(p + ": its group, and only its group, is current", navLinks.includes(p) ? cur.length === 1 && cur[0][1].includes('href="' + p + '"') : cur.length === 0);
+    t(p + ": its group, and only its group, is current", navLinks.includes(path) ? cur.length === 1 && cur[0][1].includes('href="' + path + '"') : cur.length === 0);
     const foot = render("footer", p);
     const fm = [...foot.matchAll(/aria-current="page"/g)].length;
-    t(p + ": footer marks its own link when listed", fm === (fl.includes(p) ? 1 : 0));
+    t(p + ": footer marks its own link when listed", fm === (fl.includes(path) ? 1 : 0));
   }
 }
 
@@ -123,20 +126,26 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
 {
   const ids = {};
   for (const p of PAGES) ids[p] = new Set([...read(p).matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+  // Links resolve the way Vercel serves them (scripts/serve.mjs applies
+  // vercel.json): a clean path, no redirect on the way.
+  const site = loadSite();
+  const served = (h) => { const r = route(site, { url: h }); return r.status === 200 && !r.location; };
   for (const [h] of hrefs(NAV + FOOTER)) {
     if (/^https?:/.test(h)) continue;
-    t("layout link target exists: " + h, existsSync(join(ROOT, h)));
+    t("layout link is served as is: " + h, served(h));
   }
+  const fileOf = (path) => (path === "/" ? "index.html" : path.slice(1) + ".html");
   for (const p of PAGES) {
     const html = read(p);
     t(p + ": no link to meta.html", !/href="\/?meta(\.html)?["#?]/.test(html));
-    for (const m of html.matchAll(/href="([a-z0-9-]+\.html)?#([A-Za-z][\w-]*)"/g)) {
-      const target = m[1] || p;
+    t(p + ": no link to a .html address (each one is a 308 under cleanUrls)", !/href="\/?[a-z0-9-]+\.html/.test(html));
+    for (const m of html.matchAll(/href="(\/[a-z0-9-]*)?#([A-Za-z][\w-]*)"/g)) {
+      const target = m[1] ? fileOf(m[1]) : p;
       t(p + ": link " + (m[1] || "") + "#" + m[2] + " points at a page and an id that exist",
         existsSync(join(ROOT, target)) && ids[target] && ids[target].has(m[2]));
     }
-    for (const m of html.matchAll(/href="([a-z0-9-]+\.html)(?:[?#][^"]*)?"/g)) {
-      t(p + ": link target exists: " + m[1], existsSync(join(ROOT, m[1])));
+    for (const m of html.matchAll(/href="(\/[a-z0-9-]*)(?:[?#][^"]*)?"/g)) {
+      t(p + ": link target is served: " + m[1], served(m[1]));
     }
   }
   t("meta.html is gone (renamed to setups.html)", !existsSync(join(ROOT, "meta.html")) && existsSync(join(ROOT, "setups.html")));
@@ -147,10 +156,9 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
     t("vercel.json: " + src + " redirects permanently to /setups",
       redirects.some((r) => r.source === src && r.destination === "/setups" && r.permanent === true));
   }
-  const rewrites = vj.rewrites || [];
+  t("vercel.json: clean URLs on, no trailing slash, no leftover rewrites", vj.cleanUrls === true && vj.trailingSlash === false && !vj.rewrites);
   for (const name of ["receipt", "setups", "skills", "about", "privacy", "terms"]) {
-    t("vercel.json: /" + name + " serves " + name + ".html",
-      rewrites.some((r) => r.source === "/" + name && r.destination === "/" + name + ".html") && existsSync(join(ROOT, name + ".html")));
+    t("/" + name + " serves " + name + ".html", served("/" + name) && route(site, { url: "/" + name }).file === join(ROOT, name + ".html"));
   }
   t("vercel.json: live-runs still never deploys", vj.git && vj.git.deploymentEnabled && vj.git.deploymentEnabled["live-runs"] === false);
   t(".vercelignore: partials are repo-only", /^\/partials\/$/m.test(read(".vercelignore")));
@@ -189,7 +197,7 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
     /Never the answers/.test(read("api/receipt.js")));
   t("privacy: no blanket \"don't share\" claim next to the processors", !/sell or share/i.test(pv) && pv.includes("We share it only with the services below"));
   t("privacy: token kept as a hash", pv.includes("We keep the hash, not the token"));
-  t("privacy: deletion by token on the receipt page", /href="receipt\.html"/.test(read("privacy.html")) && pv.includes("choose Delete"));
+  t("privacy: deletion by token on the receipt page", /href="\/receipt"/.test(read("privacy.html")) && pv.includes("choose Delete"));
   t("privacy: drafts stay in the browser without contact or token", pv.includes("leaves out your contact email and your token"));
   for (const [name, url] of [
     ["Vercel", "https://vercel.com/legal/privacy-notice"],
@@ -230,7 +238,7 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
   t("setups: title and heading", read("setups.html").includes("<title>Setups — Makers on Muse</title>") && read("setups.html").includes("<h1>Setups</h1>"));
   t("setups: says sharing isn't built", st.includes("Sharing a Setup isn't built yet"));
   t("setups: no usage numbers", !/usage:|top-10/i.test(st));
-  t("setups: points Muse Code users at Skills", /href="skills\.html"/.test(read("setups.html")));
+  t("setups: points Muse Code users at Skills", /href="\/skills"/.test(read("setups.html")));
 
   const sk = read("skills.html");
   const skt = text(sk);
@@ -243,11 +251,11 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
 
   const idx = read("index.html");
   const hero = idx.slice(idx.indexOf('<section class="hero">'), idx.indexOf("</section>", idx.indexOf('<section class="hero">')));
-  const iPack = hero.indexOf('href="pack.html"'), iBook = hero.indexOf('href="playbook.html"'), iMabel = hero.indexOf("data-mabel");
+  const iPack = hero.indexOf('href="/pack"'), iBook = hero.indexOf('href="/playbook"'), iMabel = hero.indexOf("data-mabel");
   t("home hero: pack and Playbook buttons, both before Mabel", iPack > -1 && iBook > -1 && iMabel > iPack && iMabel > iBook);
   t("home hero: covers testing and sharing", text(hero).includes("Test your Muse. Share what works."));
-  t("home: a library section with both tracks", /href="setups\.html"/.test(idx) && /href="skills\.html"/.test(idx));
-  t("home: the L1-L4 cards link to their levels", ["l1", "l2", "l3", "l4"].every((l) => idx.includes('href="pack.html#' + l + '"')));
+  t("home: a library section with both tracks", /href="\/setups"/.test(idx) && /href="\/skills"/.test(idx));
+  t("home: the L1-L4 cards link to their levels", ["l1", "l2", "l3", "l4"].every((l) => idx.includes('href="/pack#' + l + '"')));
 }
 
 /* ---------- 6. nav script and styles ---------- */

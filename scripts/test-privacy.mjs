@@ -35,7 +35,7 @@ function t(name, cond) {
   const cfg = existsSync(join(ROOT, dir, "config.yml")) ? read(dir + "/config.yml") : "";
   t("config.yml exists", cfg.length > 0);
   t("config.yml turns blank issues off", /^blank_issues_enabled:\s*false\s*$/m.test(cfg));
-  t("config.yml links the submit page", /url:\s*https:\/\/makersonmuse\.com\/submit\.html\s*$/m.test(cfg));
+  t("config.yml links the submit page", /url:\s*https:\/\/makersonmuse\.com\/submit\s*$/m.test(cfg));
   t("config.yml warns against pasting transcripts", /transcript/i.test(cfg));
 }
 

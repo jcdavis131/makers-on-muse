@@ -247,13 +247,13 @@
       ? s.exhibitions.map(function (n) { return "L" + esc(n); }).join(", ") + (s.exhibitions.length > 1 ? " are unscored exhibitions. " : " is an unscored exhibition. ")
       : "";
     return '<div class="run-end">' +
-      '<img src="assets/img/mabel-plush.svg" width="132" height="152" alt="Mabel stamping the final scores into the minutes">' +
+      '<img src="/assets/img/mabel-plush.svg" width="132" height="152" alt="Mabel stamping the final scores into the minutes">' +
       '<p class="eyebrow">Final minutes' + (view.label ? " · " + esc(view.label) : "") + "</p>" +
       '<div class="big-score">' + esc(s.total) + (s.maxTotal !== null ? '<span class="small muted">/' + esc(s.maxTotal) + "</span>" : "") + "</div>" +
       (starLine ? '<div class="stars" role="img" aria-label="' + esc(s.stars) + " of " + esc(s.maxStars) + ' stars">' + starLine + "</div>" : "") +
       '<p class="muted">' + starText + exhibit + "Every score here is self-reported and " + (view.demo ? "unofficial." : "provisional.") + "</p>" +
       '<p class="small muted">' + facts.join(" · ") + "</p>" +
-      '<div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="pack.html">See the pack</a></div>' +
+      '<div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/pack">See the pack</a></div>' +
       "</div>";
   }
 

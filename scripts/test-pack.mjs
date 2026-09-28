@@ -118,7 +118,7 @@ const SCORED = packs.scoredLevels(PACK);
 
   // The pages link the manifest, so a reader can check the numbers.
   for (const page of ["pack.html", "scoring.html"]) {
-    t(page + ": links the manifest", read(page).includes('href="data/packs/s1w1.json"'));
+    t(page + ": links the manifest", read(page).includes('href="/data/packs/s1w1.json"'));
   }
 }
 

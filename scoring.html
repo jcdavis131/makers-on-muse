@@ -5,44 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How scoring works — Makers on Muse</title>
 <meta name="description" content="How a Makers on Muse level is scored: correctness is a gate, then a per-level blend of token efficiency, time efficiency and procedure. Scores are self-reported and provisional for now.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/mabel.css">
-<link rel="icon" href="assets/img/mabel-plush.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/mabel.css">
+<link rel="icon" href="/assets/img/mabel-plush.svg" type="image/svg+xml">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <!-- layout:nav -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
     <nav class="nav-links" id="navlinks" aria-label="Primary">
       <div class="nav-group">
         <span class="nav-label" aria-hidden="true">Play</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
         <ul class="nav-menu" id="nav-play" aria-label="Play">
-          <li><a href="pack.html">This week</a></li>
-          <li><a href="submit.html">Submit</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="watch.html">Replays</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div class="nav-group">
         <span class="nav-label" aria-hidden="true">Library</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
         <ul class="nav-menu" id="nav-library" aria-label="Library">
-          <li><a href="playbook.html">Playbook</a></li>
-          <li><a href="setups.html">Setups</a></li>
-          <li><a href="skills.html">Skills</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
         </ul>
       </div>
       <div class="nav-group is-current">
         <span class="nav-label" aria-hidden="true">About</span>
         <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
         <ul class="nav-menu" id="nav-about" aria-label="About">
-          <li><a href="scoring.html" aria-current="page">Rules &amp; scoring</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="/scoring" aria-current="page">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
         </ul>
       </div>
     </nav>
@@ -55,12 +55,12 @@
     <div class="wrap-narrow">
       <p class="eyebrow">The composite score</p>
       <h1>Correctness opens the door.<br>Efficiency decides the room.</h1>
-      <p class="small muted">This page is how scores are computed. The rules of play are at the top of the <a href="faq.html#rules">FAQ</a>.</p>
+      <p class="small muted">This page is how scores are computed. The rules of play are at the top of the <a href="/faq#rules">FAQ</a>.</p>
       <p class="lede">Every level scores 0&ndash;<span data-pack="scoring.level_max">100</span>. Correctness is a gate, not a weight: a wrong answer scores zero no matter how fast or cheap it was. Among correct answers, three dimensions set the score.</p>
 
       <div class="status-note">
         <p><strong>What is true today.</strong> Every input is self-reported. On the submit form you attest correctness, estimate tokens, report seconds and rate your own procedure. Scores are provisional until server grading ships.</p>
-        <p><strong>The totals.</strong> Four scored levels (L1&ndash;L4), up to <span data-pack="scoring.level_max">100</span> points each, so up to <span data-pack="scoring.max_total">400</span> points and 0&ndash;<span data-pack="scoring.max_stars">4</span> stars a week. L5 is an unscored exhibition build. These numbers come from the <a href="data/packs/s1w1.json">Week 1 pack manifest</a>.</p>
+        <p><strong>The totals.</strong> Four scored levels (L1&ndash;L4), up to <span data-pack="scoring.level_max">100</span> points each, so up to <span data-pack="scoring.max_total">400</span> points and 0&ndash;<span data-pack="scoring.max_stars">4</span> stars a week. L5 is an unscored exhibition build. These numbers come from the <a href="/data/packs/s1w1.json">Week 1 pack manifest</a>.</p>
       </div>
 
       <div class="formula" role="math" aria-label="Level score equals correctness times a weighted blend of token efficiency, time efficiency and procedure. The weights change by level.">
@@ -155,28 +155,28 @@
       <div>
         <h4>Play</h4>
         <ul>
-          <li><a href="pack.html">This week</a></li>
-          <li><a href="submit.html">Submit</a></li>
-          <li><a href="leaderboard.html">Leaderboard</a></li>
-          <li><a href="watch.html">Replays</a></li>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
         </ul>
       </div>
       <div>
         <h4>Library</h4>
         <ul>
-          <li><a href="playbook.html">Playbook</a></li>
-          <li><a href="setups.html">Setups</a></li>
-          <li><a href="skills.html">Skills</a></li>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills">Skills</a></li>
         </ul>
       </div>
       <div>
         <h4>About</h4>
         <ul>
-          <li><a href="scoring.html" aria-current="page">Rules &amp; scoring</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-          <li><a href="terms.html">Terms</a></li>
+          <li><a href="/scoring" aria-current="page">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
         </ul>
       </div>
     </div>
@@ -188,6 +188,6 @@
   </div>
 </footer>
 <!-- /layout:footer -->
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>
