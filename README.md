@@ -80,7 +80,7 @@ npm run check:deploy                       # https://makersonmuse.com by default
 node scripts/check-deploy.mjs <preview-url> --no-hosts
 ```
 
-`scripts/check-deploy.mjs` sends GETs only and exits 1 unless `/api/health` reports storage reachable. Until the database is connected it fails on that line, on purpose; the other lines still show whether the rest of the deploy is right: the health check cached at the edge, clean URLs and the `.html` 308, the branded 404, the security headers, `robots.txt`, `sitemap.xml`, the favicon and share image, the one-year cache on versioned CSS, repo-only files not served, and the www and vercel.app 308s to the apex. Whether those redirects keep the query string is reported as a note, not a failure. `node scripts/check-health.mjs <base>` checks storage alone.
+`scripts/check-deploy.mjs` sends GETs only and exits 1 unless `/api/health` reports storage reachable. Until the database is connected it fails on that line, on purpose; the other lines still show whether the rest of the deploy is right: clean URLs and the `.html` 308, the branded 404, the security headers on the home page, `robots.txt`, `sitemap.xml`, the favicon and share image, the one-year cache on versioned CSS, repo-only files not served, and the www and vercel.app 308s to the apex. Three things are reported as notes, never failures, because they depend on how Vercel behaves rather than on this repo: whether the health check is cached at the edge (Vercel keeps `s-maxage` to itself, so the sign is `x-vercel-cache: HIT` on a repeat request), the security headers on the 404, and whether the host redirects keep the query string. `node scripts/check-health.mjs <base>` checks storage alone.
 
 **Keys.** Every key has a TTL.
 

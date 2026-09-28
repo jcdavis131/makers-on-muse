@@ -11,13 +11,15 @@
    /api/health says "missing" and every submission gets a 503. The other
    lines still show whether the rest of the deploy is right.
 
-   Checks: storage reachable and the health check cached at the edge;
-   the home page, a clean URL and its .html 308; the branded 404; the
-   security headers; robots.txt, sitemap.xml, the favicon and the share
-   image; a versioned stylesheet with its one-year cache; repo-only files
-   not served; www and makers-on-muse.vercel.app 308 to the apex with the
-   path. Whether the query string survives that redirect is reported but
-   doesn't fail the run. Exit 0 only when every required check passes. */
+   Required: storage reachable; the home page, a clean URL and its .html
+   308; the branded 404; the security headers on the home page;
+   robots.txt, sitemap.xml, the favicon and the share image; a versioned
+   stylesheet with its one-year cache; repo-only files not served; www
+   and makers-on-muse.vercel.app 308 to the apex with the path.
+   Reported as notes, never failures (so none can hide the storage line):
+   whether the health check is cached at the edge, the security headers
+   on the 404, and whether the host redirects keep the query string.
+   Exit 0 only when every required check passes. */
 import { pathToFileURL } from "node:url";
 import { checkHealth } from "./check-health.mjs";
 
@@ -48,8 +50,15 @@ export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000 } = {
   // Storage, the reason this script exists.
   const h = await checkHealth(base, { timeoutMs });
   add("/api/health: storage reachable", h.ok, h.detail);
+  // Edge caching. Vercel's CDN keeps s-maxage to itself and sends the
+  // browser its own Cache-Control, so on Vercel the sign is x-vercel-cache
+  // HIT or STALE on a repeat request; elsewhere, s-maxage in the header.
+  // A note, not a failure: it must never hide the storage line.
+  await get("/api/health");
   const hr = await get("/api/health");
-  add("/api/health: cached at the edge (s-maxage)", /s-maxage=\d+/.test(hr.headers.get("cache-control") || ""), hr.headers.get("cache-control") || got(hr));
+  const edge = (hr.headers.get("x-vercel-cache") || "").toUpperCase();
+  add("/api/health: cached at the edge", /^(HIT|STALE)$/.test(edge) || /s-maxage=\d+/.test(hr.headers.get("cache-control") || ""),
+    "x-vercel-cache: " + (edge || "(none)") + ", cache-control: " + (hr.headers.get("cache-control") || got(hr)), false);
 
   // Pages and clean URLs.
   const home = await get("/");
@@ -62,17 +71,18 @@ export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000 } = {
   const nope = await get("/nope-" + Date.now().toString(36));
   add("an unknown address gets the branded 404", nope.status === 404 && nope.text.includes("Page not found"), got(nope));
 
-  // Security headers, on a page and on the 404.
-  for (const [label, r] of [["/", home], ["the 404", nope]]) {
+  // Security headers: required on a page, a note on the 404 (the local
+  // emulator assumes Vercel adds them to its 404.html fallback too).
+  for (const [label, r, required] of [["/", home, true], ["the 404", nope, false]]) {
     const csp = r.headers.get("content-security-policy") || "";
-    add(label + ": CSP allows scripts from this site only", /(^|;)\s*script-src 'self'\s*(;|$)/.test(csp), csp || got(r));
+    add(label + ": CSP allows scripts from this site only", /(^|;)\s*script-src 'self'\s*(;|$)/.test(csp), csp || got(r), required);
     add(label + ": CSP forbids framing", /frame-ancestors 'none'/.test(csp) && r.headers.get("x-frame-options") === "DENY",
-      "x-frame-options: " + r.headers.get("x-frame-options"));
+      "x-frame-options: " + r.headers.get("x-frame-options"), required);
     add(label + ": nosniff, referrer and permissions policies",
       r.headers.get("x-content-type-options") === "nosniff" &&
       r.headers.get("referrer-policy") === "strict-origin-when-cross-origin" &&
       /camera=\(\)/.test(r.headers.get("permissions-policy") || ""),
-      [r.headers.get("x-content-type-options"), r.headers.get("referrer-policy"), r.headers.get("permissions-policy")].join(" | "));
+      [r.headers.get("x-content-type-options"), r.headers.get("referrer-policy"), r.headers.get("permissions-policy")].join(" | "), required);
   }
 
   // Discovery files and images.

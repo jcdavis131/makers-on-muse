@@ -45,7 +45,11 @@ try {
   require("../api/_lib.js").resetStore();
   res = await checkDeploy(srv.url, { hosts: localHosts });
   t("with storage reachable the check passes", res.ok === true, failed(res));
-  t("and storage is the first line", res.results[0].name === "/api/health: storage reachable" && res.results[0].ok);
+  t("and storage is the first line", res.results[0].name === "/api/health: storage reachable" && res.results[0].ok && res.results[0].required);
+  const notes = res.results.filter((r) => !r.required).map((r) => r.name);
+  t("only platform-dependent lines are notes, so none can fail the run", JSON.stringify(notes) === JSON.stringify([
+    "/api/health: cached at the edge", "the 404: CSP allows scripts from this site only", "the 404: CSP forbids framing",
+    "the 404: nosniff, referrer and permissions policies", "www.makersonmuse.com keeps the query string", "makers-on-muse.vercel.app keeps the query string"]), notes);
   const cmds = [...new Set(emu.log.map((c) => String(c).toUpperCase()))];
   t("it only pinged storage, nothing written (" + cmds.join(",") + ")", cmds.length > 0 && cmds.every((c) => c === "PING"), cmds);
 } finally {
@@ -65,7 +69,7 @@ try {
   const res = await checkDeploy(base, { hosts: [{ name: "www", url: base, headers: {} }] });
   const f = failed(res);
   t("a wrong deploy fails", res.ok === false);
-  for (const want of ["/api/health: cached at the edge (s-maxage)", "/ serves the home page", "/pack.html 308s to /pack",
+  for (const want of ["/api/health: cached at the edge", "/ serves the home page", "/pack.html 308s to /pack",
     "an unknown address gets the branded 404", "/: CSP allows scripts from this site only", "/: CSP forbids framing",
     "/robots.txt names the sitemap", "/scripts/check-deploy.mjs is not served", "www 308s to the apex, path kept"]) {
     t("it catches: " + want, f.includes(want), f);
