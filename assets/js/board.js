@@ -37,7 +37,7 @@
     var l = null;
     for (var i = 0; i < (levels || []).length; i++) if (levels[i] && levels[i].n === n) l = levels[i];
     if (!l) return "—";
-    if (l.skipped) return '<span title="Didn’t attempt" aria-label="Didn’t attempt">—</span>';
+    if (l.skipped) return '<span title="Didn’t attempt"><span aria-hidden="true">—</span><span class="sr-only">Didn’t attempt</span></span>';
     return esc(l.total);
   }
 

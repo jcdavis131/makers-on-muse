@@ -51,7 +51,13 @@ try {
     "/api/health: cached at the edge", "the 404: CSP allows scripts from this site only", "the 404: CSP forbids framing",
     "the 404: nosniff, referrer and permissions policies", "www.makersonmuse.com keeps the query string", "makers-on-muse.vercel.app keeps the query string"]), notes);
   const cmds = [...new Set(emu.log.map((c) => String(c).toUpperCase()))];
-  t("it only pinged storage, nothing written (" + cmds.join(",") + ")", cmds.length > 0 && cmds.every((c) => c === "PING"), cmds);
+  // /api/health runs the per-IP rate limiter (its Lua script, EVALSHA or
+  // EVAL, which keeps a counter that expires in about 2 minutes) and one PING.
+  t("it only pinged storage, nothing written but the rate limiter's counter (" + cmds.join(",") + ")",
+    cmds.includes("PING") && cmds.every((c) => c === "PING" || c === "EVAL" || c === "EVALSHA"), cmds);
+  const stored = emu.keys().map((k) => k.key);
+  t("the only keys left are rate-limit counters, each with a TTL", stored.every((k) => k.startsWith("mom:rl:health:")) &&
+    emu.keys().every((k) => k.exp !== null), emu.keys());
 } finally {
   await srv.close();
   if (upstash) await upstash.close();
@@ -96,9 +102,55 @@ try {
   t("CI: installs from the lockfile, runs npm test, then the link check",
     ci.indexOf("run: npm ci") > -1 && ci.indexOf("run: npm ci") < ci.indexOf("run: npm test") && ci.indexOf("run: npm test") < ci.indexOf("run: npm run check:links"));
   const pkg = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
-  for (const s of ["test", "check:links", "check:deploy", "check:health", "serve", "build"]) t("npm script: " + s, typeof pkg.scripts[s] === "string");
+  for (const s of ["test", "check:links", "check:deploy", "check:health", "serve", "stamp"]) t("npm script: " + s, typeof pkg.scripts[s] === "string");
   const every = readFileSync(join(ROOT, "scripts", "check-deploy.mjs"), "utf8");
   t("check-deploy only GETs", !/method:\s*"(POST|PUT|PATCH|DELETE)"/.test(every) && /method: "GET"/.test(every));
+
+  // Vercel runs no build. With the "Other" preset and no build command,
+  // Vercel runs package.json's "vercel-build" or "build" script if there
+  // is one, then wants an output directory named public. The stamps need
+  // scripts/ and partials/, which .vercelignore keeps off the deploy, and
+  // their output is committed. So none of those scripts may exist.
+  const { existsSync } = await import("node:fs");
+  for (const s of ["build", "vercel-build", "now-build"]) {
+    t("no npm \"" + s + "\" script (Vercel would run it on deploy)", !(s in pkg.scripts), pkg.scripts[s]);
+  }
+  t("no public/ directory (Vercel would serve it instead of the root)", !existsSync(join(ROOT, "public")));
+  const vj = JSON.parse(readFileSync(join(ROOT, "vercel.json"), "utf8"));
+  for (const k of ["buildCommand", "outputDirectory", "framework", "installCommand"]) {
+    t("vercel.json doesn't set " + k, !(k in vj));
+  }
+
+  // The post-deploy workflow: production deploys only, GET only, no secrets.
+  const pd = readFileSync(join(ROOT, ".github", "workflows", "post-deploy.yml"), "utf8").replace(/\r\n/g, "\n");
+  t("post-deploy: runs on deployment_status", /^on:\n  deployment_status:/m.test(pd));
+  t("post-deploy: only successful production deploys",
+    pd.includes("github.event.deployment_status.state == 'success'") && pd.includes("startsWith(github.event.deployment.environment, 'Production')"));
+  t("post-deploy: read-only token, no secrets", /^permissions:\n  contents: read/m.test(pd) && !/secrets\./.test(pd));
+  t("post-deploy: runs check-deploy against the apex",
+    /run: node scripts\/check-deploy\.mjs https:\/\/makersonmuse\.com \$STORAGE_FLAG/.test(pd));
+  t("post-deploy: storage \"missing\" is a note only until MOM_STORAGE_CONNECTED is true",
+    pd.includes("vars.MOM_STORAGE_CONNECTED != 'true' && '--allow-missing-storage'"));
+}
+
+/* 6. --allow-missing-storage: "missing" becomes a note; "unreachable" still fails */
+{
+  const mk = (storage) => http.createServer((req, res) => {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ ok: true, storage }));
+  });
+  for (const [storage, wantRequired] of [["missing", false], ["unreachable", true]]) {
+    const s = mk(storage);
+    await new Promise((r) => s.listen(0, "127.0.0.1", r));
+    const base = "http://127.0.0.1:" + s.address().port;
+    const res = await checkDeploy(base, { hosts: [], allowMissingStorage: true });
+    const line = res.results[0];
+    t("allowMissingStorage: storage " + storage + (wantRequired ? " still fails" : " is a note"),
+      line.name === "/api/health: storage reachable" && line.ok === false && line.required === wantRequired, line);
+    const strict = await checkDeploy(base, { hosts: [] });
+    t("without the flag, storage " + storage + " fails", strict.results[0].required === true && strict.results[0].ok === false);
+    await new Promise((r) => s.close(r));
+  }
 }
 
 console.log("\n" + pass + " passed, " + fail + " failed");

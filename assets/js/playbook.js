@@ -127,7 +127,7 @@
       '<div class="pb-card-top"><span class="pb-tag ' + tag + '">' + esc(human(w.group)) + "</span>" + dots(w.difficulty) + "</div>" +
       '<h3><a href="' + esc(link) + '">' + esc(w.title) + "</a></h3>" +
       '<p class="pb-time">' + esc(w.time) + "</p>" +
-      '<div class="pb-setup" aria-label="Setup">' + setup + "</div>" +
+      '<div class="pb-setup" role="group" aria-label="Setup">' + setup + "</div>" +
       (w.note ? '<p class="pb-note-card">' + esc(w.note) + "</p>" : "") +
       '<details class="pb-recipe"' + (opts.open ? " open" : "") + "><summary>Recipe · " + w.recipe.length + " steps</summary><ol>" + steps + "</ol></details>" +
       '<p class="pb-test"><strong>The test</strong>' + esc(w.test) + "</p>" +
@@ -289,6 +289,19 @@
       });
 
       syncUI(); render(); syncUrl();
+
+      // A permalink (?w=<id>) shows one workflow, below the hero and the
+      // filters. Bring the "one workflow" notice and the card into view
+      // and put focus on the card's link, so the visitor sees what the
+      // link was for.
+      if (state.w) {
+        var linked = document.getElementById("w-" + state.w);
+        var linkedA = linked && linked.querySelector("h3 a");
+        if (linked) (single || linked).scrollIntoView({ block: "start" });
+        if (linkedA) {
+          try { linkedA.focus({ preventScroll: true }); } catch (e) { linkedA.focus(); }
+        }
+      }
     };
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
     else run();

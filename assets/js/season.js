@@ -59,7 +59,7 @@
     var wk = current(now);
     var s = status(now, wk);
     var name = "Week " + wk.week;
-    if (s === "before") return name + " opens " + wk.opensLabel + ".";
+    if (s === "before") return name + " opens " + wk.opensLabel + " and closes " + wk.closesLabel + ".";
     if (s === "open") return name + " is open until " + wk.closesLabel + ".";
     return name + " closed " + wk.closesLabel + ".";
   }

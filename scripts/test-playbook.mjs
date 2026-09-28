@@ -55,6 +55,17 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
     const all = [w.title, w.test, w.proves, w.note || "", ...w.recipe].join(" ");
     t(w.id + ": names no maps, flight-tracking or photo-library connector",
       !/\bmaps?\b|flightaware|photo library|media library/i.test(all), all.match(/\bmaps?\b|flightaware|photo library|media library/i));
+    // A test that needs a live lookup (live data, official rules, real
+    // places or flights, what is open now) needs the browser tag.
+    const LIVE = /\b(live|official|real (places|flight)|actually open|real estimate)\b/i;
+    if (LIVE.test(w.test)) t(w.id + ": its test needs a live lookup, so it carries the browser tag", w.setup.includes("browser"), w.setup);
+  }
+  {
+    const pod = DATA.find((w) => w.id === "rolling-podcast-producer");
+    t("rolling-podcast-producer: the recipe gives Muse the route its test checks", /\[START\] to \[END\]/.test(pod.recipe[0]), pod.recipe[0]);
+    const trip = DATA.find((w) => w.id === "international-trip-handled");
+    t("international-trip-handled: the player's own dates and city are placeholders",
+      /\[OUT DATE\]/.test(trip.recipe[0]) && /\[HOME CITY\]/.test(trip.recipe[0]) && !/\bOct(ober)? \d/.test(trip.recipe.join(" ")), trip.recipe[0]);
   }
   const used = new Set(DATA.flatMap((w) => w.setup));
   eq("every legend entry is a tag in use", [...legend.keys()].sort(), [...used].sort());
@@ -178,6 +189,12 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
   const noted = P.cardHtml(DATA.find((x) => x.id === "line-time-life-admin"));
   t("card: shows its note", noted.includes('<p class="pb-note-card">'));
   t("card: difficulty dots are labelled", card.includes('aria-label="Difficulty 2 of 5"'));
+  t("card: the setup tags are a named group (aria-label needs a role)", card.includes('<div class="pb-setup" role="group" aria-label="Setup">'));
+  // A permalink opens with its card in view and focus on its link (the
+  // browser check, scripts/check-a11y.mjs, measures it).
+  const src = read("assets/js/playbook.js");
+  t("page: a permalink scrolls the notice and card into view and focuses the card's link",
+    /if \(state\.w\) \{[\s\S]*?scrollIntoView\(\{ block: "start" \}\)[\s\S]*?linkedA\.focus\(\{ preventScroll: true \}\)/.test(src));
 }
 
 /* ---------- 6. innerHTML ratchet ---------- */

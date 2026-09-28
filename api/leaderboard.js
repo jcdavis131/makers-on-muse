@@ -4,7 +4,10 @@
    the number of entries filed so far and no entries, so nobody can watch
    self-reported totals mid-week. That's one read (ZCARD). After close:
    ZCARD, ZRANGE on the week's sorted set, then one MGET of those records.
-   Cached at the edge for 60 s.
+   Cached at the edge for 60 s. The only query param is week, once, in
+   plain form (1, not 01): anything else gets 400 before storage is read,
+   so the edge cache can't be skipped. Past the cache, one IP gets 30
+   requests a minute (when storage exists), then 429.
 
    Response: { week, state: "before"|"open"|"closed", count, entries,
                closes, closes_label, provisional: true }
@@ -19,6 +22,8 @@ var lib = require("./_lib");
 var packs = require("../lib/packs");
 
 var TOP = 100;
+var RATE_TOKENS = 30;
+var RATE_WINDOW = "60 s";
 var CACHE = "public, s-maxage=60, stale-while-revalidate=120";
 
 function levelView(s) {
@@ -28,9 +33,11 @@ function levelView(s) {
 
 module.exports = async function handler(req, res) {
   if (!lib.methodOnly(res, req, ["GET"])) return;
+  var bad = lib.queryProblem(req, ["week"]);
+  if (bad) return lib.json(res, bad.status, { error: bad.error });
 
   var raw = String((req.query && req.query.week) || "");
-  var week = /^\d{1,4}$/.test(raw) ? parseInt(raw, 10) : NaN;
+  var week = /^[1-9]\d{0,3}$/.test(raw) ? parseInt(raw, 10) : NaN;
   if (!week || week < 1) {
     return lib.json(res, 400, { error: "query param week (integer >= 1) is required" });
   }
@@ -39,6 +46,8 @@ module.exports = async function handler(req, res) {
 
   var store = lib.getStore();
   if (!store) return lib.json(res, 503, { error: "storage unavailable" });
+  if (await lib.limitOr429(req, res, "board", RATE_TOKENS, RATE_WINDOW,
+    "Too many leaderboard requests from your network in the last minute. Wait a minute and try again.")) return;
 
   var state = packs.state(pack, lib.now());
   var entries = [];

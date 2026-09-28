@@ -82,7 +82,7 @@ module.exports = async function handler(req, res) {
   if (extra.length) return lib.json(res, 400, { error: "unknown field " + JSON.stringify(extra[0].slice(0, 40)) });
 
   var runId = String(body.run_id || "");
-  if (!runId || runId.length > 80 || !/^[A-Za-z0-9._-]+$/.test(runId)) {
+  if (!lib.RUN_ID_RE.test(runId)) {
     return lib.json(res, 400, { error: "run_id: required, 1..80 chars, alphanumerics/._-" });
   }
   if (body.week !== undefined && (typeof body.week !== "number" || !isFinite(body.week))) {

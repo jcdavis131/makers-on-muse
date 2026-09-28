@@ -192,7 +192,8 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
   const expLabel = `${o.weekday} ${o.month} ${o.day}, ${o.year}, ${o.hour}:${o.minute} ${o.dayPeriod} CT`;
   t("privacy: Week 1's expiry is the one the code computes (" + expLabel + ")", pv.includes("For Week 1: " + expLabel + "."));
   t("privacy: run events 30 days", pv.includes("30 days after the run's last event"));
-  t("privacy: rate-limit counters about 2 minutes, hashed IP", pv.includes("About 2 minutes") && pv.includes("hash of the IP address"));
+  t("privacy: rate-limit counters about 2 minutes, keyed hash of the IP", pv.includes("About 2 minutes") &&
+    pv.includes("a server secret (a keyed hash)") && /createHmac\("sha256", "mom-rl\|" \+ secret\)/.test(read("api/_lib.js")));
   t("privacy: contact email never returned", pv.includes("No page or API returns it"));
   // api/receipt.js returns status, scores, handle and agent, never answers.
   t("privacy: answers are not returned by any page or API", pv.includes("No page or API returns them") &&
@@ -284,6 +285,18 @@ const hrefs = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S
   t("mabel: no gradient on the belly emblem", !/sparkGrad|linearGradient/.test(svg));
   t("mabel: none of the old blue-violet", !/#7C9CF0|#B48CE8/i.test(svg));
   t("mabel: the patch uses the palette", /<!-- belly patch[\s\S]{0,400}fill="#F6EFE3" stroke="#C17C60"[\s\S]{0,300}fill="#C17C60"/.test(svg));
+}
+
+/* ---------- 7b. the two library tracks look like equals ---------- */
+{
+  const header = (html) => (/<main id="main">\s*<section>\s*(<div class="[^"]+">\s*<div class="[^"]+">\s*<p class="eyebrow">)/.exec(html) || [])[1];
+  const s = header(read("setups.html")), k = header(read("skills.html"));
+  t("setups and skills open with the same header component (.wrap > .center)",
+    Boolean(s) && s === k && /class="wrap">\s*<div class="center">/.test(s), [s, k]);
+  for (const p of ["setups.html", "skills.html"]) {
+    t(p + ": the status note sits under the header, in the narrow column",
+      /<\/div>\s*<div class="wrap-narrow" style="padding:0">\s*<div class="status-note">/.test(read(p)));
+  }
 }
 
 /* ---------- 8. licenses ---------- */

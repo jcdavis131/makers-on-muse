@@ -97,9 +97,32 @@ async function main() {
     }));
     await new Promise((r) => setTimeout(r, 100));
     await page.evaluate(axeSrc);
-    const out = await page.evaluate(async () => (await window.axe.run(document, { resultTypes: ["violations"] })).violations
-      .map((v) => ({ id: v.id, n: v.nodes.length, nodes: v.nodes.slice(0, 4).map((n) => n.target.join(" ") + " :: " + (n.any[0] ? n.any[0].message : "").slice(0, 160)) })));
-    t(name + ": axe color-contrast 0", !out.some((v) => v.id === "color-contrast"), out.filter((v) => v.id === "color-contrast"));
+    // Violations, plus two kinds of "incomplete" that are real failures
+    // here: contrast axe couldn't decide (it skipped the L5 badge as "too
+    // short") and aria-label on an element whose role can't carry a name.
+    const STRICT = ["color-contrast", "aria-prohibited-attr"];
+    const out = await page.evaluate(async (strict) => {
+      const r = await window.axe.run(document, { resultTypes: ["violations", "incomplete"] });
+      const view = (v) => ({ id: v.id, n: v.nodes.length, nodes: v.nodes.slice(0, 4).map((n) => n.target.join(" ") + " :: " +
+        ((n.any[0] || n.all[0] || n.none[0] || {}).message || "").slice(0, 160)) });
+      // "Obscured" or "overlapped" means a sticky bar or an open menu sat
+      // over the text when axe looked; that depends on the scroll, and the
+      // same text is checked unobscured in another state. Any other
+      // undecided result counts.
+      // Short text (like the old L5 badge) counts when axe measured a
+      // ratio; a ratio of 0 means it couldn't see the background either.
+      const decidable = (n) => {
+        const c = n.any[0] || n.all[0] || n.none[0] || {};
+        const d = c.data || {};
+        if (/obscured|overlapped/.test(c.message || "") || d.messageKey === "elmPartiallyObscured" || d.messageKey === "bgOverlap") return false;
+        if (d.messageKey === "shortTextContent") return Number(d.contrastRatio) > 0;
+        return true;
+      };
+      const undecided = r.incomplete.filter((v) => strict.includes(v.id))
+        .map((v) => ({ ...v, nodes: v.nodes.filter(decidable) })).filter((v) => v.nodes.length);
+      return r.violations.map(view).concat(undecided.map((v) => ({ ...view(v), incomplete: true })));
+    }, STRICT);
+    t(name + ": axe color-contrast 0 (violations and undecided)", !out.some((v) => v.id === "color-contrast"), out.filter((v) => v.id === "color-contrast"));
     t(name + ": axe, everything else 0", !out.some((v) => v.id !== "color-contrast"), out.filter((v) => v.id !== "color-contrast"));
     t(name + ": no script error, CSP report or failed request", page.problems.length === 0, page.problems);
   }
@@ -183,6 +206,124 @@ async function main() {
       await page.goto(BASE + "/playbook?w=grading-sprint", { waitUntil: "load" });
       await settle(500);
       await axe(page, "playbook permalink, recipe open");
+      await page.close();
+    }
+
+    /* What sticky bars cover: the nav, and Watch's run bar when it sticks. */
+    const coverBottom = () => Math.max(0, ...[document.querySelector(".nav"), document.querySelector(".livebar")]
+      .filter((b) => b && /sticky|fixed/.test(getComputedStyle(b).position)).map((b) => b.getBoundingClientRect().bottom));
+    const instant = (page) => page.addStyleTag({ content: "html{scroll-behavior:auto !important}" });
+
+    /* Keyboard focus never lands fully under a sticky bar, Tab or Shift+Tab. */
+    for (const [p, w, h] of [["/playbook", 1440, 900], ["/setups", 1440, 900], ["/terms", 1440, 900], ["/leaderboard", 1440, 900],
+      ["/watch", 1440, 900], ["/privacy", 390, 844], ["/faq", 390, 844], ["/", 390, 844]]) {
+      const page = await open({ w, h });
+      await page.goto(BASE + p, { waitUntil: "load" });
+      await settle(p === "/watch" ? 1500 : 400);
+      await instant(page);
+      const n = await page.evaluate(() => document.querySelectorAll("a[href],button,input,select,textarea,summary,[tabindex='0']").length);
+      const covered = [];
+      for (const dir of ["fwd", "back"]) {
+        if (dir === "fwd") await page.evaluate(() => { document.activeElement && document.activeElement.blur(); window.scrollTo(0, 0); });
+        else await page.evaluate(() => { const f = document.querySelector("footer a:last-of-type") || document.querySelector("footer a"); f.focus(); });
+        for (let i = 0; i < Math.min(n + 5, 400); i++) {
+          if (dir === "fwd") await page.keyboard.press("Tab");
+          else { await page.keyboard.down("Shift"); await page.keyboard.press("Tab"); await page.keyboard.up("Shift"); }
+          const r = await page.evaluate((cb) => {
+            const cover = new Function("return (" + cb + ")()")();
+            const el = document.activeElement;
+            // The bars' own links (and the skip link) live in the bars.
+            if (!el || el === document.body || el.closest(".nav, .livebar, .skip")) return null;
+            const b = el.getBoundingClientRect();
+            return { cover, bottom: b.bottom, what: (el.tagName + " " + (el.textContent || el.getAttribute("aria-label") || "").trim()).slice(0, 50) };
+          }, coverBottom.toString());
+          if (r && r.bottom > 0 && r.bottom <= r.cover) covered.push(dir + ": " + r.what + " (bottom " + Math.round(r.bottom) + " <= " + Math.round(r.cover) + ")");
+        }
+      }
+      t(p + " @" + w + ": no focused element sits fully under a sticky bar (Tab and Shift+Tab)", covered.length === 0, covered.slice(0, 6));
+      await page.close();
+    }
+
+    /* Anchor jumps land below the nav. */
+    for (const [url, w, h] of [["/pack#preflight", 1440, 900], ["/pack#l3", 1440, 900], ["/faq#rules", 1440, 900], ["/faq#rules", 390, 844],
+      ["/pack#preflight", 390, 844]]) {
+      const page = await open({ w, h });
+      await page.goto(BASE + url, { waitUntil: "load" });
+      await settle(900);
+      const r = await page.evaluate((cb, id) => {
+        const cover = new Function("return (" + cb + ")()")();
+        const el = document.getElementById(id);
+        return { cover, top: el ? el.getBoundingClientRect().top : null };
+      }, coverBottom.toString(), url.split("#")[1]);
+      t(url + " @" + w + ": the target starts below the nav", r.top !== null && r.top >= r.cover - 1, r);
+      await page.close();
+    }
+
+    /* A Playbook permalink opens with its card in view and focus on its link. */
+    for (const [w, h] of [[1440, 900], [390, 844]]) {
+      const page = await open({ w, h });
+      await page.goto(BASE + "/playbook?w=grading-sprint", { waitUntil: "load" });
+      await settle(900);
+      const r = await page.evaluate((cb) => {
+        const cover = new Function("return (" + cb + ")()")();
+        const card = document.getElementById("w-grading-sprint");
+        const note = document.getElementById("pb-single");
+        const a = card && card.querySelector("h3 a");
+        return { cover, vh: window.innerHeight, cardTop: card && card.getBoundingClientRect().top,
+          noteTop: note && note.getBoundingClientRect().top, focused: document.activeElement === a };
+      }, coverBottom.toString());
+      t("playbook permalink @" + w + ": the notice and the card are in view, below the nav",
+        r.noteTop >= r.cover - 1 && r.cardTop > r.noteTop && r.cardTop < r.vh, r);
+      t("playbook permalink @" + w + ": focus is on the card's link", r.focused, r);
+      await page.close();
+    }
+
+    /* Watch: the replay controls start in the first screen on desktop, and
+       "Back to live" stays hidden while there is no live run. */
+    for (const [w, h] of [[1440, 900], [1280, 800], [390, 844]]) {
+      const page = await open({ w, h });
+      await page.goto(BASE + "/watch", { waitUntil: "load" });
+      await settle(2500);
+      const r = await page.evaluate(() => {
+        const c = document.getElementById("replay-controls");
+        const x = document.getElementById("rp-exit");
+        return { vh: window.innerHeight, controlsTop: c.getBoundingClientRect().top, controlsBottom: c.getBoundingClientRect().bottom,
+          controlsHidden: c.hidden, exitDisplay: getComputedStyle(x).display, exitHidden: x.hidden };
+      });
+      t("watch @" + w + ": \"Back to live\" is not shown while the demo replay plays", r.exitHidden && r.exitDisplay === "none", r);
+      if (w >= 1280) t("watch @" + w + "x" + h + ": the replay controls are in the first screen", !r.controlsHidden && r.controlsBottom <= r.vh, r);
+      else console.log("watch @" + w + "x" + h + ": replay controls start at " + Math.round(r.controlsTop) + "px (first screen " + r.vh + "px)");
+      await page.close();
+    }
+
+    /* Submit, closed week: axe skips a disabled fieldset, so paint the
+       closed state on an enabled copy and check its contrast. */
+    for (const [w, h] of [[1280, 900], [390, 844]]) {
+      const page = await open({ w, h });
+      await page.goto(BASE + "/submit", { waitUntil: "load" });
+      await settle(600);
+      const dimmed = await page.evaluate(() => {
+        const f = document.getElementById("sub-fields");
+        document.querySelectorAll("#sub-fields details").forEach((d) => { d.open = true; });
+        const all = [...f.querySelectorAll("*")];
+        const ops = all.map((el) => getComputedStyle(el).opacity);
+        const wasDisabled = f.disabled;
+        f.disabled = false;
+        // The controls stay disabled one by one (inactive controls are
+        // exempt); what's checked is the text around them.
+        f.querySelectorAll("input,textarea,select,button").forEach((c) => { c.disabled = true; });
+        let n = 0;
+        all.forEach((el, i) => { if (ops[i] !== "1") { el.style.opacity = ops[i]; n++; } });
+        return { wasDisabled, n };
+      });
+      t("submit @" + w + ": the form ships disabled before the week opens", dimmed.wasDisabled, dimmed);
+      await page.evaluate(axeSrc);
+      const bad = await page.evaluate(async () => {
+        const r = await window.axe.run("#sub-fields", { runOnly: ["color-contrast"], resultTypes: ["violations", "incomplete"] });
+        return r.violations.concat(r.incomplete).flatMap((v) => v.nodes.map((n) => n.target.join(" ") + " :: " +
+          ((n.any[0] || {}).message || "").slice(0, 120)));
+      });
+      t("submit @" + w + ": closed-week paint keeps hints, labels and links at 4.5:1 (" + dimmed.n + " dimmed elements)", bad.length === 0, bad.slice(0, 6));
       await page.close();
     }
 

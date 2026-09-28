@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy — Makers on Muse</title>
 <meta name="description" content="What Makers on Muse stores, who can see it, how long it is kept, and how to delete it with your secret token. No cookies, no analytics.">
-<link rel="stylesheet" href="/assets/css/main.css?v=ac6aae9359">
+<link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
 <!-- layout:head -->
 <meta name="theme-color" content="#F9F6F0">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -107,7 +107,7 @@
         </table>
       </div>
       <p>Before an entry is stored, the site strips common patterns from the answers, the procedure notes, the L5 description and the query part of links: email addresses, phone numbers, US Social Security numbers, card numbers, street addresses and API keys. That catches common patterns, not everything. Don't put personal information in an entry, yours or anyone else's.</p>
-      <p>We don't store your IP address. When storage is connected, rate limits count requests per network using a hash of the IP address, not the address itself. Those counters expire in about 2 minutes.</p>
+      <p>We don't store your IP address. When storage is connected, rate limits count requests per network under a code made from the IP address and a server secret (a keyed hash), not the address itself. Without that secret the code can't be turned back into the address. Those counters expire in about 2 minutes.</p>
 
       <h2 id="retention">How long we keep it</h2>
       <div class="board-scroll" tabindex="0" role="region" aria-labelledby="retention">
@@ -153,7 +153,7 @@
     <div class="foot-grid">
       <div>
         <h2 class="foot-h">Makers on Muse</h2>
-        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and skills that Muse owners share. Mabel keeps the minutes.</p>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
       </div>
       <div>
         <h2 class="foot-h">Play</h2>

@@ -149,6 +149,13 @@ const LEAKS = [
       t(tag + ": labelled Demo run, unofficial", run.label === "Demo run, unofficial" && entry.label === run.label);
       t(tag + ": explains itself", typeof run.about === "string" && run.about.length > 40);
     }
+    // A served replay never says where the unscrubbed original lives, and
+    // its start time carries no clock time from the real run.
+    const meta = JSON.stringify({ about: run.about, scrub: run.scrub, label: run.label });
+    t(tag + ": doesn't point to the unscrubbed original (no branch or file path)",
+      !/live-runs|data\/live|run\.json|branch|commit|[0-9a-f]{7,40}\b/i.test(meta), run.scrub);
+    t(tag + ": started_at is midnight UTC (no clock time from the run)",
+      typeof run.started_at === "string" && /T00:00:00(\.000)?Z$/.test(run.started_at), run.started_at);
     // Answers never survive archiving: each is a bracketed note.
     for (const e of ev.filter((x) => x.type === "answer")) {
       t(tag + " seq " + e.seq + ": answer is a bracketed removal note", /^\[[^\]]+\]$/.test(e.text || ""));

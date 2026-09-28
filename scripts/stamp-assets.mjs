@@ -13,7 +13,7 @@
      node scripts/stamp-assets.mjs           check only; exit 1 on any stale or missing version
      node scripts/stamp-assets.mjs --write   rewrite the pages (npm run build:assets)
 
-   Edit a CSS or JS file, run npm run build (or build:assets), and commit
+   Edit a CSS or JS file, run npm run stamp (or build:assets), and commit
    the pages with it. scripts/test-site.mjs runs the check in npm test.
    Scripts must not load other stylesheets or scripts by URL: those
    requests would carry no version. Images and data are not versioned;

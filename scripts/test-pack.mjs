@@ -104,6 +104,26 @@ const SCORED = packs.scoredLevels(PACK);
   const stripped = read("pack.html").replace(' data-pack="levels.3.par.tokens"', "");
   t("a removed marker is caught", !stamp(stripped, PACK).paths.includes("levels.3.par.tokens"));
 
+  // Manifest numbers are written only through data-pack markers. In the
+  // level spec lists every digit must sit in a marker, and no page
+  // restates a par or a blend as plain text, where a manifest change
+  // would leave it behind.
+  const unmarked = (html) => html.replace(/<(\w+)[^>]*\bdata-pack="[^"]*"[^>]*>[^<]*<\/\1>/g, "");
+  const specDigits = (html) => [...unmarked(html).matchAll(/<ul class="spec">([\s\S]*?)<\/ul>/g)]
+    .flatMap((m) => (m[1].replace(/<[^>]+>/g, " ").match(/[^\s]*\d[^\s]*/g) || []));
+  eq("pack.html: every number in the level spec lists sits in a data-pack marker", specDigits(read("pack.html")), []);
+  const tamperedSpec = read("pack.html").replace(/(<strong data-pack="levels\.4\.par\.seconds">[^<]*<\/strong>)/, "$1 (or 7 min)");
+  t("an unmarked number added to a spec list is caught", specDigits(tamperedSpec).length > 0, specDigits(tamperedSpec));
+  const restated = [];
+  for (const n of SCORED) {
+    for (const path of ["levels." + n + ".par.tokens", "levels." + n + ".par.seconds", "levels." + n + ".blend"]) restated.push(value(PACK, path));
+  }
+  for (const page of PAGES) {
+    const text = unmarked(read(page)).replace(/<script\b[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ");
+    const hits = [...new Set(restated)].filter((s) => /\d[,\d]*\d|\//.test(s) && new RegExp("(^|[^\\d,])" + s.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&") + "(?![\\d,])").test(text));
+    eq(page + ": no par token count or blend restated outside a marker", hits, []);
+  }
+
   // Formatting
   eq("seconds under 2 min", value(PACK, "levels.1.par.seconds"), "60 s");
   eq("whole minutes", value(PACK, "levels.2.par.seconds"), "4 min");

@@ -53,6 +53,16 @@ console.warn = (...a) => { warnings.push(a.join(" ")); };
     r.headers["cache-control"] === "public, s-maxage=30, stale-while-revalidate=60", r.headers);
   r = await call(health, mockReq("POST"));
   t("health rejects POST", r.status === 405);
+  for (const [label, query, url] of [
+    ["?x=1", { x: "1" }, "/api/health?x=1"],
+    ["a bare ?", {}, "/api/health?"],
+    ["a param in the raw URL only", {}, "/api/health?cb=2"]
+  ]) {
+    r = await call(health, { ...mockReq("GET", { query }), url });
+    t("health refuses a query string (" + label + ") -> 400, not cached", r.status === 400 && r.headers["cache-control"] === "no-store", r);
+  }
+  r = await call(health, { ...mockReq("GET"), url: "/api/health" });
+  t("health with no query string -> 200", r.status === 200 && r.body.storage === "missing", r);
 
   process.env.UPSTASH_REDIS_REST_URL = "http://127.0.0.1:9";
   process.env.UPSTASH_REDIS_REST_TOKEN = "nope";
@@ -195,6 +205,19 @@ console.warn = (...a) => { warnings.push(a.join(" ")); };
   t("leaderboard unknown week -> 404", r.status === 404);
   r = await call(leaderboard, mockReq("GET", { query: { week: "1" } }));
   t("leaderboard no storage -> honest 503", r.status === 503 && r.body.error === "storage unavailable");
+  // Only ?week=N, once, in plain form: anything else could skip the edge cache.
+  for (const [label, query, url] of [
+    ["an extra param", { week: "1", x: "1" }, "/api/leaderboard?week=1&x=1"],
+    ["week with a leading zero", { week: "01" }, "/api/leaderboard?week=01"],
+    ["week given twice (parsed)", { week: ["1", "1"] }, "/api/leaderboard?week=1&week=1"],
+    ["week given twice (raw URL only)", { week: "1" }, "/api/leaderboard?week=1&week=1"],
+    ["an extra param in the raw URL only", { week: "1" }, "/api/leaderboard?week=1&_=123"]
+  ]) {
+    r = await call(leaderboard, { ...mockReq("GET", { query }), url });
+    t("leaderboard refuses " + label + " -> 400", r.status === 400, r);
+  }
+  r = await call(leaderboard, { ...mockReq("GET", { query: { week: "1" } }), url: "/api/leaderboard?week=1" });
+  t("leaderboard ?week=1 passes the query check (then 503)", r.status === 503, r.status);
 
   /* ---------- receipt (status and delete by secret token) ---------- */
   {
@@ -262,6 +285,15 @@ console.warn = (...a) => { warnings.push(a.join(" ")); };
   t("run-stream no storage -> honest 503 JSON", r.status === 503 && r.body && r.body.error === "storage unavailable");
   r = await call(runStream, mockReq("GET", {}));
   t("run-stream missing run_id -> 400", r.status === 400);
+  for (const [name, h] of [["run-state", runState], ["run-stream", runStream]]) {
+    for (const [label, query] of [["an extra param", { run_id: "x", y: "1" }], ["a path in run_id", { run_id: "../x" }],
+      ["an 81-character run_id", { run_id: "a".repeat(81) }], ["run_id given twice", { run_id: ["a", "b"] }]]) {
+      r = await call(h, mockReq("GET", { query }));
+      t(name + " refuses " + label + " -> 400", r.status === 400, r);
+    }
+    r = await call(h, mockReq("GET", { query: { run_id: "latest" } }));
+    t(name + " run_id=latest passes the query check (then 503)", r.status === 503, r.status);
+  }
 
   /* ---------- pack manifest = season.js ---------- */
   {

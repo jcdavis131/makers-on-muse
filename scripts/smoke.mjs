@@ -108,10 +108,16 @@ for (const good of ["Juniper", "Zoë's Agent", "Agent-7", "Chief of Staff 2", "J
 }
 eq("agent spaces collapse", checkAgent("  Big   Helper ").value, "Big Helper");
 for (const bad of ["Mabel", "mabel", "M4bel", "Scout", "Sc0ut", "Meta", "Muse", "Muse Official", "Makers on Muse",
-  "MakersOnMuse", "admin", "Adm1n", "Meta AI", "Official Helper", "anonymous"]) {
+  "MakersOnMuse", "admin", "Adm1n", "Meta AI", "Official Helper", "anonymous",
+  // camel-case joins and run-together staff names
+  "MetaMuse", "MuseBot", "MetaOfficial", "MUSEBot", "museBot", "Team4Muse", "metaofficial", "musebot", "MuseSupport"]) {
   const r = checkAgent(bad);
   t("agent reserved: " + bad, !r.ok && /reserved/.test(r.error));
 }
+for (const fine of ["Museum Guide", "Metallica Fan", "McDonald Helper", "MacBook Helper", "DeLorean", "iOS Helper"]) {
+  t("agent not reserved (camel case or a longer word): " + fine, checkAgent(fine).ok, checkAgent(fine));
+}
+t("handle reserved: camel case", !checkHandle("JohnMuse").ok && !checkHandle("MetaFan").ok);
 for (const [bad, why] of [["jane@example.com", /email/], ["www.example", /web address/], ["example.com", /web address/],
   ["http://x", /web address/], ["512-555-0147", /phone/], ["Call 5125550147", /phone/]]) {
   const r = checkAgent(bad);

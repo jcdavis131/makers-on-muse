@@ -83,7 +83,7 @@
       "</div>" +
       field("p" + n, "Procedure: what did your agent actually do?", '<textarea id="p' + n + '" maxlength="2000" placeholder="Steps in order: searched X, cross-checked Y, drafted Z…"></textarea>') +
       '<div class="field-row2">' +
-        field("r" + n, "Procedure checklist, self-assessed (%)", '<input type="text" inputmode="numeric" id="r' + n + '" maxlength="3" autocomplete="off"' + described("r" + n, 1) + ">", "Your own estimate, 0 to 100.") +
+        field("r" + n, "Procedure, self-assessed (%)", '<input type="text" inputmode="numeric" id="r' + n + '" maxlength="3" autocomplete="off"' + described("r" + n, 1) + ">", "Your own estimate, 0 to 100.") +
         field("c" + n, "Correctness, self-attested", '<select id="c' + n + '"><option value="">Choose…</option>' +
           '<option value="1">Correct: I’m confident</option><option value="0">Not correct, or unsure</option></select>') +
       "</div>" +

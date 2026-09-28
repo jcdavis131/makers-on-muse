@@ -2,7 +2,8 @@
    configured the way vercel.json says, and unless /api/health reports
    storage "reachable". GET only: it never writes anything.
 
-     node scripts/check-deploy.mjs [base] [--no-hosts]     (npm run check:deploy)
+     node scripts/check-deploy.mjs [base] [--no-hosts] [--allow-missing-storage]
+                                                            (npm run check:deploy)
 
    base defaults to https://makersonmuse.com. --no-hosts skips the
    www and vercel.app redirect checks (use it for a preview URL).
@@ -10,6 +11,11 @@
    Until Upstash is connected this fails on purpose, on the storage line:
    /api/health says "missing" and every submission gets a 503. The other
    lines still show whether the rest of the deploy is right.
+   --allow-missing-storage turns storage "missing" (not configured) into
+   a note, so the rest of the deploy can gate on its own. "unreachable"
+   (configured, but down) still fails. The post-deploy workflow
+   (.github/workflows/post-deploy.yml) passes it until the repo variable
+   MOM_STORAGE_CONNECTED is "true".
 
    Required: storage reachable; the home page, a clean URL and its .html
    308; the branded 404; the security headers on the home page;
@@ -31,7 +37,7 @@ export const HOSTS = [
 
 /* checkDeploy(base, { hosts, timeoutMs }) -> { ok, results: [{ name, ok, detail, required }] }
    hosts: [{ name, url, headers }] to check for a 308 to the apex; [] skips. */
-export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000 } = {}) {
+export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000, allowMissingStorage = false } = {}) {
   base = String(base).replace(/\/+$/, "");
   const results = [];
   const add = (name, ok, detail, required = true) => results.push({ name, ok: Boolean(ok), detail: detail || "", required });
@@ -49,7 +55,7 @@ export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000 } = {
 
   // Storage, the reason this script exists.
   const h = await checkHealth(base, { timeoutMs });
-  add("/api/health: storage reachable", h.ok, h.detail);
+  add("/api/health: storage reachable", h.ok, h.detail, !(allowMissingStorage && h.storage === "missing"));
   // Edge caching. Vercel's CDN keeps s-maxage to itself and sends the
   // browser its own Cache-Control, so on Vercel the sign is x-vercel-cache
   // HIT or STALE on a repeat request; elsewhere, s-maxage in the header.
@@ -106,10 +112,13 @@ export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000 } = {
   }
 
   // Repo-only files stay off the site.
-  for (const path of ["/scripts/check-deploy.mjs", "/README.md", "/partials/nav.html"]) {
+  for (const path of ["/scripts/check-deploy.mjs", "/README.md", "/partials/nav.html", "/docs/watch-protocol.md"]) {
     const r = await get(path);
     add(path + " is not served", r.status === 404, got(r));
   }
+  // The Watch archive is data the page needs.
+  const runs = await get("/data/runs/index.json");
+  add("/data/runs/index.json is served (Watch's archive)", runs.status === 200 && /"runs"/.test(runs.text), got(runs));
 
   // Other hostnames 308 to the apex.
   for (const host of hosts) {
@@ -125,7 +134,10 @@ export async function checkDeploy(base, { hosts = HOSTS, timeoutMs = 10000 } = {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const args = process.argv.slice(2);
   const base = args.find((a) => !a.startsWith("--")) || APEX;
-  const { ok, results } = await checkDeploy(base, { hosts: args.includes("--no-hosts") ? [] : HOSTS });
+  const { ok, results } = await checkDeploy(base, {
+    hosts: args.includes("--no-hosts") ? [] : HOSTS,
+    allowMissingStorage: args.includes("--allow-missing-storage")
+  });
   for (const r of results) console.log((r.ok ? "OK   " : r.required ? "FAIL " : "NOTE ") + r.name + (r.ok ? "" : ": " + r.detail));
   console.log(ok ? "\nDeploy check passed: " + base : "\nDeploy check FAILED: " + base);
   process.exit(ok ? 0 : 1);

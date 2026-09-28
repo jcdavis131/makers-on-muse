@@ -155,7 +155,8 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   r = await get(leaderboard, { week: "1" });
   t("mid-week: board holds entries back, count only",
     r.status === 200 && r.body.state === "open" && r.body.count === 3 && r.body.entries.length === 0, r.body);
-  t("mid-week: one read (ZCARD)", emu.log.join() === "ZCARD", emu.log);
+  const dataCmds = () => emu.log.filter((c) => c !== "EVALSHA" && c !== "EVAL");
+  t("mid-week: one read (ZCARD), plus the rate limiter", dataCmds().join() === "ZCARD" && emu.log.includes("EVAL"), emu.log);
   t("board says when it opens", r.body.closes === PACK.closes && r.body.closes_label === PACK.closes_label, r.body);
   t("leaderboard cached 60 s", r.headers["cache-control"] === "public, s-maxage=60, stale-while-revalidate=120");
 
@@ -163,7 +164,7 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
   emu.log.length = 0;
   r = await get(leaderboard, { week: "1" });
   t("after close: lists 3 entries", r.status === 200 && r.body.state === "closed" && r.body.entries.length === 3 && r.body.count === 3, r.body);
-  t("leaderboard reads the sorted set, not one key per receipt", emu.log.join() === "ZCARD,ZRANGE,MGET", emu.log);
+  t("leaderboard reads the sorted set, not one key per receipt", dataCmds().join() === "ZCARD,ZRANGE,MGET", emu.log);
   t("leaderboard ranked by total", r.body.entries[0].total >= r.body.entries[1].total && r.body.entries[1].total >= r.body.entries[2].total);
   t("leaderboard top is Quill", r.body.entries[0].agent === "Quill", r.body.entries);
   t("unpublished name -> anonymous", r.body.entries.some((e) => e.agent === "anonymous"));
@@ -259,6 +260,34 @@ const sub = (handle, agent, extra) => goodSubmission({ handle, agent, ...(extra 
     t("another IP is not limited", other.status === 400, other.status);
     const rlKeys = emu.keys().filter((k) => k.key.startsWith("mom:rl:submit:"));
     t("rate-limit keys hold no raw IP", rlKeys.length > 0 && rlKeys.every((k) => !k.key.includes("203.0.113")), rlKeys);
+    const plain = createHash("sha256").update("mom-rl|203.0.113.9").digest("hex").slice(0, 32);
+    t("rate-limit keys are not a plain hash of the IP (an HMAC with the storage token)",
+      rlKeys.every((k) => !k.key.includes(plain)), rlKeys.map((k) => k.key));
+  }
+
+  /* --- GET routes: no cache-busting query strings, and a per-IP limit --- */
+  {
+    const getIp = (h, query, ip, url) => call(h, { ...mockReq("GET", { query: query || {}, headers: { "x-real-ip": ip } }), url });
+    emu.log.length = 0;
+    r = await getIp(health, { x: "1" }, "198.51.100.1", "/api/health?x=1");
+    t("health ?x=1 -> 400 without a PING", r.status === 400 && emu.log.length === 0, [r.status, emu.log]);
+    r = await getIp(leaderboard, { week: "1", v: "2" }, "198.51.100.1", "/api/leaderboard?week=1&v=2");
+    t("leaderboard ?week=1&v=2 -> 400 without a read", r.status === 400 && emu.log.length === 0, [r.status, emu.log]);
+    r = await getIp(leaderboard, { week: "01" }, "198.51.100.1", "/api/leaderboard?week=01");
+    t("leaderboard ?week=01 -> 400 without a read", r.status === 400 && emu.log.length === 0, [r.status, emu.log]);
+    r = await getIp(runState, { run_id: "w1-test", x: "1" }, "198.51.100.1");
+    t("run-state with an extra param -> 400 without a read", r.status === 400 && emu.log.length === 0, [r.status, emu.log]);
+    r = await getIp(runState, { run_id: "../../etc" }, "198.51.100.1");
+    t("run-state with a malformed run_id -> 400 without a read", r.status === 400 && emu.log.length === 0, [r.status, emu.log]);
+
+    for (const [name, h, query, limit] of [["health", health, {}, 30], ["leaderboard", leaderboard, { week: "1" }, 30],
+      ["run-state", runState, { run_id: "w1-test" }, 30]]) {
+      const ip = "198.51.100." + (10 + limit + name.length);
+      const statuses = [];
+      for (let i = 0; i <= limit; i++) statuses.push((await getIp(h, query, ip)).status);
+      t(name + ": requests 1-" + limit + " from one IP in a minute pass", statuses.slice(0, limit).every((s) => s === 200), statuses);
+      t(name + ": request " + (limit + 1) + " from one IP in a minute -> 429", statuses[limit] === 429, statuses);
+    }
   }
 
   /* --- week window from data/packs --- */

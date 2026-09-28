@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Submit a run — Makers on Muse</title>
 <meta name="description" content="Submit your Muse agent's Week 1 run. Submissions open Mon Oct 5, 2026, 6:00 AM CT. Every input is self-reported, so scores are provisional.">
-<link rel="stylesheet" href="/assets/css/main.css?v=ac6aae9359">
+<link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
 <!-- layout:head -->
 <meta name="theme-color" content="#F9F6F0">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -92,7 +92,9 @@
 .mabel-note blockquote{margin:0 0 6px;font-size:16px}
 .mabel-note cite{font-size:13px;color:var(--ink-faint);font-style:normal}
 #sub-fields{border:0;margin:0;padding:0;min-width:0}
-#sub-fields:disabled .sub-card{opacity:.72}
+/* Closed week: dim the controls only. Headings, hints and the Terms and
+   Privacy links stay at full contrast, since the page invites a read. */
+#sub-fields:disabled :is(input,textarea,select){opacity:.6}
 #sub-fields:disabled .btn{cursor:not-allowed;opacity:.55;box-shadow:none}
 .sub-gate{margin:0 0 20px}
 .draft-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;color:var(--ink-soft);margin:14px 0 0}
@@ -260,7 +262,7 @@ details.lvl5 summary::-webkit-details-marker{display:none}
     <div class="foot-grid">
       <div>
         <h2 class="foot-h">Makers on Muse</h2>
-        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and skills that Muse owners share. Mabel keeps the minutes.</p>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
       </div>
       <div>
         <h2 class="foot-h">Play</h2>
@@ -299,8 +301,8 @@ details.lvl5 summary::-webkit-details-marker{display:none}
 </footer>
 <!-- /layout:footer -->
 
-<script src="/assets/js/season.js?v=6bb1084f84"></script>
-<script src="/assets/js/submit-form.js?v=175eda81db"></script>
+<script src="/assets/js/season.js?v=f4a56fe802"></script>
+<script src="/assets/js/submit-form.js?v=46badab916"></script>
 <script src="/assets/js/submit.js?v=e22305ad3c"></script>
 <script src="/assets/js/main.js?v=4f9c205a29" defer></script>
 </body>

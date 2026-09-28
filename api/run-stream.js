@@ -3,13 +3,18 @@
    ones. `meta` events carry the run envelope (status included). Keepalive
    comments every 15s. When the run is done and drained, the stream ends.
    run_id=latest resolves the current live run.
-   Storage missing -> honest 503 JSON (no fake stream). Unknown run -> 404 JSON. */
+   Storage missing -> honest 503 JSON (no fake stream). Unknown run -> 404 JSON.
+   The only query param is run_id ("latest" or 1-80 letters, digits, . _ -);
+   anything else gets 400 before storage is touched. One IP opens at most
+   20 streams a minute (when storage exists), then 429. */
 
 "use strict";
 
 var lib = require("./_lib");
 
 var POLL_MS = 2000;
+var RATE_TOKENS = 20;
+var RATE_WINDOW = "60 s";
 var KEEPALIVE_MS = 15000;
 
 function sse(res, type, obj) {
@@ -20,12 +25,19 @@ function sse(res, type, obj) {
 module.exports = async function handler(req, res) {
   if (!lib.methodOnly(res, req, ["GET"])) return;
 
+  var bad = lib.queryProblem(req, ["run_id"]);
+  if (bad) return lib.json(res, bad.status, { error: bad.error });
   var runId = String((req.query && req.query.run_id) || "");
-  if (!runId) return lib.json(res, 400, { error: "query param run_id is required" });
+  if (!lib.RUN_ID_RE.test(runId)) {
+    return lib.json(res, 400, { error: "query param run_id is required: latest, or 1-80 letters, digits, . _ -" });
+  }
 
   // Honest gate: no storage, no stream.
   var store = lib.getStore();
-  if (!store || (await lib.storeStatus()) !== "reachable") {
+  if (!store) return lib.json(res, 503, { error: "storage unavailable" });
+  if (await lib.limitOr429(req, res, "stream", RATE_TOKENS, RATE_WINDOW,
+    "Too many stream requests from your network in the last minute. Wait a minute and try again.")) return;
+  if ((await lib.storeStatus()) !== "reachable") {
     return lib.json(res, 503, { error: "storage unavailable" });
   }
 

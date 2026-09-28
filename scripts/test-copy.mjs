@@ -76,7 +76,7 @@ eq("status 1 ms before close", season.status(CLOSE - 1), "open");
 eq("status at close", season.status(CLOSE), "closed");
 eq("status well after", season.status(Date.parse("2026-12-01T00:00:00Z")), "closed");
 eq("status accepts Date", season.status(new Date(OPEN)), "open");
-eq("statusText before", season.statusText(TODAY), "Week 1 opens Mon Oct 5, 2026, 6:00 AM CT.");
+eq("statusText before", season.statusText(TODAY), "Week 1 opens Mon Oct 5, 2026, 6:00 AM CT and closes Sun Oct 11, 2026, 11:59 PM CT.");
 eq("statusText open", season.statusText(OPEN), "Week 1 is open until Sun Oct 11, 2026, 11:59 PM CT.");
 eq("statusText closed", season.statusText(CLOSE), "Week 1 closed Sun Oct 11, 2026, 11:59 PM CT.");
 
@@ -116,6 +116,24 @@ for (const p of pages) {
 
 for (const p of ["index.html", "pack.html", "faq.html", "leaderboard.html", "submit.html"]) {
   t(p + ": states the open time", decode(read(p)).includes(wk.opensLabel));
+}
+// Season lines read right before, during and after the week: a paragraph
+// with a live status line doesn't repeat the close time next to it, and
+// static text outside the live line doesn't say "opens" (future tense
+// that goes stale once the week opens).
+for (const p of pages) {
+  const html = read(p);
+  for (const m of html.matchAll(/<p\b[^>]*>((?:(?!<\/p>)[\s\S])*data-season-status(?:(?!<\/p>)[\s\S])*)<\/p>/g)) {
+    for (const [state, at] of [["before", TODAY], ["open", OPEN], ["closed", CLOSE]]) {
+      const text = decode(m[1].replace(/(<(\w+)[^>]*\bdata-season-status\b[^>]*>)[^<]*/, "$1" + season.statusText(at)).replace(/<[^>]+>/g, ""));
+      t(p + ": the status paragraph names the close time at most once (" + state + ")",
+        text.split(wk.closesLabel).length - 1 <= 1, text);
+    }
+  }
+  const outside = decode(html.replace(/<script\b[\s\S]*?<\/script>/g, "").replace(/<(\w+)[^>]*\bdata-season-status\b[^>]*>[^<]*<\/\1>/g, "")
+    .replace(/<[^>]+>/g, " "));
+  t(p + ": no static \"Week 1 opens\" outside the live status line", !/Week 1 opens/.test(outside),
+    (outside.match(/.{0,40}Week 1 opens.{0,40}/) || [])[0]);
 }
 for (const p of ["pack.html", "faq.html", "leaderboard.html", "submit.html"]) {
   t(p + ": states the close time", decode(read(p)).includes(wk.closesLabel));
@@ -187,7 +205,12 @@ const BANNED = [
   [/sunday midnight/i, "absolute close time"],
   [/2026-09-28|sep(t(ember)?)? 28/i, "old Week 1 date"],
   [/0\.35[^\n]{0,40}tokeneff/i, "headline 0.35/0.25/0.40 formula fits no scored level"],
-  [/mabel-typing|\.webp\b/i, "the webp Mabel images are gone; use mabel-plush.svg"]
+  [/mabel-typing|\.webp\b/i, "the webp Mabel images are gone; use mabel-plush.svg"],
+  [/that Muse owners share|what Muse owners share/i, "nobody has shared to the library yet; sharing isn't open"],
+  [/traps included/i, "the L4 flight list (where traps would be) isn't published"],
+  [/clearable by a stock Muse(?![^<]{0,80}<a href)/i, "a Muse capability stated without its source"],
+  [/procedure checklist/i, "no per-level checklist is published yet"],
+  [/how repeat submissions count will be decided/i, "the one-entry-per-handle rule is built"]
 ];
 for (const f of scanFiles) {
   const text = read(f);
@@ -220,6 +243,22 @@ for (const f of scanFiles) {
   t("board.js: four star slots", /for \(var i = 0; i < 4; i\+\+\)/.test(read("assets/js/board.js")));
   t("watch.js: one star slot per scored level", /maxStars: pack \? pack\.scoring\.max_stars/.test(read("assets/js/watch.js")) &&
     /for \(var i = 0; i < s\.maxStars; i\+\+\)/.test(read("assets/js/watch.js")));
+}
+
+/* ---------- 4b. rules and library copy match what is built ---------- */
+{
+  const faq = decode(read("faq.html").replace(/<[^>]+>/g, ""));
+  const api = read("api/submit.js");
+  t("faq: the retry answer states the one-entry rule the API enforces",
+    /Each handle has one entry per week/.test(faq) && /delete it on your receipt page with its secret token/.test(faq) &&
+    /One entry per handle per week/.test(api));
+  // Both library tracks are named wherever the site describes itself.
+  const index = read("index.html");
+  const desc = (/<meta name="description" content="([^"]+)"/.exec(index) || [])[1] || "";
+  t("home: the meta description names Setups and Skills", /Setups and Skills/.test(desc), desc);
+  t("home: the hero names Setups and Skills", /class="lede[^"]*"[^>]*>[^<]*Setups and Skills/.test(index));
+  t("footer: names Setups and Skills and says sharing isn't open", /Setups and Skills to copy\. Sharing your own isn't open yet\./.test(decode(read("partials/footer.html"))));
+  t("share image template: names Setups and Skills", /Setups and Skills/.test(read("scripts/og/og.html")));
 }
 
 /* ---------- 5. Muse facts cite reviewed sources ---------- */

@@ -17,11 +17,11 @@
   "transforms": [
    "t: ISO time converted to seconds since started_at",
    "seq: renumbered to start at 1 (was 0)",
-   "started_at: trimmed to milliseconds"
+   "started_at: set to midnight UTC on the run's date; t keeps the timing"
   ],
-  "source": "the retired live-runs branch, data/live/run.json"
+  "source": "an earlier unscrubbed copy that is not kept"
  },
- "started_at": "2026-09-27T19:48:22.745Z",
+ "started_at": "2026-09-27T00:00:00.000Z",
  "events": [
   {
    "seq": 1,

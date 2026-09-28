@@ -217,9 +217,15 @@ function clientIp(req) {
   return (req.socket && req.socket.remoteAddress) || "unknown";
 }
 
-/* Counters are keyed by a hash of the IP address, not the address. */
+/* Counters are keyed by an HMAC of the IP address, not the address. The
+   HMAC key includes the storage token, a server secret. A plain hash with
+   a public prefix could be reversed by hashing every IPv4 address; this
+   can't be without the token. Rate limiting only runs when storage is
+   configured, so the token is always set when this is called. */
 function ipKey(req) {
-  return crypto.createHash("sha256").update("mom-rl|" + clientIp(req)).digest("hex").slice(0, 32);
+  var e = process.env;
+  var secret = String(e.UPSTASH_REDIS_REST_TOKEN || e.KV_REST_API_TOKEN || "");
+  return crypto.createHmac("sha256", "mom-rl|" + secret).update(clientIp(req)).digest("hex").slice(0, 32);
 }
 
 /* rateLimit(req, name, tokens, window) -> { ok, retryAfter?, skipped? }
@@ -251,6 +257,51 @@ async function rateLimit(req, name, tokens, window) {
   }
 }
 
+/* Rate-limits a request and answers 429 when it is over. Returns true
+   when the handler should stop. */
+async function limitOr429(req, res, name, tokens, window, message) {
+  var limited = await rateLimit(req, name, tokens, window);
+  if (limited.ok) return false;
+  json(res, 429, { error: "too many requests", message: message },
+    { "Retry-After": String(limited.retryAfter) });
+  return true;
+}
+
+/* ---------- GET query strings ---------- */
+
+/* A GET route accepts only the query params it names, each once. Anything
+   else, such as a cache-busting ?x=1, is refused before storage is
+   touched, so nobody can skip the edge cache to spend database commands.
+   Returns null or { status: 400, error }. Checks req.query (what Vercel
+   parses) and, when present, the raw query string in req.url. */
+function queryProblem(req, allowed) {
+  var query = (req && req.query) || {};
+  var names = Object.keys(query);
+  var repeated = names.some(function (k) { return Array.isArray(query[k]); });
+  var url = req && typeof req.url === "string" ? req.url : "";
+  var qi = url.indexOf("?");
+  if (qi !== -1) {
+    var raw = url.slice(qi + 1);
+    if (!raw) return { status: 400, error: "empty query string" };
+    var counts = {};
+    new URLSearchParams(raw).forEach(function (v, k) {
+      names.push(k);
+      counts[k] = (counts[k] || 0) + 1;
+      if (counts[k] > 1) repeated = true;
+    });
+  }
+  for (var i = 0; i < names.length; i++) {
+    if (allowed.indexOf(names[i]) === -1) {
+      return { status: 400, error: allowed.length ? "only these query params are accepted: " + allowed.join(", ") : "this endpoint takes no query params" };
+    }
+  }
+  if (repeated) return { status: 400, error: "a query param was given more than once" };
+  return null;
+}
+
+/* Run ids: 1-80 characters, letters, digits, ".", "_" and "-". */
+var RUN_ID_RE = /^[A-Za-z0-9._-]{1,80}$/;
+
 /* ---------- secrets ---------- */
 
 /* Constant-time compare for the run secret. Unset secret never matches. */
@@ -277,6 +328,9 @@ module.exports = {
   preflight: preflight,
   readJson: readJson,
   rateLimit: rateLimit,
+  limitOr429: limitOr429,
+  queryProblem: queryProblem,
+  RUN_ID_RE: RUN_ID_RE,
   clientIp: clientIp,
   secretsEqual: secretsEqual
 };

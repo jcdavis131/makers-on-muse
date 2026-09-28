@@ -81,6 +81,43 @@ const tok = (name) => {
   }
 }
 
+/* ---------- 1b. badges, focus under the nav, [hidden] ---------- */
+{
+  // The L5 level badge: paper text on the .num.alt fill (17px bold is not large text).
+  const numFg = (/\.num\{[^}]*color:var\(--([\w-]+)\)/.exec(css) || [])[1];
+  const altBg = (/\.num\.alt\{background:var\(--([\w-]+)\)\}/.exec(css) || [])[1];
+  t("the .num and .num.alt rules are found", Boolean(numFg && altBg), [numFg, altBg]);
+  if (numFg && altBg) {
+    const r = ratio(tok(numFg), tok(altBg));
+    t("the L5 badge (.num.alt) text is at least 4.5:1 (" + r.toFixed(2) + ")", r >= 4.5);
+  }
+  const navH = Number((/\.nav\{[^}]*height:(\d+)px/.exec(css) || [])[1]);
+  const pad = Number((/html\{[^}]*scroll-padding-top:(\d+)px/.exec(css) || [])[1]);
+  t("the sticky nav's height is found", navH > 0, navH);
+  t("anchors and focus stop below the sticky nav (scroll-padding-top " + pad + "px > nav " + navH + "px)", pad > navH, [pad, navH]);
+  t("[hidden] always hides, whatever the class sets", /\[hidden\]\{display:none !important\}/.test(css));
+  // The closed-week submit form dims its controls only. Dimming whole
+  // cards took the live Terms and Privacy links and the hints below 4.5:1,
+  // and axe skips everything inside a disabled fieldset, so it can't see it.
+  const submit = read("submit.html");
+  t("submit: a closed week dims controls, not whole cards (links and hints keep their contrast)",
+    !/:disabled\s+\.sub-card\s*\{[^}]*opacity/.test(submit) && /#sub-fields:disabled :is\(input,textarea,select\)\{opacity:/.test(submit));
+}
+
+/* ---------- 1c. aria-label only where a role can carry it ---------- */
+{
+  // ARIA 1.2 prohibits naming generic, paragraph and code elements, so
+  // screen readers drop the name. Give them a role (group, region) or use
+  // visible or .sr-only text.
+  const GENERIC = /<(div|span|p|pre|code|b|i|strong|em|small)\b[^>]*\baria-label=/g;
+  const files = readdirSync(ROOT).filter((f) => f.endsWith(".html"))
+    .concat(readdirSync(join(ROOT, "assets/js")).filter((f) => f.endsWith(".js")).map((f) => "assets/js/" + f));
+  for (const f of files) {
+    const bad = [...read(f).matchAll(GENERIC)].map((m) => m[0]).filter((tag) => !/\brole=/.test(tag));
+    t(f + ": no aria-label on an element without a role", bad.length === 0, bad);
+  }
+}
+
 /* ---------- 2. one set of tokens ---------- */
 const pages = readdirSync(ROOT).filter((f) => f.endsWith(".html")).sort();
 {

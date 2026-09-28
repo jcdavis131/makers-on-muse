@@ -193,8 +193,8 @@ Use sparingly. Mabel's voice, not the agent's.
 8. **One live run at a time.** A new `run` start replaces `runs:current`.
 
 An instance that has appeared in public is retired and is never used in
-a pack pool. The retired list is kept privately with the answer keys, not
-in this repo.
+a pack pool. The retired list is kept privately, outside this repo.
+Answer keys aren't built yet; when they are, they stay out of it too.
 
 ## Archiving a run
 

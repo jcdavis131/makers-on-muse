@@ -258,7 +258,9 @@ const msgOf = (out, f) => (out.errors.find((e) => e.field === f) || {}).msg;
   t("after close: a table", closed.html.includes("<table") && closed.title === "Week 1 results", closed);
   t("after close: every value escaped", clean(closed.html) && (closed.html.match(/&lt;img/g) || []).length === 3, closed.html);
   t("stars clamp to 0-4 and carry a label", closed.html.includes('aria-label="4 of 4 stars"') && closed.html.includes('aria-label="0 of 4 stars"'));
-  t("skipped levels show a labelled dash", (closed.html.match(/aria-label="Didn’t attempt"/g) || []).length === 2);
+  t("skipped levels show a dash with hidden text for screen readers (no aria-label on a span)",
+    (closed.html.match(/<span aria-hidden="true">—<\/span><span class="sr-only">Didn’t attempt<\/span>/g) || []).length === 2 &&
+    !/<span(?![^>]*\brole=)[^>]*aria-label=/.test(closed.html));
   t("no streak, crown or setup columns", !/Streak|Crown|Setup/.test(closed.html));
   t("the table says the numbers are self-reported", closed.html.includes("self-reported"));
   eq("after close, no entries", B.view({ status: 200, body: { state: "closed", count: 0, entries: [] } }, wk, AFTER).text,

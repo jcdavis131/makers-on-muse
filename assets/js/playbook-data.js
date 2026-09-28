@@ -200,12 +200,12 @@
         "browser"
       ],
       "recipe": [
-        "I am flying to London for a conference, out Oct 12, back Oct 16. I need to leave Austin Sunday afternoon and land Monday morning. Research real flight options under $900, one stop max, and give me the top 3 with flight numbers, times, and prices.",
-        "Put tentative holds on my calendar for the best two options, labeled clearly as tentative. Then draft my out-of-office email for Oct 12-16 mentioning the conference and who to contact urgently.",
-        "Build a packing checklist for 4 conference days plus one nice dinner, considering London weather in October. Then show me how to track my chosen flight's live status on the day.",
+        "I am flying to London for a conference, out [OUT DATE], back [BACK DATE]. I need to leave [HOME CITY] the afternoon before and land the next morning. Research real flight options under [BUDGET], one stop max, and give me the top 3 with flight numbers, times, and prices.",
+        "Put tentative holds on my calendar for the best two options, labeled clearly as tentative. Then draft my out-of-office email for [OUT DATE] to [BACK DATE] mentioning the conference and who to contact urgently.",
+        "Build a packing checklist for 4 conference days plus one nice dinner, considering London weather for those dates. Then show me how to track my chosen flight's live status on the day.",
         "Summarize everything — flights, calendar holds, OOO draft, packing list — in one message I can forward to my spouse."
       ],
-      "test": "3 real flight options under $900 with flight numbers, two tentative calendar holds, a ready-to-paste OOO draft, and a weather-aware packing list.",
+      "test": "3 real flight options under your budget with flight numbers, two tentative calendar holds, a ready-to-paste OOO draft, and a weather-aware packing list.",
       "proves": "The full autonomous-errand test — research, calendar writes, drafting, and synthesis in one run.",
       "note": "Search only. Don't let Muse book or pay for anything."
     },
@@ -398,10 +398,11 @@
         "podcast",
         "gmail",
         "google-calendar",
-        "spotify"
+        "spotify",
+        "browser"
       ],
       "recipe": [
-        "Plan a 4-episode audio series for this drive: 45 minutes each, on [THEME, e.g. the history of BBQ joints along our route]. Generate episode 1 now.",
+        "Plan a 4-episode audio series for our drive from [START] to [END]: 45 minutes each, on [THEME, e.g. the history of BBQ joints along our route]. Generate episode 1 now.",
         "While episode 1 plays: scan my email for anything from my boss this week and give me a 3-bullet summary I'll listen to between episodes.",
         "Build a Spotify playlist of [GENRE] that fills the gaps between episodes — about 90 minutes total.",
         "At the end of the drive, run a 5-question trivia game from the episodes for me and my passenger."
@@ -417,7 +418,9 @@
       "group": "dmv",
       "difficulty": 1,
       "time": "10 min",
-      "setup": [],
+      "setup": [
+        "browser"
+      ],
       "recipe": [
         "I'm at the [STATE] DMV to [TASK, e.g. renew my driver's license]. What documents do I need? Quiz me one at a time.",
         "I have [WHAT YOU BROUGHT]. Is that enough, or am I missing something?",
