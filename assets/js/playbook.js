@@ -31,7 +31,7 @@
     return String(s).split("-").map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(" ");
   }
 
-  function emptyState() { return { track: "all", group: null, diff: 0, q: "", w: null }; }
+  function emptyState() { return { track: "all", group: null, diff: 0, q: "", w: null, comm: 0 }; }
 
   /* groups(data) -> { persona: [...], moment: [...] } in data order. */
   function groups(data) {
@@ -69,6 +69,7 @@
     if (d && /^[1-5]$/.test(d)) s.diff = Number(d);
     var q = p.get("q");
     if (q) s.q = q.trim().slice(0, Q_MAX);
+    if (p.get("comm") === "1") s.comm = 1;
     return s;
   }
 
@@ -81,16 +82,18 @@
     if (state.group) p.push("group=" + encodeURIComponent(state.group));
     if (state.diff) p.push("diff=" + state.diff);
     if (state.q) p.push("q=" + encodeURIComponent(state.q));
+    if (state.comm) p.push("comm=1");
     return p.length ? "?" + p.join("&") : "";
   }
 
   function matches(w, state) {
     if (state.w) return w.id === state.w;
+    if (state.comm && !w.claimed_by) return false;
     if (state.track !== "all" && w.track !== state.track) return false;
     if (state.group && w.group !== state.group) return false;
     if (state.diff && w.difficulty !== state.diff) return false;
     if (state.q) {
-      var hay = (w.title + " " + w.group + " " + w.test + " " + w.proves + " " + w.recipe.join(" ") + " " + w.setup.join(" ")).toLowerCase();
+      var hay = (w.title + " " + w.group + " " + w.test + " " + w.proves + " " + w.recipe.join(" ") + " " + w.setup.join(" ") + " " + (w.claimed_by || "")).toLowerCase();
       if (hay.indexOf(state.q.toLowerCase()) === -1) return false;
     }
     return true;
@@ -123,12 +126,21 @@
         "<pre><code>" + esc(s) + "</code></pre></li>";
     }).join("");
     var link = permalink("/playbook", w.id);
-    return '<article class="pb-card" id="w-' + esc(w.id) + '" data-id="' + esc(w.id) + '">' +
+    var comm = w.claimed_by ? " is-community" : "";
+    var attrib = w.claimed_by
+      ? '<p class="pb-attrib"><span class="who">Claimed by</span> ' + esc(w.claimed_by) +
+        (w.trust ? ' <span class="pb-trust">receipts: ' + esc(w.trust) + "</span>" : "") + "</p>"
+      : "";
+    var noteHtml = "";
+    if (w.note && w.review_gate) noteHtml = '<p class="pb-gate"><strong>Review before submit</strong>' + esc(w.note) + "</p>";
+    else if (w.note) noteHtml = '<p class="pb-note-card">' + esc(w.note) + "</p>";
+    return '<article class="pb-card' + comm + '" id="w-' + esc(w.id) + '" data-id="' + esc(w.id) + '">' +
       '<div class="pb-card-top"><span class="pb-tag ' + tag + '">' + esc(human(w.group)) + "</span>" + dots(w.difficulty) + "</div>" +
       '<h3><a href="' + esc(link) + '">' + esc(w.title) + "</a></h3>" +
+      attrib +
       '<p class="pb-time">' + esc(w.time) + "</p>" +
       '<div class="pb-setup" role="group" aria-label="Setup">' + setup + "</div>" +
-      (w.note ? '<p class="pb-note-card">' + esc(w.note) + "</p>" : "") +
+      noteHtml +
       '<details class="pb-recipe"' + (opts.open ? " open" : "") + "><summary>Recipe · " + w.recipe.length + " steps</summary><ol>" + steps + "</ol></details>" +
       '<p class="pb-test"><strong>The test</strong>' + esc(w.test) + "</p>" +
       '<p class="pb-proves"><strong>Proves</strong>' + esc(w.proves) + "</p>" +
@@ -202,6 +214,9 @@
         document.querySelectorAll(".pb-chips button[data-group]").forEach(function (b) {
           b.setAttribute("aria-pressed", String(!state.w && b.getAttribute("data-group") === state.group));
         });
+        document.querySelectorAll(".pb-track button[data-comm]").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(!state.w && state.comm === 1));
+        });
         diff.value = String(state.diff);
         if (q.value !== state.q) q.value = state.q;
         if (single) single.hidden = !state.w;
@@ -221,6 +236,7 @@
 
       document.querySelector(".pb-track").addEventListener("click", function (e) {
         var b = e.target.closest("button"); if (!b) return;
+        if (b.hasAttribute("data-comm")) { update({ comm: state.comm ? 0 : 1 }); return; }
         var t = b.getAttribute("data-track");
         var ch = { track: t };
         if (state.group && trackOfGroup(data, state.group) !== t) ch.group = null;

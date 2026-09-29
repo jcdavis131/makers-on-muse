@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Playbook — Makers on Muse</title>
-<meta name="description" content="28 community workflows for Muse, each with a test you can run. Copy one, run it, and see what your setup still needs.">
+<meta name="description" content="42 workflows for Muse, 28 ours and 14 claimed by the community, each with a test you can run. Copy one, run it, and see what your setup still needs.">
 <link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
 <!-- layout:head -->
 <meta name="theme-color" content="#F9F6F0">
@@ -16,14 +16,14 @@
 <meta property="og:site_name" content="Makers on Muse">
 <meta property="og:url" content="https://makersonmuse.com/playbook">
 <meta property="og:title" content="The Playbook — Makers on Muse">
-<meta property="og:description" content="28 community workflows for Muse, each with a test you can run. Copy one, run it, and see what your setup still needs.">
+<meta property="og:description" content="42 workflows for Muse, 28 ours and 14 claimed by the community, each with a test you can run. Copy one, run it, and see what your setup still needs.">
 <meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Playbook — Makers on Muse">
-<meta name="twitter:description" content="28 community workflows for Muse, each with a test you can run. Copy one, run it, and see what your setup still needs.">
+<meta name="twitter:description" content="42 workflows for Muse, 28 ours and 14 claimed by the community, each with a test you can run. Copy one, run it, and see what your setup still needs.">
 <meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
 <meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
 <!-- /layout:head -->
@@ -92,6 +92,13 @@
 .pb-links a{font-family:var(--mono);font-size:13px}
 .pb-empty{text-align:center;padding:60px 20px;background:var(--card);border:1px dashed var(--stone-300);border-radius:var(--radius-l)}
 .pb-empty h2{margin-bottom:8px}
+/* community claims */
+.pb-card.is-community{border-left:3px solid var(--terracotta)}
+.pb-attrib{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:9px 13px;margin:0 0 12px}
+.pb-attrib .who{font-weight:700;color:var(--ink)}
+.pb-trust{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--moss-deep);border:1px solid var(--stone-300);border-radius:999px;padding:2px 10px;background:var(--card);white-space:nowrap}
+.pb-gate{font-size:14px;color:var(--terracotta-deep);background:rgba(193,124,96,.09);border:1px solid rgba(193,124,96,.4);border-radius:var(--radius-s);padding:11px 15px;margin:14px 0 0}
+.pb-gate strong{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px}
 /* tag legend */
 .pb-legend{display:grid;grid-template-columns:max-content 1fr;gap:10px 18px;margin:22px 0}
 .pb-legend dt{font-family:var(--mono);font-size:13px;color:var(--moss-deep)}
@@ -146,12 +153,14 @@
       <p class="eyebrow">The Playbook &middot; community workflows</p>
       <img class="mabel" src="/assets/img/mabel-plush.svg" alt="Mabel, our plush stenographer mascot, at her typewriter" width="190" height="219">
       <h1>Workflows worth stealing.</h1>
-      <p class="lede">Twenty-eight community workflows for real life. None has been checked on a real Muse yet, so treat each one as a test: run it and see what your setup still needs.</p>
+      <p class="lede">Forty-two workflows for real life: 28 we wrote, 14 claimed by the community. None has been checked on a real Muse yet, so treat each one as a test: run it and see what your setup still needs.</p>
+      <p class="pb-note">Community claims are reported by their owners — receipts vary. The pack is the receipts machine: run one and prove it.</p>
       <p class="pb-note">Each card names the connectors or built-in features it uses (<a href="#tags">what the tags mean</a>). Every workflow has its own link, and the filters you pick stay in the address, so you can share either. Playbook content is under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: copy and adapt it, with credit.</p>
       <div class="pb-stats" role="group" aria-label="Playbook stats">
-        <span><strong>28</strong> workflows</span>
+        <span><strong>42</strong> workflows</span>
         <span><strong>7</strong> personas</span>
         <span><strong>7</strong> moments</span>
+        <span><strong>14</strong> community claims</span>
       </div>
     </div>
   </section>
@@ -163,6 +172,7 @@
           <button type="button" data-track="all" aria-pressed="true">All</button>
           <button type="button" data-track="persona" aria-pressed="false">Personas</button>
           <button type="button" data-track="moment" aria-pressed="false">Moments</button>
+          <button type="button" data-comm="1" aria-pressed="false">Community claims</button>
         </div>
         <div class="pb-chips" id="persona-chips" role="group" aria-label="Persona"></div>
         <div class="pb-chips" id="moment-chips" role="group" aria-label="Moment"></div>
@@ -212,6 +222,8 @@
         <dd>The Finances (Plaid) connector, which reads bank data. Same third-party list, not the Help Center's. Set connectors to ask before acting.</dd>
         <dt>podcast</dt>
         <dd>Muse makes an audio episode. No Meta page we checked describes this, so check that your Muse can do it before you rely on it.</dd>
+        <dt>phone</dt>
+        <dd>Muse placing phone calls. No Meta page we checked describes voice calling on Muse, so check that your Muse can do it before you rely on it.</dd>
       </dl>
       <p class="muted">Need a service with no built-in connector? Muse can write a custom connector for a service that has an API or a command-line tool. See <a href="/setups#custom-connectors">Setups</a>.</p>
     </div>
@@ -261,8 +273,8 @@
   </div>
 </footer>
 <!-- /layout:footer -->
-<script src="/assets/js/playbook-data.js?v=3f5db9b05e"></script>
-<script src="/assets/js/playbook.js?v=1eac65342b"></script>
+<script src="/assets/js/playbook-data.js?v=0ed620143d"></script>
+<script src="/assets/js/playbook.js?v=cc10b31fee"></script>
 <script src="/assets/js/main.js?v=4f9c205a29"></script>
 </body>
 </html>

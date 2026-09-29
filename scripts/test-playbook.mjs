@@ -1,5 +1,5 @@
 /* Playbook checks. Run: node scripts/test-playbook.mjs (or npm test).
-   1. assets/js/playbook-data.js: 28 workflows, unique URL-safe ids, well
+   1. assets/js/playbook-data.js: 42 workflows, unique URL-safe ids, well
       formed, and every setup tag explained in playbook.html's tag legend.
       No tag names a connector that no source lists (flight tracking, maps,
       photo library, shopping).
@@ -38,7 +38,7 @@ const PAGE = read("playbook.html");
 /* ---------- 1. data ---------- */
 const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/dd>/g)].map((m) => [m[1], m[2]]));
 {
-  eq("28 workflows", DATA.length, 28);
+  eq("42 workflows", DATA.length, 42);
   const ids = DATA.map((w) => w.id);
   eq("ids are unique", new Set(ids).size, ids.length);
   t("ids are URL-safe slugs", ids.every((id) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)), ids.filter((id) => !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)));
@@ -79,6 +79,18 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
     t(id + ": carries a note", w && typeof w.note === "string" && w.note.length > 0);
   }
   t("data file names its content license", /CC BY 4\.0/.test(read("assets/js/playbook-data.js")));
+  {
+    const claimed = DATA.filter((w) => w.claimed_by);
+    eq("14 community-claimed workflows", claimed.length, 14);
+    t("every claimed workflow names its source and a trust level",
+      claimed.every((w) => typeof w.claimed_by === "string" && w.claimed_by.length > 0 &&
+        ["high", "medium-high", "medium", "medium-low"].includes(w.trust)));
+    t("review-gated workflows carry their note",
+      claimed.filter((w) => w.review_gate).every((w) => typeof w.note === "string" && w.note.length > 0));
+    const S2 = (o) => Object.assign(P.emptyState(), o);
+    eq("community filter finds the 14", P.filter(DATA, S2({ comm: 1 })).length, 14);
+    t("community card carries attribution", P.cardHtml(claimed[0]).includes("Claimed by"));
+  }
 }
 
 /* ---------- 2. the page ---------- */
@@ -160,7 +172,7 @@ const legend = new Map([...PAGE.matchAll(/<dt>([^<]+)<\/dt>\s*<dd>([\s\S]*?)<\/d
   t("filter: a difficulty", P.filter(DATA, S({ diff: 1 })).every((w) => w.difficulty === 1) && P.filter(DATA, S({ diff: 1 })).length > 0);
   t("filter: search is case-blind", P.filter(DATA, S({ q: "SYLLABUS" })).some((w) => w.id === "syllabus-to-calendar"));
   t("filter: search finds tags", P.filter(DATA, S({ q: "photo-upload" })).length === DATA.filter((w) => w.setup.includes("photo-upload")).length);
-  eq("count text", [P.countText(3, 28, P.emptyState()), P.countText(1, 28, S({ w: "x" }))], ["3 of 28 workflows", "Showing 1 workflow of 28."]);
+  eq("count text", [P.countText(3, 42, P.emptyState()), P.countText(1, 42, S({ w: "x" }))], ["3 of 42 workflows", "Showing 1 workflow of 42."]);
 }
 
 /* ---------- 5. cards ---------- */

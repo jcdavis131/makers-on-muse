@@ -566,6 +566,320 @@
       ],
       "test": "zero emails sent without approval, every draft traces to a real thread, and the agenda reflects the actual email discussion.",
       "proves": "whether your Muse can be trusted with your inbox at near-autonomy — drafts, judgment, and restraint."
+    },
+    {
+      "id": "medical-bill-audit",
+      "title": "Medical Bill Audit",
+      "track": "persona",
+      "persona": "parent",
+      "group": "parent",
+      "difficulty": 4,
+      "time": "2 hr",
+      "setup": [
+        "browser"
+      ],
+      "recipe": [
+        "Log in to my [PROVIDER] patient portal. Download the itemized bills for my last [N] visits — I need line-item detail, not summaries.",
+        "Go through every line and flag anything billed twice, any code that doesn't match the visit notes, and any charge that looks wrong. Show me each flag with the line number and amount.",
+        "For the flagged lines: find the provider's billing-dispute process and draft the dispute message for each one. Also check whether they offer a self-pay or prompt-pay discount and ask for it.",
+        "Send nothing until I approve each draft. Give me a final table: what you found, what you asked for, total dollars recovered."
+      ],
+      "test": "Every flagged line traces to a real line on a real bill. Nothing is disputed that you didn't approve, and the dollars recovered are documented.",
+      "proves": "Whether your Muse can do supervised money-adjacent work inside a logged-in portal without hallucinating numbers.",
+      "claimed_by": "@Ryan_Holdaway via shipwithmuse.live",
+      "trust": "medium-high"
+    },
+    {
+      "id": "errand-week-sprint",
+      "title": "Errand Week Sprint",
+      "track": "persona",
+      "persona": "professional",
+      "group": "professional",
+      "difficulty": 5,
+      "time": "1 week, in the background",
+      "setup": [
+        "gmail",
+        "google-calendar",
+        "browser"
+      ],
+      "recipe": [
+        "This week you're my errand runner. First: I got an iPhone delivered by FedEx and something's off — track it, figure out what went wrong, and get me a refund from Apple. Report back what happened.",
+        "Buy two Primetime tickets for [EVENT/DATE]. Then book dinner for [N] at [RESTAURANT] on [DATE] — and if plans change, handle the cancellation and refund too.",
+        "Build me a leads list from my Instagram and LinkedIn network: people in [INDUSTRY/ROLE], with name, role, company, and why they're a fit. Spreadsheet.",
+        "There's a 3-hour application form at [URL]. Fill it out completely from my details — flag anything you're unsure about instead of guessing."
+      ],
+      "test": "The refund is actually issued. The tickets are real. The dinner booking and the refund are both confirmed. The leads list has real people with correct roles. The form is submitted with zero invented fields.",
+      "proves": "Whether your Muse can run a multi-day, multi-domain errand queue with real money and real submissions — the full autonomous week.",
+      "claimed_by": "@AlecEllin via shipwithmuse.live",
+      "trust": "medium"
+    },
+    {
+      "id": "money-recovery-sweep",
+      "title": "Money Recovery Sweep",
+      "track": "persona",
+      "persona": "professional",
+      "group": "professional",
+      "difficulty": 4,
+      "time": "3 hr",
+      "setup": [
+        "browser",
+        "phone"
+      ],
+      "recipe": [
+        "Audit my recurring bills. Start with AT&T — log in, check my plan against what I'm actually using, and get me the cheapest plan that keeps my coverage. I want $300/year or better.",
+        "Check my Amazon orders from the last 90 days for anything returnable I haven't returned, and start the returns.",
+        "I have an IKEA return to handle — [ITEM, receipt details]. Do the whole return flow.",
+        "File the $516 vet claim for my dog with [PET INSURER]: gather the invoice, fill the claim, submit it. Itemize everything you recovered at the end."
+      ],
+      "test": "The itemized recovery total matches real credits and refunds. The AT&T plan change is confirmed on the account. The vet claim is filed with a confirmation number.",
+      "proves": "Whether your Muse can chain logins, support chats, returns, and insurance filings into one itemized money-recovery run.",
+      "claimed_by": "@armand_ruiz via shipwithmuse.live",
+      "trust": "medium-high"
+    },
+    {
+      "id": "fare-matrix-europe",
+      "title": "Europe Fare Matrix",
+      "track": "moment",
+      "moment": "long-flight",
+      "group": "long-flight",
+      "difficulty": 5,
+      "time": "3 hr",
+      "setup": [
+        "browser"
+      ],
+      "recipe": [
+        "I'm flying SFO to Spain and back from Italy. Search cash AND award fares from SFO to each of these 11 Spanish cities [LIST], returning from each of these 10 Italian cities [LIST], across these 7 dates [DATES]. That's the full matrix — don't skip combinations.",
+        "Rank every valid round trip by total price, then separately by points cost. Flag any open-jaw combos that beat the simple round trips.",
+        "Give me the top 3 cash and top 3 award options with exact flight numbers, times, and booking links. Tell me which one you'd book and why."
+      ],
+      "test": "All 146 searches actually run — count them. The cheapest option is genuinely the cheapest of the matrix. Flight numbers and prices are real at the time of search.",
+      "proves": "Whether your Muse can execute a large, tedious search matrix without shortcutting — the grind test.",
+      "claimed_by": "@mehtadeep via shipwithmuse.live",
+      "trust": "high"
+    },
+    {
+      "id": "disaster-paperwork-double-file",
+      "title": "Disaster Paperwork Double-File",
+      "track": "persona",
+      "persona": "parent",
+      "group": "parent",
+      "difficulty": 4,
+      "time": "2 hr",
+      "setup": [
+        "browser",
+        "gmail"
+      ],
+      "recipe": [
+        "My AC died and there's damage. First, file a police report online for [CITY/COUNTY] — here's what happened: [DETAILS]. Get me the report number.",
+        "Now file the homeowner's insurance claim with [INSURER]: upload the photos, attach the police report number, describe the damage and the timeline.",
+        "Find three licensed HVAC repair companies near [ZIP] with 4+ stars, and get me written quotes — email them the photos and the damage description.",
+        "Summarize: report number, claim number, and the three quotes side by side. Don't authorize any work."
+      ],
+      "test": "The police report has a real report number. The insurance claim is filed with confirmation. The quotes come from real companies. No work was authorized.",
+      "proves": "Whether your Muse can run bureaucratic filings across two institutions plus vendor outreach in one stressed session.",
+      "note": "Review everything before anything is filed. Read the police report and the insurance claim yourself before Muse submits them.",
+      "review_gate": true,
+      "claimed_by": "@HouseHackerJon via shipwithmuse.live",
+      "trust": "medium"
+    },
+    {
+      "id": "marketplace-lowball-blitz",
+      "title": "Marketplace Lowball Blitz",
+      "track": "persona",
+      "persona": "student",
+      "group": "student",
+      "difficulty": 3,
+      "time": "2 hr",
+      "setup": [
+        "browser"
+      ],
+      "recipe": [
+        "I want a brand-new M5 Pro MacBook Pro, 48GB RAM, 2TB. Search Facebook Marketplace within [RADIUS] of [ZIP] for every listing.",
+        "Message all of them — start at $2,200 and negotiate up, but never above $2,500. Be polite, be fast, and keep a spreadsheet: seller, list price, their counter, status.",
+        "The moment someone accepts $2,500 or less for a sealed/new unit, stop and tell me. Don't agree to meet anyone — I handle pickup."
+      ],
+      "test": "About 50 sellers are contacted — count the threads. The final price is $2,500 or less. The unit matches the exact spec. No meetup was agreed without you.",
+      "proves": "Whether your Muse can run high-volume parallel negotiation with a hard price ceiling and clean bookkeeping.",
+      "claimed_by": "@jingusucks via shipwithmuse.live",
+      "trust": "medium-high"
+    },
+    {
+      "id": "contractor-estimate-remote",
+      "title": "Remote Contractor Estimates",
+      "track": "persona",
+      "persona": "parent",
+      "group": "parent",
+      "difficulty": 4,
+      "time": "1 hr",
+      "setup": [
+        "phone",
+        "gmail"
+      ],
+      "recipe": [
+        "I need estimates for [JOB, e.g. fence repair]. Call these contractors [NAMES/NUMBERS]: introduce yourself as my assistant, describe the job, and ask for a ballpark and their availability this month.",
+        "Email each one photos of the work area plus a written description, and ask for a written estimate in reply.",
+        "Chase anyone who hasn't replied in 48 hours — one polite follow-up call. Then give me a comparison: price, timeline, and who was most responsive."
+      ],
+      "test": "The calls are actually placed — transcripts exist. The emails go out with the right photos attached. Follow-ups happen on schedule. The comparison covers real quotes.",
+      "proves": "Whether your Muse can run a phone-plus-email vendor process you never have to attend.",
+      "claimed_by": "@ZachSB via shipwithmuse.live",
+      "trust": "medium"
+    },
+    {
+      "id": "delay-compensation-claim",
+      "title": "Delay Compensation Claim",
+      "track": "moment",
+      "moment": "airport-wait",
+      "group": "airport-wait",
+      "difficulty": 2,
+      "time": "15 min",
+      "setup": [
+        "gmail",
+        "browser"
+      ],
+      "recipe": [
+        "My Delta flight [NUMBER] on [DATE] was delayed 7 hours. Claim every cent of compensation I'm owed — check Delta's policy, DOT rules, and my SkyMiles account.",
+        "While you're at it: rebook me on the earliest workable alternative and confirm the new itinerary.",
+        "There's a support email thread about this in my inbox — read it and reply appropriately so nothing falls through the cracks."
+      ],
+      "test": "The credit actually lands in the account. The rebooking is confirmed with a real confirmation code. The email reply is sent and accurate.",
+      "proves": "Whether your Muse turns a travel disaster into money plus a new itinerary in minutes.",
+      "claimed_by": "@cryptopunk7213 via shipwithmuse.live",
+      "trust": "high"
+    },
+    {
+      "id": "credit-dispute-blitz",
+      "title": "Credit Dispute Blitz",
+      "track": "persona",
+      "persona": "professional",
+      "group": "professional",
+      "difficulty": 3,
+      "time": "1 hr",
+      "setup": [
+        "browser"
+      ],
+      "recipe": [
+        "Pull my credit reports from all three bureaus. List every collections account with creditor, amount, and date.",
+        "For each collections account, check whether it's past the statute of limitations in my state and whether the details match my records. Flag any errors.",
+        "Draft and submit disputes for the ones with errors — use the bureau's online dispute process. Log the confirmation numbers and tell me exactly what you submitted and when."
+      ],
+      "test": "The collections are actually removed — check the reports after. The dispute submissions have real confirmation numbers. Timestamps are documented.",
+      "proves": "Whether your Muse can execute a regulated dispute process fast and cleanly.",
+      "note": "Review every dispute before it's submitted. Check the confirmation numbers and exactly what was sent.",
+      "review_gate": true,
+      "claimed_by": "@ChrisUniverse via shipwithmuse.live",
+      "trust": "high"
+    },
+    {
+      "id": "day-of-errands-autopilot",
+      "title": "Day-of Errands Autopilot",
+      "track": "persona",
+      "persona": "parent",
+      "group": "parent",
+      "difficulty": 3,
+      "time": "30 min setup, runs all day",
+      "setup": [
+        "gmail",
+        "browser"
+      ],
+      "recipe": [
+        "Today you're running my errands. Buy me [SOCKS/SPECIFICS] on Amazon — cheapest decent option, not the cheapest garbage.",
+        "Order my usual Whole Foods groceries for delivery today. You know the list — check my last two orders and repeat, minus the [ITEM] I didn't like.",
+        "Book a cleaning service for [DATE] — 4.5+ stars, under $[X]. And get me a burger for dinner from somewhere good near me, arriving by 7pm.",
+        "Text me a receipt for each one as it completes. If anything costs more than $[LIMIT], ask me first."
+      ],
+      "test": "All four errands complete with real order confirmations. The grocery list matches past orders. Nothing over the limit without approval.",
+      "proves": "Whether your Muse can run a mixed shopping, services, and food day across apps with a spending governor.",
+      "claimed_by": "@nicbstme via shipwithmuse.live",
+      "trust": "medium"
+    },
+    {
+      "id": "unclaimed-property-sweep",
+      "title": "Unclaimed Property Sweep",
+      "track": "persona",
+      "persona": "professional",
+      "group": "professional",
+      "difficulty": 3,
+      "time": "45 min",
+      "setup": [
+        "browser"
+      ],
+      "recipe": [
+        "I've lived in [STATE 1], [STATE 2], [STATE 3]. Search every one of those states' unclaimed property databases for my name and any past addresses.",
+        "For every hit: tell me the amount, the holder, and the claim ID. Then fill out the claim forms — I'll sign and provide ID where needed.",
+        "Don't submit anything that needs my signature without showing me first. Give me a final list: total found, total claimed, what's pending on me."
+      ],
+      "test": "Searches run in every listed state. The hits are real — verifiable on the state sites. The forms are correctly filled. Nothing is submitted without review.",
+      "proves": "Whether your Muse does exhaustive multi-site lookup plus form-filling without missing a state.",
+      "note": "Review every claim form before it's submitted. Nothing needs your signature without your eyes on it first.",
+      "review_gate": true,
+      "claimed_by": "two builders via shipwithmuse.live",
+      "trust": "medium-high"
+    },
+    {
+      "id": "wardrobe-stylist",
+      "title": "Wardrobe Stylist",
+      "track": "persona",
+      "persona": "professional",
+      "group": "professional",
+      "difficulty": 4,
+      "time": "2 hr",
+      "setup": [
+        "browser",
+        "photo-upload"
+      ],
+      "recipe": [
+        "Learn my style. Here are my measurements [LIST], my top 20 stores [LIST], and my budget rules [RULES]. Save all of it — this is my profile now.",
+        "Pick one hero piece from [STORE/CATALOG] under $[X] that anchors my wardrobe, and build 5 full looks around it using pieces I own plus new buys.",
+        "Keep a 'loves' list of everything you recommend. Every new item needs a real product link, a price, and a reason it fits my profile."
+      ],
+      "test": "The hero piece is real, in budget, with a working link. The looks reference actual owned pieces. The profile persists across sessions.",
+      "proves": "Whether your Muse can build and maintain a persistent personal profile that compounds over time.",
+      "claimed_by": "@shriyanevatia via shipwithmuse.live",
+      "trust": "medium"
+    },
+    {
+      "id": "friends-feed-dashboard",
+      "title": "Friends-Only Feed",
+      "track": "persona",
+      "persona": "grandparent",
+      "group": "grandparent",
+      "difficulty": 3,
+      "time": "1 hr",
+      "setup": [
+        "browser"
+      ],
+      "recipe": [
+        "Look through my Instagram DMs and figure out who my actual inner circle is — family and close friends I talk to most.",
+        "Build me a private dashboard: just their posts and stories, newest first, nothing else. No ads, no suggested content.",
+        "Keep it updated daily. If someone in the circle posts something big — a baby, a move, an engagement — flag it for me so I don't miss it."
+      ],
+      "test": "The circle matches real DM frequency. The feed contains only those people. Milestone flags correspond to real posts.",
+      "proves": "Whether your Muse can derive a social graph from behavior and maintain a living artifact.",
+      "claimed_by": "@shivambharuka via shipwithmuse.live",
+      "trust": "medium"
+    },
+    {
+      "id": "playlist-pitcher",
+      "title": "Playlist Pitcher",
+      "track": "persona",
+      "persona": "professional",
+      "group": "professional",
+      "difficulty": 4,
+      "time": "2 hr",
+      "setup": [
+        "spotify",
+        "gmail"
+      ],
+      "recipe": [
+        "My music is [GENRE/DESCRIPTION] — here's my latest track [LINK]. Research Spotify playlists that feature this genre: I want curator names, playlist sizes, and contact info.",
+        "Rank the top 20 by fit. Then write a personalized cold email for each curator — reference a specific track on their playlist, keep it short, link my song.",
+        "Send nothing yet — show me all 20 drafts first. After I approve, send them and track replies for a week, then report back who placed me."
+      ],
+      "test": "The playlists are real and genre-matched. The curator contacts are real. Placements are verifiable on Spotify.",
+      "proves": "Whether your Muse can run a research-to-outreach pipeline with taste and restraint.",
+      "claimed_by": "@goshfather via Threads",
+      "trust": "medium-low"
     }
   ];
   if (typeof module === "object" && module.exports) module.exports = PLAYBOOKS;
