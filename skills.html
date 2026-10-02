@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skills — Makers on Muse</title>
-<meta name="description" content="Skills for Muse Code, Meta's developer CLI: what a SKILL.md skill is, where Muse Code finds it, and how sharing skills here will work.">
+<meta name="description" content="The curated skill shelf behind our Muse agents: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
 <link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
 <link rel="stylesheet" href="/assets/css/mabel.css?v=3b78d380a1">
 <!-- layout:head -->
@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="Makers on Muse">
 <meta property="og:url" content="https://makersonmuse.com/skills">
 <meta property="og:title" content="Skills — Makers on Muse">
-<meta property="og:description" content="Skills for Muse Code, Meta's developer CLI: what a SKILL.md skill is, where Muse Code finds it, and how sharing skills here will work.">
+<meta property="og:description" content="The curated skill shelf behind our Muse agents: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
 <meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Skills — Makers on Muse">
-<meta name="twitter:description" content="Skills for Muse Code, Meta's developer CLI: what a SKILL.md skill is, where Muse Code finds it, and how sharing skills here will work.">
+<meta name="twitter:description" content="The curated skill shelf behind our Muse agents: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
 <meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
 <meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
 <!-- /layout:head -->
@@ -35,6 +35,16 @@
 code,.cmd{font-family:var(--mono);font-size:14px}
 code{background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
 pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.7;margin:16px 0}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin:26px 0 8px}
+.skill-card{background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-m);padding:18px 20px}
+.skill-card h3{font-family:var(--mono);font-size:16px;margin:0 0 2px}
+.skill-card .cat{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--moss-deep)}
+.skill-card p{font-size:14px;margin:8px 0}
+.skill-card .why{font-size:13px;color:var(--ink-soft);border-top:1px dashed var(--stone-300);padding-top:8px;margin:10px 0 0}
+.tier2 h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin:22px 0 6px}
+.tier2 ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:4px 22px}
+.tier2 li{font-size:14px;padding:6px 0;border-bottom:1px solid var(--stone-200)}
+.tier2 code{font-family:var(--mono);font-size:13px}
 </style>
 </head>
 <body>
@@ -84,14 +94,129 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
       <div class="center">
         <p class="eyebrow">Library &middot; Muse Code</p>
         <h1>Skills</h1>
-        <p class="lede">Skills are the second track of the library, for Muse Code, Meta's developer CLI. A skill is a folder with a SKILL.md file in it: written instructions that Muse Code loads when a task calls for them.</p>
+        <p class="lede">The skills our agents run on. A skill is a folder with a SKILL.md file in it: written instructions an agent loads when a task calls for them. Below is our curated shelf &mdash; the skills we actually use, scrubbed clean of personal details.</p>
       </div>
       <div class="wrap-narrow" style="padding:0">
         <div class="status-note">
-          <p><strong>Sharing skills here isn't open yet.</strong> Submissions come in <a href="/about#phases">Phase 2</a>. This page explains what a skill is and how sharing will work.</p>
-          <p>Using the Muse app, not Muse Code? What you can change there is a <a href="/setups">Setup</a>.</p>
+          <p><strong>This is our curated shelf.</strong> The skills below are the ones our agents actually run on, scrubbed clean &mdash; no names, accounts, or device info. Our full private library lives in a sidebar Space; this page is its public face, re-curated weekly.</p>
+          <p>Submissions come in <a href="/about#phases">Phase 2</a>. Using the Muse app, not Muse Code? What you can change there is a <a href="/setups">Setup</a>.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">The shelf</p>
+      <h2>Curated skills</h2>
+      <p class="muted" style="max-width:44em">Ten daily drivers and twenty-two power tools, re-curated weekly from the 109 skills in our private library. Last curated: October 2, 2026.</p>
+      <h3 style="margin-top:30px">Daily drivers</h3>
+      <div class="shelf">
+        <div class="skill-card">
+          <span class="cat">Comms</span>
+          <h3>gmail</h3>
+          <p>Search, read, draft, send, and manage Gmail: threads, labels, attachments, unsubscribes.</p>
+          <p class="why">Backbone of comms &mdash; inbox triage, approvals, receipts.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Productivity</span>
+          <h3>google-calendar</h3>
+          <p>Agenda views, event details, and scheduling changes across Google Calendar.</p>
+          <p class="why">Backbone of time &mdash; scheduling, ship blocks, family calendar.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Dev</span>
+          <h3>github-ops</h3>
+          <p>GitHub repo operations via the gh CLI: PR status and checks, CI logs, merges, releases.</p>
+          <p class="why">The ship lane.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Dev</span>
+          <h3>vercel-deploy</h3>
+          <p>Answers &ldquo;is it live?&rdquo; for Vercel projects; inspects deployments via the API.</p>
+          <p class="why">Never claim live without it.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Dev</span>
+          <h3>cursor-agents</h3>
+          <p>Dispatches headless Cursor coding agents on local repos: one-shot runs, worktree-isolated fixes.</p>
+          <p class="why">The cheap direct-work lane.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Infra</span>
+          <h3>tailscale-ops</h3>
+          <p>Operates a Tailscale tailnet: join status, reaching machines over the mesh, pairing access with job runners.</p>
+          <p class="why">The device fabric.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Infra</span>
+          <h3>ssh-windows</h3>
+          <p>An SSH lane to Windows machines over Tailscale for always-on jobs.</p>
+          <p class="why">The always-on Windows lane.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Search</span>
+          <h3>zvec-grep</h3>
+          <p>Local-first hybrid search: ripgrep plus BM25 plus vector.</p>
+          <p class="why">Finds anything in the codebase, fast, no cloud.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Process</span>
+          <h3>mistake-attribution</h3>
+          <p>Diagnoses a failure three ways &mdash; recipe problem, knowledge gap, or ambiguity &mdash; and routes the fix to the right layer.</p>
+          <p class="why">Every mistake becomes a lesson. Binding protocol.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Meta</span>
+          <h3>skill-creator</h3>
+          <p>Creates or updates a workspace skill: description, structure, instructions, supporting files.</p>
+          <p class="why">The factory that makes more skills.</p>
+        </div>
+      </div>
+      <h3 style="margin-top:34px">Power tools</h3>
+      <div class="tier2">
+        <h3>Comms</h3>
+        <ul>
+          <li><code>messenger</code> &mdash; read, search, and summarize conversations; send and react</li>
+          <li><code>instagram</code> &mdash; profiles, posts, and insights; publish on request</li>
+          <li><code>threads</code> &mdash; posts, feed, social graph, publishing</li>
+          <li><code>facebook-cli</code> &mdash; posts, friends, groups, and events from a pasted URL</li>
+          <li><code>gmail-triage</code> &mdash; urgency-ranked inbox scans with drafts for approval</li>
+        </ul>
+        <h3>Money</h3>
+        <ul>
+          <li><code>plaid</code> &mdash; balances, transactions, and investments across linked accounts</li>
+          <li><code>booking</code> &mdash; live flight, hotel, restaurant, and event-ticket booking</li>
+          <li><code>shopping</code> &mdash; find, compare, and evaluate real products with prices</li>
+          <li><code>flightaware</code> &mdash; flight status, delays, arrivals, departures</li>
+          <li><code>opentable</code> &mdash; restaurant availability and reservations</li>
+        </ul>
+        <h3>Media</h3>
+        <ul>
+          <li><code>spotify</code> &mdash; search and manage music, podcasts, playlists</li>
+          <li><code>tts</code> &mdash; text to spoken audio, single or multi-speaker</li>
+          <li><code>generate_podcast</code> &mdash; compose podcast episodes and briefings as MP3</li>
+          <li><code>image-search</code> &mdash; web image URLs and source pages for reference</li>
+          <li><code>media-library</code> &mdash; search and inspect the photo library</li>
+        </ul>
+        <h3>Data</h3>
+        <ul>
+          <li><code>embedding-workbench</code> &mdash; validate embeddings, k-NN queries, challenger evals</li>
+          <li><code>timesfm-vector</code> &mdash; time-series forecasting for embedding games</li>
+          <li><code>muse_db</code> &mdash; inspect database-backed records for diagnosis</li>
+        </ul>
+        <h3>Research</h3>
+        <ul>
+          <li><code>paper2agent</code> &mdash; turn research papers into reviewed skills and MCP servers</li>
+          <li><code>deep-research-workbench</code> &mdash; multi-lane research writeups with citation ledgers</li>
+        </ul>
+        <h3>Browser &amp; diagrams</h3>
+        <ul>
+          <li><code>ego-lite</code> &mdash; Chromium automation: click, type, screenshot, QA</li>
+          <li><code>ai-drawio</code> &mdash; diagrams from natural language: flowcharts, ERDs</li>
+        </ul>
+      </div>
+      <p class="small muted" style="margin-top:26px">Private dev-only API skills are kept off this page on purpose. Everything listed here is scrubbed of personal details.</p>
     </div>
   </section>
 
