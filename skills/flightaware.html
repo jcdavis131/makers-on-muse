@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flightaware — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use for questions about a specific flight’s departure or arrival time, including “when’s my flight?” and confirmation of remembered times, plus flight status, delays, and cancellations. Verify the exact dated flight before answering; memory identifies the itinerary but does not verify its current schedule. Use FlightAware to monitor operational changes for an upcoming booked flight when the user directly asks for ongoing monitoring.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/flightaware">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/flightaware">
+<meta property="og:title" content="flightaware">
+<meta property="og:description" content="Use for questions about a specific flight’s departure or arrival time, including “when’s my flight?” and confirmation of remembered times, plus flight status, delays, and cancellations. Verify the exact dated flight before answering; memory identifies the itinerary but does not verify its current schedule. Use FlightAware to monitor operational changes for an upcoming booked flight when the user directly asks for ongoing monitoring.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="flightaware">
+<meta name="twitter:description" content="Use for questions about a specific flight’s departure or arrival time, including “when’s my flight?” and confirmation of remembered times, plus flight status, delays, and cancellations. Verify the exact dated flight before answering; memory identifies the itinerary but does not verify its current schedule. Use FlightAware to monitor operational changes for an upcoming booked flight when the user directly asks for ongoing monitoring.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Money &middot; Bundled</p>
+      <h1>flightaware</h1>
+      <p class="lede">Use for questions about a specific flight’s departure or arrival time, including “when’s my flight?” and confirmation of remembered times, plus flight status, delays, and cancellations. Verify the exact dated flight before answering; memory identifies the itinerary but does not verify its current schedule. Use FlightAware to monitor operational changes for an upcoming booked flight when the user directly asks for ongoing monitoring.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>FlightAware</h2>
+<h3>Connecting</h3>
+<p>There is nothing for the user to connect and no key to enter. Run <code>flightaware status</code> to check it is reachable, or <code>flightaware status --verify</code> to also confirm a live read works. If status comes back unavailable, tell the user FlightAware is not reachable from this device right now and try again later. Never ask the user for a FlightAware API key.</p>
+<h3>Command syntax</h3>
+<p>Identifiers are positional arguments, not flags. Output is always JSON; add <code>--compact</code> for single-line JSON.</p>
+<ul>
+<li><code>flightaware flight &lt;IDENT&gt; [--date YYYY-MM-DD]</code> for a flight number, registration, or <code>fa_flight_id</code>. <code>--date</code> is the local departure date and must be within two days from now; use <code>--start</code>/<code>--end</code> with ISO timestamps for another window.</li>
+<li><code>flightaware position &lt;FA_FLIGHT_ID&gt;</code> and <code>flightaware track &lt;FA_FLIGHT_ID&gt;</code> for a leg returned by <code>flight</code>.</li>
+<li><code>flightaware schedules &lt;DATE_START&gt; &lt;DATE_END&gt; [--origin &lt;ICAO&gt;] [--destination &lt;ICAO&gt;] [--airline &lt;ICAO&gt;] [--flight-number &lt;N&gt;]</code> for flights more than two days out.</li>
+</ul>
+<h3>Common flows</h3>
+<h4>Track a flight</h4>
+<p>Run <code>flight</code> with the airline flight number to get its current status, then use the returned <code>fa_flight_id</code> with <code>position</code> for where it is now or <code>track</code> for its recent path. For a picture, run <code>map</code> with <code>--save &lt;path&gt;</code> to write a static image of the flight.</p>
+<h4>Monitor a tracked trip</h4>
+<p>Use this flow when the user directly asks for ongoing monitoring of an upcoming booked flight. Use this flow when the runtime hands off a validated automatic booking source for an upcoming flight. Treat either trigger as authorization to create the watch after the required flight facts are present. Do not ask whether to start monitoring after the runtime handoff. Do not require a connected email account. Ask the user only for flight facts that the requested monitoring needs and that the current context does not supply. Resolve each exact dated leg before scheduling a job.</p>
+<p>Search user goals and Tracking items for the trip. Use a matching user goal as the canonical owner. Otherwise, reuse a matching active Tracking item. If neither exists, create one Tracking item. Resolve the canonical owner before scheduling a job. Do not create a FlightAware-specific database or a duplicate Tracking item.</p>
+<p>Store the minimum operational state in <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code>. Use <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code> only as goal-owned job state. Do not create a separate travel database.</p>
+<p>List the canonical owner's cron jobs before creating an operational job. Reuse an equivalent goal-owned operational job when one exists. If no equivalent job exists, add one operational job for the trip. Use <code>flight-status-&lt;goal-slug&gt;</code> as its identifier. Set its owner to <code>goal:&lt;goal-slug&gt;</code>. Schedule the operational job at creation with the actual cron schedule for the next active leg's current cadence band. Use a daily cron schedule while the next active leg departs more than 48 hours from now. Use an hourly cron schedule from 48 hours before departure until 6 hours before departure. Use a 10 to 15 minute cron schedule from 6 hours before departure through landing. Do not create or retain a high-frequency cron schedule that relies on <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code> to skip source calls. Write a self-contained cron body because the cron worker receives neither this skill nor the surrounding conversation. Include the Tracking goal, <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code>, exact leg identity, and booked baseline. Include the deduplication rule, failure policy, cadence transitions, and stop conditions. Include the exact FlightAware command lines each run needs, written with the syntax above.</p>
+<p>At the start of each operational run, compare the existing cron schedule with the next active leg's current cadence band. Update the same cron job before any FlightAware source call when the existing cron schedule differs from the current cadence band. Repair an existing high-frequency cron schedule before any FlightAware source call when the next active leg is outside the high-frequency band. Keep the current cadence until the active leg lands or a connection risk remains unresolved. Advance the same job to the next active leg, then stop it after the final landing.</p>
+<p>Compare strategic schedule changes with the booked baseline. Compare operational changes with the last notified facts. Apply the cancellation corroboration and status interpretation rules in the Rules section. For a material movement, flight or carrier change, confirmed cancellation, diversion, terminal change, qualifying gate change, qualifying equipment change, qualifying delay, or credible connection risk, create one stable event fingerprint. Treat the first delay estimate at 30 minutes or more as a qualifying delay. Treat a later delay-only change as a qualifying delay only when it crosses from 30 minutes or more to less than 30 minutes, enters a worse band among 30 to 59 minutes, 60 to 119 minutes, and 120 minutes or more, or differs by 60 minutes or more from the last notified delay estimate. Do not include the exact delayed minute value in a delay-only fingerprint. Treat terminal changes, airport changes, confirmed cancellations, diversions, and credible connection risks as immediate alert candidates. Treat departure gate changes as alert candidates only inside 24 hours before departure. Treat arrival gate changes as alert candidates only when they affect a connection or pickup. Treat equipment changes as alert candidates only when they affect cabin, seat, or itinerary facts. Keep final landing silent unless the user asked for landing notification or a pickup or connection impact remains. Keep a first gate or terminal assignment, an on-time status, boarding, taxiing, departure, and in-flight progress silent; none of them is a change. Name only the current gate in a departure gate alert. From 90 minutes before departure, send each departure gate change on the run that finds it. Earlier, send at most one departure gate alert per leg per hour: record a newer gate that arrives within the hour in <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code> and send the then-current gate on the first run after the hour. Stay silent when the gate returns to the last notified gate, and fold a gate change into a concurrent delay or cancellation message instead of sending it separately. In a scheduled run, keep an unconfirmed cancellation silent: record it in <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code>, recheck the exact dated leg, and seek confirmation from an airline or airport source. A cancellation is confirmed only when FlightAware's <code>cancelled</code> flag and status text agree, or an airline or airport source confirms it. Notify as soon as it is confirmed, and keep checking on later runs while it stays unconfirmed. Write these silence rules, including the gate timing and the cancellation confirmation test, into the cron body with the other alert rules; the cron worker does not receive this skill. Persist the fingerprint before sending a message. Add one Tracking activity before sending a message. Do not add another activity or message for the same fingerprint. Keep unchanged checks silent. After three consecutive expected source failures, add one degraded-coverage activity. Do not treat a failed read as evidence that nothing changed. Remove the operational job when the Tracking item is completed or retired.</p>
+<h4>Find flights in the air</h4>
+<p>Use <code>search</code> to find airborne flights by origin, destination, or area. Default to one page of results and ask before pulling more.</p>
+<h4>Airport activity</h4>
+<p>Use <code>airport</code> for an airport's details, <code>airport-delays</code> for current delays, <code>airport-flights</code> for arrivals and departures, and <code>airport-weather</code> for conditions. <code>nearby-airports</code> finds airports around a location.</p>
+<h4>Airline activity</h4>
+<p>Use <code>operator</code> for an airline's details and <code>operator-flights</code> for its recent and scheduled flights.</p>
+<h4>History</h4>
+<p>For past flights, use the <code>history</code> commands with an explicit date range. They cover flights, tracks, routes, airport activity, and an aircraft's last flight.</p>
+<h4>Predictions and schedules</h4>
+<p>Use <code>foresight</code> for FlightAware's predicted status and positions, <code>schedules</code> for scheduled flights between two dates, and <code>disruptions</code> for cancellation and delay counts.</p>
+<h3>Other commands</h3>
+<p>The flows above cover the common cases. For anything else, run <code>flightaware --help</code> for the full command list and <code>flightaware &lt;command&gt; --help</code> for a command's options. This includes aircraft owner and type lookups, route and count queries, and advanced search syntax.</p>
+<h3>Rules</h3>
+<ul>
+<li>Use the airline's ICAO flight number when you can (<code>UAL123</code>, not <code>UA123</code>). If the user's flight number is ambiguous, resolve it with <code>canonical-flight</code> first.</li>
+<li>For &quot;where is my flight&quot;, get the flight first, pick the right date and leg, then look up its position or track. Do not guess an <code>fa_flight_id</code>.</li>
+<li>A cancellation is a high-impact terminal claim. Never report it as confirmed or stop a flight watch from <code>cancelled: true</code> alone. If the flight carries <code>muse_cancellation_evidence.classification: conflicting_provider_fields</code>, recheck the exact dated leg. If the fields still conflict, seek confirmation from an airline or airport source. Without it, say the cancellation is unconfirmed when answering the user directly, and keep a scheduled monitoring run silent until it is confirmed; keep monitoring either way. Only treat the cancellation as confirmed when FlightAware's boolean and status text agree, or an independent source confirms it.</li>
+<li>If FlightAware says a flight or aircraft is blocked or has no data, tell the user plainly and do not try to work around it.</li>
+<li>Flight reads preserve AeroAPI's raw times and add semantic UTC/user-local fields such as <code>scheduled_gate_departure_at</code>, <code>estimated_takeoff_at</code>, <code>actual_landing_at</code>, and <code>scheduled_gate_arrival_at</code>. Prefer their <code>user_local</code> values in replies. Position samples similarly add <code>position_observed_at</code>.</li>
+<li>FlightAware does not cover airline policies, terminal maps, baggage, booking, or customer service. For those, use web search and make clear which details came from the web rather than FlightAware.</li>
+<li>Reply in plain language about the flight, not about how you looked it up. Do not show the user commands, ids, tokens, or raw status codes.</li>
+</ul>
+<h3>Limits</h3>
+<ul>
+<li>You can't book travel, buy tickets, change a reservation, or contact an airline or airport.</li>
+<li>Filing a flight intent changes state in FlightAware, so only do it when the user clearly asks and the exact flight is unambiguous; no additional confirmation is required.</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

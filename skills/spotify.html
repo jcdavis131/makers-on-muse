@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>spotify — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Discover, search, and manage Spotify music, podcasts, and playlists, including deleting shows or episodes you created with Save to Spotify.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/spotify">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/spotify">
+<meta property="og:title" content="spotify">
+<meta property="og:description" content="Discover, search, and manage Spotify music, podcasts, and playlists, including deleting shows or episodes you created with Save to Spotify.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="spotify">
+<meta name="twitter:description" content="Discover, search, and manage Spotify music, podcasts, and playlists, including deleting shows or episodes you created with Save to Spotify.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Bundled</p>
+      <h1>spotify</h1>
+      <p class="lede">Discover, search, and manage Spotify music, podcasts, and playlists, including deleting shows or episodes you created with Save to Spotify.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Spotify</h2>
+<h3>Purpose</h3>
+<p>Use <code>spotify-api</code> to browse personalized Spotify content, search for music and podcasts, manage the user's library and playlists, check saveability of items, and start or control Spotify playback. For new playback during a voice conversation, follow <strong>Voice playback</strong> below instead of calling <code>spotify-api play</code>. Use <code>save-to-spotify</code> to manage shows and episodes you created through Save to Spotify.</p>
+<h3>Voice playback</h3>
+<p>Use this section only when someone asks to start new music during a voice conversation. For pause, resume, stop, skip, previous, status, volume, transfer, queue, login, search, library, or playlist requests, use the <code>spotify-api</code> commands below.</p>
+<h4>Choose where to play</h4>
+<p>Use the first rule that matches:</p>
+<ol>
+<li>If the user names a playback device other than the device carrying this</li>
+</ol>
+<p>call, such as a phone, computer, TV, speaker, car, or console, or refers to another device named earlier with words like &quot;there&quot; or &quot;the same speaker,&quot; run <code>spotify-api devices</code>. Find the exact device, then use <code>spotify_connect</code> and its <code>spotify_device_id</code>. A specifically named phone always uses this rule, even if it carries an app-audio call. If there is no clear match, ask which device to use. Never use <code>auto</code> for that separate named or previously referenced device.</p>
+<ol>
+<li>Otherwise use <code>auto</code> for the device carrying this call. This includes</li>
+</ol>
+<p>&quot;here&quot;, &quot;these glasses&quot;, &quot;this device&quot;, naming that same non-phone calling device, &quot;play X&quot;, and &quot;play X on Spotify&quot;. Spotify is the music service, not the device.</p>
+<h4>Start the music</h4>
+<p>Call <code>muse.music</code> once with <code>action</code> set to <code>play</code> and the destination chosen above. Do not call <code>spotify-api play</code>, <code>spotify-api wearable-play</code>, or <code>muse.device.invoke</code> for this request.</p>
+<p>For <code>auto</code>, trusted host code checks the exact device that started this voice call. If its live tool list contains <code>music_fulfillment</code>, the host calls that command once on that device. If no supported call device can be resolved, the host uses the active Spotify Connect device. If a resolved device disappears or loses the command during dispatch, the host stops instead of switching devices. Do not inspect or call device tools yourself.</p>
+<p>If <code>muse.music</code> fails, report the failure. Do not try another device or playback route. If Spotify was disconnected, let the tool show the connection flow. When the user connects and asks again, call <code>muse.music</code> again.</p>
+<h3>Tooling</h3>
+<p>Use the installed CLI directly from <code>PATH</code>.</p>
+<h5>Connection</h5>
+<ul>
+<li><code>spotify-api status</code> — check OAuth connection status (<code>status</code>, <code>connect_url</code>, <code>disconnect_url</code>)</li>
+<li><code>spotify-api disconnect</code> — disconnect Spotify (may return a confirmation URL)</li>
+<li><code>spotify-api authorize-url</code> — get the active environment's connect URL</li>
+</ul>
+<h5>Browse &amp; Discover</h5>
+<ul>
+<li><code>spotify-api experience --id &lt;spotify_uri_or_name&gt; [--language &lt;lang&gt;]</code> — get experience by ID (e.g. artist/album/show page). Large sections may include a <code>next</code> URL for more results.</li>
+<li><code>spotify-api next-page --url &lt;section_next_url&gt; [--language &lt;lang&gt;]</code> — fetch the next pagination URL returned as <code>sections[].next</code> or <code>next</code> by a prior Spotify response. Prefer this over guessing section IDs.</li>
+</ul>
+<h5>Search</h5>
+<ul>
+<li><code>spotify-api search --query &lt;text&gt; [--search-type TRACKS,ALBUMS,ARTISTS,PLAYLISTS,EPISODES,PODCASTS] [--language &lt;lang&gt;]</code> — search for content. For an exact song or album lookup, always format the query as <code>&quot;&lt;song or album&gt; by &lt;artist&gt;&quot;</code> so missing originals are distinguished from covers and similarly named content. Use <code>PODCASTS</code> to find shows (not <code>SHOWS</code> which is invalid). Use <code>experience --id &lt;show_uri&gt;</code> to list episodes of a found show.</li>
+<li>Search responses include <code>spotify_search_url</code> for opening the same query directly in Spotify. When an exact requested item is unavailable, <code>catalog_fallback.message</code> is the fully rendered approved response and must be relayed verbatim; the object also provides <code>requested_content_label</code>, <code>requested_content_url</code>, <code>artist_name</code>, and <code>artist_url</code>.</li>
+</ul>
+<h5>Filter values</h5>
+<ul>
+<li>Valid library/browse filter values are <code>ALBUMS</code>, <code>ARTISTS</code>, <code>PLAYLISTS</code>, <code>EPISODES</code>, <code>PODCASTS</code>, <code>SHOWS</code>, and <code>PODCASTS_AND_SHOWS</code>.</li>
+<li>These filter values are content categories, not field projections. Never use field names such as <code>title</code>, <code>items.title</code>, <code>sections</code>, or <code>items</code> as <code>--filter</code> values.</li>
+<li><code>TRACKS</code> is explicitly rejected for library filtering; use unfiltered <code>spotify-api library</code> or <code>spotify-api search --search-type TRACKS</code> to find tracks.</li>
+</ul>
+<h5>Library</h5>
+<ul>
+<li><code>spotify-api library [--filter ALBUMS|ARTISTS|PLAYLISTS|EPISODES|PODCASTS|SHOWS|PODCASTS_AND_SHOWS] [--language &lt;lang&gt;]</code> — browse user's library. <code>TRACKS</code> is not supported as a library filter; use unfiltered <code>library</code> or <code>search --search-type TRACKS</code> instead.</li>
+<li><code>spotify-api save --uri &lt;spotify_uri&gt;</code> — save item to library (track, album, artist, show, episode, playlist)</li>
+</ul>
+<h5>Delete Save to Spotify shows or episodes</h5>
+<ul>
+<li>When the user asks to delete a podcast, show, or episode Muse added through Save to Spotify, use the installed <code>save-to-spotify</code> CLI. These are managed by the CLI, not <code>spotify-api</code>, <code>podcasters.spotify.com</code>, or <code>creators.spotify.com</code>.</li>
+<li>If <code>save-to-spotify</code> reports that show and episode management is unavailable, explain the limitation directly; do not ask the user to reconnect or retry.</li>
+<li>Always use JSON mode. Start with <code>save-to-spotify --json shows</code>; this inventory contains the shows created through Save to Spotify. Match by title and ask the user to disambiguate if more than one show matches.</li>
+<li>Inspect the selected show with <code>save-to-spotify --json shows get &lt;show-id&gt;</code>. List its episodes when needed with <code>save-to-spotify --json episodes --show-id &lt;show-id&gt;</code> and match episodes by title.</li>
+<li>To delete one episode, resolve its title and owning show unambiguously, then run</li>
+</ul>
+<p><code>save-to-spotify --json episodes delete &lt;episode-id&gt; --show-id &lt;show-id&gt;</code>.</p>
+<ul>
+<li>To delete the whole show, resolve the show unambiguously and tell the user that all of its episodes will be removed, then run <code>save-to-spotify --json shows delete &lt;show-id&gt;</code>. This command deletes the show and its episodes; do not delete each episode first.</li>
+<li>A <code>{&quot;status&quot;:&quot;deleted&quot;}</code> response means Spotify accepted the deletion, but its listings can take about a minute to update. Poll the relevant inventory every 5–10 seconds for up to 60 seconds: use <code>episodes --show-id &lt;show-id&gt;</code> for an episode or <code>shows</code> for a show. Confirm completion only after the deleted ID is absent. If it is still listed after 60 seconds, tell the user the deletion was accepted and is still propagating; do not send the delete again.</li>
+<li>Show and episode IDs are internal command handles. Refer to content by title in user-facing replies. A CLI deletion removes the Spotify copy only; it does not delete Muse's local audio or an independently published RSS feed.</li>
+</ul>
+<h5>Collections (Playlists)</h5>
+<ul>
+<li><code>spotify-api create-collection --name &lt;name&gt;</code> — create a new playlist</li>
+<li><code>spotify-api add-to-collection --collection-uri &lt;uri&gt; --uris &lt;uri1,uri2,...&gt; [--position-type BEFORE_UID|AFTER_UID --position-uid &lt;uid&gt;] [--revision-id &lt;rev&gt;]</code> — add items to a playlist</li>
+<li><code>spotify-api update-collection --collection-uri &lt;uri&gt; --name &lt;new_name&gt;</code> — rename a playlist</li>
+</ul>
+<h5>Playback Control</h5>
+<ul>
+<li><code>spotify-api play [--context-uri &lt;uri&gt;] [--uid &lt;uid&gt;] [--target-device-id &lt;id&gt;]</code> — start playback outside a voice conversation (optionally of a specific album/playlist/context, starting from a specific item UID, on a specific device). For new playback during voice, follow <strong>Voice playback</strong> above and use <code>muse.music</code> instead.</li>
+<li><code>spotify-api pause</code> — pause playback on the active device</li>
+<li><code>spotify-api resume</code> — resume paused playback on the active device</li>
+<li><code>spotify-api skip</code> — skip to the next item</li>
+<li><code>spotify-api previous</code> — go to the previous item</li>
+<li><code>spotify-api seek --position-ms &lt;ms&gt;</code> — seek to a position in the currently playing item</li>
+<li><code>spotify-api set-volume --volume-percent &lt;0-100&gt; [--target-device-id &lt;id&gt;]</code> — set playback volume</li>
+<li><code>spotify-api transfer --target-device-id &lt;id&gt;</code> — transfer playback to a different device</li>
+<li><code>spotify-api now-playing</code> — get the current playback state (track, progress, device, etc.)</li>
+<li><code>spotify-api devices</code> — list available Spotify Connect devices</li>
+<li><code>spotify-api get-queue</code> — get the current playback queue</li>
+<li><code>spotify-api add-to-queue --item-uri &lt;spotify_uri&gt;</code> — add an item to the playback queue</li>
+</ul>
+<h5>Known unavailable or conditional commands</h5>
+<ul>
+<li><code>home</code>, <code>recommendations</code>, <code>check-saved</code>, <code>remove</code>, <code>section-items</code>, and <code>reorder-collection</code> are not exposed by <code>spotify-api</code> because they are unsupported or unreliable with the current Partner API responses/scopes. Use <code>search</code>, <code>library</code>, <code>experience</code>, <code>next-page</code>, and playlist create/add/update instead. This does not apply to shows and episodes created through Save to Spotify; delete those with <code>save-to-spotify</code> as described above.</li>
+<li><code>play</code> and <code>add-to-queue</code> require an active Spotify Connect device; use <code>spotify-api devices</code> first and prefer an explicit <code>--target-device-id</code> where supported. <code>set-volume</code> should also prefer <code>--target-device-id</code>.</li>
+</ul>
+<h3>Auth</h3>
+<p><code>spotify-api</code> owns the Spotify connection workflow.</p>
+<p>Auth contract:</p>
+<ul>
+<li>Run <code>spotify-api status</code> first.</li>
+<li>If not connected, run <code>spotify-api authorize-url</code>. Present the returned URL as a hyperlink with the text <code><a href="&lt;connect_url&gt;">Connect to Spotify</a></code>; do not show or paste the raw URL.</li>
+<li>If playlist changes stop working after a reconnect, re-link so the token is minted with the latest requested scopes.</li>
+<li>If the user wants to disconnect, run <code>spotify-api disconnect</code>. When <code>disconnect_url</code> is present, replace <code>&lt;disconnect_url&gt;</code> with the returned URL and share only this Markdown link: <code><a href="&lt;disconnect_url&gt;">Disconnect Spotify</a></code>; explain that the user must open it to confirm. When no URL is returned and the command succeeds, <code>spotify-api status</code> may be used to verify the disconnection.</li>
+<li>Do not pass secrets on the command line.</li>
+</ul>
+<h3>Operating Rules</h3>
+<ol>
+<li>Verify connection with <code>spotify-api status</code> before <code>spotify-api</code> data calls. For Save to Spotify management, start with <code>save-to-spotify --json shows</code>; if it reports a token or connection error, ask the user to connect Spotify in Settings → Connections → Spotify, then retry. If it reports that management is unavailable, do not present reconnection as a fix.</li>
+<li>Browse with <code>search</code>, <code>library</code>, and <code>experience</code>. Extract relevant items; never dump full responses.</li>
+<li>When a section includes <code>next</code>, call <code>spotify-api next-page --url &lt;next&gt;</code> to fetch additional pages. Continue following <code>next</code> until it is absent or the user has enough results.</li>
+<li>The documented Save to Spotify show and episode deletions may proceed from a clear, unambiguous user request without an additional confirmation. Do not promise unsupported <code>spotify-api</code> cleanup (unsave/remove, playlist deletion, remove-from-playlist, or reordering).</li>
+<li>Direct <code>spotify-api</code> playback requires an active Spotify Connect device. Run <code>spotify-api devices</code> or <code>spotify-api now-playing</code> first and prefer an explicit <code>--target-device-id</code> where supported. Voice playback through <code>muse.music</code> with <code>auto</code> may instead use the calling device's live <code>music_fulfillment</code> capability.</li>
+<li>Every response referencing existing Spotify content must include a Spotify deep link. Use <code>spotify_url</code>, or construct <code>https://open.spotify.com/{type}/{id}</code> from <code>spotify_uri</code>. A Save to Spotify deletion confirmation is the exception: the resource no longer exists, so name the deleted title without exposing its internal ID or constructing a dead link.</li>
+<li>Reference Spotify by name (&quot;on Spotify&quot; / &quot;via Spotify&quot;) whenever you surface content or confirm an action.</li>
+<li>Flag explicit content: when <code>is_explicit: true</code>, show <code>[E]</code> next to the title.</li>
+<li>After a direct <code>spotify-api</code> playback change (<code>play</code>, <code>skip</code>, <code>previous</code>, <code>resume</code>), follow up with <code>now-playing</code> and name the track plus creator; never confirm with only a device name. For <code>muse.music</code>, use its result and do not issue a second playback action.</li>
+<li>A successful playback response means the action took effect. If playback still errors after CLI retries, surface it once in plain user-facing language. If an action is not available, point the user to the Spotify app rather than speculating.</li>
+<li>If an exact song or album by an artist is missing from search, or a known Spotify item cannot be resolved for playlist or playback actions, do not substitute a cover, tribute, karaoke, or similarly named item. Relay <code>catalog_fallback.message</code> verbatim; it already renders the approved Muse copy with Markdown links to the requested content search and the exact artist page. Do not add a cause, preamble, follow-up, or alternative wording; blame the user's account; suggest reconnecting; or claim the item was removed from Spotify.</li>
+</ol>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

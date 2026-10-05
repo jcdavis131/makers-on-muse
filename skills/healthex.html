@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>healthex — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use to connect HealthEx and ask questions about your medications, lab results, and other health records.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/healthex">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/healthex">
+<meta property="og:title" content="healthex">
+<meta property="og:description" content="Use to connect HealthEx and ask questions about your medications, lab results, and other health records.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="healthex">
+<meta name="twitter:description" content="Use to connect HealthEx and ask questions about your medications, lab results, and other health records.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Health &middot; Bundled</p>
+      <h1>healthex</h1>
+      <p class="lede">Use to connect HealthEx and ask questions about your medications, lab results, and other health records.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>HealthEx (OAuth + MCP Health Records)</h2>
+<h3>Purpose</h3>
+<p>Query patient health records through the HealthEx MCP server. Supports conditions, medications, allergies, lab results, vitals, immunizations, procedures, encounters, clinical notes, and health summaries.</p>
+<p>Activate this skill when:</p>
+<ul>
+<li>The user asks about their medical data, prescriptions, test results, diagnoses, or health history</li>
+<li>A response would benefit from the user's health context — e.g. diet or meal plans, workout plans, fitness assessments, travel health needs, doctor visit prep, or sleep/stress optimization</li>
+</ul>
+<h3>Tooling</h3>
+<p>Use:</p>
+<pre><code>$JARVIS_BIN_DIR/healthex &lt;subcommand&gt;</code></pre>
+<p>Subcommands:</p>
+<ul>
+<li><code>status</code> — check connector status (<code>connected</code>, <code>available</code>, or <code>unknown</code>). JSON output: <code>{ ok, provider, status, config_path, reason }</code>.</li>
+<li><code>setup</code> — write OAuth defaults with PKCE enabled. JSON output: <code>{ ok, provider, status, config_path }</code>.</li>
+<li><code>disconnect</code> — remove stored OAuth credentials and tokens. JSON output: <code>{ ok, action, config_path, removed }</code>.</li>
+<li><code>authorize-url [--state &lt;state&gt;]</code> — generate PKCE authorize URL. JSON output: <code>{ ok, authorize_url, connect_url, state }</code>. Present <code>connect_url</code> to the user (the provider <code>authorize_url</code> is for server resolution).</li>
+<li><code>refresh</code> — refresh the access token (public client). JSON output: <code>{ ok, provider, status, config_path }</code>. Rarely needed directly — <code>mcp-call</code> auto-refreshes on 401.</li>
+<li><code>mcp-list</code> — list available MCP tools. JSON output: <code>{ ok, result }</code> where result contains the tools array.</li>
+<li><code>mcp-call --tool &lt;name&gt; [--args '&lt;json&gt;']</code> — call an MCP tool. JSON output: <code>{ ok, result }</code>. Auto-refreshes token on 401.</li>
+</ul>
+<h3>Connection Guard</h3>
+<p>Before any HealthEx data access:</p>
+<ol>
+<li>Run <code>healthex status</code>.</li>
+<li>If status is <code>connected</code>, proceed to data access.</li>
+<li>Run <code>healthex authorize-url</code> to generate the link. When <code>connect_url</code> is present, replace <code>&lt;connect_url&gt;</code> with the returned URL and present a <strong>single message</strong> containing exactly the Markdown link <code><a href="&lt;connect_url&gt;">Connect HealthEx</a></code> (never paste the raw URL separately) followed by these consent details:</li>
+</ol>
+<ul>
+<li>What is being connected: <strong>HealthEx</strong> — a service that aggregates health records from your healthcare providers</li>
+<li>What access is granted: <strong>read-only</strong> access to conditions, medications, allergies, lab results, vitals, immunizations, procedures, encounters, and clinical notes</li>
+<li>Duration: access persists until you revoke it from your HealthEx account</li>
+<li>How data is used: connecting HealthEx unlocks personalized health guidance — like explaining lab results, prepping for doctor visits, and understanding medications — all based on your actual health data</li>
+</ul>
+<ol>
+<li>After callback completion, run <code>healthex status</code> again and continue only when status is <code>connected</code>.</li>
+</ol>
+<h3>Data Retrieval Strategy</h3>
+<p>Start broad, then go deep based on the user's question.</p>
+<p><strong>Step 1 — Overview:</strong> Pull the categories relevant to the question using the per-category tools (<code>get_conditions</code>, <code>get_medications</code>, <code>get_vitals</code>, <code>get_allergies</code>, <code>get_labs</code>, …). These return data reliably. <code>get_health_summary</code> is a convenience aggregator that is comparatively slow and frequently gets backgrounded (see &quot;Handling Slow or Backgrounded Calls&quot; below); do <strong>not</strong> rely on it as your only context source. Use it only when the user explicitly asks for a single overall summary, and always alongside the per-category tools.</p>
+<p><strong>Step 2 — Targeted pulls:</strong> Based on the question type, pull the right detail:</p>
+<div class="tbl"><table><thead><tr><th>User intent</th><th>Primary tools</th><th>Secondary tools</th></tr></thead><tbody>
+<tr><td>&quot;What's my health summary?&quot;</td><td><code>get_conditions</code>, <code>get_medications</code>, <code>get_labs</code>, <code>get_vitals</code></td><td><code>get_health_summary</code> (optional)</td></tr>
+<tr><td>Symptom or &quot;should I see a doctor?&quot;</td><td><code>get_conditions</code>, <code>get_medications</code>, <code>get_vitals</code></td><td><code>get_labs</code>, <code>get_visits</code></td></tr>
+<tr><td>Lab results / bloodwork</td><td><code>get_labs</code></td><td><code>get_conditions</code> (for context)</td></tr>
+<tr><td>Medication questions</td><td><code>get_medications</code></td><td><code>get_conditions</code>, <code>get_allergies</code></td></tr>
+<tr><td>Diet or meal plan</td><td><code>get_conditions</code>, <code>get_medications</code>, <code>get_allergies</code>, <code>get_labs</code></td><td>—</td></tr>
+<tr><td>Workout or fitness plan</td><td><code>get_conditions</code>, <code>get_vitals</code>, <code>get_medications</code></td><td><code>get_labs</code></td></tr>
+<tr><td>Doctor visit prep</td><td><code>get_labs</code>, <code>get_medications</code>, <code>get_vitals</code>, <code>get_conditions</code></td><td><code>get_visits</code>, <code>get_immunizations</code></td></tr>
+<tr><td>Travel health</td><td><code>get_immunizations</code>, <code>get_medications</code>, <code>get_conditions</code></td><td><code>get_allergies</code></td></tr>
+<tr><td>&quot;Am I up to date on screenings?&quot;</td><td><code>get_labs</code>, <code>get_immunizations</code>, <code>get_visits</code></td><td><code>get_procedures</code></td></tr>
+</tbody></table></div>
+<p><strong>Step 3 — Run <code>mcp-list</code> if needed.</strong> If you need a tool not listed above or want to check parameter schemas, run <code>healthex mcp-list</code> to discover all available tools and their arguments.</p>
+<h3>Clinical Insight Patterns</h3>
+<p>When presenting health data, go beyond raw data. Apply these patterns to surface actionable insights:</p>
+<h4>1. Care Gap Detection</h4>
+<p>After pulling data, check for overdue or missing care:</p>
+<ul>
+<li><strong>Lab staleness:</strong> Flag any key lab &gt;12 months old. Common gaps: A1C (for metabolic conditions), lipid panel, thyroid panel, CBC. Example: &quot;Your last A1C was in May 2019 — that's over 6 years ago. With your PCOS diagnosis, regular A1C monitoring is typically recommended.&quot;</li>
+<li><strong>Visit recency:</strong> If the most recent encounter is &gt;12 months old, flag it. Example: &quot;I don't see a PCP visit in the last 3 years. A routine checkup would be a good idea.&quot;</li>
+<li><strong>Immunization gaps:</strong> Check age-appropriate immunizations. Flag missing or expired ones (e.g., flu shot &gt;1 year, Tdap &gt;10 years).</li>
+<li><strong>Screening gaps:</strong> Based on age, sex, and conditions — flag missing screenings (mammogram, colonoscopy, eye exam for diabetics, etc.).</li>
+</ul>
+<h4>2. Condition-Medication-Lab Cross-Reference</h4>
+<p>Connect the dots across data types:</p>
+<ul>
+<li><strong>Conditions without expected medications:</strong> e.g., hypertension (elevated BP) without antihypertensives listed.</li>
+<li><strong>Medications without monitoring labs:</strong> e.g., metformin without recent A1C, statins without recent lipid panel.</li>
+<li><strong>Lab trends suggesting unmanaged conditions:</strong> e.g., consistently elevated fasting glucose without a diabetes diagnosis.</li>
+<li><strong>Vitals that contradict treatment goals:</strong> e.g., BP 149/70 despite being on antihypertensives → possible medication adjustment needed.</li>
+</ul>
+<h4>3. Contextual Health Guidance</h4>
+<p>Tailor advice to the user's actual health profile:</p>
+<ul>
+<li><strong>Diet plans:</strong> Account for conditions (PCOS → insulin-sensitive diet, hypertension → low sodium), allergies (avoid allergens), and medications (e.g., metformin → monitor B12, warfarin → consistent vitamin K).</li>
+<li><strong>Exercise plans:</strong> Account for cardiac conditions (graded activity, heart rate zones), musculoskeletal issues, and current fitness level from vitals.</li>
+<li><strong>Visit prep:</strong> Summarize what the doctor will likely want to discuss: overdue labs, unmanaged vitals, medication reviews, symptom follow-ups.</li>
+</ul>
+<h4>4. Risk Factor Aggregation</h4>
+<p>When multiple risk factors cluster, highlight the combined picture:</p>
+<ul>
+<li>Example: PCOS + elevated BP + no recent lipid panel + no PCP visit in 3 years → cardiovascular risk profile needs attention.</li>
+<li>Don't alarm — frame as &quot;areas worth discussing with your doctor.&quot;</li>
+</ul>
+<h3>Handling Slow or Backgrounded Calls</h3>
+<p>Some calls (especially <code>get_health_summary</code>) can run long enough that the <code>exec</code> tool <strong>backgrounds</strong> them and returns a process handle instead of the result, e.g.:</p>
+<pre><code>{ &quot;sessionId&quot;: &quot;proc_abc123&quot;, &quot;status&quot;: &quot;running&quot; }</code></pre>
+<p>This is <strong>not</strong> the answer and contains <strong>no health data</strong>. If you see <code>&quot;status&quot;: &quot;running&quot;</code> (or any process handle without a completed result):</p>
+<ol>
+<li><strong>Poll the backgrounded process to completion</strong> before answering — re-check it until its status is <code>completed</code>, then read its actual <code>stdout</code>.</li>
+<li>If it has not completed after a reasonable wait, <strong>fall back to the per-category tools</strong> (<code>get_conditions</code>, <code>get_medications</code>, <code>get_labs</code>, <code>get_vitals</code>, …), which return data reliably.</li>
+<li><strong>Never</strong> treat a <code>running</code>/handle response as if it were the user's data, and never infer or invent values from it.</li>
+</ol>
+<h3>No Real Data → Never Fabricate (highest-priority safety rule)</h3>
+<p>A tool call that does <strong>not</strong> return real records is <strong>never</strong> a license to invent one. In dogfooding, the most serious failures were turns that failed <code>no-harmful-misinformation</code> / <code>no-hallucinated-medical-facts</code> because the model produced specific clinical content (lab values, vitals, diagnoses, a PET/CT readout) when <strong>no real data was returned</strong>. Treat all four &quot;no real data&quot; states the same way — state plainly that the data was not available, then offer a concrete next step. Do <strong>not</strong> substitute plausible-sounding values, ranges, or interpretations.</p>
+<div class="tbl"><table><thead><tr><th>State</th><th>What the tool returned</th><th>Required response</th></tr></thead><tbody>
+<tr><td><strong>Empty</strong></td><td>call completed, no records</td><td>&quot;I don't see any [labs/medications/etc.] on file. They may not be documented in your connected providers, or may live in a system not linked to HealthEx.&quot;</td></tr>
+<tr><td><strong>Placeholder</strong></td><td>&quot;records currently being retrieved / available shortly&quot;</td><td>&quot;Your records are still syncing from your providers. Try the per-category tools now for anything already available; if still empty, tell the user their records are syncing and to check back in a few minutes. Never answer from the placeholder, and don't promise to retry on your own.&quot;</td></tr>
+<tr><td><strong>Still processing</strong></td><td>a process handle, e.g. <code>{ &quot;sessionId&quot;: …, &quot;status&quot;: &quot;running&quot; }</code></td><td>Poll to completion (see &quot;Handling Slow or Backgrounded Calls&quot;), or fall back to the per-category tools. Never treat the handle as data.</td></tr>
+<tr><td><strong>Failure / error</strong></td><td>tool errored, non-zero exit, &quot;not connected&quot;</td><td>Report that the call failed and suggest a retry or reconnect. Do not answer the clinical question from memory or assumption.</td></tr>
+</tbody></table></div>
+<p>When data <strong>is</strong> returned but is sparse, handle gracefully:</p>
+<ul>
+<li><strong>Single data source:</strong> &quot;This data comes from [provider name]. Records from other providers may not be included.&quot;</li>
+<li><strong>Missing categories:</strong> acknowledge the gap and suggest the user check with their provider or connect additional health systems through HealthEx.</li>
+</ul>
+<h3>Pagination</h3>
+<p>MCP responses may return partial data. Check every response for a <code>Pagination Info</code> section. Neither marker there tells you the patient's record has ended:</p>
+<ul>
+<li><code>More data available: Yes</code> — the range you asked for has not come back in full. Call again with the <code>beforeDate</code> and <code>years</code> the response gives you.</li>
+<li><code>Requested N-year window: Fully covered</code> — <strong>only</strong> that the range you asked for was satisfied. Your <code>years</code> budget shrinks as you page back, so every chain reaches this eventually. It is not a signal that there is nothing older.</li>
+</ul>
+<p><strong>The only end-of-record signal is a window that comes back with no records in it.</strong></p>
+<p>What to do next depends on what the user asked for:</p>
+<ul>
+<li><strong>They named a time range</strong> (&quot;labs from the last two years&quot;): pass it as <code>years</code> and paginate until <code>Fully covered</code>, or until you have made 10 calls, whichever comes first. If <code>Fully covered</code> came back, that answer is complete for what they asked, so say so; if you hit the cap first, report it the same way as below.</li>
+<li><strong>They did not name a range</strong> (&quot;what conditions do I have?&quot;, &quot;have I ever had X?&quot;): keep calling with an earlier <code>beforeDate</code> and a fresh <code>years</code> budget until <strong>two windows in a row come back with no records</strong>, or you have made 10 calls. Those are the only two reasons to stop. <strong>One empty window is not the end of the record</strong> — the most recent window is often empty, and a gap in care is ordinary, so keep going past a single empty one. Do not stop because <code>Fully covered</code> appeared, and do not stop because what you have looks like enough.</li>
+</ul>
+<p>Then report what happened:</p>
+<ul>
+<li><strong>Two empty windows in a row</strong> — stop there, and describe what you actually covered: &quot;I checked back to <code>&lt;date&gt;</code> and found nothing before <code>&lt;date&gt;</code>&quot;. That is good evidence the record has ended, but it is not proof, so do not call the result complete.</li>
+<li><strong>You stopped at the 10-call cap</strong> — say so plainly: &quot;I pulled records back to <code>&lt;date&gt;</code>; older records may exist and I have not retrieved them yet.&quot; Offer to continue. Never call the result complete, full, or &quot;everything on file&quot;.</li>
+</ul>
+<p><strong>Where you stopped without exhausting the record — at the cap, or at an empty window that may be a gap — do not treat what you did not fetch as absent.</strong> In that case only: do not say a diagnosis, medication or result is missing, do not call it a documentation gap, and do not advise the user to raise it with their provider. Care-gap detection above still applies normally to the records you did retrieve.</p>
+<h3>Operating Rules</h3>
+<ol>
+<li>Complete the Connection Guard before any data access.</li>
+<li>Pull the per-category tools relevant to the question; treat <code>get_health_summary</code> as optional and unreliable (see &quot;Handling Slow or Backgrounded Calls&quot;). When deeper or category-specific data is needed, run <code>healthex mcp-list</code> to discover the right tool and its parameter schema.</li>
+<li><strong>Never state a specific clinical value — lab number, vital, medication, diagnosis, dose, or date — that did not appear verbatim in a tool's completed output.</strong> If a call returns empty results, a <code>running</code> handle, a placeholder (&quot;records being retrieved&quot;), or a failure/error, follow &quot;No Real Data → Never Fabricate&quot;: state plainly that the data was not available, then offer a concrete next step. Never fill the gap with plausible-sounding values, ranges, or interpretations. Never answer clinical questions from memory or assumption when the tool did not return real data. This is the highest-priority safety rule — fabricating medical facts is the most serious failure mode of this skill (<code>no-harmful-misinformation</code> / <code>no-hallucinated-medical-facts</code>).</li>
+<li>Never make medical diagnoses, treatment recommendations, or clinical interpretations. Present data factually and suggest the user consult their healthcare provider.</li>
+<li>Handle MCP errors gracefully — if a tool call fails, report the error and suggest the user try again or check their HealthEx account.</li>
+<li>If <code>mcp-call</code> returns a 401 error after auto-refresh, the token is expired or revoked. Re-run the Connection Guard.</li>
+<li>Never print <code>access_token</code> or <code>refresh_token</code> values.</li>
+<li>Health data is sensitive — do not store or retain it beyond the current request.</li>
+<li>When surfacing insights, always cite the data source: &quot;Based on your HealthEx records...&quot; — never present inferences as established medical facts.</li>
+<li>For any finding that suggests a care gap or risk, include a concrete next step the user can take.</li>
+<li>Record reads preserve raw clinical timestamps and add semantic UTC and</li>
+</ol>
+<p>user-local forms when the source supplies a true instant. Date-only values remain dates.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

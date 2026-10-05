@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>duffel — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use Duffel to search, book, pay for, or manage flights. Use Duffel to monitor an already booked flight's fare when the user directly asks for ongoing price monitoring.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/duffel">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/duffel">
+<meta property="og:title" content="duffel">
+<meta property="og:description" content="Use Duffel to search, book, pay for, or manage flights. Use Duffel to monitor an already booked flight's fare when the user directly asks for ongoing price monitoring.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="duffel">
+<meta name="twitter:description" content="Use Duffel to search, book, pay for, or manage flights. Use Duffel to monitor an already booked flight's fare when the user directly asks for ongoing price monitoring.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Bundled</p>
+      <h1>duffel</h1>
+      <p class="lede">Use Duffel to search, book, pay for, or manage flights. Use Duffel to monitor an already booked flight's fare when the user directly asks for ongoing price monitoring.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Duffel Flight Booking</h2>
+<p>For a user-facing flight search or booking, first read <code>/opt/hatch/skills/booking/SKILL.md</code>, <code>/opt/hatch/skills/booking/references/flights.md</code>, and <code>/opt/hatch/skills/booking/references/presentation.md</code>. Those files define the discovery, privacy, presentation, and commitment rules. Use this file for the Duffel CLI contract. Do not emit HTML, call <code>create_options</code>, or duplicate flight choices in another widget; the native flight widget owns flight selection and uses the action chosen for the current flow.</p>
+<p>Use only this public CLI surface:</p>
+<pre><code>search
+seat-options
+validate-booking
+book
+booking-status
+cancellation-quote
+cancel-booking</code></pre>
+<p>Do not invent identifiers, call undocumented endpoints, or expose <code>off_</code>, <code>ord_</code>, or <code>ore_</code> ids to users. Do not show a Duffel command. Keep sensitive values out of chat unless the booking JSON, <code>validate-booking</code>, or <code>book</code> accepts them for the active checkout. Never request payment-card data or account credentials. Run each search command directly into a distinct temporary JSON file; do not pipe the search through <code>head</code> or a parser, which can hide errors or required offer data. After the direct search succeeds, a read-only command may inspect the saved JSON to group and rank offers, but it must not overwrite the file. Reuse the unchanged file for presentation. If an earlier search was piped, truncated, reduced, or overwritten, do not repeat it in the same turn; explain that a complete result was not retained and ask the user to continue in a new turn. A hand-built summary is not sufficient input for the required structured flight list.</p>
+<h3>Booking flow</h3>
+<ol>
+<li>Start by searching the complete itinerary and exact passenger mix together.</li>
+<li>Present the shortlist through</li>
+</ol>
+<p><code>/opt/hatch/skills/booking/references/flights.md</code>.</p>
+<ol>
+<li>If Travel Planning delegated the search in <code>planning only</code> posture, return</li>
+</ol>
+<p>the selected itinerary to Travel Planning and stop. Do not continue into seats, traveler details, validation, or checkout until the posture changes to <code>ready to book</code>.</p>
+<ol>
+<li>Optionally show <code>seat-options</code> and collect bookable seats.</li>
+<li>Collect required passenger details and any loyalty account the user wants</li>
+</ol>
+<p>attached.</p>
+<ol>
+<li>Let <code>/opt/hatch/skills/booking/references/flights.md</code> choose between the</li>
+</ol>
+<p>native path and the airline website. When it chooses the airline website, follow <code>/opt/hatch/skills/booking/references/browser-booking.md</code>. Recheck the itinerary and terms. Do not require the user to complete the checkout.</p>
+<ol>
+<li>Otherwise continue through the supported native path without asking the</li>
+</ol>
+<p>user to choose an implementation provider. Run <code>validate-booking</code> until <code>ready_to_book: true</code>, select an exact returned Stripe Link payment method, and call <code>book</code> once with the same offer, booking document, and seats.</p>
+<ol>
+<li>On success, report every carrier confirmation reference/PNR and ticket</li>
+</ol>
+<p>status. Do not add the Duffel name to the message. Any required provider attribution belongs to the provider-controlled approval or receipt surface.</p>
+<p>Do not skip validation or silently change the selected offer, route, passenger mix, fare, or seats before booking.</p>
+<h3>Search and compare</h3>
+<pre><code>duffel search --origin SFO --destination LAX --departure-date 2026-09-30 \
+  --limit 300
+duffel search --origin SFO --destination LAX --departure-date 2026-09-30 \
+  --return-date 2026-10-04 --adults 2 --child-age 8 --lap-infants 1 --limit 300
+duffel search --leg SFO:LAX:2026-09-30 --leg LAX:JFK:2026-10-03 --adults 2 \
+  --limit 300
+duffel search --origin SFO --destination LAX --departure-date 2026-09-30 \
+  --max-connections 0 --sort duration --limit 300</code></pre>
+<p>Use <code>--limit 300</code> for comparison searches so repeated fare variants from one carrier do not crowd plausible alternatives out of the inspected result set. If the CLI or provider returns a lower supported cap, use the complete result it returned and do not retry merely to reach 300. Present only the 3–6 most useful distinct offers. Start with every flight requested as one itinerary in the same search: use <code>--return-date</code> for a round trip and repeated <code>--leg</code> arguments for multi-city travel.</p>
+<p>Treat each search as a live snapshot, not a price-monitoring loop. Do not refresh an identical search in a shell loop or launch duplicate searches in the background. The CLI suppresses completed and concurrent duplicate searches and bounds all provider attempts within one user turn. On <code>duplicate_search</code>, reuse the completed result. On <code>search_in_progress</code>, wait for the original invocation. On <code>search_terminal</code>, do not retry. On <code>search_budget_exhausted</code>, use any results already available and ask the user before expanding in a new turn.</p>
+<p>For flexible dates or airports, choose the smallest useful set of distinct searches and run them sequentially. Show useful results as soon as they are available. If the requested comparison exceeds the CLI's turn budget, tell the user which combinations remain and ask them to continue in a new turn. Do not silently search the Cartesian product of every possible date and airport.</p>
+<p>Use one search ordered by the user's stated priority; default to <code>--sort duration</code> when they give none. Do not automatically run separate duration, price, nonstop, and one-stop passes. Add or widen <code>--max-connections</code> only when the user requested that constraint or the first search produced no useful match. Run a targeted <code>--airlines</code> search when a requested, preferred, or credibly expected carrier is absent from the broad results, even when another carrier produced useful offers. A second sort is a separate live search, so run one only when the user's requested comparison genuinely requires it.</p>
+<p>Before presenting, group the saved offers by complete itinerary signature: all segment airports, local timestamps, marketing and operating flight numbers, and segment order. Do not let repeated fare brands for one schedule consume the shortlist. Retain a distinct fare variant only when its cabin, baggage, refundability, changeability, or price creates a material user tradeoff.</p>
+<p>Check carrier coverage after grouping. Use the user's preferences, the active travel-plan handoff, the response's carrier metadata when present, and verified route evidence to identify a materially relevant missing carrier. Search that carrier directly with <code>--airlines</code> before moving to Matrix or its website. If the targeted search still has no usable offer, follow the fallback in <code>/opt/hatch/skills/booking/references/flights.md</code>. Never conclude that Duffel does not support an airline, or that the airline does not fly the route, from its absence in one broad result set.</p>
+<p>Use exact three-letter airport IATA codes, not metro codes such as <code>NYC</code>. Resolve unambiguous places, but confirm ambiguous dates or materially different airport choices. Do not guess an obscure or ambiguous code. Results are hard-filtered and nearby-airport inventory is excluded. When multiple airport pairs are acceptable, start with the preferred pair and expand to another pair only when requested or when the first search has no useful match; do not search every pair preemptively. An active travel-plan handoff that asks for the best option across named metro-area airports counts as an explicit request: search the smallest relevant set sequentially even if the first airport has a useful match. Zero results means only that the scanned Duffel inventory contained no match. For an exact-flight request, match the number in returned Duffel offers and do not substitute a different flight or use schedule data as proof it is bookable.</p>
+<p>Passenger pricing is fixed at search:</p>
+<ul>
+<li><code>--adults</code> is the adult count.</li>
+<li>Repeat <code>--child-age</code> for each seated traveler aged 2–17, using age on the</li>
+</ul>
+<p>itinerary's final travel date.</p>
+<ul>
+<li><code>--lap-infants</code> counts travelers under two without a seat; each must have a</li>
+</ul>
+<p>different accompanying adult.</p>
+<p>Ask for missing ages once. Ask whether an infant is seated or on a lap. Do not infer it. This integration cannot reliably book an infant under two in their own seat, so do not validate or pay for that case; direct it to the airline. Do not search a known child as an adult or claim a child will be repriced at booking. Search again whenever the passenger mix changes.</p>
+<p>Prefer one combined Duffel offer and booking for the complete itinerary. If no combined offer contains every requested leg, or the user explicitly asks for separate tickets, split only with their agreement before the first <code>book</code>. Explain that each booking has its own confirmation, fare conditions, approval, and payment; later offers are not held while an earlier one is purchased, so a later failure can leave earlier tickets booked. Compare the combined total. Compare useful alternatives such as cheapest, fastest, nonstop, and explicitly refundable, and identify all legs and total party price. Treat native-provider inventory as one live source, not exhaustive coverage across every airline channel.</p>
+<p>Present the shortlist with native flight rows through <code>widget.create</code>, using <code>kind: &quot;list&quot;</code>. Read the Flights section in <code>/opt/hatch/skills/booking/references/flights.md</code> for complete-trip rows and presentation. For list creation, redirect each search to a distinct temporary JSON file. Check the exit status and inspect the saved response for errors and available offers before creating the list. Keep the saved output unchanged:</p>
+<pre><code>duffel search --origin SFO --destination JFK --departure-date 2026-10-14 \
+  --return-date 2026-10-18 --adults 1 --limit 300 &gt; /tmp/sfo-jfk-flights.json</code></pre>
+<p>Create one row per selected complete offer. Set its <code>type</code> to &quot;flight&quot; and its <code>data</code> to the file path and that offer's JSON pointer, for example:</p>
+<pre><code>{
+  &quot;flight_details_file&quot;: &quot;/tmp/sfo-jfk-flights.json&quot;,
+  &quot;json_pointer&quot;: &quot;/offers/0&quot;
+}</code></pre>
+<p>Use the original offer's zero-based index in <code>/offers/&lt;index&gt;</code>. Keep the file until <code>widget.create</code> succeeds. Do not copy the offer JSON into the tool call, rewrite timestamps, remove fields, or generate a separate widget payload file. The runtime reads the selected object, maps timestamps, and stores the complete flight data. It does not retain the path or pointer. Keep all outbound, return and connecting segments in that one row. Show the whole offer price once. The server derives an identifying booking reply from those facts. For direct booking or a trip that is ready to book, omit the list-level <code>flight_action</code> and use the default booking CTA. For a Travel Planning handoff in <code>planning only</code> posture, set <code>flight_action</code> to <code>{&quot;cta_text&quot;:&quot;Add to plan&quot;,&quot;response_message_prefix&quot;:&quot;Add this flight to my trip plan:&quot;}</code> so selection returns the itinerary to the plan instead of implying checkout. Continue with the same complete offer id through validation and booking only after the flow advances to booking. Do not reinterpret a row tap as a request to buy only its first leg. Treat <code>refundable</code> and <code>changeable</code> as three-valued: <code>yes</code>, <code>no</code>, or <code>not stated</code>.</p>
+<p>Fare brand, cabin, baggage, refundability, and changeability are optional provider facts. Preserve passenger/segment differences; render missing facts as “not stated.” Do not render missing facts as “none,” “not allowed,” or “non-refundable.” Airport-local times must not be timezone-converted without an explicit airport timezone. <code>--refundable</code> means refundable before departure with no stated positive penalty, not “cancel anytime.” Do not infer baggage or airline-standard fees.</p>
+<p>After selection, use <code>validate-booking</code>'s <code>selected_offer</code> as the canonical itinerary, price, baggage, and fare-condition snapshot.</p>
+<h3>Tracked fare monitoring</h3>
+<p>Use this flow when the user directly asks for ongoing monitoring of an already booked flight. Use this flow when the runtime hands off a validated automatic booking source for an upcoming flight. Treat either trigger as authorization to create the watch after the required booking facts are present. Do not ask whether to start monitoring after the runtime handoff. Do not require a connected email account. Ask the user only for booking facts that the requested monitoring needs and that the current context does not supply.</p>
+<p>Collect the exact dated itinerary and passenger mix. Collect the booked cabin or fare family, included bags, and stop pattern. Collect the paid all-in total, booking currency, and known cancellation, change, or rebooking costs.</p>
+<p>Search user goals and Tracking items for the trip. Use a matching user goal as the canonical owner. Otherwise, reuse a matching active Tracking item. If neither exists, create one Tracking item. Resolve the canonical owner before scheduling a job. Do not create a shadow trip, a price-tracker notebook entry, or a parallel tracking record. Keep confirmation references, ticket numbers, and connector identifiers out of user-visible goal text.</p>
+<p>Store the minimum machine-readable fare state in <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code>. Store the booking fingerprint, source fingerprints, traveler relationship and count, immutable booked itinerary, paid total, fare terms, current facts, last comparison, last-notified fingerprint, and cron identifiers. Use <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code> only as goal-owned job state. Do not store full messages, raw connector output, names, ticket numbers, identity documents, contact data, payment data, loyalty numbers, Known Traveler Numbers, or CLEAR identifiers.</p>
+<p>List the canonical owner's cron jobs before creating a fare job. Reuse an equivalent goal-owned fare job when one exists. If no equivalent job exists, add one fare job for the trip. Use <code>flight-price-&lt;goal-slug&gt;</code> as its identifier. Set its owner to <code>goal:&lt;goal-slug&gt;</code>. Schedule the ordinary check daily. Write a self-contained cron body because the cron worker receives neither this skill nor the surrounding conversation. Include the goal identifier, <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code>, and the exact Duffel query. Include the comparison rules, alert thresholds, deduplication rule, failure behavior, and stop date. Record the cron identifier in <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code>.</p>
+<p>Run exactly one Duffel <code>search</code> during each fare cron run. Search the complete itinerary and passenger mix together with <code>--limit 30</code>. Do not use a browser or web search for repricing. Do not retry <code>duplicate_search</code> in the same turn. On <code>duplicate_search</code>, reuse a completed result only when the CLI returns that completed result in the same command response. On <code>search_in_progress</code>, wait for the original invocation. Retain only results that match the booked dated flight numbers, airports, passenger count, cabin or fare family, included bags, stop pattern, and material refund or change restrictions. Compare a candidate only when its priced scope exactly matches the baseline's complete priced scope, including every outbound, return, or multi-city leg, dated segment identity, passenger mix, cabin or fare family, included bags, stop pattern, currency, and taxes or fees basis. Do not compare a one-way or single-leg offer with a round-trip or multi-leg paid total. Do not prorate a booking total across legs unless provider-authored line-item prices establish the exact segment amount. When priced scope is missing or mismatched, record the check as non-comparable in <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code>. When priced scope is missing or mismatched, clear any pending candidate tied to that mismatch. When priced scope is missing or mismatched, keep the run silent unless degraded-coverage policy separately triggers. Compute actionable net savings after known cancellation, change, and rebooking costs.</p>
+<p>Treat these baseline gaps as missing priced scope. When the booked fare family is not stated, a basic, light, saver, or otherwise more restrictive fare brand is never comparable. When the paid total includes seats, bags, or other extras, record them separately and compare fares only after removing them or adding the candidate's current price for the same extras. When the booking source does not establish whether the paid total covers every traveler, do not compare it.</p>
+<p>When no pending candidate exists, persist the best threshold-crossing comparable candidate in <code>~/workspace/goals/&lt;goal-slug&gt;/hidden_files/travel/flight.json</code> with comparable itinerary signature, total, currency, and check time. Do not notify the user for the first threshold-crossing candidate. Temporarily update the same fare cron to run once about one hour after the current run. When a pending candidate exists, run one Duffel <code>search</code>. Compare equivalent inventory against the pending candidate and booked facts. Confirm the pending candidate only when equivalent inventory still qualifies above either threshold. When the pending candidate is confirmed, continue to the persistence and notification rules below. Clear the pending candidate when equivalent inventory disappears, no longer matches the exact comparable criteria, or falls below both thresholds. Retain the pending candidate with a source-failure record when the confirmation search cannot complete because a source failed. Restore the same fare cron to daily cadence after a confirmed candidate, disconfirmed candidate, or source failure. Keep the run silent after a disconfirmed candidate or source failure unless degraded-coverage policy triggers.</p>
+<p>Alert only when confirmed net savings exceed either 10 percent of the original paid total or the booking-currency equivalent of USD 100. Convert USD 100 with a fresh FX source. Record the FX source time. When reliable FX is unavailable, apply only the percentage threshold.</p>
+<p>Before notifying, read the goal's recent Tracking activities for a later change to the booked itinerary, such as a rebooked leg or an added traveler. When the booking changed, update the baseline, clear the pending candidate, and keep the run silent.</p>
+<p>Persist the comparison and stable alert fingerprint before notifying the user. Add one concise Tracking activity before notifying the user. State when the fare was confirmed and that fares can change before the user acts. Ask whether the user wants the main agent to investigate a credit, refund, or rebooking path. When the user accepts, run one fresh Duffel <code>search</code> before quoting savings. Treat the user's answer as authorization for investigation and preparation only. Do not cancel, rebook, contact a provider, accept terms, or spend money without the approval required for that action. Do not promise that a credit or refund will be granted.</p>
+<p>Keep checks silent when no comparable result exists, the price is unchanged, or the movement stays below both thresholds. After three consecutive expected source failures, add a degraded-coverage activity to Tracking. Stop the fare job when the useful change or cancellation window closes, the trip is cancelled without a replacement, or the Tracking item is completed. Remove the fare job when the Tracking lifecycle ends.</p>
+<h3>Seats</h3>
+<p>Use <code>seat-options</code> only after shortlisting. It returns passenger-specific, bookable Duffel services; an omitted seat is unavailable, while <code>$0.00</code> is a bookable seat with no added fee. Use <code>row</code> and <code>section</code> for adjacency. Seats on opposite sides of an aisle are not adjacent. Seat maps are carrier-dependent and inventory remains live.</p>
+<p>Choose at most one seat per passenger per segment. Do not duplicate a seat. Pass every choice to validation and booking using the returned one-based passenger and segment numbers:</p>
+<pre><code>duffel validate-booking --offer-id off_… --booking-json '{...}' \
+  --seat 1:1:28B --seat 2:1:28C</code></pre>
+<h3>Passenger details</h3>
+<p>After offer selection, ask in chat for only the values required by the booking JSON or validation:</p>
+<ul>
+<li>each traveler's legal given/family name, birth date, title, and gender;</li>
+<li>one reachable trip email and phone, reusable for passengers when designated</li>
+</ul>
+<p>as their shared contact;</p>
+<ul>
+<li>the accompanying adult for each lap infant; and</li>
+<li>passport details only when validation requires them.</li>
+</ul>
+<p>Use chat-supplied values only for this checkout; do not persist them elsewhere or repeat them to the user. Never request payment-card data or account credentials in chat.</p>
+<p>Allowed titles are <code>mr</code>, <code>ms</code>, <code>mrs</code>, <code>miss</code>, and <code>dr</code>; gender is <code>m</code> or <code>f</code>. A required passport uses <code>type: &quot;passport&quot;</code>, its number as <code>unique_identifier</code>, a two-letter uppercase <code>issuing_country_code</code>, and <code>expires_on</code> in <code>YYYY-MM-DD</code>. Do not send an empty document, invent identity data, or ticket an unborn traveler; explain that booking must wait until birth. Do not promise the same fare, availability, or adjacent seats later.</p>
+<p>Mention loyalty once. If the user wants an account attached, collect its airline IATA code and account number in chat and add it to the matching passenger's <code>loyalty_programme_accounts</code>. Validation must confirm support and attachment; omit a failed account only with the user's agreement. Mention optional seat availability once without blocking.</p>
+<p>Keep passengers in search order. Do not include Duffel passenger ids or fields owned by the CLI (<code>id</code>, <code>infant_passenger_id</code>, <code>user_id</code>, <code>type</code>, <code>selected_offers</code>, <code>services</code>, <code>payment</code>, or <code>payments</code>). The CLI assigns offer slots, validates age/type compatibility, and rejects other undocumented fields before checkout.</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;passengers&quot;: [{
+      &quot;given_name&quot;: &quot;Legal given name&quot;,
+      &quot;family_name&quot;: &quot;Legal family name&quot;,
+      &quot;born_on&quot;: &quot;1990-01-01&quot;,
+      &quot;title&quot;: &quot;ms&quot;,
+      &quot;gender&quot;: &quot;f&quot;,
+      &quot;email&quot;: &quot;trip-contact@example.com&quot;,
+      &quot;phone_number&quot;: &quot;+14155550123&quot;,
+      &quot;loyalty_programme_accounts&quot;: [
+        {&quot;airline_iata_code&quot;: &quot;UA&quot;, &quot;account_number&quot;: &quot;…&quot;}
+      ]
+    }]
+  }
+}</code></pre>
+<p>For a lap infant, add <code>&quot;accompanying_adult&quot;: 1</code>, using the adult's one-based position in the passenger array.</p>
+<h3>Validate before payment</h3>
+<pre><code>duffel validate-booking --offer-id off_… --booking-json '{...}'</code></pre>
+<p>Validation refreshes the live offer and checks expiry/current total, passenger count/order/ages/types, required contacts and documents, lap-infant linkage, seats, and loyalty. It creates no Stripe request and has no HITL. Ask for every <code>required_missing</code> or <code>invalid</code> item together and rerun. Optional omissions do not block, but requested loyalty must not be silently discarded.</p>
+<p>Before <code>book</code>, compare every <code>selected_offer.slices[].from</code> and <code>.to</code> with the chosen airports. Stop on any mismatch. Do not infer a route from search args, flight number, or city name.</p>
+<p>A first booking may require the user's account email and legal name for a Duffel payment profile. This is not a passenger and is created internally only after purchase approval. When validation requests it, pass the same values to validation and booking:</p>
+<pre><code>duffel validate-booking --offer-id off_… --booking-json '{...}' \
+  --customer-email owner@example.com \
+  --customer-given-name Account --customer-family-name Owner</code></pre>
+<h3>Book once</h3>
+<pre><code>stripe-link payment-methods list --format json
+
+duffel book --offer-id off_… --payment-method-id pm_… \
+  --booking-json '{...}' --seat 1:1:28B --seat 2:1:28C \
+  --customer-email owner@example.com \
+  --customer-given-name Account --customer-family-name Owner</code></pre>
+<p>If Stripe Link is disconnected, explain the one-time virtual-card flow and provide its connection link. If the user cannot use that connection, an airline-site fallback is allowed only when its secure browser handoff or provider-owned payment surface actually renders for the user. Do not offer to receive a card number, expiry, security code, billing address, or other payment credential in chat. Do not transfer chat-supplied card data into the browser. If neither secure path is available, stop at the prepared itinerary, say payment is blocked, and provide the exact safe handoff; do not invent a chat-card workaround. Omit <code>--customer-*</code> when validation did not request them.</p>
+<p><code>book</code> refreshes and revalidates before any Stripe request. Its single approval covers the itinerary, passengers, seats/fees, fare conditions, total, optional first-time booking profile, one-time virtual card, 3DS, and immediate paid order. Do not use Duffel balance, held-order, inline-card, or separate order/payment flows.</p>
+<p>The trusted approval must show compact passenger names, plus a separate lap-infant row with name, birth date, accompanying adult, and <code>no seat</code>; city and airport codes, flights, operating carriers, schedules, fare/cabin, selected seats, masked loyalty, baggage, refund/change conditions, price breakdown, and legal links. Label absent provider conditions as not stated.</p>
+<p>After success, treat a requested loyalty account marked <code>not_confirmed_on_order</code> as unverified, not rejected: explain that the booking response did not confirm it, it may still be attached, and the user should check with the airline using the PNR and add it only if absent. Do not claim attachment failed solely because the response omitted it. Do not retry or rebook a successful order to repair loyalty.</p>
+<h3>Recovery</h3>
+<p>For a Stripe Link <code>requires_action</code> result, use only <code>user_action.url</code> as a link. Do not share or open an <code>action_url</code> inside <code>provider_response</code>.</p>
+<div class="tbl"><table><thead><tr><th>Result</th><th>Action</th></tr></thead><tbody>
+<tr><td>Validation failure or expired offer before approval</td><td>Correct all fields together. If the offer expired, report that and ask the user to continue in a new turn before searching again. No spend exists.</td></tr>
+<tr><td><code>requires_action</code> with <code>resolution: auto_resume</code></td><td>If <code>user_action.kind</code> is <code>open_url</code>, send one Markdown link with <code>user_action.label</code> as its text and <code>user_action.url</code> as its destination. Wait for the user to complete it, then rerun the identical <code>book</code>. If <code>user_action</code> is absent, stop and report the blocker.</td></tr>
+<tr><td><code>requires_action</code> with <code>resolution: replacement_required</code></td><td>If <code>user_action.kind</code> is <code>open_url</code>, send one Markdown link with <code>user_action.label</code> as its text and <code>user_action.url</code> as its destination. Do not rerun <code>book</code>. After the user completes the action and asks to continue, start a fresh search and obtain new payment approval. If <code>user_action</code> is absent, stop and report the blocker.</td></tr>
+<tr><td><code>requires_action</code> without a recognized <code>resolution</code></td><td>If <code>user_action.kind</code> is <code>open_url</code>, send one Markdown link with <code>user_action.label</code> as its text and <code>user_action.url</code> as its destination, then stop. Do not infer whether the existing request can resume. If <code>user_action</code> is absent, stop and report the blocker.</td></tr>
+<tr><td><code>failed</code>, <code>terminal_status</code>, or <code>unsupported</code></td><td>Report the Stripe Link result and stop. Do not retry <code>book</code> or create another spend request.</td></tr>
+<tr><td>Partially completed split booking</td><td>Stop. Report the successful bookings and PNRs plus every unpurchased leg. Do not buy a replacement or cancel anything without the user's explicit instruction.</td></tr>
+<tr><td>Definitive native-provider rejection</td><td>Say no booking was created and the card was not captured; any temporary authorization will fall off on the issuer's schedule. Do not retry until the user explicitly requests a new attempt in a later message.</td></tr>
+<tr><td>Timeout, 5xx, or ambiguous mutation</td><td>Do not claim success/failure or retry. Inspect <code>booking-status</code>; otherwise escalate.</td></tr>
+<tr><td>Ambiguous customer-profile creation</td><td>No payment started; do not retry profile creation. Escalate for profile recovery.</td></tr>
+<tr><td>Success with <code>resource_authorization.persisted: false</code></td><td>Report the PNR/order and warn later management may be unavailable. Do not repeat the booking.</td></tr>
+</tbody></table></div>
+<p>Identical offer plus normalized booking data form a resumable checkout identity. A newly searched offer is a new checkout and can create another authorization hold, so do not use it as an automatic retry.</p>
+<h3>Review, cancellation, and limits</h3>
+<pre><code>duffel booking-status
+duffel booking-status ord_…
+duffel cancellation-quote ord_…
+duffel cancel-booking ore_…</code></pre>
+<p>Without an id, <code>booking-status</code> lists locally authorized orders and can recover a lost order id. <code>cancellation-quote</code> does not cancel; report its exact known refund, destination, airline credits, and expiry. A null refund amount is unknown, not zero: say that the carrier did not provide a quote. <code>cancel-booking</code> re-checks the exact quote and asks once before the irreversible cancellation. Do not invent an unknown refund or fee.</p>
+<p>Unsupported: paid bags or other services, partial-passenger cancellation, date/time or name changes, pets, unaccompanied-minor service, check-in, and boarding passes. Do not improvise with raw APIs; direct the user to the airline or support.</p>
+<h3>Approval rules</h3>
+<ul>
+<li>No HITL: search, seat options, validation, booking status, cancellation quote.</li>
+<li>Exactly one HITL: native <code>book</code>, airline browser checkout, or cancellation. The</li>
+</ul>
+<p>airline browser checkout uses the same single purchase-approval boundary as <code>book</code>.</p>
+<ul>
+<li>Any change to flight, date, passengers, fare, services, or total requires a</li>
+</ul>
+<p>fresh purchase approval.</p>
+<ul>
+<li>Retry <code>search</code> only when its response explicitly says <code>retriable: true</code>;</li>
+</ul>
+<p>successful, duplicate, in-progress, terminal, and budget-exhausted searches must not be repeated in the same turn. Other reads may be retried. Do not automatically retry an ambiguous mutation.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

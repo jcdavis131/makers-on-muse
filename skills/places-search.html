@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>places_search — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Find, compare, and share details on physical places near the user or in a specified area, including restaurants, cafes, bars, hotels, parks, attractions, shops, and businesses with local services. Not for itineraries, choosing a city or region, dated events or showtimes, or directions.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/places-search">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/places-search">
+<meta property="og:title" content="places_search">
+<meta property="og:description" content="Find, compare, and share details on physical places near the user or in a specified area, including restaurants, cafes, bars, hotels, parks, attractions, shops, and businesses with local services. Not for itineraries, choosing a city or region, dated events or showtimes, or directions.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="places_search">
+<meta name="twitter:description" content="Find, compare, and share details on physical places near the user or in a specified area, including restaurants, cafes, bars, hotels, parks, attractions, shops, and businesses with local services. Not for itineraries, choosing a city or region, dated events or showtimes, or directions.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Bundled</p>
+      <h1>places_search</h1>
+      <p class="lede">Find, compare, and share details on physical places near the user or in a specified area, including restaurants, cafes, bars, hotels, parks, attractions, shops, and businesses with local services. Not for itineraries, choosing a city or region, dated events or showtimes, or directions.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Places</h2>
+<p>Use <code>browser.search</code> for all place discovery and name/address lookup. Run <code>places &lt;command&gt;</code> through <code>muse.exec</code> for richer details and photo-based place detection. Never load or search for a <code>places</code> tool namespace. If a search comes back empty or weak, refine the <code>browser.search</code> query per the rules below. Print CLI JSON to stdout for you to read, not to show the user. Use <code>--help</code> when needed. No sign-in is required.</p>
+<h3>Common flows</h3>
+<h4>Find places</h4>
+<p>Use <code>browser.search</code> for standing places people can visit or reference on a map: restaurants, cafes, bars, hotels, parks, trails, attractions, shops, and local services. A follow-up like &quot;anything cheaper?&quot; or &quot;Italian instead?&quot; refines the preceding search.</p>
+<ul>
+<li>Put the complete user intent in <code>primary_query.query</code>. Include the place</li>
+</ul>
+<p>category or venue name, area, radius, and ranking preference in natural language. For example, search for &quot;best sushi restaurants in San Francisco within five miles&quot;, not just &quot;sushi&quot;.</p>
+<ul>
+<li>Put &quot;near me&quot; or &quot;nearby&quot; in a browser.search query only when</li>
+</ul>
+<p><code>message_location</code> or <code>last_seen_location</code> arrived with this turn; the search service cannot see a location you learned any other way, so those words can land results in the wrong city. When the location came from the user, a device read, or their home on file, put the area's name in the query. If no location is available, ask the user; never invent or guess a location.</p>
+<ul>
+<li>One call covers one area. When the user names multiple cities or</li>
+</ul>
+<p>neighborhoods, run a separate call for each and cover each in the answer.</p>
+<ul>
+<li>For category discovery, include the category and area in the query. For a</li>
+</ul>
+<p>named venue, include its exact name and enough area context to disambiguate it.</p>
+<ul>
+<li>For &quot;best,&quot; trending, insider, or nuanced requests, use the web evidence and</li>
+</ul>
+<p>place results returned together by <code>browser.search</code>. Ground every named venue in a returned result.</p>
+<ul>
+<li>When comparable <code>avg_rating</code> values from <code>places details</code> are available for</li>
+</ul>
+<p>every shortlisted place, order them highest first but never print the rating. Otherwise order by relevance to the user's constraints.</p>
+<ul>
+<li>Avoid showing permanently or temporarily closed places unless specifically</li>
+</ul>
+<p>asked for.</p>
+<ul>
+<li>Judge the returned result set rather than following rank blindly. Set aside</li>
+</ul>
+<p>wrong-category or wrong-area results. If the set is weak, retry with an exact venue name, a narrower subtype, or clearer area language.</p>
+<h4>Get richer details</h4>
+<ul>
+<li><code>places details</code> takes numeric place IDs only. It cannot search by name or</li>
+</ul>
+<p>address; use <code>browser.search</code> for that.</p>
+<ul>
+<li>Call <code>places details</code> only when <code>browser.search</code> explicitly returns an all-digit</li>
+</ul>
+<p><code>place_id</code> for that result. Never derive an ID from a venue name or URL.</p>
+<ul>
+<li>Prefer the <code>browser.search</code> response when it already contains enough detail. Use</li>
+</ul>
+<p><code>places details</code> for richer or fresher hours, prices, photos, reviews, and offerings.</p>
+<ul>
+<li>If <code>browser.search</code> returns no numeric ID, retry once with the exact venue</li>
+</ul>
+<p>name and area. If that still returns no ID, answer from cited search evidence without details or a map.</p>
+<ul>
+<li>Batch several IDs into one call when comparing places. Pass <code>--motivation</code></li>
+</ul>
+<p>with the user's intent so quotes and photos are ranked for it.</p>
+<ul>
+<li><code>places details</code> returns `{&quot;&lt;place_id&gt;&quot;: {&quot;details&quot;: {…, &quot;rating&quot;:</li>
+</ul>
+<p>{&quot;avg_rating&quot;, &quot;num_rating&quot;}}}}`, keyed by id.</p>
+<h4>Show places on a map</h4>
+<p>Before creating a map, run <code>places details</code> for the selected numeric IDs. Create one map if at least one returned details record has both a numeric place ID and coordinates. This applies to recommendations, comparisons, named-place lookups, and other uses where a map could ground the user. See Response formatting for which places go on it.</p>
+<p>Create one <code>local_map</code> widget with <code>widget.create</code> and this payload:</p>
+<pre><code>{
+  &quot;kind&quot;: &quot;local_map&quot;,
+  &quot;data&quot;: {
+    &quot;elements&quot;: [
+      {
+        &quot;kind&quot;: &quot;rich_place&quot;,
+        &quot;place_id&quot;: &quot;&lt;numeric ID&gt;&quot;,
+        &quot;name&quot;: &quot;&lt;name from the same result&gt;&quot;,
+        &quot;coordinate&quot;: {
+          &quot;latitude&quot;: 0.0,
+          &quot;longitude&quot;: 0.0
+        }
+      }
+    ]
+  }
+}</code></pre>
+<ul>
+<li>Replace the example coordinates with the values from the same keyed</li>
+</ul>
+<p><code>places details</code> record. Use its canonical name. Omit a place whose details or coordinates are missing; never infer an ID or geocode a name.</p>
+<ul>
+<li>If creation fails, answer in text. Do not retry or build an HTML or image map.</li>
+</ul>
+<h4>Identify a place from a photo</h4>
+<p>Use <code>places detect</code> when captured frames and GPS need to resolve which place the user is at. It returns ranked candidates as <code>{place_id, place_name, confidence}</code>. Pass a returned ID to <code>places details</code> for more. The optional 4th <code>--location</code> field is the connected Wi-Fi BSSID; include it verbatim when known to improve Home/Work matching, and never echo a raw BSSID back to the user.</p>
+<h3>Response formatting</h3>
+<ul>
+<li>Never name a place that did not come back from a tool.</li>
+<li>Match the framing to the ask. When the user wants a recommendation, give them</li>
+</ul>
+<p>two to three. When the request is broad, offer a few named results as a starting point.</p>
+<ul>
+<li>Name two to three places in text from the merged result set. Write each on</li>
+</ul>
+<p>its own line in exactly this shape: <code><strong>Name</strong>, a sentence or two on why you chose it.</code> Open with one short line framing the answer before the places.</p>
+<ul>
+<li>Send the text as one message. Never add a second message after the map.</li>
+<li>No addresses, raw place IDs, coordinates, star ratings, review counts, or</li>
+</ul>
+<p>price levels in text.</p>
+<ul>
+<li>After a recommendation, note there are more options without itemizing; after</li>
+</ul>
+<p>a broad answer, offer to narrow to a recommendation.</p>
+<ul>
+<li>Cite factual claims sourced from <code>browser.search</code> using its normal citation</li>
+</ul>
+<p>format.</p>
+<ul>
+<li>Resolve every name you plan to use, closing line included, through</li>
+</ul>
+<p><code>browser.search</code> before creating the map. Never name an unresolved place.</p>
+<ul>
+<li>Build the map from the most relevant places returned that have a place ID</li>
+</ul>
+<p>and coordinates. Don't rely solely on named places in your text as an indication of what places should appear on the map.</p>
+<ul>
+<li>The places you named come first on the map, in the order you named them,</li>
+</ul>
+<p>ahead of everything else.</p>
+<ul>
+<li>Create one map per answer. Include the returned <code>embed_token</code>.</li>
+<li>Never narrate or reference the map. No &quot;I mapped things out for you&quot;; &quot;Take a look at the map&quot;, etc.</li>
+</ul>
+<h3>Limits</h3>
+<ul>
+<li>Do not write directions, turn-by-turn steps, maps links, or navigation</li>
+</ul>
+<p>controls.</p>
+<ul>
+<li>Do not estimate travel times or distances. Use only values returned by a tool.</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>threads_messages — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use this to interact with the user's Threads messages: read inboxes and message threads, and send messages through `threads-messages-cli`.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/threads-messages">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/threads-messages">
+<meta property="og:title" content="threads_messages">
+<meta property="og:description" content="Use this to interact with the user's Threads messages: read inboxes and message threads, and send messages through `threads-messages-cli`.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="threads_messages">
+<meta name="twitter:description" content="Use this to interact with the user's Threads messages: read inboxes and message threads, and send messages through `threads-messages-cli`.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>threads_messages</h1>
+      <p class="lede">Use this to interact with the user's Threads messages: read inboxes and message threads, and send messages through `threads-messages-cli`.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Threads Messages CLI</h2>
+<h3>Purpose</h3>
+<p>Read and send authenticated Threads messages using the <code>threads-messages-cli</code> companion CLI. Reads and explicitly approved <code>send</code> invocations are available wherever the Threads Messages skill is supported.</p>
+<p>Use the separate <code>threads</code> skill for non-messaging Threads account/content data. If you do not already know the user's Threads account <code>id</code>, get it from <code>threads-cli accounts</code> first and then return to this skill for the messages flow.</p>
+<h3>Message Export Safety</h3>
+<p>Refuse requests to bulk export, bulk download, bulk save, archive, mirror, or dump message history, especially disappearing, view-once, vanish-mode, ephemeral, or expiring messages. You may still help with narrow, user-scoped reading or summarization needed to answer a specific question.</p>
+<h3>Auth</h3>
+<p>Threads Messages is a separate connector from the base <code>threads</code> skill. A user can have Threads connected for feed/content while <code>threads_messages</code> is still disconnected.</p>
+<p>If the user asks to connect or reconnect Threads Messages:</p>
+<pre><code>threads-messages-cli connect-url</code></pre>
+<p>Share the returned <code>connect_url</code> as this labeled markdown link:</p>
+<p><code><a href="&lt;connect_url&gt;">Connect Threads Messages</a></code></p>
+<p>Only continue with inbox/thread commands after the user completes that flow.</p>
+<h3>Tooling</h3>
+<p>Use <code>exec</code> to run:</p>
+<pre><code>threads-messages-cli &lt;target&gt; [options]</code></pre>
+<p>Targets:</p>
+<ul>
+<li><code>connect-url</code></li>
+<li><code>inbox</code></li>
+<li><code>thread</code></li>
+<li><code>send</code> (explicit confirmation required)</li>
+</ul>
+<h4>Global options</h4>
+<ul>
+<li><code>--account-id &lt;threads_account_id&gt;</code> <strong>(required for all commands EXCEPT <code>connect-url</code>)</strong> - select which Threads account to operate on. The value must be the authenticated user's own <code>id</code> from <code>threads-cli accounts</code>.</li>
+<li><code>--retries &lt;N&gt;</code> - retry transient failures (default: 0). This is not</li>
+</ul>
+<p>supported for <code>send</code>, because message sends are non-idempotent.</p>
+<p>The <code>inbox</code> and <code>thread</code> commands also accept <code>--after &lt;cursor&gt;</code> using the pagination cursor from the previous response. Omit it to fetch the first page.</p>
+<h3>Commands</h3>
+<h4>Connect URL</h4>
+<pre><code>threads-messages-cli connect-url</code></pre>
+<h4>Inbox</h4>
+<p>Fetch the user's inbox threads with a preview of recent messages.</p>
+<pre><code>threads-messages-cli inbox --account-id &lt;threads_account_id&gt;
+threads-messages-cli inbox --account-id &lt;threads_account_id&gt; --first 20 --message-count 3
+threads-messages-cli inbox --account-id &lt;threads_account_id&gt; --after &lt;cursor&gt;
+threads-messages-cli inbox --account-id &lt;threads_account_id&gt; --folder PENDING</code></pre>
+<h4>Thread + Messages</h4>
+<p>Fetch messages for a specific thread. Get the decimal-string <code>thread_fbid</code> from the inbox response and pass it through unchanged.</p>
+<pre><code>threads-messages-cli thread --account-id &lt;threads_account_id&gt; --thread-fbid 123456789
+threads-messages-cli thread --account-id &lt;threads_account_id&gt; --thread-fbid 123456789 --first 20
+threads-messages-cli thread --account-id &lt;threads_account_id&gt; --thread-fbid 123456789 --after &lt;cursor&gt;</code></pre>
+<h4>Send message</h4>
+<p><code>send</code> is a write command. Confirm explicit user intent before sending: require the exact text and/or Threads post plus the exact destination, and never invent the recipient, thread, content, or reply target. Send to exactly one existing <code>thread_fbid</code> or between one and 11 numeric Threads recipient FBIDs. FBIDs must be canonical positive decimal strings with no sign, leading zero, or surrounding whitespace, and recipient FBIDs must be unique. Never pass a username to <code>send</code>; see &quot;Choosing a recipient&quot; below.</p>
+<h5>Choosing a recipient</h5>
+<p><code>send</code> needs a numeric Threads user ID or an existing <code>thread_fbid</code>. The CLI cannot look up an @handle. Use the first source that applies:</p>
+<ol>
+<li>Someone the user already has a 1:1 conversation with: send to the</li>
+</ol>
+<p><code>thread_fbid</code> of an <code>inbox</code> thread where <code>is_group</code> is <code>false</code> and the other participant's <code>username</code> matches. Never use a group thread unless the user named that group as the destination.</p>
+<ol>
+<li>Someone who has messaged the user, including message requests in</li>
+</ol>
+<p><code>--folder PENDING</code>: use the <code>sender_fbid</code> on one of their messages.</p>
+<ol>
+<li>Anyone else: a numeric ID that a <code>threads-cli</code> result returns for that exact</li>
+</ol>
+<p>username (for example <code>author_id</code> on one of their posts), and only after <code>threads-cli user-profile --account-id &lt;threads_account_id&gt; --user-id &lt;id&gt;</code> returns the same username.</p>
+<p>Never use Instagram or Facebook IDs, IDs recalled from memory, or an ID taken from a different person's result. If none of these sources gives a verified ID, tell the user plainly that you cannot message that person by handle and offer the text as a draft instead. Before sending, tell the user which @username the confirmation's recipient should show; if the recipient shows someone else or any <code>Unverified Threads …</code> placeholder (account or conversation), they should decline it.</p>
+<p>The CLI requires write correlation, selected-account consent, authorization, and quota checks when <code>send</code> is invoked. Treat any rejection as authoritative and do not reroute the send.</p>
+<pre><code>threads-messages-cli send --account-id &lt;threads_account_fbid&gt; --thread-fbid &lt;thread_fbid&gt; --text &quot;Hello&quot;
+threads-messages-cli send --account-id &lt;threads_account_fbid&gt; --recipient-user-fbids &lt;recipient_fbid&gt; --text &quot;Hello&quot;
+threads-messages-cli send --account-id &lt;threads_account_fbid&gt; --thread-fbid &lt;thread_fbid&gt; --media-fbid &lt;visible_threads_post_fbid&gt;
+threads-messages-cli send --account-id &lt;threads_account_fbid&gt; --thread-fbid &lt;thread_fbid&gt; --media-fbid &lt;visible_threads_post_fbid&gt; --text &quot;Post context&quot;
+threads-messages-cli send --account-id &lt;threads_account_fbid&gt; --thread-fbid &lt;thread_fbid&gt; --text &quot;Reply&quot; --reply-to-message-id '&lt;opaque_message_id&gt;'</code></pre>
+<p><code>--text</code> and <code>--media-fbid</code> are optional individually, but at least one is required. <code>--media-fbid</code> must be a canonical FBID for a visible, published Threads post. <code>--reply-to-message-id</code> is an optional non-empty opaque message ID from an inbox or thread response; never parse it as an FBID. When both media and text are present, the service sends the post share first and the text second. Public stdout describes only the trailing text message when both are present, or the share for a media-only send. In either case it contains exactly the opaque <code>message_id</code> and numeric <code>timestamp_ms</code>. There is no <code>--file</code> option and this CLI does not upload media; it can only share an existing visible, published Threads post by FBID.</p>
+<p>Never send until the explicit Hatch confirmation window is approved. A decline or dismissal ends the action. The confirmation makes a best-effort attempt for up to 30 seconds to resolve the sending account, recipient context, and optional <code>media_fbid</code>, but never looks up the opaque <code>reply_to_message_id</code>. Resolved media is rendered as a plain <code>Shared post</code> field, never a link, and any reply is rendered as the literal plain field <code>Reply: Existing message</code>. A lookup timeout, error, malformed response, or missing/unsafe label uses a non-identifying <code>Unverified Threads …</code> placeholder and continues to explicit approval; raw backing account, thread, recipient, media, and reply identifiers are never substituted into the preview. Multi-recipient fallback preserves the exact recipient count and uses placeholders for the whole list if any label is unresolved, so partial lookup cannot understate the audience. A media-only fallback identifies the action as <code>Share Threads post</code> and retains an unverified post placeholder. Supplied message text is rejected only when its trim is empty. Every accepted byte, including leading/trailing whitespace and Unicode, reaches both the structured preview and dispatched request unchanged; platform readback may later show normalized text. Opaque <code>reply_to_message_id</code> values are rejected only when trimming leaves them empty; every accepted value, including one with surrounding spaces, is forwarded byte-for-byte unchanged. If the complete preview cannot fit without truncation, the send fails closed.</p>
+<h5>No unattended sends</h5>
+<p>Only send from a conversation where the user approves that exact message. Never send from a scheduled job, cron, watch, background worker, auto-reply, or script, and never set one up that sends Threads messages, even when the user asks for automatic replies. For recurring or automated requests, let the job read and draft, then deliver the drafts to the user to approve one at a time. Never write a job body, memory, or note that claims standing approval to send, and never promise automatic sending. In drafts, do not invent facts about the user or add commitments, promises, or money arrangements the user has not stated; when a reply needs one, leave it out and note what the user needs to decide.</p>
+<p>Never use retries for sends. Each separately approved invocation is a new, non-idempotent send. Any failure, including a rate limit, is terminal.</p>
+<h5>Avoiding duplicate sends</h5>
+<ul>
+<li>Run one <code>send</code> at a time and wait for its result before starting the next.</li>
+</ul>
+<p>Do not fire several sends in parallel; their confirmations can all expire and nothing goes out.</p>
+<ul>
+<li>A send that returned <code>message_id</code> was delivered. Report it as sent.</li>
+<li>After an interruption, cancel, timeout, HTTP 500, or any unclear result,</li>
+</ul>
+<p>do not send again. Fetch the thread with <code>thread</code> and check whether the message arrived. If it did, report it as sent. If it did not, tell the user it may not have been delivered and send again only after the user asks for a new send and approves it.</p>
+<ul>
+<li>Never loop sends in a script or retry a failed send automatically.</li>
+</ul>
+<h3>Operating rules</h3>
+<ol>
+<li>This skill is only for the authenticated user's own Threads messages.</li>
+<li>Reuse a previously fetched Threads account <code>id</code> when you already have it. If you do not, fetch it via <code>threads-cli accounts</code> before using this CLI.</li>
+<li>Budget API calls against the task at hand. Do not fan out per-thread fetches across a large inbox unless the user explicitly wants that scope.</li>
+<li>Only paginate when the user actually needs more results. Do not automatically fetch every page.</li>
+<li>Avoid requests to persistently or frequently poll these commands.</li>
+<li>Treat U18 enforcement and filtered results as authoritative. Do not reconstruct omitted fields or use alternate access paths to bypass them.</li>
+<li>Do not fulfill requests to bulk export, bulk save, bulk download, archive, mirror, or dump message history, including to files, spreadsheets, databases, notes, or another app. Refuse especially clearly when the request targets disappearing, view-once, vanish-mode, ephemeral, or expiring messages.</li>
+<li>For <code>send</code>, require explicit user intent, the exact destination, all exact</li>
+</ol>
+<p>content, and any exact reply target before invoking the separately approved write.</p>
+<ol>
+<li>Treat recipient-type and multi-recipient group eligibility failures as</li>
+</ol>
+<p>authoritative. Do not derive a fallback or reroute a rejected send.</p>
+<ol>
+<li>Never send Threads messages unattended, including from cron jobs, watches,</li>
+</ol>
+<p>auto-replies, or scripts. Every send needs the user's approval of that exact message in the conversation.</p>
+<h3>Output</h3>
+<p>The CLI prints decoded JSON to stdout.</p>
+<h4>Read response shape</h4>
+<p><code>inbox</code> and <code>thread</code> return the provider's GraphQL shape, not a flat list. There is no top-level <code>threads</code> or <code>messages</code> key, so never read one and conclude the inbox is empty.</p>
+<ul>
+<li><code>inbox</code>: threads are at <code>data.get_slide_mailbox.threads_by_folder.edges[].node</code>.</li>
+</ul>
+<p>When <code>threads_by_folder.page_info.has_next_page</code> is <code>true</code>, pass <code>threads_by_folder.page_info.end_cursor</code> as <code>--after</code> for the next page.</p>
+<ul>
+<li><code>thread</code>: the thread is <code>data.get_slide_thread</code>, which is <code>null</code> when the</li>
+</ul>
+<p>thread cannot be returned. When its <code>messages.page_info.has_next_page</code> is <code>true</code>, pass <code>messages.page_info.end_cursor</code> as <code>--after</code> for older messages.</p>
+<p>Each thread node has <code>thread_fbid</code>, <code>thread_name</code>, <code>thread_type</code>, <code>is_group</code>, <code>folder</code>, <code>timestamp_ms</code>, <code>participants.nodes[]</code> (<code>name</code>, <code>username</code>; no user IDs), <code>messages.edges[].node</code>, and <code>messages.page_info</code>. Each message node has <code>message_id</code>, <code>sender</code> (<code>name</code>, <code>username</code>), <code>sender_fbid</code> (the sender's numeric Threads user ID), <code>content_type</code>, <code>content</code>, and <code>timestamp_ms</code>. Message text is usually <code>content.text_body</code>; other content uses <code>content.text_fragments[].plaintext</code>, <code>content.xma_text_body</code>, <code>content.attachments</code>, or <code>content.videos</code>.</p>
+<p>The inbox is empty only when <code>threads_by_folder.edges</code> is an empty array. If the user asks about message requests, also check <code>--folder PENDING</code>; the default <code>INBOX</code> folder does not include them.</p>
+<h4>Presenting results</h4>
+<p>Read results preserve raw provider timestamps and add semantic <code>message_sent_at</code> / <code>last_message_sent_at</code> values with UTC and user-local forms. Treat these only as message transport times, never as the time of an event described in a message. <code>send</code> public stdout contains exactly <code>message_id</code> and integer JSON <code>timestamp_ms</code>; the message ID is opaque and must not be parsed as an FBID. When presenting results to the user, focus on meaningful content such as participants, message text, user-local times, links, and media summaries, and avoid exposing raw IDs, cursors, unix timestamps, or implementation details unless the user explicitly needs them for a follow-up command.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

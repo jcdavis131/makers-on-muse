@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>outlook_calendar — Agent Skills — Makers on Muse</title>
+<meta name="description" content="View, create, update, and delete events in the user's Outlook Calendar.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/outlook-calendar">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/outlook-calendar">
+<meta property="og:title" content="outlook_calendar">
+<meta property="og:description" content="View, create, update, and delete events in the user's Outlook Calendar.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="outlook_calendar">
+<meta name="twitter:description" content="View, create, update, and delete events in the user's Outlook Calendar.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>outlook_calendar</h1>
+      <p class="lede">View, create, update, and delete events in the user's Outlook Calendar.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Outlook Calendar</h2>
+<h3>Purpose</h3>
+<p>Manage Outlook Calendar events with the <code>outlook-calendar</code> companion CLI. The connector supports both personal Microsoft accounts and Microsoft 365 work or school accounts.</p>
+<h3>Tooling</h3>
+<p>Use <code>exec</code> to run the installed CLI directly from <code>PATH</code>.</p>
+<pre><code>outlook-calendar --status
+outlook-calendar disconnect
+outlook-calendar list --page-size 10 [--time-min &lt;RFC3339&gt;] [--time-max &lt;RFC3339&gt;] [--query &lt;text&gt;] [--page-token &lt;token&gt;]
+outlook-calendar get &quot;&lt;event_id&gt;&quot;
+outlook-calendar create --summary &quot;&lt;title&gt;&quot; --start &quot;&lt;RFC3339-or-date&gt;&quot; --end &quot;&lt;RFC3339-or-date&gt;&quot; --timezone &quot;&lt;iana_tz&gt;&quot; [--attendee &lt;email&gt;] [--location &lt;text&gt;] [--description &lt;text&gt;] [--all-day]
+outlook-calendar update &quot;&lt;event_id&gt;&quot; [--summary &lt;title&gt;] [--start &lt;RFC3339&gt;] [--end &lt;RFC3339&gt;] [--timezone &lt;iana_tz&gt;] [--location &lt;text&gt;] [--description &lt;text&gt;]
+outlook-calendar delete &quot;&lt;event_id&gt;&quot;</code></pre>
+<p>For <code>list</code>, use <code>--page-size</code> for result count. <code>--top</code>, <code>--limit</code>, and <code>--max-results</code> are compatibility aliases only; do not use them in new commands. <code>list</code> uses <code>--time-min</code> / <code>--time-max</code> for time bounds. <code>--start</code> and <code>--end</code> are canonical only for <code>create</code> / <code>update</code>; <code>list</code> accepts them only as compatibility aliases.</p>
+<p>JSON output contract:</p>
+<ul>
+<li><code>disconnect</code>: parse <code>ok</code>, <code>action</code>, <code>status</code>, and <code>disconnect_url</code>.</li>
+<li><code>list</code>: parse <code>ok</code>, <code>count</code>, <code>next_page_token</code> (when present, pass back as <code>--page-token</code>), <code>retrieved_at</code>, and <code>events[]</code> with fields such as <code>id</code>, <code>summary</code>, <code>description</code>, <code>start</code>, <code>end</code>, <code>event_starts_at</code>, <code>event_ends_at</code>, <code>location</code>, <code>is_all_day</code>, and <code>attendees</code>.</li>
+<li><code>get</code>: parse <code>ok</code>, <code>retrieved_at</code>, and <code>event</code>.</li>
+<li><code>create</code> / <code>update</code>: parse <code>ok</code>, <code>action</code>, <code>event_id</code>, and <code>web_link</code>.</li>
+<li><code>delete</code>: parse <code>ok</code>, <code>action</code>, and <code>event_id</code>.</li>
+</ul>
+<h3>Auth</h3>
+<p>This skill uses the CLI-managed Outlook connector. Do not hand-write auth files.</p>
+<p>First-use or reconnect flow:</p>
+<ol>
+<li>Run <code>outlook-calendar --status</code>.</li>
+<li>If the response includes <code>connect_url</code>, replace <code>&lt;connect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;connect_url&gt;">Connect Outlook Calendar</a></code>; do not paste the raw URL separately. Wait for the user to finish linking.</li>
+<li>Re-run the same status command before continuing.</li>
+<li>If the response includes <code>disconnect_url</code>, the account is already connected.</li>
+</ol>
+<p>For disconnect requests, run <code>outlook-calendar disconnect</code>. When <code>disconnect_url</code> is present, replace <code>&lt;disconnect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;disconnect_url&gt;">Disconnect Outlook Calendar</a></code>; do not paste the raw URL separately. If it is absent, say the account is already disconnected.</p>
+<h3>Operating Rules</h3>
+<ol>
+<li>Use <code>list</code> first when you need an event ID or when the user asks about a date range.</li>
+<li>All timed values must be RFC3339 / ISO 8601. Use date-only values only with <code>--all-day</code>.</li>
+<li>Always supply a valid IANA timezone on <code>create</code>, and on <code>update</code> whenever start or end times change.</li>
+<li>Confirm with the user before creating an event that sends invitations.</li>
+<li>Private event updates may proceed from a clear user request. The helper reads</li>
+</ol>
+<p>the current event before updating it; organizer-owned meetings with attendees require confirmation because Outlook sends meeting-update email.</p>
+<ol>
+<li>The current helper does not support attendee changes on <code>update</code>. If the user asks to add or remove invitees on an existing event, explain that limitation instead of emitting an unsupported <code>--attendee</code> flag.</li>
+<li><code>delete</code> may proceed from a clear, unambiguous user request without an additional confirmation.</li>
+<li>Event IDs are opaque Graph values. Reuse the exact <code>id</code> returned by <code>list</code> or <code>get</code>.</li>
+<li>Never use the shared connector helper CLI for Outlook Calendar; status and linking must go through <code>outlook-calendar --status</code>.</li>
+<li>Never surface raw Graph identifiers (event ids, calendar ids) or other internal response fields (change keys, page/skip tokens, raw JSON) in text shown to the user — including in summaries, lists, or per-item annotations. Reuse the ids only internally to chain follow-up commands (rule 8). The sole exceptions are when the user explicitly asks for a raw id or you must show one to troubleshoot a failure.</li>
+<li>For timed events, prefer <code>event_starts_at.user_local</code> and <code>event_ends_at.user_local</code>; the raw Graph fields remain for compatibility. All-day values are calendar dates, not instants, and must not be timezone-shifted.</li>
+</ol>
+<ul>
+<li>Permission-withheld fields: a <code>list</code> result carrying a <code>withheld</code> entry had</li>
+</ul>
+<p>organizer and attendees removed by the user's &quot;Access events&quot; permission — the meeting is NOT guest-less. Answer from the remaining fields and mention that the permission hides the guest list. Only when the user actually needs a withheld field for one specific event and <code>withheld.reason</code> is <code>requires_approval</code>, read that event with <code>get</code>, which shows the user the approval prompt. Never <code>get</code> during routine browsing just to fill guest lists.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

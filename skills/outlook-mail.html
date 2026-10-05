@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>outlook_mail — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Read, search, send, reply to, and delete messages in the user's Outlook Mail.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/outlook-mail">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/outlook-mail">
+<meta property="og:title" content="outlook_mail">
+<meta property="og:description" content="Read, search, send, reply to, and delete messages in the user's Outlook Mail.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="outlook_mail">
+<meta name="twitter:description" content="Read, search, send, reply to, and delete messages in the user's Outlook Mail.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Bundled</p>
+      <h1>outlook_mail</h1>
+      <p class="lede">Read, search, send, reply to, and delete messages in the user's Outlook Mail.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Outlook Mail</h2>
+<h3>Purpose</h3>
+<p>Manage Outlook Mail messages with the <code>outlook-mail</code> companion CLI. The connector supports both personal Microsoft accounts and Microsoft 365 work or school accounts.</p>
+<h3>Tooling</h3>
+<p>Use <code>exec</code> to run:</p>
+<pre><code>outlook-mail &lt;subcommand&gt; [options]</code></pre>
+<p>Core subcommands:</p>
+<ul>
+<li><code>disconnect</code></li>
+<li><code>list [--page-size 10] [--unread] [--page-token 20] [--folder sentitems]</code></li>
+<li><code>get &quot;&lt;MESSAGE_ID&gt;&quot;</code></li>
+<li><code>search &quot;&lt;query&gt;&quot; [--folder sentitems] [--page-size 10]</code></li>
+<li><code>send --to alice@example.com [--to bob@example.com] [--cc charlie@example.com] --subject &quot;Hello&quot; --body &quot;Hi ...&quot; [--attachment /path/to/file.pdf]</code></li>
+<li><code>reply &quot;&lt;MESSAGE_ID&gt;&quot; --body &quot;Thanks for the update!&quot; [--reply-all]</code></li>
+<li><code>delete &quot;&lt;MESSAGE_ID&gt;&quot;</code> (moves the message to Deleted Items; recoverable, not a permanent delete)</li>
+<li><code>mark-read &quot;&lt;MESSAGE_ID&gt;&quot;</code></li>
+<li><code>mark-unread &quot;&lt;MESSAGE_ID&gt;&quot;</code></li>
+</ul>
+<p>Use <code>--page-size</code> for result count. <code>--top</code>, <code>--limit</code>, and <code>--max-results</code> are compatibility aliases only; do not use them in new commands. Use <code>get &quot;&lt;MESSAGE_ID&gt;&quot;</code> for a single message; <code>read</code>, <code>get --id</code>, and <code>search --query</code> are compatibility forms only.</p>
+<p>JSON output contract:</p>
+<ul>
+<li><code>disconnect</code>: parse <code>ok</code>, <code>action</code>, <code>status</code>, and <code>disconnect_url</code></li>
+<li><code>list</code> / <code>search</code>: parse <code>ok</code>, <code>count</code>, <code>next_page_token</code> (when present, pass back as <code>--page-token</code>), <code>total_messages</code>, <code>retrieved_at</code>, and <code>messages[]</code> with <code>id</code>, <code>subject</code>, <code>from</code>, <code>to</code>, <code>date</code>, <code>message_received_at</code>, <code>preview</code>, <code>is_read</code>, and <code>has_attachments</code></li>
+<li><code>get</code>: parse <code>ok</code>, <code>retrieved_at</code>, and <code>message</code> with <code>id</code>, <code>subject</code>, <code>from</code>, <code>to</code>, <code>cc</code>, <code>date</code>, <code>message_received_at</code>, <code>body</code>, <code>body_type</code>, <code>is_read</code>, and <code>has_attachments</code></li>
+<li><code>send</code>: parse <code>ok</code> and <code>action</code></li>
+<li><code>reply</code>: parse <code>ok</code>, <code>action</code>, and <code>message_id</code></li>
+<li><code>delete</code>: parse <code>ok</code>, <code>action</code> (<code>trashed</code>), and <code>message_id</code>; the moved message gets a <strong>new</strong> id, so <code>message_id</code> is not the id you passed in — use the returned one for any follow-up command</li>
+<li><code>mark-read</code> / <code>mark-unread</code>: parse <code>ok</code>, <code>action</code>, and <code>message_id</code></li>
+</ul>
+<h3>Auth</h3>
+<p>Use <code>outlook-mail --status</code> for connector state and link management. The binary handles its callback target internally.</p>
+<ul>
+<li>If the user wants to connect or reconnect, replace <code>&lt;connect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;connect_url&gt;">Connect Outlook Mail</a></code>; do not paste the raw URL separately.</li>
+<li>If the user wants to disconnect, run <code>outlook-mail disconnect</code>. When <code>disconnect_url</code> is present, replace <code>&lt;disconnect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;disconnect_url&gt;">Disconnect Outlook Mail</a></code>; do not paste the raw URL separately. Otherwise say it is already disconnected.</li>
+<li>Keep status and linking inside <code>outlook-mail --status</code>; do not use a shared connector helper CLI.</li>
+<li>Never print tokens, cookies, or connector secrets.</li>
+</ul>
+<h3>Operating Rules</h3>
+<ol>
+<li>Use <code>search</code> for targeted lookup, <code>list</code> for browsing, and <code>get</code> only when you need the full body of a specific message.</li>
+<li>Message IDs are opaque Graph values. Reuse the exact <code>id</code> returned by <code>list</code> or <code>search</code>.</li>
+<li>Before <code>send</code>, confirm recipients, subject, and body in the current thread.</li>
+<li>Before <code>reply</code>, confirm the reply body and whether the user wants <code>--reply-all</code>. Use <code>--reply-all</code> only when the user explicitly wants everyone included.</li>
+<li><code>delete</code>, <code>mark-read</code>, and <code>mark-unread</code> may proceed from a clear user request without an additional confirmation. <code>delete</code> moves the message to the Deleted Items folder, where the user can still recover it; tell the user that, and do not describe it as permanent or unrecoverable.</li>
+<li>For mailbox-summary requests, exclude likely spam, phishing, or irrelevant bulk promotions by default unless the user explicitly asks for junk or spam, and briefly note that filtering if you used it.</li>
+<li>If the CLI reports an auth failure or disconnected state, stop and route the user through the <code>--status</code> connect flow before retrying.</li>
+<li>Never surface raw Graph identifiers (message ids, conversation ids) or other internal response fields (change keys, <code>@odata</code> fields, page/skip tokens, raw JSON) in text shown to the user — including in summaries, lists, or per-item annotations. Reuse the ids only internally to chain follow-up commands (rule 2). The sole exceptions are when the user explicitly asks for a raw id or you must show one to troubleshoot a failure.</li>
+<li>The compatibility <code>date</code> field is Outlook's message-received time. Prefer <code>message_received_at.user_local</code> when presenting it. It is not the time of an event described inside the email; never infer a delivery, payment, trip, meeting, or other event time from it.</li>
+</ol>
+<ul>
+<li>Permission-withheld fields: a <code>list</code>/<code>search</code> result carrying a <code>withheld</code></li>
+</ul>
+<p>entry had those fields removed by the user's &quot;Access messages&quot; permission — they are NOT empty. Answer from the remaining fields and mention that the permission hides the rest. Only when the user actually needs a withheld field for one specific message and <code>withheld.reason</code> is <code>requires_approval</code>, read that message with <code>get</code>, which shows the user the approval prompt. Never <code>get</code> during routine browsing just to fill previews.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>google_health_connect — Agent Skills — Makers on Muse</title>
+<meta name="description" content="The user's synced Google Health Connect data from their Android device: daily metrics (steps, distance, calories, heart rate, HRV, VO2max), sleep sessions (stages, quality, efficiency), and workouts.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/google-health-connect">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/google-health-connect">
+<meta property="og:title" content="google_health_connect">
+<meta property="og:description" content="The user's synced Google Health Connect data from their Android device: daily metrics (steps, distance, calories, heart rate, HRV, VO2max), sleep sessions (stages, quality, efficiency), and workouts.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="google_health_connect">
+<meta name="twitter:description" content="The user's synced Google Health Connect data from their Android device: daily metrics (steps, distance, calories, heart rate, HRV, VO2max), sleep sessions (stages, quality, efficiency), and workouts.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Health &middot; Bundled</p>
+      <h1>google_health_connect</h1>
+      <p class="lede">The user's synced Google Health Connect data from their Android device: daily metrics (steps, distance, calories, heart rate, HRV, VO2max), sleep sessions (stages, quality, efficiency), and workouts.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Health Connect</h2>
+<p>Read the user's synced Google Health Connect data with the <code>health-cli</code> binary. Every command below takes <code>--provider healthconnect</code>.</p>
+<p>This skill serves Android devices only. If the user's paired device is not an Android device, it has no data for them — check the <code>platform</code> field returned by <code>device.list</code> when you are unsure.</p>
+<h3>When to Use</h3>
+<p>When the user asks about their synced Health Connect data, sync status, or sources:</p>
+<ul>
+<li>All-day metrics/vitals: steps, distance, calories, heart rate, HRV, VO2max.</li>
+<li>Sleep sessions: stages, quality, efficiency, awakenings.</li>
+<li>Workouts: type, duration, calories, distance, HR.</li>
+</ul>
+<h3>Tooling</h3>
+<p>Binary: <code>health-cli</code>. <strong><code>--provider healthconnect</code> is required on every command below</strong> — it is not optional and has no default; omitting it is a usage error. Commands group by data <em>shape</em> under <code>query</code>:</p>
+<ul>
+<li><code>query metrics --provider healthconnect</code> — all-day metric rollups</li>
+<li><code>query samples --provider healthconnect</code> — raw, unbucketed data points (intraday HR/steps, GPS, sleep stages)</li>
+<li><code>query sessions --provider healthconnect</code> — discrete sessions: sleep, workout</li>
+<li><code>status --provider healthconnect</code> — data-sync status</li>
+<li><code>auth connect --provider healthconnect</code>, <code>auth disconnect --provider healthconnect</code></li>
+<li><code>delete</code> — <strong>erase stored records</strong> (destructive; see below)</li>
+</ul>
+<p><strong>Multi-device (rare):</strong> when a window spans &gt;1 device the envelope adds <code>&quot;multi_node&quot;: true</code> — <code>query metrics</code> returns per-device <code>node_groups</code>; <code>query samples</code>/<code>sessions</code> add a <code>node_id</code> to each record (samples CSV gains a leading <code>node_id</code> column). Single-device output is unchanged; never sum or double-count across devices.</p>
+<h4>query metrics — all-day metric rollups</h4>
+<pre><code>health-cli query metrics --provider healthconnect \
+  --start-date &lt;YYYY-MM-DD&gt; [--end-date &lt;YYYY-MM-DD&gt;] \
+  [--interval hourly|daily|weekly] [--fields a,b,c] [--timeout-secs N]</code></pre>
+<p><code>daily-metrics</code> is the only domain so there is <strong>no <code>--category</code></strong>. One row per <code>--interval</code> bucket (default <code>daily</code>). <code>--start-date</code> required; <code>--end-date</code> defaults to today. Output is an envelope <code>{ &quot;coverage&quot;: {...}, &quot;records&quot;: [...] }</code> (see Coverage below).</p>
+<p><code>--list-fields</code> reads the metric field names from the synced data → <code>{ ok, provider, category, observed_count, fields: [{ name, observed, count? }] }</code>. <code>observed: true</code> (with a row <code>count</code>) means the name is present in this user's data — those are exactly the names <code>--fields</code> matches. <code>observed: false</code> means the build knows the field but nothing has synced yet. If the field set can't be read the response carries <code>degraded: true</code> and every <code>observed</code> is <code>null</code>.</p>
+<h4>query sessions — discrete sessions</h4>
+<pre><code>health-cli query sessions --provider healthconnect --category sleep|workout \
+  --start-date &lt;YYYY-MM-DD&gt; [--end-date &lt;YYYY-MM-DD&gt;] [--fields a,b,c]</code></pre>
+<ul>
+<li><code>sleep</code> — one row per sleep session.</li>
+<li><code>workout</code> — one row per workout/activity.</li>
+</ul>
+<p>Sessions are never bucketed (no <code>--interval</code>). Discovery: <code>--list-categories</code> → <code>{ ok, provider, categories }</code>; <code>--list-fields</code> (needs <code>--category</code>) → <code>{ ok, provider, category, fields }</code> (e.g. workout has <code>is_indoor</code>).</p>
+<p><strong>Output:</strong> normalized snake_case records; the same concept uses the same field name (e.g. workout <code>average_speed_mps</code>, <code>elevation_gain_meters</code>, <code>hr_average_bpm</code>). Session records carry a provider-prefixed <code>id</code> (<code>healthconnect_…</code>) + <code>start_datetime</code>/<code>end_datetime</code>/<code>timezone</code>; metric buckets carry <code>date</code>/<code>hour</code>/<code>week_start</code> + <code>record_count</code>.</p>
+<p><strong>Coverage:</strong> queries return an envelope <code>{ &quot;coverage&quot;: {...}, &quot;records&quot;: [...] }</code>. <code>coverage.complete</code> is <code>false</code> when days in the window aren't synced from the device; <code>coverage.warning</code> then holds the exact <code>backfill_data_source</code> command to run. <strong>Surface that warning to the user / act on it</strong> — results are partial until the backfill completes.</p>
+<h4>query samples — raw, unbucketed data points</h4>
+<pre><code>health-cli query samples --provider healthconnect --start-date &lt;YYYY-MM-DD&gt; \
+  [--end-date &lt;YYYY-MM-DD&gt;] [--start-time &lt;HH:MM[:SS]&gt;] [--end-time &lt;HH:MM[:SS]&gt;] \
+  [--fields &lt;type1,...&gt;] [--limit &lt;n&gt;] [--format stdout|csv] [--output &lt;path&gt;]
+health-cli query samples --provider healthconnect --list-fields   # discover sample types</code></pre>
+<p>Individual samples — finer than the <code>query metrics</code> rollups (intraday HR/steps, GPS, sleep-stage timelines; <code>query sessions</code> gives stage totals only). <code>--fields</code> selects sample <strong>types</strong> (not output columns) — run <code>--list-fields</code> to see the types this user has synced. GPS is <code>location</code> (raw lat/lon — don't infer place names from it). For dense reads use <code>--output &lt;path&gt;</code>: it writes CSV into the agent filesystem for a later script step and prints only a summary, keeping thousands of rows out of context.</p>
+<h4>status — data-sync status</h4>
+<pre><code>health-cli status --provider healthconnect [--timeout-secs N] \
+  [--start-date &lt;YYYY-MM-DD&gt;] [--end-date &lt;YYYY-MM-DD&gt;] [--check-missing-entries]</code></pre>
+<p>Returns <code>{ categories: [{ name, record_count, earliest_datetime, latest_datetime }] }</code>. With <code>--check-missing-entries</code> (requires <code>--start-date</code>): a deep per-30-min-interval gap report (<code>unsynced_dates</code>, <code>missing_intervals</code>, …).</p>
+<h4>auth connect</h4>
+<pre><code>health-cli auth connect --provider healthconnect [--timeout-secs N]</code></pre>
+<p>Run this and follow the instruction to connect to Health Connect data.</p>
+<h4>auth disconnect</h4>
+<pre><code>health-cli auth disconnect --provider healthconnect [--timeout-secs N]</code></pre>
+<p>Health Connect cannot be disconnected through this CLI or an in-chat widget. Tell the user to open <strong>Settings → Connectors → Health Connect → Manage</strong>, then revoke the app's Health Connect permissions in Android settings.</p>
+<h4>delete — erase stored Health Connect records</h4>
+<pre><code>health-cli delete --provider healthconnect --all             # every Health Connect record
+health-cli delete --provider healthconnect --device NODE_ID  # one paired device
+health-cli delete --provider healthconnect --start-date 2026-03-01 --end-date 2026-03-31</code></pre>
+<p>Use for any request to delete, remove, erase, wipe, or clear Health Connect data. Never improvise it by moving files, disconnecting the connector, or writing to the database — those neither remove records nor leave an audit trail. A delete never spans providers; to clear both, run it once per provider.</p>
+<p><code>--all</code> takes no other filter; <code>--device</code>/<code>--start-date</code>/<code>--end-date</code> are used instead of it. All record kinds go at once — no per-category or per-record-ID delete. Dates are <code>YYYY-MM-DD</code> in <code>JARVIS_USER_TIMEZONE</code> or epoch seconds; a record is in range when it starts before the end and ends after the start, so a session straddling a bound is included. <code>--start-date</code> alone deletes from that day onward, <code>--end-date</code> alone up to and including it.</p>
+<p><strong>Destructive and irreversible</strong>, behind a fresh one-time approval showing the normalized filters. Run it <strong>once per request</strong> — settle provider, device and dates in conversation first. Denial exits <strong>code 3</strong> with nothing deleted; that is final, so report it rather than retrying other filters or the other provider.</p>
+<p><strong>Zero is a success</strong>, not a miss — nothing matched, so say so and stop rather than widening dates or re-running with <code>--all</code>. Report <code>deleted.records</code>, not <code>total_rows</code>, which also counts child value rows. If Health Connect on the device still holds the records, a later sync can bring them back.</p>
+<h3>Auth</h3>
+<p>Device-synced; no login. Data availability depends on the Health Connect permission being approved on the user's Android device + sync. Use <code>status</code> to see synced ranges and the <code>backfill_data_source</code> device action (surfaced in query <code>coverage.warning</code>) to pull a range.</p>
+<h3>Operating Rules</h3>
+<ol>
+<li>Pick the command by data shape: <code>query metrics</code> (all-day rollups),</li>
+</ol>
+<p><code>query samples</code> (raw points — only when individual samples matter; prefer <code>metrics</code> for trends), or <code>query sessions --category sleep|workout</code> (discrete events).</p>
+<ol>
+<li>Always pass <code>--provider healthconnect</code> and <code>--start-date</code>; <code>--end-date</code></li>
+</ol>
+<p>defaults to today. Use current-date context for relative asks (&quot;today&quot;, &quot;last week&quot;); use sample time bounds for narrow intraday windows.</p>
+<ol>
+<li><strong>Coverage:</strong> if a <code>query metrics</code>/<code>sessions</code> returns `coverage.complete:</li>
+</ol>
+<p>false<code>, tell the user the data is partial and relay/act on </code>coverage.warning<code> (run the </code>backfill_data_source` action, then re-query).</p>
+<ol>
+<li><code>query metrics</code> defaults to <code>--interval daily</code>; sleep spans midnight (include</li>
+</ol>
+<p>both evening start and morning end dates).</p>
+<ol>
+<li>On empty results, the range likely has no data; widen it, or check <code>status</code> /</li>
+</ol>
+<p>coverage and backfill.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

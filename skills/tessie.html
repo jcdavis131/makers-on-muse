@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tessie — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Monitor a Tesla vehicle, inspect live state, and run explicit Tessie command endpoints.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/tessie">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/tessie">
+<meta property="og:title" content="tessie">
+<meta property="og:description" content="Monitor a Tesla vehicle, inspect live state, and run explicit Tessie command endpoints.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="tessie">
+<meta name="twitter:description" content="Monitor a Tesla vehicle, inspect live state, and run explicit Tessie command endpoints.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Process &middot; Bundled</p>
+      <h1>tessie</h1>
+      <p class="lede">Monitor a Tesla vehicle, inspect live state, and run explicit Tessie command endpoints.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Tessie (Tesla Vehicle Control)</h2>
+<h3>Purpose</h3>
+<p>Use <code>tessie-api</code> to list vehicles, inspect status/state, and run explicit Tessie vehicle commands.</p>
+<h3>Tooling</h3>
+<p>Use:</p>
+<pre><code>tessie-api &lt;subcommand&gt; [options]</code></pre>
+<p>Core subcommands:</p>
+<ul>
+<li><code>authorize-url</code></li>
+<li><code>set-token --token '&lt;TOKEN&gt;'</code></li>
+<li><code>disconnect</code></li>
+<li><code>verify</code></li>
+<li><code>vehicles</code></li>
+<li><code>status --vin '&lt;VIN&gt;'</code></li>
+<li><code>state --vin '&lt;VIN&gt;'</code></li>
+<li><code>command --vin '&lt;VIN&gt;' --command &lt;command_name&gt; [--wait-for-completion] [--extra-query k=v]</code></li>
+<li><code>request --method GET --path '/&lt;VIN&gt;/battery' [--query k=v] [--json-body '{&quot;...&quot;:&quot;...&quot;}']</code></li>
+</ul>
+<p>JSON output contract:</p>
+<ul>
+<li><code>authorize-url</code>: parse <code>ok</code>, <code>authorize_url</code>, and <code>connect_url</code></li>
+<li><code>set-token</code>: parse <code>ok</code> and <code>action</code></li>
+<li><code>disconnect</code>: parse <code>ok</code>, <code>action</code>, <code>path</code>, and <code>removed</code></li>
+<li><code>verify</code>: parse <code>ok</code>, <code>action</code>, and <code>error</code></li>
+<li>all read/command calls: parse top-level <code>ok</code>, <code>status</code>, and <code>body</code></li>
+<li>common <code>body</code> fields include <code>results[]</code>, <code>battery_level</code>, <code>battery_range</code>, <code>status</code>, and <code>result</code></li>
+</ul>
+<h3>Auth</h3>
+<p>Manage Tessie auth through the CLI helpers only.</p>
+<p>Auth contract:</p>
+<ul>
+<li>Run <code>tessie-api verify</code> before Tessie API use when connection state is unknown.</li>
+<li>If no API key is configured, run <code>tessie-api authorize-url</code>. When <code>connect_url</code> is present, replace <code>&lt;connect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;connect_url&gt;">Connect Tessie</a></code>; do not paste the raw URL separately.</li>
+<li>The user can generate a token at <code>https://dash.tessie.com/settings/api</code>.</li>
+<li>If the user provides a key through the CLI flow, store it only through <code>tessie-api set-token --token '&lt;TESSIE_API_TOKEN&gt;'</code>; do not write auth files directly.</li>
+<li>Remove stored auth only through <code>tessie-api disconnect</code>.</li>
+<li>Never print token values.</li>
+</ul>
+<h3>Operating Rules</h3>
+<ol>
+<li>If VIN is not given, call <code>vehicles</code> and ask user to pick one when multiple exist.</li>
+<li>Use <code>status</code> or <code>state</code> before impactful commands when the current vehicle condition matters.</li>
+<li><code>honk</code>, <code>flash</code>, <code>remote_boombox</code>, software-update scheduling or cancellation, and fleet telemetry configuration may proceed from a clear, unambiguous request without an additional confirmation. Other vehicle commands and raw API writes use the connector approval gate; invoke the resolved command directly and do not add a duplicate chat confirmation. Never invent a command or infer a physical action the user did not request.</li>
+<li>Use <code>command --command &lt;name&gt;</code> only for explicit Tessie command names. Do not invent a mandatory pre-wake flow or undocumented helper behavior.</li>
+<li>On HTTP or API errors, report <code>status</code> and <code>body</code> clearly. Common cases are <code>401</code>, <code>408</code>, and <code>503</code>.</li>
+<li>Never print token values.</li>
+<li>Read results preserve Tessie's raw timestamps and add semantic UTC and</li>
+</ol>
+<p>user-local forms for state observations, last-seen values, and record creation/update times.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

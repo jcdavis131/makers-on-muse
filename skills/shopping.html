@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shopping — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use for any product or shopping question: find, reverse image search, shopping Instagram/Facebook/Marketplace links, buy, compare, or evaluate real products with prices, images, and product page URLs, including buying or browsing Facebook Marketplace listings. Use when presenting shopping search results from any source. For shopping intent, load this skill first before any other skills.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/shopping">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/shopping">
+<meta property="og:title" content="shopping">
+<meta property="og:description" content="Use for any product or shopping question: find, reverse image search, shopping Instagram/Facebook/Marketplace links, buy, compare, or evaluate real products with prices, images, and product page URLs, including buying or browsing Facebook Marketplace listings. Use when presenting shopping search results from any source. For shopping intent, load this skill first before any other skills.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="shopping">
+<meta name="twitter:description" content="Use for any product or shopping question: find, reverse image search, shopping Instagram/Facebook/Marketplace links, buy, compare, or evaluate real products with prices, images, and product page URLs, including buying or browsing Facebook Marketplace listings. Use when presenting shopping search results from any source. For shopping intent, load this skill first before any other skills.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>shopping</h1>
+      <p class="lede">Use for any product or shopping question: find, reverse image search, shopping Instagram/Facebook/Marketplace links, buy, compare, or evaluate real products with prices, images, and product page URLs, including buying or browsing Facebook Marketplace listings. Use when presenting shopping search results from any source. For shopping intent, load this skill first before any other skills.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Shopping</h2>
+<p>You should always aim to save the user money. Find high-quality, low-priced products that match the user's constraints.</p>
+<h3>Product search tools</h3>
+<p>The following are the primary tools for product search: &lt;!-- catalog-search-v1-only:start --&gt;</p>
+<ul>
+<li>Meta catalog search: <code>meta-catalog-search</code> enables rapid searches across Meta's product catalog</li>
+</ul>
+<p>&lt;!-- catalog-search-v1-only:end --&gt; &lt;!-- catalog-search-v2-only:start --&gt;</p>
+<ul>
+<li>Meta catalog search: <code>shopping catalog-search</code> enables rapid semantic searches across Meta's product catalog</li>
+</ul>
+<p>&lt;!-- catalog-search-v2-only:end --&gt;</p>
+<ul>
+<li>Browser product search: <code>browser.spawn_task</code> enables slow but thorough searches across the web via an agentic browser; it has universal product coverage; always call it (unless the user explicitly asked only for products from Facebook Marketplace), especially for home goods, and run it in parallel with any other applicable product search tools</li>
+<li>Facebook Marketplace search: <code>facebook-cli</code> enables rapid searches for listings on Facebook Marketplace</li>
+</ul>
+<p>After selecting products, call <code>shopping.resolve_results</code> with the product-search result files and the ordered IDs you selected. When the tool is available, always call it before mentioning products, whether or not the response will also create a widget:</p>
+<pre><code>{
+  &quot;result_paths&quot;: [&quot;&lt;catalog, Marketplace, or browser product-search JSON path&gt;&quot;],
+  &quot;selected_ids&quot;: [&quot;&lt;selected product, listing, or browser result ID&gt;&quot;]
+}</code></pre>
+<p>The tool resolves and normalizes those selections, returns a <code>path</code> for optional widget presentation, and returns <code>product_citations</code> markers for the response. This is the single product-resolution and citation path. It does not create or present UI; call <code>widget.create</code> separately with the returned path when a shopping widget is appropriate.</p>
+<h4>Markers belong to the product, not to the widget</h4>
+<p>A marker is how you write a product's name anywhere, in every message, for the whole conversation. It is not part of the shopping-results presentation and it is not discharged by having presented one.</p>
+<p>So a marker belongs in all of these, not just the roundup:</p>
+<ul>
+<li>an early update naming a pick while a search is still running</li>
+<li>an answer to a follow-up question about a product already on screen (&quot;is that one washable?&quot;, &quot;does it fit three lenses?&quot;)</li>
+<li>a comparison or a narrowing down to two of the products you already showed</li>
+<li>a status note that names a candidate the search has turned up</li>
+<li>any later turn that comes back to a product, however many messages ago you showed it</li>
+</ul>
+<p>Write the marker even when you have already used it earlier in the conversation, and even when the widget above already shows that product. Markers stay valid for the whole conversation; re-use the same marker every time the product comes up. Referring to a resolved product by a description instead (&quot;that merino one&quot;, &quot;the $199 semi-auto&quot;, &quot;the Marfi one&quot;) drops its verified name and link, so the user cannot act on it.</p>
+<p>The only product you may name without a marker is one that has no marker: a product no successful <code>shopping.resolve_results</code> call returned. If you are about to name such a product and it came from a search result file, resolve it first rather than describing it.</p>
+<h3>User Preferences</h3>
+<p><code>~/memory/shopping/PROFILE.md</code> is the user's durable shopping preferences. Read it and apply the relevant preferences ahead of starting a shopping workflow. A user may not have a profile established yet. If it doesn't exist, proceed as is.</p>
+<h3>Required attributes</h3>
+<p>Some constraints decide which products are <em>correct</em>, not just how they rank: the intended wearer's gender and size for clothing and footwear, the exact device or vehicle a part must fit, the platform for software or games. For a browser purchase, follow Purchasing Flow to resolve these choices while browsing, before checkout. For other requests, resolve them before searching.</p>
+<p>Resolve each one in this order: what the user said in this request or earlier in the conversation, then <code>~/memory/shopping/PROFILE.md</code>, then <code>~/USER.md</code> (already in your context), then <code>muse.memory_search</code> for durable preferences and sizes. Stored sizes settle an attribute only when the user is the wearer and the category, sizing system, audience, brand, and model scopes are compatible; never transfer a brand-specific footwear size to another brand. When the item is for someone else, use what the user says about that person and their <code>~/memory/people/</code> page. Never infer the wearer's gender from the user's name, and never fall back to a default.</p>
+<p>If required attributes remain unknown for a browser purchase, ask for them together in one message. Use plain text when several choices need answers.</p>
+<p>For other requests, if one is still unknown, ask for it and wait for the answer before running any product search. Ask about exactly one attribute per turn. When several are open, pick the one that most changes which products are correct (the wearer's gender before their size, the device before the part), ask only that, wait for the reply, then ask the next one in its own turn. For a known, bounded choice, call <code>muse.create_options</code> and follow its guidance. Ask open-ended questions in plain text. Never stack two questions or two <code>option</code> widgets in one message — a second widget renders as a stray, unanswerable list beside the one the user is actually answering. Do not search first and narrow afterwards: an unresolved required attribute returns wrong products, and offering to filter once they're on screen is too late. If the user cannot answer or declines, do not guess and do not fall back to their own value: search each plausible value separately&lt;!-- catalog-search-v1-only:start --&gt; (<code>--gender male</code>, then <code>--gender female</code>)&lt;!-- catalog-search-v1-only:end --&gt; and present the results labelled by cut so they can pick.</p>
+<p>Once resolved, apply every required attribute to every search for that request, refinements included.</p>
+<h3>Workflows</h3>
+<h4>Product discovery</h4>
+<ol>
+<li>Ensure you fully understand the user's request, resolving every required attribute above before you search.</li>
+<li>Gather any relevant context that will be useful when writing product search queries. Use <code>browser.search</code> to discover trends, well-known sellers for a product category, reviews, or typical prices.</li>
+<li>Use the relevant search tools to execute product search queries. Always call browser product search (unless the user explicitly asked only for products from Facebook Marketplace, e.g. &quot;couches on marketplace&quot;); run it in parallel with any other applicable product search tools. Include all user constraints in every search; catalog retries may relax only the parameters allowed under Meta Catalog Search below. Don't re-use previous search results unless it makes sense in context; by default always make new searches to get fresh results.</li>
+<li>Review the search results. Filter out any that don't match the user constraints, aren't high quality, or are outside the normal price distribution for that product. Call <code>browser.open</code> on all non-Marketplace product URLs and filter out any that aren't product pages with in-stock availability. <code>browser.open</code> cannot fetch Meta first-party links (instagram.com, facebook.com, threads.com/threads.net, and other Meta-owned hosts are blocked for it). Use the platform's native tools for those. Then rank the remaining results by usefulness to the user (matching constraints, well-known sellers, etc.). Prefer the version of each retailer's site for the user's country.</li>
+<li>If you don't find enough relevant search results, adjust your queries (and potentially your product search tools) and repeat steps 3-4.</li>
+<li>A request gets one shopping-results presentation, and it comes after every product search for that request has finished. Until then, do not create a <code>shopping_results</code> widget. Always mention products in your text responses while you wait for all product searches to finish if there are quality interim results (e.g. catalog search results from a well-known retailer), but before you name any of them, call <code>shopping.resolve_results</code> for the exact products you are about to name and write each one as its marker. A marker you already have stays good for the rest of the conversation. Once those products are resolved, mention 1-2 products using product markers as long as the update says it is early and says what is still running. Once the last product search finishes, make that presentation cover everything gathered for the request: pass every result file for it (catalog, Marketplace, and browser) in a single <code>result_paths</code> array, select and rank the best products across that whole pool, then call <code>widget.create</code> with the returned <code>path</code>. That is one widget, unless the request spans distinct product groups: those get one widget each in the same response, each resolving its own selection from that same pool (see Response Formatting). A group split is still one presentation, never a sequence of them over time. A later search adds candidates to the pool; it never replaces the searches that came before it, and the presentation must not be only about the search task that finished last. A search that fails or returns nothing usable has finished: present what the other sources returned rather than withholding the widget. Follow the Response Formatting section below.</li>
+<li>If the user continues the original query in follow-up turns, maintain the constraints of the original request. Drop constraints only when the user explicitly instructs you to do so or pivots to a new search query, in which case drop all previous constraints that aren't generally applicable or based on high-level user preference. On a pivot, close every active browser search for the old request with <code>browser.close_task</code> before starting the new search. Use <code>browser.list_tasks</code> if you need the task IDs. Ignore late results from the old request.</li>
+</ol>
+<p>Note: Always resolve and then mention products in your text response using markers in the turn that you receive the search results. Don't wait for all the search results to be returned before doing this.</p>
+<p>Example: &quot;help me shop for a black sweater&quot;</p>
+<h4>Finding deals</h4>
+<ol>
+<li>Identify the typical/baseline price for the product.</li>
+<li>Research where deals might be found for this specific product or product category e.g. newegg.com often has sales for electronics</li>
+<li>Use <code>browser.spawn_task</code> to perform a thorough and detailed search for any product listings that have a lower price than the baseline.</li>
+<li>Use <code>browser.spawn_task</code> to look for any coupon or promo codes for relevant products.</li>
+<li>Present the relevant search results to the user. Be succinct and aim to provide a recommendation or takeaway. If you didn't find any current deals, say so and share any knowledge you gained about past and/or future deals.</li>
+</ol>
+<p>Example: &quot;find me a deal on a new microwave&quot;</p>
+<h4>Reverse image search</h4>
+<ol>
+<li>If the image contains multiple plausible products and the user does not specify which one to shop, ask which item to search for before running a product search.</li>
+<li>If the current user message attaches an image and asks to shop a clear target, and every required attribute is already resolved, run direct catalog image search before any other step.</li>
+<li>If direct image search is unavailable or no uploaded image path is available, derive a detailed visual description.</li>
+<li>Execute searches with the relevant product search tools, using image search inputs when available and descriptive queries otherwise.</li>
+<li>Verify product pages / images against the original image; rank exact matches ahead of visually similar results.</li>
+<li>Continue searching and adjusting your queries as necessary in order to identify the product. Stop after reasonable query refinements and return similar matches if necessary.</li>
+<li>Present the relevant search results to the user. Be honest with the user if you're unable to find an exact match.</li>
+</ol>
+<h4>Purchase</h4>
+<p>Run the purchase workflow on the main agent. Do not hand any part of it to <code>subagent.spawn</code>: a subagent has neither wallet nor browser access, so it cannot complete a purchase.</p>
+<ol>
+<li>Identify the products and any variants or quantities already specified.</li>
+<li>Close active browser discovery tasks that are no longer relevant with <code>browser.close_task</code>. Use <code>browser.list_tasks</code> to find their IDs. Ignore late results for those products after purchase begins.</li>
+<li>Route on the eligibility flags the catalog search already returned; do not call <code>shopping product-details</code> just to decide the route.</li>
+<li>For Meta catalog products with <code>is_agentic_checkout_creation_enabled: true</code>, call <code>shopping product-details</code> once per selected product to pin the exact variant. Then load <code>/opt/hatch/skills/shopping/references/shopify-ucp.md</code> and follow its purchase flow.</li>
+<li>Otherwise, load <code>/opt/hatch/skills/shopping/references/browser-checkout.md</code> and follow its handoff flow.</li>
+</ol>
+<h4>Cart-building</h4>
+<p>The user is gathering items to buy later, not buying now. A cart is the merchant's own basket, not a list you keep: the store holds it, prices it, and applies its discounts and availability, so what the user sees is what they would pay. Remembering products yourself gets you none of that.</p>
+<ol>
+<li>For Meta catalog products with <code>is_agentic_checkout_creation_enabled: true</code>, load <code>/opt/hatch/skills/shopping/references/shopify-ucp.md</code> and follow its Cart section. Products without that capability have no cart, and neither does browser checkout; say so rather than improvising one.</li>
+<li>Keep the <code>cart_id</code> for the rest of the conversation. It is internal state. Do not show it to the user.</li>
+<li>Follow the Purchase workflow once the user is ready to check out their cart.</li>
+</ol>
+<h4>Shopping Instagram links</h4>
+<ol>
+<li>Use <code>instagram-cli post</code> and <code>instagram-cli media-understanding</code> to fetch the shopping context for the provided Instagram link.</li>
+<li>If the shopping context contains multiple products, ask the user which product they want to focus on.</li>
+<li>If the shopping context contains product IDs, use <code>shopping product-details --product-id &lt;product id&gt;</code> to fetch the corresponding product details. Write a temporary <code>{&quot;products&quot;: [...]}</code> JSON file whose entries copy <code>product.id</code>, <code>product.name</code>, <code>product.price</code>, <code>product.url</code>, and <code>product.images[0].url</code> verbatim from the product-details response into <code>product_id</code>, <code>price</code>, <code>name</code>, <code>url</code>, and <code>image_url</code>. Copy no field the response does not contain, and never take a name, price, or URL from the Instagram post. Pass that file and the copied product IDs to <code>shopping.resolve_results</code>. Do not execute a product search if you already have the relevant product ID, that wastes the user's time.</li>
+<li>If the shopping context contains no product IDs, execute the product discovery workflow using the data provided in the shopping context.</li>
+<li>Surface the found products in the shopping results widget and mention them via product markers in the text response.</li>
+</ol>
+<h4>Shopping Facebook reel links</h4>
+<ol>
+<li>Use <code>facebook-cli post read --url '&lt;link&gt;'</code> to fetch the shopping context for the provided <code>facebook.com/reel/</code> link. Do not open the link in the browser. Its <code>shoppable_products</code> are the products Facebook identified in the reel.</li>
+<li>If the user named a product, shop for that product. Otherwise, shop for the products in <code>shoppable_products</code>. If there are none, ask the user which product they want.</li>
+<li>Execute the product discovery workflow for those products using the data provided in the shopping context, such as <code>brand_name</code>, <code>color</code>, and <code>product_name</code>, together with any constraints the user gave, but skip browser product search and search with&lt;!-- catalog-search-v1-only:start --&gt; <code>meta-catalog-search</code>&lt;!-- catalog-search-v1-only:end --&gt;&lt;!-- catalog-search-v2-only:start --&gt; <code>shopping catalog-search</code>&lt;!-- catalog-search-v2-only:end --&gt; only.</li>
+<li>Surface the found products in the shopping results widget and mention them via product markers in the text response.</li>
+</ol>
+<h3>Meta Catalog Search</h3>
+<h4>Product Shape</h4>
+<pre><code>{
+  &quot;rank&quot;: 1,
+  &quot;product_id&quot;: &quot;Meta catalog product id&quot;,
+  &quot;url&quot;: &quot;product page URL&quot;,
+  &quot;name&quot;: &quot;product title&quot;,
+  &quot;brand&quot;: &quot;brand or merchant name&quot;,
+  &quot;price&quot;: &quot;$49.00&quot;,
+  &quot;sale_price&quot;: &quot;$39.00&quot;,
+  &quot;description&quot;: &quot;product description&quot;,
+  &quot;image_url&quot;: &quot;direct image URL&quot;,
+  &quot;color&quot;: &quot;available or selected color&quot;,
+  &quot;material&quot;: &quot;material when present&quot;,
+  &quot;pattern&quot;: &quot;pattern when present&quot;,
+  &quot;size&quot;: &quot;available or selected size&quot;,
+  &quot;gender&quot;: &quot;gender/audience when present&quot;,
+  &quot;category&quot;: &quot;category when present&quot;,
+  &quot;rating&quot;: &quot;rating and review count when present&quot;,
+  &quot;is_agentic_checkout_creation_enabled&quot;: true,
+  &quot;is_agentic_checkout_completion_enabled&quot;: true
+}</code></pre>
+<h4>Search</h4>
+<p>&lt;!-- catalog-search-v1-only:start --&gt; <code>--query</code> performs semantic text matching. Query terms influence relevance but do not filter the result set, so they are not a substitute for corresponding structured flags. For example, a query for a boy's product can return products for other genders unless <code>--gender male</code> is also passed.</p>
+<p>A text call accepts up to eight distinct queries; use only as many as are useful.</p>
+<pre><code>CATALOG_RESULTS_JSON=$(mktemp &quot;${TMPDIR:-/tmp}/meta-catalog-search.XXXXXX&quot;)
+meta-catalog-search \
+  --query &quot;&lt;product query&gt;&quot; \
+  --retries 2 --out &quot;$CATALOG_RESULTS_JSON&quot;
+
+# Preview the first 20 products
+jq '.products[0:20] | map(del(.image_url))' &quot;$CATALOG_RESULTS_JSON&quot;
+
+# Stream products
+jq '.products[] | select((.sale_price // .price // &quot;&quot;) | test(&quot;\\$[0-9]&quot;)) | del(.image_url)' &quot;$CATALOG_RESULTS_JSON&quot;
+
+# Pick products under a budget
+jq '
+  [
+    .products[]
+    | select(.product_id != null and .url != null and .image_url != null)
+    | select((.sale_price // .price // &quot;&quot;) | test(&quot;^\\$[0-9]&quot;))
+    | select(((.sale_price // .price) | gsub(&quot;[^0-9.]&quot;; &quot;&quot;) | tonumber) &lt;= 100)
+    | del(.image_url)
+  ][0:50]
+' &quot;$CATALOG_RESULTS_JSON&quot;</code></pre>
+<p>When the current user message attaches an image and asks to shop a clear target, start with a direct image search using the uploaded image path from the prompt context:</p>
+<pre><code>CATALOG_RESULTS_JSON=$(mktemp &quot;${TMPDIR:-/tmp}/meta-catalog-search.XXXXXX&quot;)
+meta-catalog-search --image-path &lt;uploaded_file_path&gt; --retries 2 \
+  --out &quot;$CATALOG_RESULTS_JSON&quot;</code></pre>
+<p>Do not use <code>--visual-query</code> instead of <code>--image-path</code> on the attaching turn. Use text or <code>--visual-query</code> only to complement direct image search, or when no uploaded image path is available.</p>
+<p><code>product_id</code> is what <code>shopping.resolve_results</code> takes in <code>selected_ids</code>, so keep it in every projection you make of these results. A narrowed preview that selects only display fields (<code>{name, brand, price, url}</code>) leaves you unable to cite anything you then talk about, and re-reading the file later costs an extra turn. When you narrow, keep <code>product_id</code> alongside whatever else you need:</p>
+<pre><code>jq -r '.products[] | [.product_id, .brand, .name, (.sale_price // .price), .size] | @tsv' &quot;$CATALOG_RESULTS_JSON&quot;</code></pre>
+<p>Constraint flags for the <code>meta-catalog-search</code> CLI:</p>
+<ul>
+<li><code>--category</code> for a hard category constraint</li>
+<li><code>--gender</code> for a hard gender/audience constraint resolved under Required attributes. Use exactly <code>male</code>, <code>female</code>, or <code>unisex</code>, preserve it on refinements, and do not infer it from product type or styling. Use <code>--prefer-gender</code> instead for a soft preference.</li>
+<li><code>--brand</code> ensures available products from the specified brand are returned and ranked first, with other brands available as backfill. Always specify <code>--brand</code> when the user requests results from a specific brand.</li>
+<li><code>--domain</code> ensures available products from the specified seller domain are returned and ranked first, with products from other sellers available as backfill. Always specify <code>--domain</code> when the user requests results from a specific seller; pass its canonical hostname without a scheme or path.</li>
+<li><code>--boost-brand-seller-website true|false</code> defaults to <code>true</code> and boosts the official seller website associated with each value passed to <code>--brand</code></li>
+<li><code>--seller-type direct|secondhand</code> adds a seller-type ranking preference; the default is <code>direct</code></li>
+<li><code>--currency</code> with <code>--min-price</code> / <code>--max-price</code> (values in cents) for budget limits</li>
+<li><code>--color</code>, <code>--material</code>, <code>--style</code>, <code>--prefer-brand</code>, <code>--prefer-gender</code> for soft preferences</li>
+</ul>
+<p>For requests for used, pre-owned, secondhand, thrifted, vintage, or refurbished inventory, set <code>--seller-type secondhand</code> and <code>--boost-brand-seller-website false</code>.</p>
+<p>Apply every requirement in the request and context to every Meta Catalog Search call, in each query and every applicable structured parameter. Required attributes, stated price limits, and parameters that express a user requirement are never relaxed. If results are insufficient, a later call may relax only preference parameters that do not express a user requirement. Keep deliberately relaxed results separate and do not present them as exact matches. If the CLI rejects an argument you passed, correct that argument and rerun once with the same constraints. If it fails for any other reason, or the results file cannot be parsed, use the other search results rather than issuing diagnostic catalog calls or silently dropping constraints. &lt;!-- catalog-search-v1-only:end --&gt; &lt;!-- catalog-search-v2-only:start --&gt; <code>shopping catalog-search</code> accepts one to four semantic <code>--query</code> values. Put every required attribute and useful preference into every query because this backend has no structured constraint flags. Use repeated <code>--brand</code> values only when the user names preferred brands; brand is a ranking preference, not a hard filter.</p>
+<pre><code>CATALOG_RESULTS_JSON=$(mktemp &quot;${TMPDIR:-/tmp}/shopping-catalog-search.XXXXXX&quot;)
+shopping catalog-search \
+  --query &quot;&lt;specific product query including every constraint&gt;&quot; \
+  --retries 2 --out &quot;$CATALOG_RESULTS_JSON&quot;
+
+# Inspect the returned products while retaining their ids
+jq -r '.products[] | [.product_id, .brand, .name, .price, .size] | @tsv' &quot;$CATALOG_RESULTS_JSON&quot;</code></pre>
+<p>The command supports semantic text queries only. Filter returned products against every hard requirement before selecting them. If too few match, refine the query without dropping required attributes. A failure or malformed result ends this catalog attempt; use results from the other search tools instead of issuing diagnostic calls. &lt;!-- catalog-search-v2-only:end --&gt;</p>
+<h4>Product details</h4>
+<p>During product selection, before purchase, or when the user asks, it can be beneficial to determine the variants available for a given product, such as different clothing sizes.</p>
+<p>For a specific Meta catalog product returned by catalog search, retrieve its corresponding product variant data from the catalog with the following command:</p>
+<pre><code>shopping product-details --product-id &quot;&lt;product_id&gt;&quot;</code></pre>
+<p>To confirm the size of a selected product, find that size in the size variant group and inspect its <code>product_ids</code>. Keep every non-size selected attribute (such as color) constant. Call <code>shopping product-details --product-id</code> for candidate IDs as needed and choose only a response whose <code>product.selected_variant_info</code> confirms both the requested size and the original non-size attributes. Treat an option with <code>is_available: false</code> as unavailable; never choose an arbitrary candidate when the attributes cannot be confirmed. Use the confirmed response's <code>product.id</code> for checkout, not the product ID from the <code>variant_groups</code>. If you select a product ID from the <code>variant_groups</code>, call <code>shopping product-details</code> for that variant product ID to confirm availability and checkout eligibility. Do not expose product IDs or this lookup process to the user.</p>
+<h4>Widget</h4>
+<p>The <code>shopping_results</code> widget can be used to surface Meta catalog products in a detailed list-view component. Create it only once every product search for the request has finished, never as an early look at whichever source returned first. It's imperative to rank/order the products such that the top 5 are the highest quality (matching user constraints, from well-known merchants/websites).</p>
+<pre><code>{
+  &quot;result_paths&quot;: [&quot;&lt;CATALOG_RESULTS_JSON&gt;&quot;],
+  &quot;selected_ids&quot;: [&quot;product-id-1&quot;, &quot;product-id-2&quot;]
+}</code></pre>
+<p>Call <code>widget.create</code> with the <code>path</code> returned by <code>shopping.resolve_results</code>:</p>
+<pre><code>{
+  &quot;kind&quot;: &quot;shopping_results&quot;,
+  &quot;present_now&quot;: true,
+  &quot;data&quot;: {
+    &quot;path&quot;: &quot;&lt;path returned by shopping.resolve_results&gt;&quot;
+  }
+}</code></pre>
+<h3>Browser Product Search</h3>
+<h4>Search</h4>
+<p>Call <code>browser.spawn_task</code> with a complete search brief:</p>
+<pre><code>{
+  &quot;task&quot;: &quot;&lt;what the user asked to find, in their words&gt;. Find real purchasable products online for: &lt;user request&gt;. Preserve these requirements: &lt;constraints&gt;. Unless instructed otherwise, default to searching a maximum of 3 merchant sites and a maximum of 10 products in total - prefer to limit searching to the minimum amount necessary to provide a high-quality and seller-diverse response (e.g. if searching 2 merchant sites gives you enough high quality products, stop there). Return a concise shortlist with product name, merchant, price, availability, product URL, and why each product matches. Also populate browser_hand_off.product_results with every shortlisted product. Ensure that each URL is a dedicated product page, not a search page. For image_url, identify the primary rendered product image; inspect its src, srcset, lazy-load attributes, or element HTML, resolve relative URLs against the product-page URL, and include only a direct absolute HTTPS image URL. Omit products whose primary image cannot be verified or resolves to a blob/data URL, placeholder, logo, or tracking pixel. Use price for the regular/list price, or the current price when there is no sale. Include sale_price only when the page explicitly shows an actual sale with a distinct discounted price. Set availability to in_stock only when the product page indicates it can be added to cart or purchased. This is product discovery only: do not purchase, enter checkout, add items to cart, or request payment/shipping details. If the user asked to buy, order, purchase, or check out, ask them to choose or confirm one product before any separate checkout handoff.&quot;
+}</code></pre>
+<p>Ensure the search brief is complete and self-contained: the browser task cannot see this conversation and receives no information about the user or their request beyond what you put in <code>task</code>.</p>
+<p>Parallel browser tasks are for distinct discovery angles that improve coverage; follow-up refinements stay within the browser task already pursuing that angle.</p>
+<p>Never surface product details (price, availability, product page URLs) from <code>browser.search</code> results to the user. They are unreliable. Always use <code>browser.spawn_task</code> for product search and fetching product details.</p>
+<p>Call <code>browser.open</code> on all product URLs returned from the browser product search and filter out any products where the URL isn't a dedicated product page with in-stock availability.</p>
+<h4>Product shape</h4>
+<p>Browser product searches finish asynchronously. When the completion arrives, use the structured <code>completion_result.product_results</code> object rather than reconstructing products from the prose report. It has this shape:</p>
+<pre><code>{
+  &quot;version&quot;: 1,
+  &quot;kind&quot;: &quot;browser_product_search_results&quot;,
+  &quot;count&quot;: 2,
+  &quot;products&quot;: [
+    {
+      &quot;result_id&quot;: &quot;browser:&lt;stable URL hash&gt;&quot;,
+      &quot;name&quot;: &quot;Product name&quot;,
+      &quot;url&quot;: &quot;https://merchant.example/product&quot;,
+      &quot;image_url&quot;: &quot;https://merchant.example/product.jpg&quot;,
+      &quot;availability&quot;: &quot;in_stock&quot;,
+      &quot;brand&quot;: &quot;Merchant or brand&quot;,
+      &quot;price&quot;: &quot;$49.00&quot;
+    }
+  ]
+}</code></pre>
+<p>Do not copy fields out of the prose report or invent a missing image URL.</p>
+<h4>Widget</h4>
+<p>The <code>shopping_results</code> widget can surface verified browser products using the generic catalog card layout. Browser cards deliberately use <code>type: &quot;browser&quot;</code>, omit <code>product_id</code>, and disable agentic checkout.</p>
+<p>Write <code>completion_result.product_results</code> verbatim to a temporary JSON file. Select and rank products by <code>result_id</code>, then resolve them into the presentation payload:</p>
+<pre><code>{
+  &quot;result_paths&quot;: [&quot;&lt;browser completion_result.product_results JSON path&gt;&quot;],
+  &quot;selected_ids&quot;: [
+    &quot;browser:stable-url-hash-1&quot;,
+    &quot;browser:stable-url-hash-2&quot;
+  ]
+}</code></pre>
+<p>Pass catalog or Marketplace result files in the same <code>result_paths</code> array when combining sources. Then call <code>widget.create</code> with the following payload:</p>
+<pre><code>{
+  &quot;kind&quot;: &quot;shopping_results&quot;,
+  &quot;present_now&quot;: true,
+  &quot;data&quot;: {
+    &quot;path&quot;: &quot;&lt;path returned by shopping.resolve_results&gt;&quot;
+  }
+}</code></pre>
+<p>If several browser tasks belong to one shopping request, aggregate their completed result files by passing each file in one <code>shopping.resolve_results</code> call. The request's presentation comes once every one of those tasks has finished, and carries the catalog and Marketplace files for the same request alongside them. If not every task has completed, wait for automatic completion delivery; do not poll. A single browser task may cover several retailers when aggregation would otherwise be unnecessary overhead.</p>
+<h3>Marketplace Search</h3>
+<h4>Printed listing shape</h4>
+<pre><code>{
+  &quot;listing_id&quot;: &quot;Marketplace listing id&quot;,
+  &quot;title&quot;: &quot;listing title&quot;,
+  &quot;location&quot;: &quot;city, state location of the listing&quot;,
+  &quot;price&quot;: &quot;$49.00&quot;,
+  &quot;condition&quot;: &quot;condition of the item, e.g., Used (good)&quot;,
+  &quot;description&quot;: &quot;listing description&quot;,
+  &quot;product_url&quot;: &quot;listing URL&quot;,
+  &quot;image_url&quot;: {&quot;withheld&quot;: &quot;signed URL; ...&quot;}
+}</code></pre>
+<h4>Search</h4>
+<pre><code>MARKETPLACE_RESULTS_JSON=$(mktemp &quot;${TMPDIR:-/tmp}/facebook-marketplace-search.XXXXXX&quot;)
+
+facebook-cli marketplace search \
+  --query &quot;&lt;natural language item query&gt;&quot; \
+  --limit &lt;N&gt; \
+  --out &quot;$MARKETPLACE_RESULTS_JSON&quot;</code></pre>
+<p>With location or local pickup filters:</p>
+<pre><code>facebook-cli marketplace search \
+  --query &quot;&lt;item&gt;&quot; \
+  --max-price &lt;dollars&gt; \
+  --latitude &lt;lat&gt; \
+  --longitude=&quot;&lt;lng&gt;&quot; \
+  --radius-in-miles &lt;miles&gt; \
+  --delivery-method local_pickup_only \
+  --limit &lt;N&gt; \
+  --out &quot;$MARKETPLACE_RESULTS_JSON&quot;</code></pre>
+<p>The command prints each listing with <code>image_url</code> replaced by a <code>withheld</code> object. The full payload, including signed photo URLs, goes only to the <code>--out</code> file. Pick listings and their <code>listing_id</code> values from the printed output. Do not read, print, or <code>jq</code> the <code>--out</code> file; pass its path unchanged in <code>result_paths</code>. To show a listing's photo, select it in <code>shopping.resolve_results</code>: its card carries the photo. Select only listings whose printed output has an <code>image_url</code>: <code>shopping.resolve_results</code> fails the whole call when a selected listing has no photo.</p>
+<h4>Listing details</h4>
+<p>Fetch full details and seller trust signals with <code>facebook-cli marketplace listing details --listing-id &lt;listing_id&gt;</code> and <code>facebook-cli marketplace seller-info --listing-id &lt;listing_id&gt;</code>. Search results carry only <code>seller_id</code> (no seller name), so <code>seller-info</code> is how you surface the seller's name, rating, and review count. See <code>references/backends.md</code> for the full flag set and pagination.</p>
+<h4>Pasted listing links</h4>
+<p>When the message contains a Marketplace item or share link, do not open it in the browser: those pages sit behind a login wall. Use the facebook-cli to fetch the listing instead: <code>facebook-cli marketplace listing details --url '&lt;pasted link&gt;'</code> for item links (needs no linked account), or <code>facebook-cli link-sharing decode-url --url '&lt;pasted link&gt;'</code> first for share links (needs a linked account), then pass the decoded item link to <code>details --url</code>. Then search similars from the title and description and resolve them with <code>shopping.resolve_results</code>.</p>
+<h4>Widget</h4>
+<p>The <code>shopping_results</code> widget can be used to surface Marketplace listings in a detailed list-view component. Create it only once every product search for the request has finished, never as an early look at whichever source returned first.</p>
+<pre><code>{
+  &quot;result_paths&quot;: [&quot;&lt;MARKETPLACE_RESULTS_JSON&gt;&quot;],
+  &quot;selected_ids&quot;: [&quot;listing-id-1&quot;, &quot;listing-id-2&quot;]
+}</code></pre>
+<p>Then call <code>widget.create</code> with the <code>path</code> returned by <code>shopping.resolve_results</code>:</p>
+<pre><code>{
+  &quot;kind&quot;: &quot;shopping_results&quot;,
+  &quot;present_now&quot;: true,
+  &quot;data&quot;: {
+    &quot;path&quot;: &quot;&lt;path returned by shopping.resolve_results&gt;&quot;
+  }
+}</code></pre>
+<h3>Constraints</h3>
+<p>Before surfacing any products to the user (either via widget or text), double-check that the products match all constraints for the user request and/or general preferences. E.g. for clothing requests, are all the products of the right gender &amp; size for the user request</p>
+<h3>Response Formatting</h3>
+<ul>
+<li>Prefer presenting products in widgets rather than text when the product search tool supports them, in the one presentation that comes after every search for the request has finished. Any response before that, or any request whose searches support no widget, keeps to the takeaway and at most one or two recommendations.</li>
+<li>Lead with the recommendation or takeaway. Keep the rest of the response succinct and easily scannable. Briefly compare the decisive tradeoff between the top choices when useful.</li>
+<li>Say plainly when an update is early. Any response that names a product before every search is in opens by saying it is early and what is still running (&quot;here are a few initial picks, still running a more thorough search&quot;), and stays provisional throughout: no superlatives, no ranking language, no category verdict, nothing shaped like &quot;the best X is Y&quot;. You have not seen the whole pool yet, so you cannot know. A recommendation is earned only once every search has returned and you have reviewed all of it together.</li>
+<li>When presenting products in widgets, pay attention to their order. Rank them from most relevant to least relevant, placing products that match the constraints from well-known sellers first.</li>
+<li>If there is a natural grouping of products in the response (e.g. user asked for shoes &amp; pants), surface those different groups in separate widgets, side by side in that one presentation rather than spread across turns.</li>
+<li>For every product included in <code>product_citations</code>, use only the exact complete <code>marker</code> value returned by the successful <code>shopping.resolve_results</code> call. Put the marker where the product name belongs. Do not construct it from <code>citation_id</code>, copy a product name next to it, or invent names, URLs, links, or citation IDs. If a product has no returned marker, only reference it by name.</li>
+<li>If you know that variant (size, color, etc.) data exists for a product named in the text response, offer to surface it if the user is interested, e.g. &quot;Would you like to know what other colors that sweater comes in?&quot; Do not name additional products while making the offer.</li>
+<li>Never surface results in a Markdown file (no link, no preview, no attachment) to the user unless explicitly asked to do so.</li>
+</ul>
+<h4>When this turn mentions a product without presenting a widget</h4>
+<p>This is most turns in a shopping conversation: the early update while a search runs, every follow-up question about something already on screen, every comparison, every later turn that circles back to a product. The marker rule is the same here as it is in the presentation, and this is where it is easiest to lose.</p>
+<ul>
+<li>Write each product as its marker, exactly as <code>shopping.resolve_results</code> returned it. This holds no matter how far back the product was resolved.</li>
+<li>Answering a question about one product still names that product, so put its marker where the name would have gone: confirming that a bag fits three lenses reads as &quot;yes, &lt;marker&gt; fits three lenses&quot;, not &quot;yes, the Lowepro fits three lenses&quot;.</li>
+<li>Narrowing the products already on screen down to one or two names each of the ones you keep, so each of those takes its marker. Do not substitute a distinguishing attribute (&quot;the merino one&quot;, &quot;the $199 one&quot;, &quot;the Brooks pair&quot;) because it is shorter.</li>
+<li>A product from a search result file that no successful resolve returned has no marker yet. Resolve it before naming it. If it genuinely cannot be resolved, name it plainly and do not invent a marker, a URL, or a link for it.</li>
+</ul>
+<p>&lt;!-- shopping-results-response-contract:start --&gt;</p>
+<h4>When this turn presents a shopping-results widget</h4>
+<p>These rules apply only to user-facing prose accompanying a shopping-results presentation. Begin directly with the takeaway. Do not mention or acknowledge the skill, instructions, tools, widgets, or formatting rules.</p>
+<ul>
+<li>Do not mention the shopping-results presentation or narrate its contents.</li>
+<li>Never surface the results in a Markdown file unless explicitly requested.</li>
+<li>Do not recap, enumerate, or describe the products already presented.</li>
+<li>Give one short takeaway. Name at most two products, and only when they are needed for the decisive recommendation or tradeoff. Treat those names as the complete allowlist and refer to all other presented products collectively.</li>
+<li>Base the takeaway and any recommendations on all available search results, not only the search task that finished last.</li>
+<li>When multiple products are named, preserve their relative order from the corresponding widget.</li>
+<li>For every named product included in <code>product_citations</code>, use only the exact complete <code>marker</code> value returned by the successful <code>shopping.resolve_results</code> call. Put the marker where the product name belongs. Do not construct it from <code>citation_id</code>, copy a product name next to it, or invent names, URLs, links, or citation IDs. If a named product has no returned marker, reference it by name only.</li>
+</ul>
+<p>&lt;!-- shopping-results-response-contract:end --&gt;</p>
+<h3>Auth</h3>
+<ul>
+<li>No user-provided token is required.</li>
+<li>Meta catalog search relies on installed runtime tools and environment-backed access.</li>
+<li>Meta catalog requests use the Meta Catalog connector's read permission.</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

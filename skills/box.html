@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>box — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Search, read, upload, download, move, rename, delete, restore, and share Box content; manage comments and metadata.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/box">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/box">
+<meta property="og:title" content="box">
+<meta property="og:description" content="Search, read, upload, download, move, rename, delete, restore, and share Box content; manage comments and metadata.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="box">
+<meta name="twitter:description" content="Search, read, upload, download, move, rename, delete, restore, and share Box content; manage comments and metadata.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Bundled</p>
+      <h1>box</h1>
+      <p class="lede">Search, read, upload, download, move, rename, delete, restore, and share Box content; manage comments and metadata.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Box</h2>
+<p>Use <code>/opt/hatch/bin/box-cli</code> to access Box.</p>
+<h3>Connect</h3>
+<p>Run <code>/opt/hatch/bin/box-cli status</code>. If disconnected, run <code>/opt/hatch/bin/box-cli authorize-url</code> and share the returned <code>connect_url</code> as <strong>Connect Box</strong>. A fresh connection requests read-only access. Wait for browser consent, then check status again.</p>
+<p>Before an operation that may need broader Box access, run <code>/opt/hatch/bin/box-cli status --for-command &lt;command-or-method&gt;</code>. For a hosted MCP operation, pass its exact tool name instead of <code>call-tool</code>. When <code>scope_status</code> is <code>not_granted</code>, copy the returned <code>scope_add_url</code> exactly and post it on its own line as <code><a href="&lt;scope_add_url&gt;">Additional Box access</a></code> so the client renders the native access button. Wait for consent, then retry the original operation. Never construct an authorization URL or substitute a raw Box scope. The operation also fails closed with the same method-bound link if its required scope is absent. OAuth access does not replace Muse approval.</p>
+<h3>Use</h3>
+<p>Run <code>list-tools</code> for available MCP tools, their argument schemas, and Muse permissions. Use those schemas and IDs returned by Box in <code>call-tool</code>. <code>get_file_content</code> reads document text. Downloads and changes ask for Muse approval by default.</p>
+<pre><code>/opt/hatch/bin/box-cli list-tools
+/opt/hatch/bin/box-cli call-tool --name who_am_i --arguments-json '{}'
+
+# Browse the root folder.
+/opt/hatch/bin/box-cli call-tool --name list_folder_content_by_folder_id \
+  --arguments-json '{&quot;folder_id&quot;:&quot;0&quot;,&quot;limit&quot;:20}'
+
+# Search for PDFs.
+/opt/hatch/bin/box-cli call-tool --name search_files_keyword \
+  --arguments-json '{&quot;query&quot;:&quot;project plan&quot;,&quot;file_extensions&quot;:[&quot;pdf&quot;],&quot;limit&quot;:10}'
+
+# Inspect file metadata.
+/opt/hatch/bin/box-cli call-tool --name get_file_details \
+  --arguments-json '{&quot;file_id&quot;:&quot;&lt;file_id&gt;&quot;,&quot;fields&quot;:[&quot;name&quot;,&quot;size&quot;,&quot;permissions&quot;]}'
+
+# Read document text.
+/opt/hatch/bin/box-cli call-tool --name get_file_content \
+  --arguments-json '{&quot;file_id&quot;:&quot;&lt;file_id&gt;&quot;}'
+
+# Create a folder.
+/opt/hatch/bin/box-cli call-tool --name create_folder \
+  --arguments-json '{&quot;name&quot;:&quot;Project notes&quot;,&quot;parent_folder_id&quot;:&quot;&lt;folder_id&gt;&quot;}'
+
+# Upload a text file.
+/opt/hatch/bin/box-cli call-tool --name upload_file \
+  --arguments-json '{&quot;file_name&quot;:&quot;notes.txt&quot;,&quot;file_content&quot;:&quot;Meeting notes&quot;,&quot;parent_folder_id&quot;:&quot;&lt;folder_id&gt;&quot;}'
+
+# Post a comment.
+/opt/hatch/bin/box-cli call-tool --name create_file_comment \
+  --arguments-json '{&quot;file_id&quot;:&quot;&lt;file_id&gt;&quot;,&quot;message&quot;:&quot;Ready for review.&quot;}'</code></pre>
+<p>Use the file commands below for local-file uploads, full downloads, moves, renames, and deletion. <code>update-folder</code> and <code>delete-folder</code> take <code>--folder-id</code>. Use <code>upload-version</code> to replace an existing file's contents; its required <code>--name</code> also renames the file. Run <code>&lt;command&gt; --help</code> for options.</p>
+<pre><code>/opt/hatch/bin/box-cli download --file-id &lt;file_id&gt; --output workspace/report.pdf
+/opt/hatch/bin/box-cli upload --input workspace/report.pdf --name report.pdf --parent-folder-id &lt;folder_id&gt;
+/opt/hatch/bin/box-cli update-file --file-id &lt;file_id&gt; --name renamed.pdf --parent-folder-id &lt;folder_id&gt;
+/opt/hatch/bin/box-cli delete-file --file-id &lt;file_id&gt;</code></pre>
+<p>Downloads overwrite the output file. Deletion is permanent when Box trash is disabled; deleting a nonempty folder requires <code>--recursive</code>. <code>list-trash</code> returns retained items; pass <code>next_marker</code> as <code>--marker</code> to page. Use <code>restore-file</code> or <code>restore-folder</code> to recover them. Their <code>--fallback-parent-folder-id</code> applies only if the original parent no longer exists.</p>
+<p>Downloads report the saved path and byte count; other results appear under <code>result</code>. <code>ok: false</code> means the operation failed. REST commands make one attempt: retry a download later if Box returns HTTP 202 (file not ready), and run <code>refresh</code> on HTTP 401 before retrying. Read-only hosted MCP requests refresh and retry once after HTTP 401. A hosted MCP write is never automatically replayed after it is sent: if it returns HTTP 401, first check Box to see whether the change applied, then run <code>/opt/hatch/bin/box-cli refresh</code> and retry manually only if needed. Reconnect Box only if refresh fails. Do not retry an access-denied operation through another command.</p>
+<p><code>/opt/hatch/bin/box-cli refresh</code> refreshes the connection. <code>/opt/hatch/bin/box-cli disconnect</code> disconnects Box from Muse.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

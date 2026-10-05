@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>generate_podcast — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an MP3. For reading supplied text aloud verbatim, use tts.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/podcast">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/podcast">
+<meta property="og:title" content="generate_podcast">
+<meta property="og:description" content="Compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an MP3. For reading supplied text aloud verbatim, use tts.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="generate_podcast">
+<meta name="twitter:description" content="Compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an MP3. For reading supplied text aloud verbatim, use tts.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Media &middot; Bundled</p>
+      <h1>generate_podcast</h1>
+      <p class="lede">Compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an MP3. For reading supplied text aloud verbatim, use tts.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Generate Podcast</h2>
+<h3>Purpose</h3>
+<p>Generate audio content — podcasts, audio briefings, narrated summaries, or any spoken audio. Use this skill for all generated audio, not just podcasts. The <code>podcast-helper</code> script handles synthesis, catalog management, cover art generation, and publishing.</p>
+<h3>Workflow</h3>
+<h4>1. Plan</h4>
+<ul>
+<li><strong>Topic and angle</strong></li>
+<li><strong>Speaker names and voices</strong> — <strong>prefer the Meta AI voices by default</strong> (the <code>MAI_01</code> and <code>MAI_03</code> catalog ids: Warm and Smooth); they are the recommended, production-quality set and the right pick most of the time. Default to Warm (<code>avocado_v2:MAI_01</code>) and Smooth (<code>avocado_v2:MAI_03</code>). When the topic, tone, or user request steers toward a different catalog voice — an accent, a character fit, or more distinct speakers — it's perfectly fine to pick it from the catalog. The full voice catalog is at <code>/opt/hatch/skills/voice-selector/voice_source.json</code> — pick by the entry's display <code>name</code> and pass its <code>id</code> (colon form like <code>avocado_v2:MAI_01</code> is fine). Any number of speakers is supported. (&quot;MAI&quot; is the internal id prefix only — say &quot;Meta AI voices&quot; or display names to the user, never &quot;MAI&quot;.)</li>
+<li><strong>Host names</strong> — give each speaker a real first name (e.g. Alex, Jordan). These are the show's own character names, chosen by you and separate from the voice display names: never label a speaker with a voice name like &quot;Warm&quot; or &quot;Smooth&quot;. <strong>Remember the name you give each voice</strong> — record the pairing in <code>~/MEMORY.md</code> (e.g. &quot;podcast host Alex = avocado_v2:MAI_01&quot;) and, before naming a new host, check there for a name you've already used for that voice. Reuse the same name whenever you use that voice again, so a given voice is always the same character to the user. For a <strong>recurring series</strong>, reuse the same host names and the same voice assignments in every episode so it sounds like the same show — pin them in the cron task body (see Scheduling).</li>
+<li><strong>Target length</strong> — 5–15 minutes; ~130 words/minute</li>
+<li><strong>Avoid repeating past episodes</strong> — before settling the topic and angle, run <code>podcast-helper manifest read</code> and look at each recent episode's <code>topics</code> field (a short summary of what that episode already covered). Steer the new episode toward fresh material or a genuinely new angle rather than re-covering ground. This matters most for a recurring series.</li>
+</ul>
+<h4>2. Write the script</h4>
+<p>Write the full dialogue. Label each turn with the speaker name followed by a colon:</p>
+<pre><code>Alex: Welcome to the podcast. Today we're diving into async Rust.
+Jordan: Great topic. Let's start with why async matters.
+Alex: The big advantage is zero-cost abstractions...</code></pre>
+<p>Write the script to a file (e.g. <code>/tmp/script.txt</code>).</p>
+<p><strong>The script goes directly to a TTS model — write it in spoken form.</strong> The text will be read aloud exactly as written. Follow these guidelines:</p>
+<ul>
+<li><strong>Numbers</strong>: write out in full — &quot;one hundred thousand&quot;, &quot;forty-two dollars and fifty cents&quot;, &quot;three point five percent&quot;</li>
+<li><strong>Times</strong>: &quot;ten o'clock A M&quot;, &quot;three thirty P M&quot;, &quot;noon&quot;, &quot;midnight&quot;</li>
+<li><strong>Years</strong>: &quot;twenty twenty-five&quot;, &quot;nineteen ninety-nine&quot;</li>
+<li><strong>Abbreviations</strong>: spell out — &quot;U S A&quot;, &quot;A P I&quot; (pronounceable acronyms like &quot;NASA&quot; can stay)</li>
+<li><strong>URLs</strong>: simplify — &quot;example dot com link&quot; instead of raw URLs</li>
+<li><strong>Email</strong>: &quot;john at company dot com&quot;</li>
+<li><strong>Lists/data</strong>: convert to natural sentences, limit to top 3–5 items</li>
+<li><strong>Punctuation</strong>: use commas for natural pauses. If a sentence runs long, split it into two <em>complete</em> sentences — do not clip it into fragments.</li>
+<li><strong>Never include</strong>: stage directions like <code>(pause)</code>, sound effects, markup, emoji, citation numbers like <code>[1]</code>, math symbols, or visual separators like <code>---</code></li>
+</ul>
+<p><strong>Write complete, conversational sentences — not headlines.</strong> Every line a host speaks should be a full grammatical sentence with a subject and a verb, the way people actually talk out loud. Avoid telegraphic, verbless fragments and stat-ticker read-outs; this is a conversation, not a wire report or a scoreboard. An occasional short line for emphasis (&quot;Unbelievable.&quot;) is fine, but never string clipped fragments together.</p>
+<ul>
+<li>Avoid: <code>Second assist of the night for Messi. Two one Argentina. Full time. Heartbreak for England.</code></li>
+<li>Prefer: <code>That's Messi's second assist of the night, and it puts Argentina up two to one. When the whistle went, it was heartbreak for England.</code></li>
+</ul>
+<p>When you present a stat or a scoreline, fold it into a spoken sentence (&quot;England had just forty-four percent of the ball&quot;) rather than dropping it in as a bare fragment (&quot;England, forty-four percent possession&quot;).</p>
+<h4>3. Generate</h4>
+<p><strong>Write a topics summary for dedup.</strong> Before generating, write a short bulleted summary of the major topics and key points this episode covered to a file (e.g. <code>/tmp/topics.md</code>) and pass it with <code>--topics-file</code>. Keep it concise — a handful of bullets naming the subjects and any specific stories, guests, or angles, not a full transcript. It is persisted alongside the episode and read by future generations (via the <code>topics</code> field in <code>manifest read</code>) to avoid repeating material. Example:</p>
+<pre><code>- Async Rust fundamentals: futures, executors, zero-cost abstractions
+- Tokio vs async-std tradeoffs
+- Common pitfalls: blocking in async contexts, .await forgetting</code></pre>
+<p><strong>Default: generate only, do not publish.</strong> Only add <code>--publish</code> when the user explicitly asked to publish or when the podcast catalog already has an RSS feed — a <code>&quot;feed&quot;</code> object with a non-empty <code>feed_url</code> (meaning they've published to a feed before and want new episodes added). A <code>&quot;feed&quot;</code> object that has only a <code>spotify_show_url</code> (from a personal Save to Spotify) is <strong>not</strong> an RSS feed and must <strong>not</strong> trigger <code>--publish</code>; publishing is public and requires explicit consent.</p>
+<p>Always pass <code>--cover-prompt</code> with a short description of the episode's theme so podcast-helper can generate cover art automatically.</p>
+<p><strong>Do not pass <code>--cover-image</code>.</strong> Publishing accepts only generated cover art or the bundled default, so an episode published with <code>--cover-image</code> fails. Use <code>--cover-prompt</code> instead; if the user hands you an image file, generate a cover from a prompt describing it and say you did. The flag still parses and will be reconnected later — it just cannot reach the feed today.</p>
+<p><strong>Language:</strong> unless the user asks for another language, write the title, description, feed copy, and script in the language of the current conversation. <code>podcast-helper</code> defaults synthesis to the request's <code>JARVIS_PRESENTATION_LOCALE</code>; pass <code>--language</code> only to honor an explicit user choice (e.g. <code>--language es</code>, <code>--language pt</code>, or a locale like <code>pt_BR</code>). Quality varies significantly across languages — English is highest quality; other languages can be rough (mispronunciations, accent), and some voices handle a given language better than others (try a different <code>--speaker</code> voice from <code>voice_source.json</code> if one sounds wrong). Tell the user non-English audio may be imperfect. See the <code>tts</code> skill's Language section for details.</p>
+<p><strong>One-off episode:</strong></p>
+<pre><code>podcast-helper generate \
+  --script /tmp/script.txt \
+  --title &quot;Deep Dive into Async Rust&quot; \
+  --description &quot;Alex and Jordan explore async patterns in Rust&quot; \
+  --speaker Alex=avocado_v2:MAI_03 \
+  --speaker Jordan=avocado_v2:MAI_01 \
+  --cover-prompt &quot;async Rust programming, gears and lightning bolts&quot; \
+  --topics-file /tmp/topics.md</code></pre>
+<p><strong>Cron/recurring episode</strong> — pass <code>--series-id</code> matching the cron job ID so episodes in the same series share cover art:</p>
+<pre><code>podcast-helper generate \
+  --script /tmp/script.txt \
+  --title &quot;Morning News - June 2, 2026&quot; \
+  --description &quot;Today's top stories&quot; \
+  --speaker Alex=avocado_v2:MAI_03 \
+  --speaker Jordan=avocado_v2:MAI_01 \
+  --series-id daily-news \
+  --cover-prompt &quot;morning news briefing, sunrise and newspaper&quot; \
+  --topics-file /tmp/topics.md</code></pre>
+<p>With <code>--series-id</code>, cover art is generated once for the first episode and reused for all subsequent episodes in the series.</p>
+<p>If the user asked to publish, or the podcast catalog already has an RSS feed — run <code>podcast-helper manifest read</code> and check for a <code>&quot;feed&quot;</code> object with a non-empty <code>feed_url</code> (a <code>feed</code> with only <code>spotify_show_url</code> does not count):</p>
+<pre><code>podcast-helper generate \
+  --script /tmp/script.txt \
+  --title &quot;Deep Dive into Async Rust&quot; \
+  --description &quot;Alex and Jordan explore async patterns in Rust&quot; \
+  --speaker Alex=avocado_v2:MAI_03 \
+  --speaker Jordan=avocado_v2:MAI_01 \
+  --cover-prompt &quot;async Rust programming&quot; \
+  --topics-file /tmp/topics.md \
+  --publish --feed-title &quot;Daily with Alex&quot;</code></pre>
+<p>Returns JSON with <code>path</code>, <code>duration_secs</code>, <code>slug</code>, <code>cover</code>, and (if published) <code>feed_url</code>, <code>episode_url</code>, and <code>subscription_links</code>.</p>
+<h4>4. Deliver to chat</h4>
+<p>Always present the title as plain text above the playable link:</p>
+<pre><code>{title}
+[{title}](sandbox://workspace/podcasts/{slug}/{slug}.mp3)</code></pre>
+<p>The first time you mention publishing, a personal feed, or subscription in a conversation, briefly explain what the feed is: a personal RSS podcast feed they can add to a podcast app, and future published episodes will show up there automatically. After that first explanation, use shorter wording.</p>
+<p>If the episode was published, mention it was published and that it will appear in their feed. Note that published episodes are public. If the result has <code>published: false</code> with <code>publish_error</code>, the audio was generated locally but publication failed: relay <code>publish_error</code> to the user and do not claim it reached the feed. If it also has <code>blocked: true</code>, apply the content-review stop rule in step 5 and skip the publish follow-up below: do not retry, reword the script, or use another publish path. If it has <code>retryable: true</code>, content review could not run; tell the user publication can be retried later using the full step 5 <code>podcast-helper publish</code> command. Before retrying, run <code>podcast-helper manifest read</code> and reuse the target feed's existing <code>feed_title</code> exactly when one exists; never invent or alter a title for an existing feed.</p>
+<p>After delivering, present applicable follow-ups:</p>
+<ol>
+<li><strong>If not published and not blocked:</strong> &quot;Want me to publish this to a personal podcast feed? It's an RSS feed you can add to Apple Podcasts, Overcast, Pocket Casts, or most other podcast players, and future published episodes will show up there automatically. Note: published episodes are public — anyone with the link can listen.&quot;</li>
+<li><strong>If no cron job exists:</strong> &quot;Generate a new episode every day?&quot;</li>
+</ol>
+<h4>5. Publish (if not done in step 3)</h4>
+<pre><code>podcast-helper publish \
+  --slug {slug} \
+  --feed-title &quot;Daily with Alex&quot; \
+  --feed-description &quot;Daily news and tech updates&quot;</code></pre>
+<p>Returns JSON with <code>feed_url</code>, <code>episode_url</code>, and <code>subscription_links</code>.</p>
+<p>Public publishing is content-reviewed. If the output has <code>&quot;blocked&quot;: true</code>, the episode was <strong>not</strong> published: the audio and catalog entry still exist locally, but it cannot go to the public feed. Relay the returned <code>error</code> message to the user plainly and stop — do not retry, reword the script to get around it, or fall back to another publish path. Saving to the user's own Spotify show is unaffected by this review.</p>
+<p>A publish that brings a new show cover unifies artwork across that show — its episodes' covers are replaced with it in the podcast catalog. A series show keeps its series cover, and an episode whose cover was changed with <code>update-cover</code> keeps the show's existing cover when published. Another feed's episodes keep their own artwork.</p>
+<p>After publishing, always re-present the listen link and confirm publication:</p>
+<pre><code>{title}
+[{title}](sandbox://workspace/podcasts/{slug}/{slug}.mp3)
+
+Published to your personal feed, which is the RSS feed you can subscribe to in your podcast app so future published episodes show up there automatically.
+Published episodes are public — anyone with the feed link can listen.</code></pre>
+<h4>6. Subscribe (after publishing)</h4>
+<p>On the first episode published to a feed, present subscription links from the output JSON:</p>
+<pre><code>Subscribe to your personal feed:
+
+RSS feed URL (copy and paste into any podcast player):
+`{subscription_links.rss}`
+
+Or open directly in a podcast app:
+- [Open in Apple Podcasts]({subscription_links.apple_podcasts})
+- [Open in Overcast]({subscription_links.overcast})
+- [Open in Pocket Casts]({subscription_links.pocket_casts})
+
+This is the RSS feed for your generated episodes, and once you add it to a podcast app, future published episodes will appear there automatically.</code></pre>
+<p><strong>Important — how to render the feed URL:</strong> The RSS feed URL is for the user to <strong>copy and paste</strong>, never to click. Always present any published <code>https://</code> URL (feed URL, episode link) wrapped in backticks as code — either inline `<code> </code>https://…<code> </code><code> or inside a fenced code block. Never emit it as a bare URL (a bare </code>https://…<code> auto-linkifies on native clients) and never as a </code><a href="https://…">label</a><code> markdown link; either form may fail to open on native clients and invites a click instead of a copy. Do not offer direct episode download links. The only clickable links should be local </code>sandbox://<code> listen links and the podcast-app protocol links (</code>podcast://<code>, </code>overcast://<code>, </code>pktc://`).</p>
+<p>On subsequent episodes to the same feed, skip — the user is already subscribed.</p>
+<h3>Feed Organization</h3>
+<p><strong>Always use a single feed</strong> unless the user explicitly asks for a separate one. Before publishing, run <code>podcast-helper manifest read</code>. <code>feeds</code> lists every feed on this VM and <code>feed</code> is whichever was published to most recently; if either has a non-empty <code>feed_url</code>, reuse that feed's <code>feed_title</code> exactly.</p>
+<p>When the user does keep more than one show, the title is what picks the feed: publishing with a <code>--feed-title</code> that matches an existing feed adds to it, and any other title creates a new one. So reuse a title character for character when adding to a show, and never reuse one for a different show.</p>
+<p>On the first publish (no <code>feed_url</code> in the podcast catalog yet — a <code>feed</code> object that only carries a <code>spotify_show_url</code> still counts as no RSS feed), choose a personal feed title based on the user's Muse name — e.g. &quot;Today with Alex&quot;, &quot;News with Alex&quot;.</p>
+<h3>Add to your Spotify (personal, optional)</h3>
+<p>When the user explicitly asks to put a generated episode on their Spotify, use <code>podcast-helper save-to-spotify</code> to add it to the user's <strong>own</strong> Spotify account. This is a personal save to the user's own Spotify library/show — it is NOT the public/subscribable RSS feed publishing described above, and does not use <code>podcast-helper --publish</code>. Only do this on an explicit request; do not offer it proactively.</p>
+<p>Run the upload through <code>podcast-helper</code> (not the raw <code>save-to-spotify</code> CLI): the helper uploads via the bundled <code>save-to-spotify</code> CLI <strong>and</strong> records the resulting Spotify show link into the podcast catalog so it shows up on the library podcasts page. See <code>references/save-to-spotify.md</code> for the underlying CLI, the connect flow, and rules.</p>
+<ol>
+<li><strong>List shows / check connection:</strong> run <code>save-to-spotify --json shows</code> — it lists existing shows and</li>
+</ol>
+<p>confirms Spotify is connected. If it fails with a token / &quot;not connected&quot; error, tell the user to connect Spotify in <strong>Settings → Connections → Spotify</strong> (the shared Spotify connection), then retry. This tool has no <code>auth</code> subcommands or connect link. Ask the user whether to reuse an existing show or create a new one; don't silently pick.</p>
+<ol>
+<li><strong>Upload + record</strong> with <code>podcast-helper</code> (confirm title, target show, and summary with the user</li>
+</ol>
+<p>first — this writes to their account). The helper reads the audio/title/cover from the podcast catalog by slug; pass a cover only to override (must be JPEG/PNG ≤ 1 MB — convert <code>.webp</code>/other formats first): ``<code>sh podcast-helper save-to-spotify \ --slug {slug} \ [--show-id &lt;id&gt; | --new-show &quot;&lt;show title&gt;&quot;] \ [--title &quot;{title}&quot;] [--summary &quot;{description}&quot;] [--image {cover}] </code>`<code> Returns JSON with </code>episode_id<code>, </code>episode_uri<code>, </code>spotify_show_id<code>, and </code>spotify_show_url`.</p>
+<ol>
+<li><strong>Wait for readiness:</strong> <code>save-to-spotify --json episodes status &lt;episode-id&gt; --wait</code> (use the</li>
+</ol>
+<p><code>episode_id</code> from step 2). Processing is server-side and takes a few minutes; a returned <code>episode_uri</code> means it was accepted. If it stalls in <code>NOT_READY</code> (Spotify occasionally 503s), it's a Spotify-side delay — tell the user it's processing and retry later rather than polling indefinitely.</p>
+<ol>
+<li>Tell the user it's on their Spotify and may take a few minutes to appear in the app. Because the show</li>
+</ol>
+<p>link is now recorded, the Spotify option on the podcasts library page will link to their show. Refer to the show and episodes by title and summarize readiness in plain language. Spotify show IDs, episode IDs, and <code>spotify:show:</code> / <code>spotify:episode:</code> URIs are internal CLI handles: use them for subsequent commands, but never include them in a user-facing response.</p>
+<p>For deletion, use the raw <code>save-to-spotify</code> CLI, not <code>podcast-helper</code>, <code>spotify-api</code>, <code>podcasters.spotify.com</code>, or <code>creators.spotify.com</code>. Start with <code>save-to-spotify --json shows</code>, resolve the requested show by title, and inspect it with <code>shows get &lt;show-id&gt;</code>. Use <code>episodes --show-id &lt;show-id&gt;</code> followed by <code>episodes delete &lt;episode-id&gt;</code> to remove one episode. To remove the entire show, confirm that all its episodes will be deleted and run <code>shows delete &lt;show-id&gt;</code>; that command removes the episodes too. Treat <code>{&quot;status&quot;:&quot;deleted&quot;}</code> as accepted, then poll the relevant <code>shows</code> or <code>episodes --show-id</code> inventory for up to 60 seconds. Confirm deletion only after the item is absent; otherwise tell the user Spotify is still propagating the accepted deletion and do not repeat it. Deleting the Spotify copy does not delete local audio or an RSS feed. See <code>references/save-to-spotify.md</code> for the full command flow.</p>
+<h3>Cover Art</h3>
+<p>Cover art is handled automatically by <code>podcast-helper</code> during generation. You control it with two flags:</p>
+<ul>
+<li><strong><code>--cover-prompt</code></strong> — a short description of the episode theme (e.g. &quot;morning news briefing, sunrise and cityscape&quot;). podcast-helper shells out to <code>media-generation</code> to create a square icon-style image. Always provide this.</li>
+<li><strong><code>--series-id</code></strong> — groups episodes that share the same cover art. Use the cron job ID for recurring episodes. Without this, each episode gets unique art.</li>
+</ul>
+<p><strong>How artwork flows:</strong></p>
+<div class="tbl"><table><thead><tr><th>Scenario</th><th>Behavior</th></tr></thead><tbody>
+<tr><td>One-off episode</td><td>Unique cover generated per episode from <code>--cover-prompt</code></td></tr>
+<tr><td>Recurring/cron episode</td><td>First episode generates cover; subsequent episodes with same <code>--series-id</code> reuse it</td></tr>
+<tr><td>Published episode</td><td>A new show cover replaces that feed's episode covers; a series show, or an episode changed with <code>update-cover</code>, keeps the show's cover</td></tr>
+</tbody></table></div>
+<p><strong>Fallback</strong> when no <code>--cover-prompt</code> is provided: the bundled default cover (<code>/opt/hatch/skills/generate_podcast/default-cover.jpg</code>). The user's avatar is also tried first, but an avatar cover cannot currently be published — one more reason to always pass <code>--cover-prompt</code> on an episode headed for a feed.</p>
+<p>You do NOT need to call <code>media.generate_image</code> yourself for cover art — <code>podcast-helper</code> handles it internally.</p>
+<p><code>--cover-image</code> is not available right now: publishing takes only generated cover art or the bundled default. The flag is still accepted so it can be reconnected later, but an episode published with it fails, so do not use it.</p>
+<h4>Changing the cover</h4>
+<p>When the user asks to change an episode's cover — a new prompt, a variation, or an image they hand you — regenerate through the helper so the catalog reference moves to a new file:</p>
+<pre><code>podcast-helper update-cover \
+  --slug {slug} \
+  --cover-prompt &quot;starry night sky over a mountain lake&quot;</code></pre>
+<p>This generates new artwork to a fresh path, updates the episode's <code>cover</code> reference to it, and prints the new path as <code>cover</code>. Present that new path in chat.</p>
+<p>Hard rules:</p>
+<ul>
+<li><strong>Never overwrite the current cover file.</strong> Do not <code>cp</code>, move, or rename a new image over the old cover path, do not call <code>media.generate_image</code> for covers, and do not present the old path again after changing its bytes. Already-delivered previews and library rows reference the old file by path, and clients cache by path — rewriting its bytes silently changes what was already shown (or shows stale art), which is the failure this flow exists to prevent.</li>
+<li><strong>A user-supplied image is a prompt, not a file.</strong> Describe it in <code>--cover-prompt</code> and generate (the same rule as <code>--cover-image</code> at generation time); publishing still takes only generated art.</li>
+<li><strong>Series episodes diverge.</strong> <code>update-cover</code> changes only that episode in the local catalog; the show cover, the other episodes, and future <code>--series-id</code> generations keep the shared series cover. Publishing the edited episode keeps the show's cover too, and the public feed shows that cover (a feed has one cover).</li>
+<li><strong>Published feeds keep the previous art, and publish refuses repeats.</strong> <code>podcast-helper publish</code> refuses an already-published episode, because publishing appends a NEW episode entry (duplicating the episode in every subscriber's feed) while the catalog row forgets the original. So there is no publish path that pushes a cover change: a cover-only refresh does not exist yet, and cover edits on published shows stay local to the catalog and chat.</li>
+</ul>
+<h3>Scheduling</h3>
+<p>When a user asks for a recurring podcast, audio briefing, or scheduled audio content:</p>
+<ol>
+<li><strong>Generate a first episode now</strong> — don't just set up the cron and leave them with nothing to listen to. Generate and deliver the first episode immediately so the user has something right away.</li>
+<li><strong>Ask about publishing</strong> — offer to publish to a podcast feed so they can subscribe and listen in their preferred podcast app. If they agree, publish the first episode and present subscription links.</li>
+<li><strong>Then create the cron job</strong> — set up the recurring schedule.</li>
+</ol>
+<p>For recurring podcasts, create a cron job using the <code>cron</code> tool. <strong>Always set <code>timeout_secs: 1800</code></strong>.</p>
+<p>Example <code>cron</code> tool call:</p>
+<pre><code>{
+  &quot;action&quot;: &quot;add&quot;,
+  &quot;file_name&quot;: &quot;daily-podcast__daily@13:00:00.md&quot;,
+  &quot;id&quot;: &quot;daily-podcast&quot;,
+  &quot;enabled&quot;: true,
+  &quot;mode&quot;: &quot;task&quot;,
+  &quot;timeout_secs&quot;: 1800,
+  &quot;schedule&quot;: {
+    &quot;kind&quot;: &quot;daily&quot;,
+    &quot;timezone&quot;: &quot;UTC&quot;,
+    &quot;time&quot;: &quot;13:00:00&quot;
+  },
+  &quot;body&quot;: &quot;Generate a new podcast episode on &lt;topic&gt;. Follow the generate_podcast skill workflow. Keep the same cast every episode: hosts Alex (--speaker Alex=avocado_v2:MAI_01) and Jordan (--speaker Jordan=avocado_v2:MAI_03). Use --series-id daily-podcast and --cover-prompt '&lt;topic description&gt;' when calling podcast-helper generate. Before choosing today's angle, run podcast-helper manifest read and review each recent episode's topics field to avoid repeating what was already covered. Write a short topics summary to /tmp/topics.md and pass it with --topics-file so future episodes can dedup against it. Publish to the feed after generating.&quot;
+}</code></pre>
+<p>Keep cron task descriptions concrete — include the topic angle, the fixed cast (host names and their voice ids, so every episode uses the same hosts and voices), <code>--series-id</code> matching the cron ID, and explicit instructions to research live results at generation time.</p>
+<h3>Utility Commands</h3>
+<p>For edge cases and manual operations, <code>podcast-helper</code> exposes sub-commands:</p>
+<ul>
+<li><code>podcast-helper manifest read</code> — print the current podcast catalog</li>
+<li><code>podcast-helper manifest add-episode --slug ... --title ... --duration-secs ... --path ... --chunk-count ...</code> — add episode</li>
+<li><code>podcast-helper manifest update-episode --slug ... [--episode-url ...] [--feed-url ...]</code> — update episode</li>
+<li><code>podcast-helper update-cover --slug ... --cover-prompt ...</code> — replace an episode's cover with newly generated art (updates the reference; never overwrites the old file)</li>
+<li><code>podcast-helper generate-slug --title &quot;...&quot;</code> — generate a kebab-case slug with today's date</li>
+</ul>
+<h3>Listening to Existing Episodes</h3>
+<p>If the user asks to listen to a podcast, hear their podcast, or asks about their episodes, read the podcast catalog with <code>podcast-helper manifest read</code> and present listen links for the relevant episodes:</p>
+<p><code><a href="sandbox://workspace/podcasts/{slug}/{slug}.mp3">{title}</a></code></p>
+<p>If the feed is published, also include the subscription links (see section 6 format).</p>
+<h3>Operating Rules</h3>
+<ol>
+<li>Use voices from <code>/opt/hatch/skills/voice-selector/voice_source.json</code>, referenced by their catalog <code>id</code>. Default to the Meta AI voices (catalog ids <code>MAI_01</code> and <code>MAI_03</code>) most of the time, but pick another catalog voice when the topic, tone, or user request steers that way. Never say &quot;MAI&quot; to the user — call them the Meta AI voices or use display names.</li>
+<li>If a chunk fails, <code>tts synthesize-script</code> stops — do not deliver a partial episode. Most failures are transient backend issues: <strong>retry the same generation later</strong> on a bounded backoff (~5m, ~10m, ~30m, ~1h), keeping the <strong>same speaker voices</strong>. Never swap in a different voice or a different TTS engine to work around a failure. Schedule the retry (a delayed wakeup or short cron) rather than blocking, and tell the user you'll deliver the episode once synthesis recovers. <strong>If it still fails after the ~1h retry, stop</strong> — cancel the scheduled retry, report the error, and suggest they try again later. (A <code>... not allowed to use voiceID ...</code> error won't clear on retry — that voice id isn't permitted for this client; pick another from <code>voice_source.json</code> and regenerate. Auth or clear request errors likewise need a fix, not a retry.)</li>
+<li>On first episode in a new feed, help the user subscribe. On subsequent episodes, skip.</li>
+<li><strong>Cron runs:</strong> Follow whatever the cron task description says. If it says to publish, publish without confirmation.</li>
+<li><strong>Never</strong> present a published <code>https://</code> feed or episode URL as a bare or clickable link — always as copyable code (wrapped in backticks). Only <code>sandbox://</code> listen links and podcast-app protocol links (<code>podcast://</code>, <code>overcast://</code>, <code>pktc://</code>) may be clickable.</li>
+</ol>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wearables_comms — Agent Skills — Makers on Muse</title>
+<meta name="description" content="&gt;-">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/wearables-comms">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/wearables-comms">
+<meta property="og:title" content="wearables_comms">
+<meta property="og:description" content="&gt;-">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="wearables_comms">
+<meta name="twitter:description" content="&gt;-">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; General &middot; Bundled</p>
+      <h1>wearables_comms</h1>
+      <p class="lede">&gt;-</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Wearables Calls and Messages</h2>
+<h3>Purpose</h3>
+<p>Handle call and text-message requests that originate on a wearable. Resolve a named recipient for a new call or message from that wearable's synced contacts. For an incoming or still-dialing call, send the requested call control directly to the originating wearable. Do not silently hand an action to a paired phone.</p>
+<p>An ordinary request such as “call Alice” means a native call where the user speaks. This workflow does not cover a request for the assistant to conduct the conversation itself.</p>
+<h3>Emergency calls</h3>
+<p>If the user asks to call the 911 emergency line, including “nine one one” or a formatted variant, do not search contacts or invoke any call command. Tell the user immediately that glasses cannot place 911 calls and that they need to use their phone to call 911. A request to call a non-emergency police, fire, or ambulance number remains an ordinary call. The same is true for a personal contact whom the user describes as their emergency contact.</p>
+<p>If any call attempt returns <code>emergency-unsupported</code>, treat that result as terminal even when the request did not match the rule above or contact lookup resolved a name to 911. Report the restriction immediately. Do not perform another lookup or retry through another advertised calling command or device.</p>
+<h3>Supported routes</h3>
+<p>Calling is native only. A request to call someone through an app, such as WhatsApp, Messenger, or Instagram, is unsupported. Do not invoke a call command to satisfy it, and do not offer a native call in its place. Reply only with a brief refusal meaning &quot;I can't do that at the moment.&quot; in the caller's supported language, and nothing else. This rule is about the requested route, not about calling: an ordinary &quot;call Alice&quot; is a native call and follows the normal workflow below.</p>
+<p>Messaging defaults to native SMS whenever the user names no provider. A WhatsApp, Messenger, or Instagram Direct message is a connector route rather than a wearable command, so it never appears among the device's commands; follow that provider's own skill instead. If the provider reports that it is not connected, stop there: do not start a connection flow, do not silently substitute SMS, and do not offer another route. Reply with the same brief refusal. For a message through any other named app, follow that app's own skill the same way and let its result decide. Do not refuse it before checking, and do not substitute SMS for it.</p>
+<p>Answering whether a route is available is not the same as performing it. When the user asks what this device can do, or whether an app or account is connected, answer that question normally instead of refusing.</p>
+<h3>Default workflow: use the current wearable</h3>
+<p>For every native call or message action in this skill, use the originating glasses' device id from the <strong>current</strong> user turn's <code>[device_id=...]</code> tag. This tag is already the exact paired-device id. Do not call <code>device.list</code> or <code>device.describe</code> before the call, message, or call-control command: the documented command ids and argument shapes below are the default, and <code>device.invoke</code> validates them against the device's current advertisement before dispatch.</p>
+<p>Keep that same device id for the initial stored-contact lookup and the final action. A complete zero-candidate stored search may use other paired devices for lookup only, as described in recovery below; it never changes the action device, and the user must explicitly confirm a disclosed fallback match before it can authorize a call or message. Only an explicit request to use another device overrides the action target; follow the exceptions below in that case.</p>
+<h3>Answer, decline, or cancel a call immediately</h3>
+<p>For a direct request to answer or pick up an incoming call, use the <code>answer</code> action. For a request to reject an incoming call or send it to voicemail, use <code>decline</code>. For a request to stop an outgoing call that is still dialing, use <code>cancel</code>. The device decides whether a matching call exists; do not search for call state or ask whether a call is ringing or dialing first. An attempted control on a device without such a call is harmless.</p>
+<p>These are not controls for an already connected phone call or for this voice conversation. Do not interpret &quot;hang up&quot;, &quot;end the call&quot;, a conversational sign-off, or an unrelated &quot;cancel&quot; as an outgoing-call cancellation. A brief &quot;never mind&quot; means cancel the outgoing call only when the immediately preceding context makes that intent clear. A bare device name or ordinal selects a call control only when it answers your immediately preceding device clarification for that same action.</p>
+<p>Immediately call <code>device.invoke</code> once on the selected device with command <code>wearables.comms.resolve.call</code> and <code>params_json</code> containing just the selected <code>action</code> (<code>answer</code>, <code>decline</code>, or <code>cancel</code>). Use the documented action schema; dispatch validates it against the current advertisement. Skip contact lookup and other discovery. Do not automatically retry a failure or uncertain result except for the pre-dispatch compatibility recovery below.</p>
+<h3>Resolve a recipient</h3>
+<p>Skip contact lookup when the user supplied a complete phone number. Otherwise, search the stored contacts first, even when the wearable is online:</p>
+<pre><code>device-data contacts search --match-mode ranked --device &lt;selected_device_id&gt; \
+  --query &lt;contact_name&gt;</code></pre>
+<p>Pass <code>--phone-label &lt;label&gt;</code> when the user requested a mobile, home, work, or other saved number, and <code>--locale &lt;bcp-47&gt;</code> when the caller's locale is known. Ranked results are candidates, not authorization to act. Inspect the complete result, including <code>selection_evidence</code>, every candidate's <code>match</code>, and every candidate's <code>phone_selection</code>, before invoking a command.</p>
+<ul>
+<li>Treat <code>exact_full</code>, <code>exact_tokens</code>, <code>nickname</code>, and <code>phonetic</code> candidates as</li>
+</ul>
+<p>plausible interpretations of a spoken name. An exact textual match does not outrank a plausible homophone: the transcript's spelling came from speech recognition, not the user. When <code>requires_spoken_name_clarification</code> is true, ask a short clarification before invoking. Use each collision entry's <code>spoken_spelling</code> when pronunciation alone cannot distinguish the names. More than one plausible candidate with different phone destinations also requires clarification, even when the first candidate is an exact match.</p>
+<ul>
+<li>Resolve a phone line separately after resolving the person. If</li>
+</ul>
+<p><code>requires_phone_clarification</code> is true, ask which saved line to use unless the user explicitly selected one of the numbered line options you presented. If <code>requested_label_match_count</code> is zero, say that no saved number has the requested label. If <code>distinct_usable_phone_count</code> is zero, ask the user for a number. Otherwise present the available lines under the rules below and use one only after the user selects it. When only one line remains, an explicit confirmation selects it. Never choose the first or preferred-order number. Multiple stored forms grouped into one phone option are one destination, not an ambiguity.</p>
+<ul>
+<li>Do not invoke a call or message from an incomplete search, a weak or</li>
+</ul>
+<p>unresolved name match, or an unresolved phone choice.</p>
+<h3>Ask for clarification</h3>
+<p>When there are at most five selectable contact and phone-line combinations, give one numbered option for each, keeping ranked contact order and the returned phone-option order. Include the contact name, its <code>spoken_spelling</code> when it has a spoken-name collision, and a concise phone label when the contact has multiple lines. If labels are missing or repeated, add the option's <code>spoken_suffix</code> so every spoken choice remains distinguishable. Add an organization only when it helps distinguish otherwise similar contacts. Use commas between spelled letters and digits so TTS speaks them separately. For example:</p>
+<p>“1, Sean, spelled S, E, A, N, mobile. 2, Shawn, spelled S, H, A, W, N, work. Which one should I call?”</p>
+<p>When presenting numbered options, end with a question that matches the requested action: “Which one should I call?” for a call or “Which one should I message?” for a message. Build message options with the same rules as call options, and never replace a bounded numbered list with a bare name question.</p>
+<p>When more than five combinations remain, or the search is incomplete, do not read a partial list. Ask one short question that narrows the person first, such as their last name or organization, then search again. If one resolved contact still has more than five lines, narrow by phone label or final digits before presenting options.</p>
+<p>Only after you actually presented the complete numbered list may an ordinal on the next turn select its corresponding option. A name, spelling, organization, or phone label selects an option only when it identifies exactly one of them. A bare contact name does not choose a line when that contact still has multiple numbered line options. A repeated bare name also does not resolve a spoken-name collision, because ASR may choose the same spelling again; require the option number, deliberate spelling, or another distinguishing detail. Do not reorder the presented options while interpreting the answer.</p>
+<p>If the stored search does not resolve exactly one recipient and line, do not invoke the call or message command. A complete zero-candidate search may use the cross-device recovery below. Otherwise follow the clarification rules.</p>
+<h3>Place a call</h3>
+<p>Call <code>device.invoke</code> on the selected wearable with command <code>wearables.comms.provider.call</code>. Set <code>params_json.phone_number</code> to the supplied or resolved number and <code>params_json.provider</code> to <code>phone</code>. Always set <code>params_json.contact_name</code> too: use the resolved contact name when available, or the supplied phone number otherwise. Do not call <code>device.describe</code> first. Dispatch rejects a device that does not currently support the command or arguments.</p>
+<h3>Send a message</h3>
+<p>This is the native SMS route, the default whenever the user names no provider. A message the user asked to send through WhatsApp, Messenger, or Instagram Direct follows <em>Supported routes</em> above instead.</p>
+<p>Require both a resolved recipient and the message text. Select the native SMS command by calling <code>device.invoke</code> on the selected wearable with command <code>wearables.comms.native.sms</code>. Set <code>params_json.phone_number</code> to the supplied or resolved number and <code>params_json.message</code> to the user's text; include <code>params_json.contact_name</code> when a named contact was resolved. Do not call <code>device.describe</code> first. Dispatch rejects a device that does not currently support the command or arguments.</p>
+<p>Apply the recipient and phone-line resolution and clarification rules above before sending; a supplied message body is not evidence for choosing a recipient. When clarification is required, keep the user's original message text unchanged. Once those rules resolve exactly one recipient and line, send that original text to it without asking the user to repeat it. Do not send to any candidate before then.</p>
+<p>Do not substitute a draft or send command from a paired phone. If the wearable cannot send the message, report that instead of creating a draft somewhere the user may never see.</p>
+<h3>Recovery and explicit device overrides</h3>
+<h4>The user selected another device</h4>
+<p>Call <code>device.list</code> to map the user's description to the intended device. If more than one device fits, ask which one they mean. For answer, decline, or cancel, invoke the fixed call-control command on the selected device without calling <code>device.describe</code>. For a new call or message, call <code>device.describe</code> on the selected device, then use its advertised call or SMS command and schema instead of the fixed wearable commands above.</p>
+<h4>The current turn has no device id</h4>
+<p>When the user named no device and the current turn has no trustworthy device id, call <code>device.list</code> only to find the one <code>is_request_origin: true</code> device. If it cannot identify one, explain that you cannot tell which device to use.</p>
+<h4>Stored contacts returned no candidates</h4>
+<p>Do not use another device to settle a weak, ambiguous, incomplete, or numberless result from the selected device. Search other devices only when the selected device's stored search is complete and its <code>count</code> is zero. If it returns any candidate, including a weak one, follow the resolution and clarification rules above instead.</p>
+<p>After a complete zero-candidate result, call <code>device.list</code> and search the stored contacts on every other paired device:</p>
+<pre><code>device-data contacts search --match-mode ranked --device &lt;fallback_device_id&gt; \
+  --query &lt;contact_name&gt;</code></pre>
+<p>Finish every fallback-device search before choosing, and treat all results as one candidate set under the resolution and clarification rules above. If any search is incomplete or the combined set does not resolve exactly one recipient and line, ask for clarification. Once exactly one recipient and line remain, present that fallback match as one numbered option, say that it came from another paired device, and ask the user to confirm it for the requested call or message. Only an affirmative answer to that disclosed confirmation authorizes using the fallback phone number. Then invoke the selected wearable. Never invoke a fallback device.</p>
+<p>Only when every stored search is complete and each has <code>count</code> zero, inspect the selected device's description, reusing it if an explicit device override already required one. If it advertises <code>contacts.search</code>, invoke that command on the selected device with its advertised schema. This live lookup is the one exception to the default workflow. Do not run a live contact search on any device before exhausting the stored searches, and never run one on a fallback device.</p>
+<h4>Contacts haven't synced</h4>
+<p>Apply this step when the selected device's search reports <code>contacts_never_synced: true</code> and every stored and live search above still found no recipient. The flag means no contacts are stored for that device: none have synced since it paired or since the user deleted Muse's stored contacts. It does not show whether the user skipped setup, so never say they did. The setup steps to check are: in the Meta AI app, open Settings, then Apps, Communicate hands-free, then Phone, and make sure it is connected with every permission it asks for, including contacts. When <code>contacts_platform</code> is <code>ios</code>, also open iPhone Settings, Bluetooth, tap the glasses, and make sure Sync Contacts and Show Notifications are on.</p>
+<p>If there was no fallback device, or every fallback search also reported <code>contacts_never_synced: true</code>, no contacts are stored on the user's devices, so the name can't be looked up. Do not say the contact was not found or ask the user to spell it differently. Tell the user their phone contacts haven't synced yet and give the setup steps to check.</p>
+<p>If a fallback device without <code>contacts_never_synced</code> was searched, the name may be misheard or absent. Say it wasn't found on their other devices, ask whether it could be spelled differently, then briefly give the setup steps so the glasses can use their contacts directly.</p>
+<p>Keep the reply brief and spoken-friendly, and do not invoke a call or message.</p>
+<h4>The advertised command or schema changed</h4>
+<p>If the documented call, message, or call-control invocation returns <code>node_command_unsupported</code> or <code>invalid_command_params</code>, it was rejected before dispatch. Call <code>device.describe</code> once on the same selected device and inspect its current commands and schemas. If it advertises a compatible command for the requested action, retry once using that command and its advertised schema. Ask for any newly required user input rather than inventing it. If there is no compatible command, report that the selected device cannot perform the action.</p>
+<p>Do not use this recovery for a timeout, interruption, transport error, or any other failed or uncertain result: the action may already have happened. Do not switch devices during recovery.</p>
+<p>Never silently switch to a paired phone or another wearable because the selected device is unavailable or rejects the command.</p>
+<h3>Report the result</h3>
+<ul>
+<li>Report success only when <code>device.invoke</code> reports success.</li>
+<li>For call controls, inspect the device's result too: an inner <code>ok: false</code> or</li>
+</ul>
+<p>error is a failure even if the outer tool call succeeded. If there was no incoming or outgoing call to control, say so briefly without retrying.</p>
+<ul>
+<li>Relay a useful device-provided failure explanation without exposing internal</li>
+</ul>
+<p>command names or private contact details.</p>
+<ul>
+<li>Do not blindly retry a timed-out, interrupted, or uncertain call, send, or</li>
+</ul>
+<p>call control; the action may already have happened.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

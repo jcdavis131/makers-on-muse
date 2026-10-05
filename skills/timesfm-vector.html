@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>timesfm-vector — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Integrate TimesFM-3 multivariate time-series foundation model for forecasting and train new models for vector embedding games. Triggers on timesfm, time series forecasting, multivariate forecast, vector games forecasting.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/timesfm-vector">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/timesfm-vector">
+<meta property="og:title" content="timesfm-vector">
+<meta property="og:description" content="Integrate TimesFM-3 multivariate time-series foundation model for forecasting and train new models for vector embedding games. Triggers on timesfm, time series forecasting, multivariate forecast, vector games forecasting.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="timesfm-vector">
+<meta name="twitter:description" content="Integrate TimesFM-3 multivariate time-series foundation model for forecasting and train new models for vector embedding games. Triggers on timesfm, time series forecasting, multivariate forecast, vector games forecasting.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Data &middot; Custom</p>
+      <h1>timesfm-vector</h1>
+      <p class="lede">Integrate TimesFM-3 multivariate time-series foundation model for forecasting and train new models for vector embedding games. Triggers on timesfm, time series forecasting, multivariate forecast, vector games forecasting.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>TimesFM Vector</h2>
+<h3>Purpose</h3>
+<p>Use Google TimesFM-3 (330M, multivariate, zero-shot) in our projects, fine-tune new models on our data, and ship forecasts into vector embedding games (hoops etc). Handles license gating and zero-deps fallbacks.</p>
+<h3>Tooling</h3>
+<ul>
+<li><code>timesfm[torch]</code> pip package or <code>timesfm3</code> module from github.com/google-research/timesfm</li>
+<li>HuggingFace checkpoints: <code>google/timesfm-3.0-pytorch</code> (non-commercial), <code>google/timesfm-2.5-200m-pytorch</code> (Apache-2.0)</li>
+<li>Python: torch, numpy</li>
+<li>Local cache: <code>~/workspace/models/timesfm/</code></li>
+</ul>
+<h3>Auth</h3>
+<p>No auth needed for open weights. For BigQuery ML integration later, use gcloud auth.</p>
+<h3>Workflow</h3>
+<ol>
+<li><strong>License check</strong>: TimesFM-3.0 weights = non-commercial-license-v1.0 only. For any production/commercial game, use 2.5 (Apache-2.0) or train own. Flag this in every ship.</li>
+<li><strong>Zero-shot spike</strong> (today):</li>
+</ol>
+<p>``<code>python from timesfm3 import TimesFM3Evaluator, ModelConfig config = ModelConfig(checkpoint_path=&quot;google/timesfm-3.0-pytorch&quot;, per_core_batch_size=16, device=&quot;cuda&quot;) forecaster = TimesFM3Evaluator(config) # contexts: np array (num_variates, context_len) e.g. player embedding dims over time # past_future_covariates: (num_cov, context+hor) e.g. schedule, rest days, holidays outputs = list(forecaster.predict_batch([target], horizon=24, past_only_covariates=[...], past_future_covariates=[...], return_quantiles=True)) </code>``</p>
+<ol>
+<li><strong>Train new</strong>: fine-tune TimesFM-2.5 via HF Transformers + PEFT LoRA (see <code>timesfm-forecasting/examples/finetuning/</code>), or train lightweight patch-transformer inspired by TimesFM-3 architecture (patch 32, alternating temporal/variate attention, Contiguous Patch Masking single-pass).</li>
+<li><strong>Vector game mapping</strong>:</li>
+</ol>
+<ul>
+<li>Hoops: forecast embedding coords of players over season, team vol+3p, daily court 5x past-&gt;modern with covariates (injury report, b2b, opponent strength)</li>
+<li>Generic: forecast cluster movement in embedding maps, similarity decay</li>
+<li>Quantiles (0.1-0.9) -&gt; game uncertainty bands, betting edges local-first</li>
+</ul>
+<ol>
+<li><strong>Ship</strong>: export point+quantile forecasts to <code>~/workspace/goals/mlops-factory-train-check-ship/</code> format, verify offline, 40px mono nav, verifier ≥8.0</li>
+</ol>
+<h3>Operating Rules</h3>
+<ul>
+<li>Always surface license warning before prod ship.</li>
+<li>Prefer 2.5 for prod until we have commercial 3.0 or our own weights.</li>
+<li>Zero-deps first: if torch not available, use stdlib patch-tokenizer + stub forecast that returns honest 503, never fake data.</li>
+<li>All pipelines full-scale real data only, no synthetic.</li>
+<li>Log triple-write timeline 7-field on train/check/ship.</li>
+<li>Keep taste: map-first 58/42, 72vh sticky, modular IIFEs.</li>
+</ul>
+<h3>Quick Preview to Build</h3>
+<p>Before any heavy install, show user:</p>
+<ul>
+<li>Which game first (hoops recommended)</li>
+<li>Which data slice (player embedding trajectory vs team stats)</li>
+<li>Which model tier (2.5 prod vs 3.0 research spike)</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

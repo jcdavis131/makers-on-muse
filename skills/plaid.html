@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>plaid — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use to connect Plaid and read linked financial accounts: metadata, balances, transactions, recurring transactions, liabilities, and investments.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/plaid">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/plaid">
+<meta property="og:title" content="plaid">
+<meta property="og:description" content="Use to connect Plaid and read linked financial accounts: metadata, balances, transactions, recurring transactions, liabilities, and investments.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="plaid">
+<meta name="twitter:description" content="Use to connect Plaid and read linked financial accounts: metadata, balances, transactions, recurring transactions, liabilities, and investments.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Money &middot; Bundled</p>
+      <h1>plaid</h1>
+      <p class="lede">Use to connect Plaid and read linked financial accounts: metadata, balances, transactions, recurring transactions, liabilities, and investments.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Plaid</h2>
+<p>Everything runs as <code>plaid &lt;command&gt;</code> and returns JSON for you to read, not to show the user. Add <code>--help</code> to any command to see its options.</p>
+<p>Reads cover every linked institution at once. To narrow to one bank, pass <code>--credential-id &lt;id&gt;</code>, taking the id from <code>body.institutions[]</code> in an earlier read. Some reads also take <code>--account-id &lt;id&gt;</code> (repeatable) to narrow to specific accounts; when more than one institution is linked, pair it with <code>--credential-id</code> so the account ids resolve to the right bank.</p>
+<h3>Connecting</h3>
+<p>Plaid needs a one-time connect before any read returns data. Run <code>plaid status</code>. If it comes back not connected, post the exact <code>connect_url</code> it returns as <code><a href="&lt;connect_url&gt;">Connect Plaid</a></code> and wait for the user to finish linking, then run <code>plaid status</code> again before reading. Don't invent a URL, send the user to Settings, or ask for bank credentials.</p>
+<p>If the user asks to add or link another bank or institution, run <code>plaid status</code> and post the exact <code>add_account_url</code> it returns as <code><a href="&lt;add_account_url&gt;">Add financial account</a></code>. Never reuse <code>connect_url</code> for an additional institution. If <code>add_account_url</code> is absent, say that adding another institution is unavailable.</p>
+<p>To disconnect every institution linked through Plaid, run <code>plaid disconnect</code>. If it returns a <code>disconnect_url</code>, post it as <code><a href="&lt;disconnect_url&gt;">Disconnect Plaid</a></code> and wait for the user to confirm through that link; never claim disconnection before they confirm. If it has no URL, say Plaid is already disconnected. A bank-specific unlink is not available from chat: if the user asks to remove only one institution, direct them to that institution's account row in Settings instead of running the whole-Plaid disconnect. Don't set up a background check, goal, or reminder to monitor disconnection.</p>
+<h3>Common flows</h3>
+<h4>Accounts and balances</h4>
+<p>List the linked accounts with <code>plaid accounts</code> — names, types, masked numbers, and each account's balances (<code>balances</code> carries <code>available</code>/<code>current</code>/<code>limit</code>). Start here to see what's linked and to answer &quot;how much is in my checking,&quot; &quot;what's my total across accounts,&quot; or net-worth questions. There is no separate balances command; <code>plaid accounts</code> is the balance read. Balances are Plaid's last reported figures, not live.</p>
+<h4>Spending and transactions</h4>
+<p>Use <code>plaid transactions-get --start-date YYYY-MM-DD --end-date YYYY-MM-DD</code> as the default for reading transaction history. Dates are inclusive; posted transactions use posting dates. A successful read returns all available transactions in the requested date range; no manual pagination is needed.</p>
+<p>Results are returned directly as JSON. If the JSON response is too large to return inline, it is written to the file named by <code>output_file</code>. Transactions are in <code>body.transactions</code>; match <code>body.accounts</code> using <code>_plaid_source.credential_id</code> and <code>account_id</code>. Failed reads can contain partial results: when <code>ok</code> is false, use <code>body.institutions</code> to explain missing coverage.</p>
+<p>Positive amounts are outflows; negative amounts are inflows, including refunds.</p>
+<p>Merchant names vary. Before saying a charge isn't there, try alternate merchant names, also search by amount and date, and include pending rows.</p>
+<h4>Incremental transaction state</h4>
+<p>Use <code>plaid transactions-sync</code> only for workflows that maintain a persistent transaction store and cursor, such as a user-built spending dashboard with a database that updates daily. Apply additions, modifications, and removals to the store and save the returned cursor. For scheduled time-range reports without a persistent store, use <code>transactions-get</code>.</p>
+<p>Continue pages with <code>--cursor-map-json &lt;body.next_cursors&gt;</code>, or <code>--cursor &lt;next_cursor&gt;</code> for one institution. Do not use <code>--days-requested</code> to select a date range; it does not filter returned transactions. Use <code>transactions-get</code> with explicit dates to select a time range.</p>
+<h4>Recurring bills and subscriptions</h4>
+<p><code>plaid transactions-recurring</code> returns recurring money in (<code>body.inflow_streams</code>, e.g. paychecks) and out (<code>body.outflow_streams</code>, e.g. subscriptions and regular bills). Use it for &quot;what am I subscribed to&quot; or &quot;what are my monthly bills.&quot; <code>is_active</code> indicates whether Plaid considers the recurring payment pattern ongoing. Keep it and <code>last_date</code> when parsing streams, and exclude inactive streams from current-bill totals. <code>average_amount</code> can include one-off payments, so check recent charges with <code>transactions-get</code> before quoting a monthly cost.</p>
+<h4>Loans and credit</h4>
+<p><code>plaid liabilities</code> returns credit-card, student-loan, and mortgage details — balances, rates, minimum payments, and due dates — under <code>body.liabilities</code>. Use it for what's owed or when a payment is due. A card's <code>last_statement_balance</code> is the amount billed on <code>last_statement_issue_date</code>. Payments made before that date are already accounted for in the bill. Payments posted afterward reduce the amount still unpaid. If the statement balance is null, say the statement amount is unavailable. Only say a card costs interest if its transactions show interest charges or the user says so.</p>
+<h4>Investments</h4>
+<p>Before reading holdings, glance at <code>plaid accounts</code> for an account of <code>type</code> <code>investment</code> (a brokerage/retirement account). If none is linked, skip the read — it would only return empty while still prompting the user to approve it — and tell the user their linked accounts don't include a brokerage. Otherwise <code>plaid investments-holdings</code> returns current positions, holdings, and securities. Holdings are priced as of <code>institution_price_as_of</code>. For buy/sell/dividend activity, use <code>plaid investments-transactions --start-date YYYY-MM-DD --end-date YYYY-MM-DD</code>; page it with <code>--offset</code>/<code>--count</code> (default 100, max 500) until the fetched count reaches <code>body.total_investment_transactions</code>.</p>
+<h3>Rules</h3>
+<ul>
+<li>Everything you say to the user is plain English. The commands, flags, cursors, and JSON output are for you, not the user. Keep them out of your replies: no command or flag (<code>plaid</code>, <code>transactions-sync</code>, <code>--credential-id</code>), no field name (<code>next_cursors</code>, <code>inflow_streams</code>, <code>total_investment_transactions</code>), no raw JSON, and no <code>credential_id</code>, account id, or cursor. Name the account in words (&quot;your Chase checking&quot;); you may add the masked last digits (&quot;…4471&quot;) only to tell two similar accounts apart, but never an internal id. When you give a figure, say which accounts and what time range it covers so it matches what the user sees at their bank.</li>
+<li>Never print or repeat secrets, tokens, or full account or routing numbers. Plaid only exposes masked numbers (last few digits); share at most the mask, and never a reconstructed full number.</li>
+<li>This is read-only reference, not financial advice. Report what the data shows; don't tell the user to buy, sell, refinance, or move money, and don't guarantee outcomes.</li>
+<li>Plaid data may lag behind what the bank currently shows. If a balance or a recent charge looks stale or missing, say the data may not be fully up to date rather than asserting it's wrong or complete.</li>
+<li>If a read returns nothing for an account or institution, say so plainly instead of inventing balances, transactions, or holdings.</li>
+<li>Transaction reads preserve Plaid's raw dates. Sync, recurring, and investment reads also add <code>transaction_posted_at</code> / <code>transaction_authorized_at</code> for true instants in UTC and the user's timezone. Keep date-only fields as dates.</li>
+</ul>
+<h3>Limits</h3>
+<ul>
+<li>Read-only. You can't move money, pay a bill, transfer funds, open or close accounts, or change anything at the bank. For those, tell the user to use their bank directly.</li>
+<li>Muse never sees full account or routing numbers, only masked digits, so you can't supply them for wire transfers or direct-deposit setup.</li>
+<li>Coverage depends on what the user linked and what each bank shares through Plaid. A missing account type (say, a loan the bank doesn't expose through Plaid) isn't an error — tell the user it isn't available rather than treating it as zero.</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ticketmaster — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Search Ticketmaster events and seats with pricing. Returns Buy-now links to Ticketmaster checkout; it cannot complete a purchase itself.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/ticketmaster">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/ticketmaster">
+<meta property="og:title" content="ticketmaster">
+<meta property="og:description" content="Search Ticketmaster events and seats with pricing. Returns Buy-now links to Ticketmaster checkout; it cannot complete a purchase itself.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ticketmaster">
+<meta name="twitter:description" content="Search Ticketmaster events and seats with pricing. Returns Buy-now links to Ticketmaster checkout; it cannot complete a purchase itself.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Bundled</p>
+      <h1>ticketmaster</h1>
+      <p class="lede">Search Ticketmaster events and seats with pricing. Returns Buy-now links to Ticketmaster checkout; it cannot complete a purchase itself.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Ticketmaster</h2>
+<h3>Purpose</h3>
+<p>Search events and get smart Ticketmaster seat recommendations.</p>
+<p>For a user-facing event-ticket search or purchase, first read <code>/opt/hatch/skills/booking/SKILL.md</code>, <code>/opt/hatch/skills/booking/references/tickets.md</code>, and <code>/opt/hatch/skills/booking/references/presentation.md</code>. Those files define the routing, presentation, browser checkout, and commitment rules. Use this file for the Ticketmaster CLI contract. Do not call <code>seat-view-carousel</code>, create HTML, or use <code>widget.create</code> for a booking flow. Use the compact Markdown ticket table and optional verified Markdown images. Do not call <code>create_options</code> for ticket choices or checkout decisions.</p>
+<h3>Tooling</h3>
+<pre><code>ticketmaster &lt;subcommand&gt; [options]</code></pre>
+<h5>search-events</h5>
+<p>Search for events by keyword (required), location, and date range. Supports <code>--country-code</code> (default: US), <code>--page</code> (0-indexed), and <code>--sort</code> (e.g. <code>date,asc</code>, <code>relevance,desc</code>, <code>name,asc</code>). <code>--start-date</code> and <code>--end-date</code> accept ISO 8601 values; bare <code>YYYY-MM-DD</code> dates are normalized by the CLI.</p>
+<pre><code>ticketmaster search-events --keyword &quot;Taylor Swift&quot; --city &quot;Los Angeles&quot; --size 10
+ticketmaster search-events --keyword &quot;Lakers&quot; --start-date 2026-05-01 --end-date 2026-06-01 --state-code CA --sort date,asc</code></pre>
+<h5>event-details</h5>
+<p>Get full details for a specific event ID returned by <code>search-events</code>.</p>
+<pre><code>ticketmaster event-details --event-id vvG1IZ_AKnSEae</code></pre>
+<h5>top-picks</h5>
+<p>Get seat recommendations sorted by price or quality. Default <code>--selection Any</code> returns Standard + Resale + Platinum tickets. Use <code>--selection Standard</code> to exclude resale. Returns <code>venue_map_url</code> and per-pick <code>snapshot_image_url</code> when available. Preserve those URLs for verified Markdown links or images.</p>
+<pre><code>ticketmaster top-picks --event-id vvG1IZ_AKnSEae --quantity 2 --sort listprice
+ticketmaster top-picks --event-id vvG1IZ_AKnSEae --quantity 4 --sections &quot;MEZZ,ORCH&quot; --sort quality
+ticketmaster top-picks --event-id vvG1IZ_AKnSEae --quantity 2 --price-min 50 --price-max 150 --limit 10
+ticketmaster top-picks --event-id vvG1IZ_AKnSEae --quantity 2 --selection Standard --sort listprice
+ticketmaster top-picks --event-id vvG1IZ_AKnSEae --quantity 2 --areas &quot;10,11&quot; --ticket-type-id 000000000001</code></pre>
+<h5>seat-view-carousel</h5>
+<p>Generate a carousel HTML widget from top-picks JSON. Takes the full top-picks JSON output as <code>--input</code>. Outputs raw HTML to stdout.</p>
+<pre><code>ticketmaster seat-view-carousel --input '&lt;top-picks JSON&gt;' --title &quot;Lakers vs Thunder&quot; --subtitle &quot;Paycom Center · May 13 · 8:30 PM&quot;</code></pre>
+<h3>Output</h3>
+<p>Commands return JSON from Ticketmaster. Do not expect an <code>ok</code> wrapper around endpoint output.</p>
+<p>The CLI maps snake_case query params to Ticketmaster camelCase API params. The response body is the raw Ticketmaster payload unless this CLI adds explicit convenience fields for local rendering.</p>
+<p><strong>search-events</strong>: raw Ticketmaster Discovery search response. Events are in <code>_embedded.events[]</code>; pagination is in <code>page</code>. For each event, use <code>id</code> as the event ID for follow-up calls, <code>name</code> for the title, <code>url</code> for the public Ticketmaster page, <code>dates.start.localDate</code>, <code>dates.start.localTime</code>, and <code>dates.start.dateTime</code> for timing, <code>_embedded.venues[0]</code> for venue/city/state, and <code>priceRanges[]</code> when Ticketmaster includes search-level pricing. Each event may add <code>tmol_available</code>. When it is <code>false</code>, <code>url</code> and the <code>tmMarketPlace</code> outlet URL are omitted and <code>box_office_url</code> contains a sanitized venue link or <code>null</code>. An absent <code>tmol_available</code> means availability is unknown.</p>
+<p><strong>event-details</strong>: raw Ticketmaster Discovery event object. Read fields directly from the event: <code>id</code>, <code>name</code>, <code>url</code>, <code>dates.start.*</code>, <code>dates.timezone</code>, <code>dates.status.code</code>, <code>priceRanges[]</code>, <code>classifications[]</code>, <code>images[]</code>, <code>_embedded.venues[]</code>, <code>_embedded.attractions[]</code>, and <code>_links</code>.</p>
+<p>Timed event reads add <code>event_starts_at</code> / <code>event_ends_at</code> with canonical UTC and user-local forms, plus runtime-generated <code>retrieved_at</code>. Prefer the user-local form when answering; date-only event fields remain dates.</p>
+<p><strong>top-picks</strong>: raw Ticketmaster Top Picks response with CLI convenience fields added for carousel rendering when available.</p>
+<p>Top-picks contains <code>picks[]</code>, <code>_embedded.offer[]</code>, <code>eventDetails</code>, and <code>page</code>. Seat-level pricing lives in <code>_embedded.offer[]</code>, keyed by <code>offerId</code>; each pick references offers through <code>picks[].offers[]</code>. Use the first referenced matching offer as the primary displayed price. <code>_embedded.offer[].totalPrice</code> is the price <strong>per ticket</strong>, not the total for the requested quantity. Multiply it by the requested quantity and show that computed full-party amount as the primary price; label the per-ticket amount separately only when useful. Do not label one ticket's <code>totalPrice</code> as the pair or party total. If <code>eventDetails.allInclusivePricing</code> is true, say the displayed per-ticket price and computed party total include fees and show <code>eventDetails.listingsDisclaimer</code> when present. You may show <code>faceValue</code> only as additional context, not as the main price.</p>
+<p>Ticketmaster may return both camelCase and snake_case duplicates. Use this precedence when reading fields:</p>
+<ul>
+<li>Checkout URL: <code>pick.redirect_url || pick.redirectUrl</code></li>
+<li>Seat image: <code>pick.snapshot_image_url || pick.snapshotImageUrl || pick.snapshotURL</code></li>
+<li>Price: <code>pick.total_price || _embedded.offer[offerId].totalPrice</code></li>
+</ul>
+<p>The CLI may add these convenience fields for carousel rendering: <code>venue_map_url</code>, <code>snapshotURL</code>, <code>snapshot_image_url</code>, <code>redirect_url</code>, <code>total_price</code>, <code>face_value</code>, and <code>currency</code>.</p>
+<p>Each pick may include: <code>{ type, selection, section, row, seats, area, quality, descriptions, listingDetails, offers, snapshotImageUrl, redirectUrl }</code>.</p>
+<p><strong>seat-view-carousel</strong>: Legacy HTML output. Do not use it in a booking flow. Images are Ticketmaster-hosted, for example <code>https://app.ticketmaster.com/maps/geometry/...</code>. Checkout URLs must be valid HTTPS URLs; <code>https://ticketmaster.evyy.net/...</code> affiliate redirect URLs with preselected seats are valid when returned.</p>
+<p>Do not generate or render the carousel or a buy-now list widget in a booking flow. Put three to five exact ticket groups in the booking skill's Markdown table. A verified <code>snapshot_image_url</code> may appear below the table with ordinary Markdown image syntax and an exact section label. Keep each valid checkout URL as a compact Markdown link in the relevant option or next action.</p>
+<h3>Auth</h3>
+<p>No user setup is required for Ticketmaster service access.</p>
+<h3>Operating Rules</h3>
+<ol>
+<li>Use <code>search-events</code> first to find the event ID before calling <code>top-picks</code>.</li>
+<li>When the user asks for &quot;cheap&quot; tickets, use <code>--sort listprice</code>. When they want &quot;best&quot; seats, use <code>--sort quality</code>.</li>
+<li>When searching for a seating level, do not guess the section name. Venues use inconsistent names for floor, mezzanine, orchestra, pit, and upper sections. Run a broad <code>--sort quality --limit 20</code> query with no <code>--sections</code> filter. Use the returned section names and area labels in later <code>--sections</code> queries.</li>
+<li>When a valid checkout URL (<code>redirect_url || redirectUrl</code>) and a displayed price are present, include a compact <code><a href="&lt;redirect_url&gt;">Review on Ticketmaster</a></code> Markdown link for that option. Ticketmaster affiliate links such as <code>https://ticketmaster.evyy.net/...</code> are valid checkout URLs. If the checkout URL is absent/invalid or pricing is unavailable, do not fabricate a checkout link or present the seat as directly purchasable.</li>
+</ol>
+<p>Bind each link to the same pick used for that row and verify its offer/seat parameters before sending. Do not reuse one option's URL for another option; omit an unverified link instead.</p>
+<ol>
+<li>For resale tickets (<code>selection: &quot;resale&quot;</code>), show the <code>listingDetails</code> description when present and note these are verified resale tickets.</li>
+<li>If the selected offer has a <code>limit</code> object, respect its <code>min</code> and <code>max</code> quantity bounds.</li>
+<li>If <code>eventDetails.allInclusivePricing</code> is true, note that the displayed price includes fees. Show <code>eventDetails.listingsDisclaimer</code> and <code>eventDetails.importantInformation</code> when present.</li>
+<li>After <code>top-picks</code> returns, follow the <code>Event tickets</code> section in</li>
+</ol>
+<p><code>/opt/hatch/skills/booking/references/presentation.md</code>.</p>
+<ol>
+<li><code>priceRanges[]</code> from search-events is often absent or incomplete. Do not tell the user &quot;no pricing available&quot; based on search-events alone. Use <code>top-picks</code> to get current pricing.</li>
+<li>Use the raw Discovery <code>id</code> from <code>_embedded.events[]</code> for <code>event-details</code> and prefer it for <code>top-picks</code> calls. <code>top-picks</code> accepts either the Discovery ID (for example <code>vvG...</code>) or the numeric geometry/eventDetails ID (for example <code>0900...</code>); the response may echo the numeric ID as <code>eventDetails.id</code>.</li>
+<li>If a search event has <code>tmol_available: false</code>, it is not sold on Ticketmaster. Say so, offer its non-null <code>box_office_url</code>, and never run <code>top-picks</code> on it. If <code>box_office_url</code> is null, say Ticketmaster Discovery supplied no official purchase link. If <code>tmol_available</code> is absent, do not claim the event is offsite.</li>
+<li>When the user selects tickets, use the browser to keep the exact checkout alive and prepare it to final review. Ask whether the user has a Ticketmaster account and wants to sign in before checkout. Continue as a guest when permitted. Hand off the exact link only when authentication, blocked automation, or another real limitation prevents the main agent from continuing.</li>
+<li>If a response carries an <code>error</code>, drop it silently: skip that event or pick, and do not display it or surface the error text.</li>
+<li>Do not quote a price from memory or an earlier turn. Re-run <code>top-picks</code> and quote only its current result. A price-monitoring cron must fetch current inventory on every run.</li>
+</ol>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

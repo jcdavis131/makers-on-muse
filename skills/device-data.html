@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>device_data — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Read cached contacts and calendar events from Muse storage. Delete Muse's local copy of either source without modifying paired devices.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/device-data">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/device-data">
+<meta property="og:title" content="device_data">
+<meta property="og:description" content="Read cached contacts and calendar events from Muse storage. Delete Muse's local copy of either source without modifying paired devices.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="device_data">
+<meta name="twitter:description" content="Read cached contacts and calendar events from Muse storage. Delete Muse's local copy of either source without modifying paired devices.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>device_data</h1>
+      <p class="lede">Read cached contacts and calendar events from Muse storage. Delete Muse's local copy of either source without modifying paired devices.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Device Data</h2>
+<h3>Purpose</h3>
+<p>Read cached contacts and calendar events directly from Muse storage, without contacting the device. Use it when a live read is not possible: the device is offline, or it does not offer <code>contacts.search</code>/<code>calendar.search</code>. Delete all locally stored contacts or calendar data when the user explicitly requests it. The tool does not contact or mutate a device.</p>
+<h3>Commands</h3>
+<pre><code>device-data --help
+device-data contacts status
+device-data contacts --delete-all
+device-data contacts search --match-mode ranked \
+                            [--query &lt;text&gt; [--phone-label &lt;text&gt;] \
+                             [--locale &lt;bcp-47&gt;]] \
+                            [--device &lt;node_id&gt;] [--limit &lt;n&gt;] [--offset &lt;n&gt;]
+device-data calendar search [--query &lt;text&gt;] [--device &lt;node_id&gt;] \
+                            [--start-date &lt;YYYY-MM-DD&gt;] \
+                            [--end-date &lt;YYYY-MM-DD&gt;] [--limit &lt;n&gt;] \
+                            [--cursor &lt;next_cursor&gt;]
+device-data calendar --delete-all</code></pre>
+<p>Both searches default to every eligible paired device. Use <code>--device</code> to scope to one and omit <code>--query</code> to list.</p>
+<p>For calendar results, pass <code>next_cursor</code> unchanged as <code>--cursor</code> to continue, keeping the same device, query and dates. An absent cursor ends pagination; check <code>cache.coverage</code> separately to understand whether the cache is complete.</p>
+<p>Contact search combines literal display-name, phone, and email substring matches with token-level exact, locale-aware personal-name nickname, and phonetic name matching. With no locale or an English locale, ranked search applies OACR-style fuzzy matching only after ordinary name matching returns nothing for that source device. It compares cleaned query tokens of at least four characters against the cleaned full name and canonical indexed name tokens, including simplified name variants, allows one edit, and returns at most three fuzzy candidates per source device. Explicit non-English locales retain the existing bounded Unicode full-name edit-distance fallback. Ranked name evidence feeds the downstream call-authorization policy. Fuzzy, partial, and phonetic evidence must pass bounded token revalidation before a complete singleton autodials; literal matches never autodial. Nickname singletons rely on the explicit locale-selected nickname map. Weak, ambiguous, incomplete, or unanchored matches still require confirmation.</p>
+<p>Ranked results also include <code>selection_evidence</code>. Its <code>spoken_name_collision_pairs</code> identifies differently spelled plausible matches whose full names have strong phonetic coverage in both directions; a nonempty list sets <code>requires_spoken_name_clarification</code>, because spoken input has not selected between them. Collision entries carry a comma-separated <code>spoken_spelling</code> suitable for distinct TTS pronunciation in either a call or message clarification. Each contact includes <code>phone_selection</code>, which groups safely equivalent formatting variants into one destination and reports <code>distinct_usable_phone_count</code> and <code>requires_phone_clarification</code>. When <code>--phone-label</code> is present, <code>requested_label_match_count</code> reports how many distinct destinations carry that label or a recognized equivalent such as <code>cell</code> and <code>mobile</code>. Each option includes a TTS-safe <code>spoken_suffix</code> for the rare case where labels do not distinguish the saved lines.</p>
+<p>Compound given names match as a unit: under the English default, <code>Mary Ann</code> can find a contact named <code>Mary</code>. Pass <code>--locale</code> to select the French, Italian, or Spanish nickname map when the user's locale is known; for example, <code>Mamen</code> finds <code>María del Carmen</code> with <code>--locale es</code>, and <code>Coco</code> finds <code>Jean Claude</code> with <code>--locale fr</code>. Language subtags <code>ar</code>, <code>ja</code>, <code>zh</code>, and <code>ko</code> disable nickname matching; every other locale without a dedicated map uses the English fallback. If the locale is unavailable, omit the flag to use that English nickname, fuzzy, and spoken-emoji default. Queries containing Chinese, Japanese, or Korean characters retain the bounded whole-name edit-distance fallback without requiring locale plumbing. Explicit non-English locales do not inherit English spoken-emoji labels. Phone matching ignores formatting and country-code differences when the final seven digits agree, but only for a phone-shaped query; digits embedded in names or emails do not activate phone matching. Ranked name search is order-independent, treats apostrophes and hyphens symmetrically, tolerates repeated or unmatched query words, and reports coarse <code>match</code> evidence (<code>class</code>, matched/total tokens, and unmatched tokens). Results are a single ranked, paginated list; they do not assert that one contact has been selected. Pass an explicitly requested phone type through <code>--phone-label</code> rather than including it in the name query. Phone numbers are ordered by the requested label first, then mobile, home, work, other, and custom labels. Results report <code>phone_label_matched</code>; a label miss does not exclude the contact. Organization and job title are included when available. Ranked results can be paged by advancing <code>offset</code> by the returned <code>count</code> while <code>has_more</code> is true. <code>search_complete</code> is false when the scoped contact corpus, bounded preprocessing, or a ranked result bound overflows, independently from pagination; inspect <code>corpus_overflow</code>, <code>preprocessing_overflow</code>, and <code>result_overflow</code> for the cause. <code>fuzzy_overflow</code> separately reports that English fuzzy recovery hit its non-pageable, per-source confirmation cap; it does not make an otherwise exact result incomplete.</p>
+<h3>Operating Rules</h3>
+<ol>
+<li>Read fresh this turn; never answer a contacts or calendar question from memory.</li>
+<li>Treat device data as private user data: show only the fields the request needs, and do not infer sensitive attributes from contacts, locations, device names, or communication metadata.</li>
+<li>Use inclusive <code>YYYY-MM-DD</code> bounds for calendar dates, with the same date for</li>
+</ol>
+<p>a single day; all-day result <code>end_date</code> values are also inclusive. Read event times from the tagged <code>time</code> object: <code>timed</code> keeps the existing localized <code>start_at</code> / <code>end_at</code> fields and adds their UTC forms plus <code>user_timezone</code>, the IANA display zone used to render those local values; <code>all_day</code> has date-only values that must not be timezone-shifted. Both carry <code>start_weekday</code> / <code>end_weekday</code>, already resolved against the value beside them; use those and never work a weekday out from the date yourself. Contact reads likewise preserve <code>synced_at</code> and add semantic <code>contact_synced_at</code> or <code>contact_sync_completed_at</code> UTC/user-local forms.</p>
+<ol>
+<li>Treat an empty calendar result as authoritative only when <code>cache.coverage</code></li>
+</ol>
+<p>is <code>complete</code>. For contacts, <code>search_complete</code> covers the bounded corpus and ranked result sets, not source freshness; consult contacts status when freshness matters and report partial or truncated results.</p>
+<ol>
+<li>If no record exists, say so. A device calendar is only that phone's view;</li>
+</ol>
+<p>check other connected calendars when relevant.</p>
+<ol>
+<li>When the user asks to delete contacts or calendar events without naming the</li>
+</ol>
+<p>target, do not infer the target. Confirm that the user means Muse's locally stored copy before deleting anything.</p>
+<ol>
+<li>After the user explicitly requests deletion of Muse's locally stored copy,</li>
+</ol>
+<p>run the command that matches the source: <code>device-data contacts --delete-all</code> or <code>device-data calendar --delete-all</code>. Do not enumerate record IDs.</p>
+<ol>
+<li>Both <code>--delete-all</code> commands delete the selected source from Muse storage</li>
+</ol>
+<p>across all devices. They delete cached records, source-ledger payloads, upload staging, and sync state. They preserve device pairing and every other data source. A later device sync can store new records for the deleted source.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>
