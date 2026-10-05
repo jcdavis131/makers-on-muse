@@ -198,6 +198,27 @@
       var momentChips = document.getElementById("moment-chips");
       var state = parseQuery(window.location.search, data);
 
+      /* Popularity metrics: fire-and-forget pings. Counts only — no
+         cookies, no user ids, nothing stored about the visitor. The page
+         works exactly the same when a ping fails. */
+      function ping(type, id) {
+        try {
+          var body = JSON.stringify({ type: type, id: id });
+          if (navigator.sendBeacon) { navigator.sendBeacon("/api/metric", body); return; }
+          fetch("/api/metric", { method: "POST", headers: { "Content-Type": "application/json" }, body: body, keepalive: true });
+        } catch (e) { /* metrics never break the page */ }
+      }
+      var popScores = null; /* workflow id -> usefulness score, once /api/popular answers */
+      var popOn = false;
+      try {
+        fetch("/api/popular").then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+          if (!d || !d.workflows) return;
+          popScores = {};
+          d.workflows.forEach(function (w) { popScores[w.id] = w.score; });
+          syncUI();
+        });
+      } catch (e) { /* no popularity data: the Popular button stays hidden */ }
+
       var g = groups(data);
       personaChips.innerHTML = chipsHtml("Personas", g.persona);
       momentChips.innerHTML = chipsHtml("Moments", g.moment);
@@ -217,12 +238,21 @@
         document.querySelectorAll(".pb-track button[data-comm]").forEach(function (b) {
           b.setAttribute("aria-pressed", String(!state.w && state.comm === 1));
         });
+        document.querySelectorAll(".pb-track button[data-pop]").forEach(function (b) {
+          b.hidden = !popScores;
+          b.setAttribute("aria-pressed", String(popOn && !state.w));
+        });
         diff.value = String(state.diff);
         if (q.value !== state.q) q.value = state.q;
         if (single) single.hidden = !state.w;
       }
       function render() {
         var list = filter(data, state);
+        if (popOn && popScores) {
+          list = list.slice().sort(function (a, b) {
+            return (popScores[b.id] || 0) - (popScores[a.id] || 0);
+          });
+        }
         grid.innerHTML = cardsHtml(list, Boolean(state.w));
         empty.hidden = list.length > 0;
         count.textContent = countText(list.length, data.length, state);
@@ -237,6 +267,7 @@
       document.querySelector(".pb-track").addEventListener("click", function (e) {
         var b = e.target.closest("button"); if (!b) return;
         if (b.hasAttribute("data-comm")) { update({ comm: state.comm ? 0 : 1 }); return; }
+        if (b.hasAttribute("data-pop")) { popOn = !popOn; state.w = null; syncUI(); render(); syncUrl(); return; }
         var t = b.getAttribute("data-track");
         var ch = { track: t };
         if (state.group && trackOfGroup(data, state.group) !== t) ch.group = null;
@@ -298,8 +329,12 @@
           var li = c.closest("li");
           var code = li && li.querySelector("code");
           if (code) copyText(code.textContent, c, "Copy");
+          var art = c.closest("article[data-id]");
+          if (art) ping("copy", art.getAttribute("data-id"));
           return;
         }
+        var chip = e.target.closest(".pb-tagchip");
+        if (chip) ping("setup", chip.textContent.trim());
         var l = e.target.closest(".pb-link");
         if (l) copyText(permalink(window.location.href, l.getAttribute("data-id")), l, "Copy link");
       });
@@ -311,6 +346,7 @@
       // and put focus on the card's link, so the visitor sees what the
       // link was for.
       if (state.w) {
+        ping("open", state.w);
         var linked = document.getElementById("w-" + state.w);
         var linkedA = linked && linked.querySelector("h3 a");
         if (linked) (single || linked).scrollIntoView({ block: "start" });

@@ -28,6 +28,12 @@
 <meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
 <meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
 <!-- /layout:head -->
+<style>
+.top-setups-list{list-style:none;padding:0;margin:18px 0;max-width:34em}
+.top-setups-list li{display:flex;justify-content:space-between;gap:12px;padding:9px 2px;border-bottom:1px solid var(--stone-200);font-size:15px}
+.top-setups-list li span:first-child{font-family:var(--mono);font-size:14px}
+.top-setups-list li span:last-child{color:var(--ink-soft);font-size:13px;white-space:nowrap}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -123,6 +129,14 @@
           <p class="small muted">Sources: <a href="https://www.meta.com/help/artificial-intelligence/995796179982326/">personalize Muse</a> &middot; <a href="https://www.meta.com/help/artificial-intelligence/2225571704857152/">your data</a></p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="popular-setups">
+    <div class="wrap-narrow">
+      <h2>Most tapped setups</h2>
+      <p class="muted">Which setup tags Playbook visitors tap most, counted from aggregate taps &mdash; no cookies, no personal data. Needs the database to be connected; until then this stays quiet.</p>
+      <div id="top-setups"><p class="muted small">Loading&hellip;</p></div>
     </div>
   </section>
 
@@ -254,5 +268,6 @@
 </footer>
 <!-- /layout:footer -->
 <script src="/assets/js/main.js?v=4f9c205a29"></script>
+<script src="/assets/js/setups.js?v=c568a82348"></script>
 </body>
 </html>

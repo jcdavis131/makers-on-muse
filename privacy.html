@@ -108,6 +108,7 @@
       </div>
       <p>Before an entry is stored, the site strips common patterns from the answers, the procedure notes, the L5 description and the query part of links: email addresses, phone numbers, US Social Security numbers, card numbers, street addresses and API keys. That catches common patterns, not everything. Don't put personal information in an entry, yours or anyone else's.</p>
       <p>We don't store your IP address. When storage is connected, rate limits count requests per network under a code made from the IP address and a server secret (a keyed hash), not the address itself. Without that secret the code can't be turned back into the address. Those counters expire in about 2 minutes.</p>
+      <p>Popularity counts are aggregate only. The Playbook counts recipe copies, card opens, and setup-tag taps as bare totals per workflow or tag &mdash; no cookies, no accounts, nothing that identifies a visitor. Until the database is connected, nothing is counted at all.</p>
 
       <h2 id="retention">How long we keep it</h2>
       <div class="board-scroll" tabindex="0" role="region" aria-labelledby="retention">
