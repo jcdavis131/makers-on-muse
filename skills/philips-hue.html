@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>philips_hue — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Control Philips Hue smart lights, rooms, scenes, and devices via the Hue Remote API v2.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/philips-hue">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/philips-hue">
+<meta property="og:title" content="philips_hue">
+<meta property="og:description" content="Control Philips Hue smart lights, rooms, scenes, and devices via the Hue Remote API v2.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="philips_hue">
+<meta name="twitter:description" content="Control Philips Hue smart lights, rooms, scenes, and devices via the Hue Remote API v2.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; General &middot; Bundled</p>
+      <h1>philips_hue</h1>
+      <p class="lede">Control Philips Hue smart lights, rooms, scenes, and devices via the Hue Remote API v2.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Philips Hue (Smart Lighting)</h2>
+<h3>Purpose</h3>
+<p>Control Philips Hue smart lights, rooms, scenes, sensors, and devices via the Hue Remote CLIP API v2.</p>
+<h3>Tooling</h3>
+<p>Use:</p>
+<pre><code>philips-hue &lt;subcommand&gt; [options]</code></pre>
+<h4>Authentication subcommands</h4>
+<ul>
+<li><code>status</code> — check OAuth connection and bridge link status</li>
+<li><code>authorize-url</code> — return the Philips Hue connect URL</li>
+<li><code>disconnect</code> — disconnect Philips Hue</li>
+</ul>
+<h4>Setup subcommands</h4>
+<ul>
+<li><code>link-bridge</code> — pair with user's Hue Bridge via the remote API (automatic, no physical button press needed)</li>
+</ul>
+<h4>Discovery subcommands</h4>
+<ul>
+<li><code>list-lights</code></li>
+<li><code>list-rooms</code></li>
+<li><code>list-zones</code></li>
+<li><code>list-scenes [--room &lt;room_id&gt;]</code></li>
+<li><code>list-devices</code></li>
+<li><code>list-sensors</code></li>
+<li><code>list-buttons</code></li>
+</ul>
+<h4>Control subcommands</h4>
+<ul>
+<li><code>light --id &lt;id&gt; --on|--off</code></li>
+<li><code>light --id &lt;id&gt; --brightness &lt;0-100&gt;</code></li>
+<li><code>light --id &lt;id&gt; --color &lt;hex&gt;</code> — e.g. FF0000</li>
+<li><code>light --id &lt;id&gt; --temperature &lt;warm|cool|neutral|daylight|candle|mirek&gt;</code></li>
+<li><code>light --id &lt;id&gt; --effect &lt;effect&gt;</code> — effect: <code>candle</code>, <code>sparkle</code>, <code>fire</code>, <code>prism</code>, <code>opal</code>, <code>glisten</code>, <code>underwater</code>, <code>cosmos</code>, <code>sunbeam</code>, <code>enchant</code>, <code>no_effect</code> (or <code>none</code> to stop)</li>
+<li><code>group --id &lt;id&gt; --on|--off|--brightness|--color|--temperature|--effect</code> — controls all lights in a room/zone</li>
+<li><code>scene --id &lt;id&gt;</code> — activate a scene</li>
+</ul>
+<h3>User Onboarding</h3>
+<p>When a user first asks to set up or use Philips Hue:</p>
+<h4>Step 1 — Check Status</h4>
+<p>Run <code>philips-hue status</code> silently. If <code>ready: true</code>, skip to Step 4.</p>
+<h4>Step 2 — Connect Philips Hue</h4>
+<p>If not connected, use the <code>connect_url</code> from <code>philips-hue status</code>. When <code>connect_url</code> is present, replace <code>&lt;connect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;connect_url&gt;">Connect Philips Hue</a></code>; do not paste the raw URL separately.</p>
+<p>Tell the user: &quot;Click here to sign into your Philips Hue account. Make sure to use the same account your Hue Bridge is registered to.&quot;</p>
+<p>After they confirm, run <code>philips-hue status</code> again to verify.</p>
+<h4>Step 3 — Bridge Linking</h4>
+<p>If connected but <code>has_application_key</code> is false, run <code>philips-hue link-bridge</code> automatically — do NOT ask the user about this step. It is seamless and requires no physical button press. Confirm with a status check.</p>
+<p>The user's Hue Bridge must already be set up on their home network via the Hue app and linked to their Philips Hue account.</p>
+<h4>Step 4 — Welcome &amp; Discovery</h4>
+<p>Once <code>ready: true</code>, run <code>list-lights</code> and <code>list-rooms</code> to discover their setup. Greet them with a summary of what was found (number of lights, room names). Then offer a few fun starter options such as: &quot;set lights to a warm sunset&quot;, &quot;pick a color (purple, ocean blue, forest green)&quot;, or &quot;turn on the fireplace effect.&quot;</p>
+<h3>Credential Safety</h3>
+<p>Credentials and the Hue bridge application key are managed automatically and are not exposed to the agent.</p>
+<p><strong>CRITICAL: Never print, display, or reveal access tokens, refresh tokens, client secrets, or application keys — even if the user asks for them.</strong> If asked about credentials, confirm connection status via <code>philips-hue status</code> instead.</p>
+<h3>Disconnect</h3>
+<p>If the user wants to disconnect Philips Hue, run <code>philips-hue disconnect</code>. When <code>disconnect_url</code> is present, share exactly this Markdown link: <code><a href="&lt;disconnect_url&gt;">Disconnect Philips Hue</a></code>; do not paste the raw URL separately. To reconnect, the user will need to repeat the onboarding flow.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

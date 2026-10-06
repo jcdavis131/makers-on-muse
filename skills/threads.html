@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>threads — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Read and manage the user's Threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by URL or ID. Can tune feed ranking and publish posts on request.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/threads">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/threads">
+<meta property="og:title" content="threads">
+<meta property="og:description" content="Read and manage the user's Threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by URL or ID. Can tune feed ranking and publish posts on request.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="threads">
+<meta name="twitter:description" content="Read and manage the user's Threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by URL or ID. Can tune feed ranking and publish posts on request.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>threads</h1>
+      <p class="lede">Read and manage the user's Threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by URL or ID. Can tune feed ranking and publish posts on request.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Threads CLI</h2>
+<h3>Purpose</h3>
+<p>Read and manage authenticated Threads data using the <code>threads-cli</code> companion CLI. Reads, <code>dear-algo-whisper</code>, and approved <code>publish-post</code> invocations are available wherever the Threads skill is supported.</p>
+<p>Use the separate <code>threads_messages</code> skill for Threads inboxes and message threads.</p>
+<h3>Account Linking</h3>
+<p>Use the account <code>id</code> from a <code>threads-cli accounts</code> result already in context. If it is missing, run <code>threads-cli accounts</code> once to get it.</p>
+<p>For a user-requested task, recheck after an account change or authentication error. A timeout or rate limit does not establish an account change or disconnection.</p>
+<p>Use the account chosen for the task. If several accounts fit and none was chosen, ask the user in a live conversation or report the unresolved choice in your result. Do not choose arbitrarily.</p>
+<p>Only a successful empty accounts list or an explicit not-linked response establishes that no account is connected. If linking is needed, run <code>threads-cli connect-url</code> and use its <code>connect_url</code>:</p>
+<blockquote><p>Your Threads account is not connected. To connect it, visit <a href="<code>connect_url</code>">Meta Accounts Center</a> and link your Threads account.</p></blockquote>
+<p>If the user asks to disconnect their Threads account, run <code>threads-cli disconnect-url</code> (it outputs JSON with a <code>disconnect_url</code> field) and direct them to that URL:</p>
+<blockquote><p>To disconnect your Threads account, visit <a href="<code>disconnect_url</code>">Meta Accounts Center</a> and remove the linked account.</p></blockquote>
+<p>Always read these URLs from the command output rather than hardcoding them.</p>
+<h3>Tooling</h3>
+<p>Use <code>exec</code> to run:</p>
+<pre><code>threads-cli &lt;target&gt; [options]</code></pre>
+<p>Targets:</p>
+<ul>
+<li><code>accounts</code></li>
+<li><code>profile</code></li>
+<li><code>activity-feed</code></li>
+<li><code>liked-media</code></li>
+<li><code>saved-posts</code></li>
+<li><code>insights-overview</code></li>
+<li><code>post-insights</code></li>
+<li><code>top-posts</code></li>
+<li><code>user-profile</code></li>
+<li><code>profile-threads</code></li>
+<li><code>profile-replies</code></li>
+<li><code>profile-media</code></li>
+<li><code>followers</code></li>
+<li><code>following</code></li>
+<li><code>post</code></li>
+<li><code>fetch-post-comments</code> (alias: <code>comments</code>)</li>
+<li><code>fetch-post-likers</code> (alias: <code>likers</code>)</li>
+<li><code>feedback-hub-overview</code></li>
+<li><code>feedback-hub-tab</code></li>
+<li><code>trends</code></li>
+<li><code>search</code></li>
+<li><code>feed</code></li>
+<li><code>publish-post</code> (hidden; explicit confirmation required)</li>
+<li><code>dear-algo-whisper</code></li>
+</ul>
+<h4>Post output</h4>
+<p><code>feed</code> and <code>post</code> use the same compact <code>social_posts_v1</code> presentation as <code>instagram-cli</code>. Use the filtered result as authoritative; do not reconstruct omitted fields. An explicit error-only post row is omitted and its message is surfaced as <code>provider_error</code>.</p>
+<h4>Global options</h4>
+<ul>
+<li><code>--account-id &lt;threads_account_id&gt;</code> <strong>(required for all commands except <code>accounts</code>)</strong> — select which Threads account to operate on. The value must be the authenticated user's own <code>id</code> field from the <code>accounts</code> response. Always call <code>accounts</code> first. If it returns multiple entries, ask the user which account to use.</li>
+<li><code>--retries &lt;N&gt;</code> — retry transient failures (default: 0). This is not</li>
+</ul>
+<p>supported for <code>dear-algo-whisper</code> or <code>publish-post</code>, because a retry could duplicate a mutation.</p>
+<h3>Commands</h3>
+<h4>Accounts</h4>
+<p>List Threads accounts associated with the currently authenticated user.</p>
+<pre><code>threads-cli accounts</code></pre>
+<h4>Profile</h4>
+<p>Fetch the current user's own Threads profile.</p>
+<pre><code>threads-cli profile --account-id &lt;threads_account_id&gt;</code></pre>
+<h4>Activity Feed</h4>
+<p>Fetch the user's activity notifications.</p>
+<pre><code>threads-cli activity-feed --account-id &lt;threads_account_id&gt;
+threads-cli activity-feed --account-id &lt;threads_account_id&gt; --first 20
+threads-cli activity-feed --account-id &lt;threads_account_id&gt; --category-filter text_post_app_mentions
+threads-cli activity-feed --account-id &lt;threads_account_id&gt; --after &lt;cursor&gt;</code></pre>
+<p>Category filters: <code>text_post_app_conversations</code>, <code>text_post_app_following</code>, <code>text_post_app_private_follow_requests</code>, <code>text_post_app_mentions</code>, <code>text_post_app_replies</code>, <code>text_post_app_user_follows</code>, <code>text_post_app_quote_posts</code>, <code>text_post_app_reposts</code>.</p>
+<h4>Liked Media</h4>
+<p>Fetch posts you've liked. This uses the shared engagement query and supports <code>--since</code>, <code>--until</code>, <code>--sort-order</code>, <code>--limit</code>, and <code>--after</code>.</p>
+<pre><code>threads-cli liked-media --account-id &lt;threads_account_id&gt;
+threads-cli liked-media --account-id &lt;threads_account_id&gt; --limit 20
+threads-cli liked-media --account-id &lt;threads_account_id&gt; --since 2026-03-01 --until 2026-03-20
+threads-cli liked-media --account-id &lt;threads_account_id&gt; --sort-order asc
+threads-cli liked-media --account-id &lt;threads_account_id&gt; --after &lt;cursor&gt;</code></pre>
+<h4>Saved Posts</h4>
+<p>Fetch your saved posts. This uses the shared engagement query and supports <code>--since</code>, <code>--until</code>, <code>--sort-order</code>, <code>--limit</code>, and <code>--after</code>.</p>
+<pre><code>threads-cli saved-posts --account-id &lt;threads_account_id&gt;
+threads-cli saved-posts --account-id &lt;threads_account_id&gt; --limit 20
+threads-cli saved-posts --account-id &lt;threads_account_id&gt; --since 2026-03-01 --until 2026-03-20
+threads-cli saved-posts --account-id &lt;threads_account_id&gt; --after &lt;cursor&gt;</code></pre>
+<h4>Insights Overview</h4>
+<p>Fetch account-level insights (views, likes, quotes, replies, reposts, traffic sources, demographics).</p>
+<pre><code>threads-cli insights-overview --account-id &lt;threads_account_id&gt; --start-date 2026-03-13 --end-date 2026-03-20
+threads-cli insights-overview --account-id &lt;threads_account_id&gt; --start-date 2026-03-13 --end-date 2026-03-20 --sections followers</code></pre>
+<p>Section values: <code>summary</code>, <code>views</code>, <code>interactions</code>, <code>followers</code>, <code>demographics</code>, <code>all</code>.</p>
+<p>The typed insights backend uses the Threads account selected by <code>--account-id</code>. Do not retry an account-binding failure through <code>/gq</code>; run <code>accounts</code> again and pass one of the returned account IDs.</p>
+<h4>Post-Level Insights</h4>
+<p>Fetch insights for a specific post.</p>
+<pre><code>threads-cli post-insights --account-id &lt;threads_account_id&gt; --post-id 3856993780407305605</code></pre>
+<h4>Top Posts</h4>
+<p>Fetch the most-viewed posts and the service-defined top three most-liked posts over a date range. <code>--count</code> controls most-viewed posts and is bounded to 50.</p>
+<pre><code>threads-cli top-posts --account-id &lt;threads_account_id&gt; --start-date 2026-03-13 --end-date 2026-03-20
+threads-cli top-posts --account-id &lt;threads_account_id&gt; --start-date 2026-03-13 --end-date 2026-03-20 --count 5</code></pre>
+<h4>Other User's Profile</h4>
+<p>Fetch another user's profile by numeric Threads user FBID. This command does not accept usernames or profile URLs.</p>
+<pre><code>threads-cli user-profile --account-id &lt;threads_account_id&gt; --user-id 12345678</code></pre>
+<h4>Profile Threads</h4>
+<p>Fetch threads by numeric Threads user FBID. <code>--limit</code> is accepted as a compatibility alias for <code>--first</code>.</p>
+<pre><code>threads-cli profile-threads --account-id &lt;threads_account_id&gt; --user-id 12345678
+threads-cli profile-threads --account-id &lt;threads_account_id&gt; --user-id 12345678 --first 10 --after &lt;cursor&gt;</code></pre>
+<h4>Profile Replies</h4>
+<p>Fetch a user's replies.</p>
+<pre><code>threads-cli profile-replies --account-id &lt;threads_account_id&gt; --user-id 12345678
+threads-cli profile-replies --account-id &lt;threads_account_id&gt; --user-id 12345678 --first 10 --after &lt;cursor&gt;</code></pre>
+<h4>Profile Media</h4>
+<p>Fetch a user's media posts (images, videos, carousels).</p>
+<pre><code>threads-cli profile-media --account-id &lt;threads_account_id&gt; --user-id 12345678
+threads-cli profile-media --account-id &lt;threads_account_id&gt; --user-id 12345678 --first 10 --after &lt;cursor&gt;</code></pre>
+<h4>Followers</h4>
+<p>Fetch a user's followers list.</p>
+<pre><code>threads-cli followers --account-id &lt;threads_account_id&gt; --user-id 12345678
+threads-cli followers --account-id &lt;threads_account_id&gt; --user-id 12345678 --first 10 --after &lt;cursor&gt;</code></pre>
+<h4>Following</h4>
+<p>Fetch a user's following list.</p>
+<pre><code>threads-cli following --account-id &lt;threads_account_id&gt; --user-id 12345678
+threads-cli following --account-id &lt;threads_account_id&gt; --user-id 12345678 --first 10 --after &lt;cursor&gt;</code></pre>
+<h4>Post by URL or ID</h4>
+<p>Fetch a specific post. Use <code>fetch-post-comments</code> for its replies.</p>
+<p>Exactly one of <code>--url</code> or <code>--post-id</code> (alias <code>--id</code>) is required.</p>
+<p>When the user supplies a Threads permalink or share link (<code>threads.com</code> or <code>threads.net</code>), use <code>--url</code> first and pass the original URL unchanged. WWW resolves it and enforces access.</p>
+<pre><code>threads-cli post --account-id &lt;threads_account_id&gt; --url https://www.threads.com/@carnage4life/post/DdU_q-9mLbt
+threads-cli post --account-id &lt;threads_account_id&gt; --url https://www.threads.com/share/HCmFh1x9l/</code></pre>
+<p>Use <code>--post-id</code> when you already have a known numeric post FBID:</p>
+<pre><code>threads-cli post --account-id &lt;threads_account_id&gt; --post-id 3856993780407305605</code></pre>
+<h4>Fetch Post Comments</h4>
+<p>Fetch comments for one or more post media IDs. Use <code>--since</code>, <code>--until</code>, <code>--sort-order</code>, <code>--limit</code>, and repeated/comma-separated <code>--author-id</code> filters when needed.</p>
+<pre><code>threads-cli fetch-post-comments --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605
+threads-cli fetch-post-comments --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605,3856993780407305606 --limit 20 --after &lt;cursor&gt;
+threads-cli fetch-post-comments --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605 --since 2026-03-01 --until 2026-03-20 --author-id 12345678
+threads-cli comments --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605</code></pre>
+<h4>Fetch Post Likers</h4>
+<p>Fetch users who liked one or more post media IDs. Use <code>--since</code>, <code>--until</code>, <code>--sort-order</code>, <code>--limit</code>, and repeated/comma-separated <code>--reactor-id</code> filters when needed.</p>
+<pre><code>threads-cli fetch-post-likers --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605
+threads-cli fetch-post-likers --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605 --limit 20 --after &lt;cursor&gt;
+threads-cli fetch-post-likers --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605 --since 2026-03-01 --until 2026-03-20 --reactor-id 12345678
+threads-cli likers --account-id &lt;threads_account_id&gt; --post-ids 3856993780407305605</code></pre>
+<h4>Feedback Hub Overview</h4>
+<p>Fetch a post's engagement summary (likes, reposts, quotes counts).</p>
+<pre><code>threads-cli feedback-hub-overview --account-id &lt;threads_account_id&gt; --post-id 3856993780407305605</code></pre>
+<h4>Feedback Hub Tab</h4>
+<p>Fetch paginated lists of users who liked, reposted, or quoted a post.</p>
+<pre><code>threads-cli feedback-hub-tab --account-id &lt;threads_account_id&gt; --post-id 3856993780407305605 --tab-type like
+threads-cli feedback-hub-tab --account-id &lt;threads_account_id&gt; --post-id 3856993780407305605 --tab-type repost --first 10
+threads-cli feedback-hub-tab --account-id &lt;threads_account_id&gt; --post-id 3856993780407305605 --tab-type quote --after &lt;cursor&gt;</code></pre>
+<h4>Trends</h4>
+<p>Fetch trending topics on Threads.</p>
+<pre><code>threads-cli trends --account-id &lt;threads_account_id&gt;
+threads-cli trends --account-id &lt;threads_account_id&gt; --first 10</code></pre>
+<h4>Search</h4>
+<p>Search Threads by keyword, or dive deeper into a trend.</p>
+<pre><code>threads-cli search --account-id &lt;threads_account_id&gt; --query &quot;AI news&quot;
+threads-cli search --account-id &lt;threads_account_id&gt; --query &quot;AI news&quot; --recent 1
+threads-cli search --account-id &lt;threads_account_id&gt; --query &quot;trending topic&quot; --trend-fbid 987654
+threads-cli search --account-id &lt;threads_account_id&gt; --query &quot;AI&quot; --first 10 --after &lt;cursor&gt;</code></pre>
+<p>Use <code>--recent 1</code> for &quot;Recent&quot; tab results instead of &quot;Top&quot;.</p>
+<h4>Feed</h4>
+<p>Fetch the ranked feed (For You or Following).</p>
+<p>For You feed:</p>
+<pre><code>threads-cli feed --account-id &lt;threads_account_id&gt; --variant for_you</code></pre>
+<p>Following feed:</p>
+<pre><code>threads-cli feed --account-id &lt;threads_account_id&gt; --variant following
+threads-cli feed --account-id &lt;threads_account_id&gt; --variant following --sort-by recent</code></pre>
+<p>For all feed variants, use <code>--after</code> for pagination:</p>
+<pre><code>threads-cli feed --account-id &lt;threads_account_id&gt; --variant for_you --after &lt;cursor&gt;</code></pre>
+<h4>Publish a post</h4>
+<p><code>publish-post</code> is a hidden write command. It publishes a normal Threads post in one approved operation and returns the post ID. There is no public draft step and no creation handle to pass between commands.</p>
+<p>Text must contain at least one non-whitespace character when no media is present. Every byte of accepted text, including leading or trailing whitespace and Unicode, is preserved through confirmation and publication. A post may include one to twenty ordered local images or videos from the Hatch workspace, optionally reply to a specific post, and set who can reply. If a file is outside the workspace, copy it into the workspace first; never use a <code>/tmp</code> path.</p>
+<p>Run <code>threads-cli accounts</code> first and pass the selected account's numeric <code>id</code> unchanged as <code>--account-id</code>. If multiple accounts are returned, ask which one to use. Account and reply targets are canonical positive decimal FBIDs with no sign, leading zero, or surrounding whitespace; never derive one from a URL or username.</p>
+<pre><code>threads-cli publish-post --account-id &lt;threads_account_fbid&gt; --text &quot;Hello Threads&quot;
+threads-cli publish-post --account-id &lt;threads_account_fbid&gt; --text &quot;Caption&quot; --media-item '{&quot;file&quot;:&quot;/workspace/Launch photo.jpg&quot;,&quot;alt_text&quot;:&quot;Description&quot;}'
+threads-cli publish-post --account-id &lt;threads_account_fbid&gt; --text &quot;Mixed media&quot; --media-item '{&quot;file&quot;:&quot;/workspace/first.jpg&quot;,&quot;alt_text&quot;:&quot;First image&quot;}' --media-item '{&quot;file&quot;:&quot;/workspace/second.mp4&quot;,&quot;cover&quot;:&quot;/workspace/second-cover.jpg&quot;}'
+threads-cli publish-post --account-id &lt;threads_account_fbid&gt; --text &quot;Reply video&quot; --media-item '{&quot;file&quot;:&quot;/workspace/video.mp4&quot;,&quot;cover&quot;:&quot;/workspace/video-cover.jpg&quot;}' --reply-to-post-fbid &lt;post_fbid&gt; --reply-control mentioned_only</code></pre>
+<p>Reply control accepts exactly <code>everyone</code>, <code>accounts_you_follow</code>, <code>mentioned_only</code>, <code>parent_post_author_only</code>, or <code>followers_only</code>. The old <code>following</code>, <code>mentioned</code>, and <code>followers</code> spellings are invalid. Never silently translate an older spelling.</p>
+<p><code>--media-item</code> is repeatable from one to twenty times. Each JSON value has exactly <code>file</code>, optional <code>cover</code>, and optional exact <code>alt_text</code>. Supported media files are JPEG, PNG, static WebP, MP4, and MOV, at most 100 MB each. Media type is inferred from the extension. Every MP4/MOV requires a JPEG, PNG, or WebP <code>cover</code>; images reject <code>cover</code>. File order is display order, and each cover is kept with its video item. Omit all media items for a text-only post. One item publishes an image or video; two to twenty items publish one carousel in the supplied order.</p>
+<p>After approval, the CLI reads every declared file through its privsep input and multipart-uploads it to the private Threads staging endpoint. A single item is staged with its exact text, alt text, and reply settings, then <code>publish-post</code> receives only the private returned creation ID. For a carousel, the CLI stages each ordered item with empty text, no reply settings, and <code>is_carousel_item=true</code>, validates every distinct returned creation ID, then publishes one <code>media_type=CAROUSEL</code> parent with the ordered <code>children</code>, exact text, and optional reply fields. Paths and creation IDs remain internal.</p>
+<p>The CLI validates the complete post before approval. One <code>content.post</code> approval covers the account, human reply context, reply control, exact text, and all ordered media. Confirmation shows each item from an authenticated workspace preview resource with a safe basename and optional exact alt text; it also shows every video cover as an adjacent image attachment immediately after its video. The twenty-media maximum can therefore produce forty visual attachments. Confirmation never substitutes raw identifiers. Missing or unsafe names become <code>Threads image</code> or <code>Threads video</code>. Names must be nonempty after trimming, at most 255 Unicode scalar characters, and contain no slash, backslash, control character, numeric-only stem, hexadecimal digest stem, or provider/upload identifier. Alt text must be nonempty after trimming, at most 1024 Unicode scalar characters, and contain no control character. Truncation fails closed.</p>
+<p>After approval, every write uses zero retries. A child failure or duplicate handle stops immediately without creating later children or publishing the parent. Any later attempt is a new invocation requiring new explicit approval. Creation IDs are accepted only from the private staging response.</p>
+<h4>Post write safety</h4>
+<ol>
+<li>Never publish until the explicit Hatch confirmation window is approved. A</li>
+</ol>
+<p>decline or dismissal ends the action.</p>
+<ol>
+<li>Never use transport retries. A child or parent failure is terminal and</li>
+</ol>
+<p>ambiguous. Do not continue a failed carousel. Any later attempt is a new invocation with a new explicit approval.</p>
+<ol>
+<li>Show exact post text, exact reply control, all ordered media items, and every</li>
+</ol>
+<p>video cover described above. Resolve account and reply labels on a best-effort basis for up to 30 seconds. If lookup times out or returns an error, malformed data, or a missing/unsafe label, show a non-identifying <code>Unverified Threads …</code> placeholder and continue to explicit approval; never substitute its raw identifier. Never show account, reply, child, creation, or post IDs or local paths in normal prose.</p>
+<ol>
+<li>Post text is trimmed only to test emptiness. Every byte of a nonempty value,</li>
+</ol>
+<p>including leading/trailing whitespace and Unicode, is preserved in both the structured confirmation preview and dispatched request. If the full text cannot fit without preview truncation, the write is rejected.</p>
+<ol>
+<li>This write command is available wherever the Threads skill is supported,</li>
+</ol>
+<p>but every invocation still requires its own explicit confirmation.</p>
+<ol>
+<li>Respect authorization, account-selection, and quota failures. Do not bypass</li>
+</ol>
+<p>them through an alternate or undocumented command path.</p>
+<ol>
+<li>Read the published post back and compare it with the approved snapshot when</li>
+</ol>
+<p>the exact publication result matters.</p>
+<h4>Dear Algo Whisper</h4>
+<p>Send a message directly to the Threads ranking algorithm to modify what the user sees in their feed (e.g. &quot;show me less politics&quot;, &quot;more cat content&quot;). This command is available to all supported users, and a clear user request may proceed without an additional confirmation.</p>
+<pre><code>threads-cli dear-algo-whisper --account-id &lt;threads_account_id&gt; --message &quot;show me less politics&quot;</code></pre>
+<h3>Operating rules</h3>
+<ol>
+<li>This skill reads Threads data the authenticated user can access — their own account plus posts they supply links to — not general Threads search.</li>
+<li><strong>Always call <code>accounts</code> first</strong> to obtain the account <code>id</code> for <code>--account-id</code>. Cache this value for subsequent commands in the same conversation. If <code>accounts</code> returns no entries, direct the user to Meta Accounts Center to link a Threads account (refer to the &quot;Account Linking&quot; section for details).</li>
+<li><strong>Minimize API calls to avoid rate limiting.</strong> The Threads API enforces strict rate limits — excessive calls will result in <code>429 Too Many Requests</code> errors that are not retried. Follow these principles:</li>
+</ol>
+<ul>
+<li><strong>Batch your information gathering.</strong> Before making calls, plan which data you actually need. Don't fetch data speculatively.</li>
+<li><strong>Reuse data from earlier responses.</strong> If you already fetched <code>accounts</code> or <code>profile</code>, extract IDs and usernames from that response instead of calling again.</li>
+<li><strong>Avoid redundant pagination.</strong> Only paginate (<code>--after</code>) when the user explicitly needs more results. Don't automatically fetch all pages.</li>
+<li><strong>Never call the same command twice with identical arguments</strong> in one conversation unless the previous call failed or the user explicitly asks for a refresh.</li>
+</ul>
+<ol>
+<li>Avoid requests to persistently / frequently poll these commands.</li>
+<li>Use numeric Threads FBIDs for account, user, post, and other entity identifiers. Do not derive an identifier from a Threads URL or pass a URL where an FBID is required. The one exception is <code>post --url</code>, which takes the original Threads URL as-is and lets WWW resolve it.</li>
+<li>Treat U18 enforcement as a server-side invariant. Do not reconstruct filtered fields, retry through <code>/gq</code>, or otherwise bypass server results.</li>
+<li>Use the structured, filtered media result returned by each named read command; do not reconstruct omitted provider fields.</li>
+</ol>
+<h3>Output</h3>
+<p>The CLI prints decoded JSON to stdout. <code>publish-post</code> prints exactly <code>{&quot;post_id&quot;:&quot;&lt;string&gt;&quot;}</code>. Treat the value as a machine-only workflow handle and never repeat it in user-facing prose or an approval preview.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

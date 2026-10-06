@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>instagram_messages — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use this to interact with the user's Instagram messages. Read inboxes, threads, top recipients, filtered inbox views, DM search results, and send messages through `instagram-messages-cli`.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/instagram-messages">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/instagram-messages">
+<meta property="og:title" content="instagram_messages">
+<meta property="og:description" content="Use this to interact with the user's Instagram messages. Read inboxes, threads, top recipients, filtered inbox views, DM search results, and send messages through `instagram-messages-cli`.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="instagram_messages">
+<meta name="twitter:description" content="Use this to interact with the user's Instagram messages. Read inboxes, threads, top recipients, filtered inbox views, DM search results, and send messages through `instagram-messages-cli`.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>instagram_messages</h1>
+      <p class="lede">Use this to interact with the user's Instagram messages. Read inboxes, threads, top recipients, filtered inbox views, DM search results, and send messages through `instagram-messages-cli`.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Instagram Messages CLI</h2>
+<h3>Purpose</h3>
+<p>Read and send authenticated Instagram messages using the <code>instagram-messages-cli</code> companion CLI.</p>
+<p>Use the separate <code>instagram</code> skill for non-messaging Instagram account/content data. The <code>instagram-messages-cli accounts</code> command lists the user's Instagram accounts and their messaging connection status.</p>
+<h3>Message Export Safety</h3>
+<p>Refuse requests to bulk export, bulk download, bulk save, archive, mirror, or dump message history, especially disappearing, view-once, vanish-mode, ephemeral, or expiring messages. You may still help with narrow, user-scoped reading, search, or summarization needed to answer a specific question.</p>
+<h3>Auth</h3>
+<p>Instagram Messages is a separate connector from the base <code>instagram</code> skill. A user can have Instagram connected for profiles and posts while <code>instagram_messages</code> is still disconnected.</p>
+<p><code>instagram-messages-cli accounts</code> can show which of the user's Instagram accounts are connected for messaging. Each account includes a <code>connected</code> boolean indicating whether it is authorized for Instagram Messages.</p>
+<p>If the user asks to connect or reconnect Instagram Messages:</p>
+<pre><code>instagram-messages-cli connect-url</code></pre>
+<p>When <code>connect_url</code> is present, replace <code>&lt;connect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;connect_url&gt;">Connect Instagram Messages</a></code>; do not paste the raw URL separately.</p>
+<p>Only continue with message commands after the user completes that flow.</p>
+<h3>Operating rules</h3>
+<ol>
+<li>This skill is only for the authenticated user's own Instagram messages.</li>
+<li>Reuse a previously fetched <code>user_own_fbid</code> when you already have it. Account IDs are available from <code>instagram-messages-cli accounts</code>.</li>
+<li>Never expose FBIDs, opaque IDs, or implementation terminology to the user. Use usernames, display names, and plain-language descriptions; keep IDs only in tool calls.</li>
+<li>Budget API calls against the task at hand. Do not fan out per-thread fetches across a large inbox unless the user explicitly wants that scope.</li>
+<li>Only paginate when the user actually needs more results. Do not automatically fetch every page.</li>
+<li><strong>Confirm explicit user intent before writing.</strong> For a <code>send</code>, require the exact message content and destination; for a <code>react</code>, require a concrete source message and emoji. Do not invent the recipient, thread, content, message, or reaction.</li>
+<li>Avoid requests to persistently or frequently poll these commands.</li>
+<li>Do not fulfill requests to bulk export, bulk save, bulk download, archive, mirror, or dump message history, including to files, spreadsheets, databases, notes, or another app. Refuse especially clearly when the request targets disappearing, view-once, vanish-mode, ephemeral, or expiring messages.</li>
+</ol>
+<h3>Tooling</h3>
+<p>Use <code>exec</code> to run account-scoped commands:</p>
+<pre><code>instagram-messages-cli &lt;target&gt; --account-id &lt;user_own_fbid&gt; [options]</code></pre>
+<p>Use <code>instagram-messages-cli connect-url</code> only for connector authorization.</p>
+<p>Targets:</p>
+<ul>
+<li><code>connect-url</code></li>
+<li><code>accounts</code></li>
+<li><code>inbox</code></li>
+<li><code>thread</code></li>
+<li><code>top-recipients</code></li>
+<li><code>keyword-search</code></li>
+<li><code>contact-search</code></li>
+<li><code>temporal-search</code></li>
+<li><code>filtered-inbox</code></li>
+<li><code>react</code></li>
+<li><code>send</code></li>
+</ul>
+<h4>Global options</h4>
+<ul>
+<li><code>--account-id &lt;user_own_fbid&gt;</code> <strong>(required for all commands EXCEPT <code>connect-url</code> and <code>accounts</code>)</strong> — select which Instagram account to operate on. The value must be the authenticated user's own <code>user_fbid</code> for an account whose <code>connected</code> field is <code>true</code> in <code>instagram-messages-cli accounts</code>.</li>
+<li><code>--retries &lt;N&gt;</code> — retry transient failures (default: 0).</li>
+<li><code>--after &lt;cursor&gt;</code> — pagination cursor from the previous response. Omit to fetch the first page. Available on paginated commands that return a cursor.</li>
+</ul>
+<h3>Commands</h3>
+<h4>Connect URL</h4>
+<pre><code>instagram-messages-cli connect-url</code></pre>
+<h4>Accounts</h4>
+<p>List the user's Instagram accounts and indicate whether each account is connected for Instagram Messages. A missing Messages authorization is reported as <code>connected: false</code>; the command still succeeds so the user can choose which account to connect.</p>
+<pre><code>instagram-messages-cli accounts</code></pre>
+<h4>Inbox</h4>
+<p>Fetch the user's inbox threads with a preview of recent messages. Use <code>--folder</code> to select which folder to fetch:</p>
+<ul>
+<li><code>inbox</code> (default) — normal messages</li>
+<li><code>pending</code> — message requests from accounts the user doesn't follow</li>
+<li><code>spam</code> — spam messages</li>
+</ul>
+<pre><code>instagram-messages-cli inbox --account-id &lt;user_own_fbid&gt;
+instagram-messages-cli inbox --account-id &lt;user_own_fbid&gt; --first 20 --message-count 3
+instagram-messages-cli inbox --account-id &lt;user_own_fbid&gt; --after &lt;cursor&gt;
+instagram-messages-cli inbox --account-id &lt;user_own_fbid&gt; --folder pending
+instagram-messages-cli inbox --account-id &lt;user_own_fbid&gt; --folder spam</code></pre>
+<h4>Thread + Messages</h4>
+<p>Fetch messages for a specific thread. Get the <code>thread_fbid</code> from the inbox response.</p>
+<pre><code>instagram-messages-cli thread --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789
+instagram-messages-cli thread --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --first 20
+instagram-messages-cli thread --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --after &lt;cursor&gt;</code></pre>
+<h4>React to message</h4>
+<p>Add an emoji reaction to a message. Get <code>thread_fbid</code> and <code>message_id</code> from an inbox, thread, or filtered-inbox response, and confirm the exact emoji with the user before reacting.</p>
+<pre><code>instagram-messages-cli react --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --message-id &lt;message_id&gt; --emoji '❤️'</code></pre>
+<h4>Send message</h4>
+<p><strong>Confirm explicit user intent before sending.</strong> A <code>send</code> delivers a real DM to another person and cannot be undone. Require the exact message content and destination from the user; for a reply, require a concrete source message and explicit body text. Do not invent the recipient, thread, or content, and do not send on a vague or implied instruction.</p>
+<p>Send a message to an existing Instagram thread with <code>--thread-fbid</code>, or directly to one or more users with <code>--recipient-user-fbids</code>. Provide exactly one of these destination options. Recipient IDs are user FBIDs; separate multiple IDs with commas. Provide at least one of <code>--text</code>, <code>--file</code>, or <code>--media-fbid</code>. Text may be sent alongside media. <code>--file</code> may be at most 40 MiB and must be JPEG, PNG, WebP, GIF, MP4, or MOV. Do not combine <code>--file</code> with <code>--media-fbid</code>, and do not use <code>--retries</code> when sending a file.</p>
+<p>Before using <code>send --file</code>, ensure that the file is in the workspace path. If it is not, copy it to the workspace. Never use a <code>/tmp</code> path.</p>
+<p>Use <code>--reply-to-message-id</code> to send the message as a linked reply to a specific existing message.</p>
+<pre><code>instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --text &quot;hello&quot;
+instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --recipient-user-fbids 100000000000001 --text &quot;hello&quot;
+instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --recipient-user-fbids 100000000000001,100000000000002 --text &quot;hello everyone&quot;
+instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --media-fbid 17895695668004550
+instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --text &quot;hello&quot; --media-fbid 17895695668004550
+instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --file /path/to/media.jpg
+instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --recipient-user-fbids 100000000000001 --text &quot;look at this&quot; --file /path/to/media.mp4
+instagram-messages-cli send --account-id &lt;user_own_fbid&gt; --thread-fbid 123456789 --text &quot;hello&quot; --reply-to-message-id 'mid.$cAAAGVc20uJOkli7TZGeZOmKFMXiq'</code></pre>
+<h4>Top recipients</h4>
+<p>Use the previous response's <code>page_max_id</code> as <code>--page-max-id</code>. Omit on first request.</p>
+<pre><code>instagram-messages-cli top-recipients --account-id &lt;user_own_fbid&gt; --count 10
+instagram-messages-cli top-recipients --account-id &lt;user_own_fbid&gt; --count 10 --page-max-id &lt;cursor&gt;</code></pre>
+<h4>Keyword search</h4>
+<p>Search DMs by keyword.</p>
+<pre><code>instagram-messages-cli keyword-search --account-id &lt;user_own_fbid&gt; --query-text &quot;hello&quot; --start-date 2025-01-01 --end-date 2026-03-24
+instagram-messages-cli keyword-search --account-id &lt;user_own_fbid&gt; --query-text &quot;hello&quot; --max-results 20 --start-date 2025-01-01 --end-date 2026-03-24</code></pre>
+<h4>Contact search</h4>
+<p>Search DMs by contact name.</p>
+<pre><code>instagram-messages-cli contact-search --account-id &lt;user_own_fbid&gt; --query-text &quot;John&quot; --start-date 2025-01-01 --end-date 2026-03-24
+instagram-messages-cli contact-search --account-id &lt;user_own_fbid&gt; --query-text &quot;John&quot; --max-results 5 --start-date 2025-01-01 --end-date 2026-03-24</code></pre>
+<h4>Temporal search</h4>
+<p>Search DMs by time range.</p>
+<pre><code>instagram-messages-cli temporal-search --account-id &lt;user_own_fbid&gt; --start-date 2025-01-01 --end-date 2026-03-24
+instagram-messages-cli temporal-search --account-id &lt;user_own_fbid&gt; --max-results 15 --start-date 2025-01-01 --end-date 2026-03-24</code></pre>
+<h4>Filtered inbox</h4>
+<p>Fetch inbox threads filtered by a specific criterion. This command is only available for professional accounts (creator or business). Check <code>instagram-cli accounts</code> before using it.</p>
+<p>Available filters:</p>
+<ul>
+<li><code>unread</code> — show unread conversations</li>
+<li><code>unanswered</code> — find threads needing a reply</li>
+<li><code>starred</code> — show important or flagged threads</li>
+<li><code>groups</code> — show group chats only</li>
+<li><code>verified</code> — show verified account threads</li>
+<li><code>followers</code> — show threads from followers</li>
+<li><code>creators</code> — show threads from creators</li>
+<li><code>other-participant-followers100k-plus</code> — high-follower accounts (100K+)</li>
+</ul>
+<pre><code>instagram-messages-cli filtered-inbox --account-id &lt;user_own_fbid&gt; --selected-filter unread
+instagram-messages-cli filtered-inbox --account-id &lt;user_own_fbid&gt; --selected-filter unanswered --thread-limit 10 --message-count 3
+instagram-messages-cli filtered-inbox --account-id &lt;user_own_fbid&gt; --selected-filter verified --folder pending</code></pre>
+<h3>Output</h3>
+<p>The CLI prints decoded JSON to stdout. Read results preserve raw provider timestamps and add semantic <code>message_sent_at</code> / <code>last_message_sent_at</code> values with UTC and user-local forms. Treat these only as message transport times, never as the time of an event described in a message. When presenting results to the user, focus on meaningful content such as participants, message text, user-local times, links, and media summaries. Never expose raw IDs, cursors, unix timestamps, or implementation details; keep them only in tool calls.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

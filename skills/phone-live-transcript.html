@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>phone-live-transcript — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Watch an in-progress phone call and get its transcript to the user as early as possible, with live status narration while the call runs. Triggers on 'show me the call transcript', 'stream the call', or watching an active phone call for the user.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/phone-live-transcript">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/phone-live-transcript">
+<meta property="og:title" content="phone-live-transcript">
+<meta property="og:description" content="Watch an in-progress phone call and get its transcript to the user as early as possible, with live status narration while the call runs. Triggers on 'show me the call transcript', 'stream the call', or watching an active phone call for the user.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="phone-live-transcript">
+<meta name="twitter:description" content="Watch an in-progress phone call and get its transcript to the user as early as possible, with live status narration while the call runs. Triggers on 'show me the call transcript', 'stream the call', or watching an active phone call for the user.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; General &middot; Custom</p>
+      <h1>phone-live-transcript</h1>
+      <p class="lede">Watch an in-progress phone call and get its transcript to the user as early as possible, with live status narration while the call runs. Triggers on 'show me the call transcript', 'stream the call', or watching an active phone call for the user.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Phone Live Transcript</h2>
+<h3>Purpose</h3>
+<p>Give the user the transcript of a phone call at the earliest moment it exists, and narrate the call's live status while it runs. Honest limit up front: the provider releases the transcript only after the call ends — true mid-call text streaming is not possible today. This skill implements the best achievable behavior: a bounded poll loop with status updates, then immediate transcript delivery the moment it lands.</p>
+<h3>Workflow</h3>
+<ol>
+<li>Get the <code>call_id</code>. Use the one returned by <code>phone.place_call</code>, or <code>phone.list_calls</code> (unfiltered, <code>truncated: false</code>) to find a recent one if it isn't in context.</li>
+<li>Start the watch: call <code>phone.call_status</code> with the <code>call_id</code> once to get the baseline state.</li>
+<li>Poll loop while status is non-terminal (<code>queued</code>, <code>dialing</code>, <code>ringing</code>, <code>in_progress</code>):</li>
+</ol>
+<ul>
+<li>Wait 20–30 seconds between checks (never poll faster than ~15 s).</li>
+<li>If the status changed since the last check, tell the user in one short line (during a voice call this becomes a spoken update: &quot;still ringing&quot;, &quot;connected now&quot;, etc.).</li>
+<li>If the result now carries <code>transcript_available: true</code>, <code>transcript_artifact_available: true</code>, or a <code>transcript_widget</code> token, break out of the loop immediately and go to step 4.</li>
+<li>If the status reaches a terminal value (<code>completed</code>, <code>failed</code>, <code>canceled</code>, <code>rejected</code>), allow one short grace window (~60 s) for the transcript to materialize, then stop.</li>
+</ul>
+<ol>
+<li>Present the transcript: share it verbatim via the exact token the tool returned (never reconstruct it from memory, never invent one). If the user asked for its contents, read and summarize them from the delivered attachment.</li>
+<li>Future-proofing: if the provider ever returns partial transcripts mid-call, present new text as it arrives and keep a seen-cursor (last shown character count or last segment id) so re-polls append only deltas.</li>
+</ol>
+<h3>Output Contract</h3>
+<ul>
+<li>While the call runs: one short spoken/text status line per state change, nothing more.</li>
+<li>When the transcript lands: deliver the transcript token/content immediately, no delay.</li>
+<li>When the call ends without a transcript: say plainly the transcript never materialized, and summarize the known outcome from <code>call_status</code> (status, duration, disconnection reason) without inventing detail.</li>
+</ul>
+<h3>Operating Rules</h3>
+<ol>
+<li>Never claim to show a live transcript when only status is available — honest 503 over fake success.</li>
+<li>Never invent transcript content, a transcript token, or call dialogue.</li>
+<li>The poll loop is bounded: terminal status plus a short grace window ends it. Do not poll in a tight loop and do not spawn a separate monitor to keep watching.</li>
+<li>Do not redial or place a replacement call because a transcript is missing — check <code>phone.list_calls</code> first.</li>
+<li>Keep one unanswered user question in flight during a live call; narrate status, don't interrogate.</li>
+<li>During a voice call, keep status updates to a single short line each — the user is listening, not reading.</li>
+</ol>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

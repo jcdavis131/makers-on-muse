@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>booking — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Primary entry point for direct flight, hotel, restaurant, or event-ticket transactions and for bounded live availability checks delegated by Travel Planning. Always use before provider-specific skills or browser work when the user asks to find live availability or prices, compare bookable options, book, or continue an active booking. Do not use for trip planning itself, broad inspiration, opening hours, schedules, flight status, or other factual questions without transaction intent.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/booking">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/booking">
+<meta property="og:title" content="booking">
+<meta property="og:description" content="Primary entry point for direct flight, hotel, restaurant, or event-ticket transactions and for bounded live availability checks delegated by Travel Planning. Always use before provider-specific skills or browser work when the user asks to find live availability or prices, compare bookable options, book, or continue an active booking. Do not use for trip planning itself, broad inspiration, opening hours, schedules, flight status, or other factual questions without transaction intent.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="booking">
+<meta name="twitter:description" content="Primary entry point for direct flight, hotel, restaurant, or event-ticket transactions and for bounded live availability checks delegated by Travel Planning. Always use before provider-specific skills or browser work when the user asks to find live availability or prices, compare bookable options, book, or continue an active booking. Do not use for trip planning itself, broad inspiration, opening hours, schedules, flight status, or other factual questions without transaction intent.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Money &middot; Bundled</p>
+      <h1>booking</h1>
+      <p class="lede">Primary entry point for direct flight, hotel, restaurant, or event-ticket transactions and for bounded live availability checks delegated by Travel Planning. Always use before provider-specific skills or browser work when the user asks to find live availability or prices, compare bookable options, book, or continue an active booking. Do not use for trip planning itself, broad inspiration, opening hours, schedules, flight status, or other factual questions without transaction intent.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Booking</h2>
+<p>Use plain Markdown for booking responses except for native flight comparisons and the hotel map/list presentation described in the hotel reference. Do not emit HTML or call <code>create_options</code>. Do not duplicate booking inventory in two equivalent selection widgets.</p>
+<p>Turn a direct booking request into a verified reservation or purchase with as little work from the user as possible. Examples include “book dinner tomorrow for two,” “get me a flight from SFO to JFK next Tuesday,” “find me a hotel in SoHo for Friday,” and “get tickets to the Patriots’ next game.”</p>
+<p>This skill covers four booking types:</p>
+<ul>
+<li>flights: read <code>/opt/hatch/skills/booking/references/flights.md</code> and</li>
+</ul>
+<p><code>/opt/hatch/skills/booking/references/presentation.md</code> before searching or booking; the required comparison fields affect which facts must be retained from search results</p>
+<ul>
+<li>hotels: read <code>/opt/hatch/skills/booking/references/hotels.md</code> before searching</li>
+</ul>
+<p>or booking</p>
+<ul>
+<li>restaurants: read <code>/opt/hatch/skills/booking/references/restaurants.md</code></li>
+</ul>
+<p>before searching or booking</p>
+<ul>
+<li>sports, concert, theater, and other event tickets: read</li>
+</ul>
+<p><code>/opt/hatch/skills/booking/references/tickets.md</code> before searching or booking</p>
+<p>Booking is the user-facing entry point. Provider-specific skills are secondary operating manuals: load this skill and its category reference first, then load the relevant provider skill before using that provider. Do not substitute a provider skill or generic browser search for this orchestration layer.</p>
+<p>For a browser checkout, read <code>/opt/hatch/skills/booking/references/browser-booking.md</code> before starting it. For a non-flight booking, read <code>/opt/hatch/skills/booking/references/presentation.md</code> before presenting options, a final review, or a confirmation. Read only the references required for the current booking type.</p>
+<p>Apply instructions that ask the user a question only in a live conversation. In a detached worker, use authorized context to make reversible assumptions. Put any unresolved blocker in the final message.</p>
+<h3>Non-negotiable behavior</h3>
+<ul>
+<li>Load the category reference before searching or opening a provider, even when</li>
+</ul>
+<p>a provider-specific skill appears to cover the request.</p>
+<ul>
+<li>When a relevant, low-friction booking connector is disconnected, recommend</li>
+</ul>
+<p>connecting it and surface its supported connection action once when that would improve live availability, saved-profile use, or checkout. Do not make connection a prerequisite or wait idle for it: continue the same request through the official website, another reputable provider, and <code>phone.place_call</code> when that tool is available. A missing, gated, unavailable, or unsuccessful connector ends only that path.</p>
+<ul>
+<li>Keep provider plumbing private. Do not expose internal provider names,</li>
+</ul>
+<p>commands, identifiers, offer ids, or tool choices.</p>
+<ul>
+<li>Present flight comparisons with the native structured flight list when it is</li>
+</ul>
+<p>available. For hotels, use the native map/list plus compact Markdown contract in the hotel reference. Present all other booking choices and decisions in plain Markdown. Do not use HTML or call <code>create_options</code>. When Travel Planning owns a plan-first workflow, return the selected candidate to it for the separate book-now-or-later decision.</p>
+<ul>
+<li>For event tickets, do not search seat inventory until the exact occurrence</li>
+</ul>
+<p>and ticket count are known, including after a partial reply; an option count is not a ticket count. Never infer a seat attribute from its section name; if a current source does not state shade or coverage, call it unverified.</p>
+<ul>
+<li>Do not ask the user to paste sensitive values into chat unless the active</li>
+</ul>
+<p>provider skill explicitly permits the field for checkout. Payment-card data and account credentials never qualify. Do not repeat sensitive values.</p>
+<h3>Boundary</h3>
+<p>Direct use requires booking intent. A specific venue or itinerary is not required, but the desired outcome is a transaction rather than inspiration. The exception is a bounded live availability or price check delegated by Travel Planning, which retains trip-level ownership and receives the selected candidate back without checkout preparation.</p>
+<p>Do not use this skill for:</p>
+<ul>
+<li>planning a trip, building a multi-part itinerary, or filling in adjacent</li>
+</ul>
+<p>needs such as rides, childcare, activities, or meals the user did not ask to book; Travel Planning may still delegate one bounded live check</p>
+<ul>
+<li>“where should I go?” exploration with no intent to reserve</li>
+<li>factual questions such as opening hours, reviews, or flight status</li>
+<li>changing or cancelling an existing booking unless the request explicitly</li>
+</ul>
+<p>asks for that and the relevant provider tool supports it</p>
+<p>If a direct request contains several bookings, handle each requested item but do not expand it into a broader trip or occasion plan.</p>
+<h3>Operating principle: discover before asking</h3>
+<p>Do not begin with a questionnaire. Use available, authorized sources to fill in the request and personalize the search before asking the user for anything. Work from narrow, relevant queries; do not browse unrelated mail, accounts, or transactions.</p>
+<p>Check, when available and relevant:</p>
+<ol>
+<li>Persistent preferences or prior booking context.</li>
+<li>Connected email for confirmations, receipts, credits, memberships, and the</li>
+</ol>
+<p>channels previously used for comparable bookings.</p>
+<ol>
+<li>Signed-in provider accounts and booking platforms for profile details,</li>
+</ol>
+<p>loyalty status, credits, points, booking history, and saved preferences.</p>
+<ol>
+<li>Connected calendar for conflicts with the requested date or time.</li>
+<li>Connected wallet or card profile for saved payment methods and known</li>
+</ol>
+<p>benefits. Plaid, when available, may identify linked card products and relevant transactions, but it is not a source of points balances, reward rules, or unused travel credits. Do not expose full account or card numbers.</p>
+<ol>
+<li>Live inventory and the provider’s current terms.</li>
+</ol>
+<p>Use what is already connected. For a relevant low-friction booking connector, briefly recommend connecting it early when doing so improves discovery or checkout, and provide only its supported connection action. Continue useful unauthenticated discovery without waiting for the connection. For other accounts or login walls, offer sign-in when authentication materially unlocks the best path or is required to complete checkout. Do not turn it into an up-front questionnaire.</p>
+<h3>What to remember</h3>
+<p>Build a small booking profile from explicit choices and reliable history. Keep three kinds of data separate:</p>
+<ul>
+<li><strong>Reusable preferences:</strong> airports, airlines, seat location, cabin, hotel</li>
+</ul>
+<p>style, neighborhood, restaurant tastes, price comfort, usual dining time, seating preferences, and preferred booking channels. Save these through an available persistent memory or profile capability.</p>
+<ul>
+<li><strong>Account facts:</strong> loyalty program names, status tiers, point currencies,</li>
+</ul>
+<p>card products, travel-credit programs, and which booking accounts exist. Keep these only in an approved account/profile store or the connector that owns them.</p>
+<ul>
+<li><strong>Sensitive booking identity:</strong> legal name, date of birth, passport details,</li>
+</ul>
+<p>Known Traveler Number or TSA PreCheck number, loyalty membership numbers, and payment credentials. A provider skill may permit checkout fields in chat; use them only for that checkout. Never copy them into ordinary memory, notes, artifacts, or workspace files, or claim they were remembered.</p>
+<p>Apply these evidence rules:</p>
+<ul>
+<li>An explicit statement is a preference.</li>
+<li>A repeated pattern across comparable bookings is a tentative preference.</li>
+<li>One old booking is a search hint, not a permanent preference.</li>
+<li>Do not infer allergies, accessibility needs, identity fields, or willingness</li>
+</ul>
+<p>to spend from history.</p>
+<ul>
+<li>Do not overwrite an explicit preference with an inferred one. When recent</li>
+</ul>
+<p>evidence conflicts and changes the recommendation, surface the conflict at the decision point.</p>
+<ul>
+<li>After a completed booking, update reusable preferences when the user made</li>
+</ul>
+<p>an explicit choice or the booking reinforces a repeated pattern. Store a concise fact, not the full itinerary or receipt.</p>
+<p>If persistent memory is unavailable, keep the profile session-local and say nothing that implies it will survive this conversation.</p>
+<h3>Direct-booking flow</h3>
+<h4>1. Normalize the request</h4>
+<p>Resolve relative dates into exact local dates. Identify the booking type and the minimum transaction fields for it. Carry reasonable assumptions into search when they are reversible. For example, use one traveler when the user says “me,” or search near the user's home when context makes that clear. Label those assumptions when presenting results.</p>
+<p>Do not invent legal names, ages, identity numbers, accessibility needs, dietary restrictions, or payment details.</p>
+<h4>2. Gather context proactively</h4>
+<p>Inspect the relevant sources above, preferably in parallel. Extract only facts that can affect this booking. Record internally whether each fact was explicit, observed repeatedly, or inferred from one prior booking.</p>
+<p>Do not ask for information already available from an authorized source. Delay sensitive identity and payment fields until a chosen option actually requires them.</p>
+<h4>3. Ask only for a true blocker</h4>
+<p>Start searching as soon as a useful search can run. Ask only when a missing fact would create materially different searches, risks booking the wrong thing, or is required to transact and cannot be obtained securely elsewhere.</p>
+<p>Keep at most one unanswered question in flight. Prefer a short choice with a recommended default. Do not ask for optional preferences one by one; search with the best available profile and let the results make tradeoffs concrete.</p>
+<h4>4. Search through the best available path</h4>
+<p>Use the category reference’s routing. In general:</p>
+<ol>
+<li>Use a connected native provider or authenticated first-party account when</li>
+</ol>
+<p>it can complete the job and preserve relevant loyalty or credits.</p>
+<ol>
+<li>Use connected booking platforms and compare across them when channel,</li>
+</ol>
+<p>availability, or benefits differ.</p>
+<ol>
+<li>Use the authenticated browser on the provider’s own site.</li>
+<li>Use a reputable marketplace or aggregator.</li>
+<li>Use <code>phone.place_call</code> when it is in the tool catalog and the business</li>
+</ol>
+<p>accepts bookings by phone. Follow the phone tool’s confirmation rules.</p>
+<ol>
+<li>Hand off only after the available paths are genuinely blocked. Give the</li>
+</ol>
+<p>exact link or number, the filled-in choices, what remains, and why you could not finish.</p>
+<p>Actually try an available path before declaring it unavailable. A help page, search snippet, or missing result on one marketplace is not proof that the booking cannot be made.</p>
+<p>When one provider has no match, no inventory, or cannot complete the booking, continue immediately through the next suitable provider, the venue or carrier's official site, and then <code>phone.place_call</code> when that tool is available. Do not ask whether to try the next path. Ask only when every available path is blocked by a decision, identity field, authentication step, or commitment that requires the user.</p>
+<p>Do not silently substitute a different date, airport, property, restaurant, event, seating class, fare class, or materially different price.</p>
+<h4>5. Rank a small set of real options</h4>
+<p>When a choice remains, show three to five bookable contenders, best first. Include only details that separate them and the full amount the user will pay, including taxes and mandatory fees. For comparisons without a flight widget, say why the first option wins for this user, using confirmed preferences and clearly labeled assumptions. For flight widgets, follow the acknowledgement guidance in <code>/opt/hatch/skills/booking/references/flights.md</code>.</p>
+<p>Render the choices according to <code>/opt/hatch/skills/booking/references/presentation.md</code>. The native structured list is the primary flight-comparison surface when available; a compact Markdown table is the fallback for flights and the primary surface for other booking types. Do not repeat either as a wall of prose.</p>
+<p>Every option shown must be live enough to pursue now. Recheck stale inventory before checkout. Keep estimated prices, missing terms, and unverified attributes outside the bookable shortlist. Do not dump raw provider output or internal identifiers.</p>
+<p>If one exact option was requested and is available on acceptable terms, skip the comparison and prepare that option directly.</p>
+<h4>6. Prepare to the commitment boundary</h4>
+<p>Fill in known details and advance the selected option to the final review page. A free, clearly cancellable hold may be placed when it protects the requested booking; immediately disclose the hold and its expiry.</p>
+<p>Before submitting a reservation or purchase, show a compact final review. This rule applies to deposits, points transfers, non-refundable commitments, and cancellation or no-show penalties. Include:</p>
+<ul>
+<li>exact item, provider, date, time, party/traveler count, and selected variant</li>
+<li>itemized price, mandatory fees, credits or points applied, amount due now,</li>
+</ul>
+<p>and amount due later</p>
+<ul>
+<li>cancellation, refund, change, and no-show terms that affect the decision</li>
+<li>payment source only by safe label such as issuer, product, and last four when</li>
+</ul>
+<p>an authorized tool provides it</p>
+<p>Ask for confirmation on those exact terms through the relevant trusted approval surface. When the provider tool will present the same approval, do not add a duplicate chat confirmation. An earlier “book it” authorizes the workflow, not a changed price or an undisclosed commitment.</p>
+<p>Do not transfer points, buy points, apply a scarce certificate, or choose a different payment method without making that choice visible at final review.</p>
+<h4>7. Execute and verify</h4>
+<p>Submit through the same prepared checkout or provider session. A loaded page, pending spinner, or card authorization is not success. Report a booking only after the provider returns a confirmation page, reference, ticket, or clearly booked state.</p>
+<p>Return a concise receipt with the human-readable booking details, confirmation/reference number, total paid or committed, and the most important deadline. Do not include full payment, passport, traveler-security, or loyalty numbers.</p>
+<p>If submission is ambiguous, say that it is ambiguous, check the provider account and narrowly search for a confirmation email before retrying. Do not risk a duplicate booking.</p>
+<h4>8. Close the loop</h4>
+<p>Save the receipt or add the booking to the calendar only when the user has requested it or has an established preference for that behavior. Record any new reusable preference per “What to remember.” State plainly whether the booking is confirmed, held, waitlisted, or still blocked.</p>
+<h3>Communication</h3>
+<ul>
+<li>Lead with progress or the recommendation, not process narration.</li>
+<li>Keep one decision in front of the user at a time.</li>
+<li>Treat <code>/opt/hatch/skills/booking/references/presentation.md</code> as the</li>
+</ul>
+<p>response-format contract. Use the native structured list for flight options when available, a compact Markdown comparison for other options, and a short Markdown receipt for completion.</p>
+<ul>
+<li>Keep the surrounding chat to a short recommendation and one next decision.</li>
+</ul>
+<p>Do not restate every field already visible in the presentation.</p>
+<ul>
+<li>Do not expose which emails, transactions, or old reservations were read.</li>
+</ul>
+<p>Summarize the useful preference instead.</p>
+<ul>
+<li>Do not print secrets, full identity numbers, or full payment numbers.</li>
+<li>Be honest about blocks and uncertainty. Trying is not booking.</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

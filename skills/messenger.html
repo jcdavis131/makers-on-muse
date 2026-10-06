@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>messenger_read — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Work with the user's Messenger account: read call history; read and search contacts; read, search, and summarize conversations; send, react to, unsend, or edit messages; and message Marketplace listing threads.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/messenger">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/messenger">
+<meta property="og:title" content="messenger_read">
+<meta property="og:description" content="Work with the user's Messenger account: read call history; read and search contacts; read, search, and summarize conversations; send, react to, unsend, or edit messages; and message Marketplace listing threads.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="messenger_read">
+<meta name="twitter:description" content="Work with the user's Messenger account: read call history; read and search contacts; read, search, and summarize conversations; send, react to, unsend, or edit messages; and message Marketplace listing threads.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>messenger_read</h1>
+      <p class="lede">Work with the user's Messenger account: read call history; read and search contacts; read, search, and summarize conversations; send, react to, unsend, or edit messages; and message Marketplace listing threads.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Messenger</h2>
+<p>Use Messenger Companion to work with the user's personal Messenger account.</p>
+<h3>Routing and Safety</h3>
+<p>Messenger on Muse has two separate features:</p>
+<div class="tbl"><table><thead><tr><th>User wants to...</th><th>Feature</th><th>What to do</th></tr></thead><tbody>
+<tr><td>Message Muse on Messenger</td><td><strong>Messenger side chat</strong></td><td>Use <code>chat.connection_status</code> and the connection flow in <code>~/docs/chat-connections/messenger.md</code></td></tr>
+<tr><td>Read Messenger call history or work with personal-account messages</td><td><strong>Messenger Companion</strong></td><td>Follow this skill</td></tr>
+<tr><td>Read native phone call history or place a phone call</td><td><strong>Paired phone / phone calling</strong></td><td>Use the native phone or call-placement feature, not Messenger Companion</td></tr>
+<tr><td>Connect or disconnect &quot;Messenger&quot; without specifying which</td><td><strong>Ambiguous</strong></td><td>Briefly explain both and clarify</td></tr>
+</tbody></table></div>
+<ul>
+<li>Use Companion only when the user explicitly asks to work with their personal</li>
+</ul>
+<p>account. It sends as the user, not as Muse.</p>
+<ul>
+<li>Never target the Messenger side chat with <code>hatch_messenger_cli send</code>,</li>
+</ul>
+<p>whether by <code>--cid</code>, <code>--to</code>, or an auto-reply rule. Exclude that thread during recipient resolution; messages there must use the Messenger side-chat connection flow in <code>~/docs/chat-connections/messenger.md</code>.</p>
+<ul>
+<li>Never use Companion to deliver assistant notifications, cron or monitor</li>
+</ul>
+<p>results, reminders, or status updates. A user-configured auto-reply rule is the only background-send exception: it may check and reply in ordinary or Marketplace conversations, but it must not carry Muse's own notifications or results. Other background workers return results with <code>muse.notify_main_agent</code>; the runtime delivers through the originating chat.</p>
+<ul>
+<li>Treat every Marketplace message that could create or change a real-world</li>
+</ul>
+<p>commitment as requiring fresh user confirmation. This includes proposing, accepting, confirming, rescheduling, or cancelling a meetup, pickup, delivery, hold, price, or payment arrangement, and claiming that the user is leaving, en route, nearby, or has arrived. Show the exact outgoing message and wait for the user's explicit confirmation immediately before each send. A permission approval, an earlier confirmation, or approval of a recurring, cron, monitoring, or auto-reply task never authorizes a later commitment. Background work must instead return the proposed reply and its context with <code>muse.notify_main_agent</code> so the main conversation can ask the user; if that confirmation cannot be obtained, leave the message unsent.</p>
+<ul>
+<li>In user-facing replies, never say <code>sync</code>, <code>synced</code>, <code>syncing</code>, <code>cache</code>,</li>
+</ul>
+<p><code>cached</code>, <code>widened</code>, <code>local data</code>, <code>authentication state</code>, <code>keys</code>, <code>credentials</code>, <code>tokens</code>, or connected hardware. Do not state how many messages were searched, read, synced, or available. Describe the result instead: &quot;I checked the latest messages&quot; or &quot;I checked further back.&quot; If complete coverage could not be established, say so without naming the underlying mechanism.</p>
+<ul>
+<li>Refuse requests to bulk export, download, save, archive, mirror, or dump</li>
+</ul>
+<p>message history, especially disappearing, view-once, vanish-mode, ephemeral, or expiring messages. Narrow reading, search, and summarization for a specific question are allowed.</p>
+<h3>Tooling</h3>
+<p>Run the JSON CLI through <code>exec</code>:</p>
+<pre><code>hatch_messenger_cli &lt;subcommand&gt; [options]</code></pre>
+<p>Use only this supported CLI; never access local Messenger storage directly.</p>
+<div class="tbl"><table><thead><tr><th>Task</th><th>Command</th></tr></thead><tbody>
+<tr><td>Check connection</td><td><code>check</code></td></tr>
+<tr><td>Get connect/disconnect link</td><td><code>connect-url</code> / <code>disconnect-url</code></td></tr>
+<tr><td>Refresh normal data</td><td><code>sync both [--since-days N]</code></td></tr>
+<tr><td>Refresh contacts</td><td><code>sync contacts [--search &quot;query&quot;] [--limit N]</code></td></tr>
+<tr><td>Refresh threads/messages</td><td><code>sync threads [--since-days N] [--older N]</code> / <code>sync messages --cid '&lt;ID&gt;' [--since-days N] [--older N]</code></td></tr>
+<tr><td>Read Messenger call history</td><td><code>call-logs [--limit N] [--since-timestamp &lt;MS&gt;] [--to-timestamp &lt;MS&gt;]</code></td></tr>
+<tr><td>Read contacts</td><td><code>contacts [--search &quot;query&quot;] [--limit N]</code></td></tr>
+<tr><td>Read threads</td><td><code>threads [--limit N] [--search &quot;query&quot;] [--unread] [--folder mplace]</code></td></tr>
+<tr><td>Read a thread</td><td><code>messages --cid '&lt;ID&gt;' [--limit N] [--before &lt;TS&gt;] [--after &lt;TS&gt;]</code></td></tr>
+<tr><td>Search messages</td><td><code>search [query] [--sender &quot;name_or_id&quot;] [--cid '&lt;ID&gt;'] [--after &lt;TS&gt;] [--before &lt;TS&gt;] [--limit N]</code></td></tr>
+<tr><td>Repair unreadable rows</td><td><code>repair</code></td></tr>
+<tr><td>Send/initiate/react/edit/unsend</td><td>See the mutation workflows below</td></tr>
+</tbody></table></div>
+<h4>User-facing output</h4>
+<ul>
+<li>Never expose raw tool metadata: IDs (<code>msg_id</code>, <code>message_id</code>, <code>mid.$...</code>,</li>
+</ul>
+<p><code>conversation_id</code>, <code>cid.$...</code>, caller/callee FBIDs, <code>otid</code>), device counts, encryption details, delivery or receipt state, raw JSON, or cache statistics.</p>
+<ul>
+<li>The only ID-derived output exceptions are an FBID embedded in an allowed</li>
+</ul>
+<p>Facebook profile link and the target portion of a user-requested Messenger thread link. Never display either ID separately or put a full namespaced ID in a URL.</p>
+<ul>
+<li>A URL found in message text or message-level URL metadata may be returned</li>
+</ul>
+<p>when requested, but expose only the URL, not its surrounding metadata.</p>
+<ul>
+<li>After a successful mutation, confirm briefly and naturally. Do not narrate</li>
+</ul>
+<p>the service response or claim delivery/read status.</p>
+<h3>Connect or Disconnect Companion</h3>
+<p>Check first:</p>
+<pre><code>hatch_messenger_cli check</code></pre>
+<p>If Companion is not connected, run <code>hatch_messenger_cli connect-url</code>. When the response contains <code>connect_url</code>, share exactly <code><a href="&lt;connect_url&gt;">Connect Messenger</a></code>, without also pasting the raw URL. Do not collect secrets or guide the user through manual authentication in chat. After the user links in Settings, continue with the requested operation.</p>
+<p>To disconnect Companion, run <code>hatch_messenger_cli disconnect-url</code>. When the response contains <code>disconnect_url</code>, share exactly <code><a href="&lt;disconnect_url&gt;">Disconnect Messenger</a></code>, without also pasting the raw URL. Disconnecting Companion removes its access to the personal account but does not affect the Messenger side-chat connection. Reconnect later with <code>connect-url</code> and the same link rule.</p>
+<h3>Sync Threads and Messages</h3>
+<p>Read commands use locally retained Messenger data. Sync before claiming freshness or completeness.</p>
+<p>Use <code>hatch_messenger_cli sync both</code> for normal refreshes. Add <code>--since-days N</code> when the question reaches farther back. For older history in one thread, use:</p>
+<pre><code>hatch_messenger_cli sync messages --cid '&lt;CONVERSATION_ID&gt;' --older 100</code></pre>
+<p><code>sync both</code> is incremental and fills message gaps. If <code>_cache.gaps</code> overlaps the question, repeat it until the relevant gaps clear. If the requested period predates <code>_cache.oldest_cached_ts</code>, extend it with <code>sync both --since-days N</code>. For a single-thread gap, prefer targeted <code>sync messages</code>. Qualify the answer if complete coverage still cannot be established, using the user-facing language from Routing and Safety.</p>
+<h2>Resolve Contacts</h2>
+<pre><code>hatch_messenger_cli sync contacts
+hatch_messenger_cli contacts --search &quot;Alice&quot;</code></pre>
+<p>The default refresh fetches up to 100 contacts and merges them into the contact snapshot. If the user asks for more, rerun with a limit larger than 100 or the previous bounded limit, up to 10,000. <code>contacts</code> reads the complete retained snapshot; <code>--search</code> performs case-insensitive substring matching on names.</p>
+<p>If local search returns no result, retry once with <code>sync contacts --search &quot;&lt;name&gt;&quot;</code>, then repeat the local search. Also use that targeted refresh when matches are ambiguous or incomplete, the user asks to look beyond known contacts, or current server results are required.</p>
+<h4>Contact profile links</h4>
+<p>In contact-list/search results and the <strong>Recipients:</strong> field of a send preview, link each full display name when a profile URL or FBID is available. Prefer an explicit <code>profile_url</code> or <code>vanity_url</code>; otherwise use <code>https://www.facebook.com/profile.php?id=&lt;fbid&gt;</code>. Keep names plain when neither is known. Do not show a raw FBID, a bare profile URL, or a shortened name.</p>
+<p>Use plain contact names in thread labels, thread-search results, unrelated assistant prose, and success confirmations. Never add a profile link to the outgoing message unless the user explicitly asked to send that exact linked text.</p>
+<h3>Read Messenger Call History</h3>
+<p>Use <code>hatch_messenger_cli call-logs</code> for the latest Messenger audio and video call history. <code>--limit</code> accepts 0 through 50 and defaults server-side to 20. Use <code>--since-timestamp &lt;MS&gt;</code> for an inclusive lower bound and <code>--to-timestamp &lt;MS&gt;</code> for an exclusive upper bound; when both are present, the lower bound must be less than the upper bound.</p>
+<p>Report the annotated time, event, audio/video type, duration, direction, and missed status without exposing caller, callee, conversation, or message IDs or raw JSON. An empty result means no Messenger calls were returned for that bounded query; it does not establish that the user has no native phone call history or no calls outside the retained Messenger history window.</p>
+<h3>Read Threads and Messages</h3>
+<p>List or resolve threads before reading one:</p>
+<pre><code>hatch_messenger_cli threads --limit 20
+hatch_messenger_cli threads --search &quot;Bao&quot; --limit 10
+hatch_messenger_cli messages --cid '&lt;CONVERSATION_ID&gt;' --limit 20</code></pre>
+<p><code>threads --search</code> matches names and nicknames. If exactly one thread matches, read it; otherwise ask the user to disambiguate. Folder filtering applies only to <code>threads</code>, not <code>sync</code>:</p>
+<pre><code>hatch_messenger_cli threads --folder mplace --limit 20
+hatch_messenger_cli threads --folder mplace --unread</code></pre>
+<p>For older retained rows, use <code>messages --before &lt;TIMESTAMP_MS&gt;</code>. For unread catch-up, read <code>threads --unread</code>, then the chosen thread with <code>messages --after &lt;read_timestamp&gt;</code>.</p>
+<p>If a row says <code>(decrypt failed)</code> or <code>(no thread key)</code>, treat only that row as unreadable. Run <code>repair</code> and read the thread again before drawing a conclusion; see Repair Unreadable Messages.</p>
+<h4>Return URLs from messages</h4>
+<p>When asked for a URL from a message, inspect both its text and message-level URL metadata. Return the relevant value verbatim, preserving scheme, hostname, port, path, query, fragment, casing, and percent-encoding. Do not normalize, shorten, decode/re-encode, or rebuild it from a preview. Do not open it unless the user asks.</p>
+<h4>Count total messages</h4>
+<ol>
+<li>Run <code>threads</code> and compare the returned list with</li>
+</ol>
+<p><code>_cache.cached_thread_count</code>; if needed, rerun with that count as <code>--limit</code>.</p>
+<ol>
+<li>Deduplicate threads by <code>conversation_id</code>.</li>
+<li>For each thread, run <code>messages --cid '&lt;CONVERSATION_ID&gt;' --limit 1</code> and read</li>
+</ol>
+<p><code>_cache.cached_message_count</code>.</p>
+<ol>
+<li>Sum those counts, not the one-row <code>messages</code> arrays.</li>
+</ol>
+<p>Sync first for a current or complete count. Qualify an incomplete total using the user-facing wording above, and never expose the IDs used in the calculation.</p>
+<h4>Link to a specific conversation</h4>
+<p>Only create a deep link when the user asks. Resolve the exact thread and inspect both <code>conversation_id</code> and <code>is_e2ee</code>:</p>
+<ul>
+<li>Open one-to-one: <code>is_e2ee: false</code> and</li>
+</ul>
+<p><code>cid.c.&lt;VIEWER_FBID&gt;:&lt;CONTACT_FBID&gt;</code>. Compare both values with <code>_cache.self_user_id</code> and use the other value: <code>https://www.messenger.com/t/&lt;CONTACT_FBID&gt;</code>.</p>
+<ul>
+<li>Open group: <code>is_e2ee: false</code> and <code>cid.g.&lt;GROUP_ID&gt;</code>:</li>
+</ul>
+<p><code>https://www.messenger.com/t/&lt;GROUP_ID&gt;</code>.</p>
+<ul>
+<li>E2EE chat: <code>is_e2ee: true</code> and <code>cid.g.&lt;THREAD_ID&gt;</code>:</li>
+</ul>
+<p><code>https://www.messenger.com/e2ee/t/&lt;THREAD_ID&gt;</code>.</p>
+<p>Groups and E2EE chats share the <code>cid.g.</code> prefix, so never infer encryption from the ID prefix, thread type, or name. If <code>is_e2ee</code> is absent, sync and resolve again. For an open one-to-one, do not build the link unless <code>_cache.self_user_id</code> identifies the other participant unambiguously. Use only the documented numeric portion; never substitute another field, guess, or put the <code>cid.c.</code>/<code>cid.g.</code> namespace in the URL. Return a descriptive Markdown link without separately showing the ID.</p>
+<h3>Search Messages</h3>
+<pre><code>hatch_messenger_cli search &quot;dinner&quot;
+hatch_messenger_cli search --sender &quot;Alice&quot;
+hatch_messenger_cli search &quot;dinner&quot; --cid '&lt;CONVERSATION_ID&gt;'</code></pre>
+<ul>
+<li>Search is literal substring matching over retained data, not semantic search.</li>
+</ul>
+<p>Quote multi-word queries and try alternate terms when useful.</p>
+<ul>
+<li>Resolve an ambiguous conversation with <code>threads --search</code> before scoping the</li>
+</ul>
+<p>query. For exhaustive searches, paginate with <code>--before &lt;oldest_timestamp&gt;</code>.</p>
+<ul>
+<li>Sync first when freshness or completeness matters.</li>
+<li>Bound date questions with <code>search --after &lt;ms&gt;</code> and optionally</li>
+</ul>
+<p><code>--before &lt;ms&gt;</code>. <code>sync --since-days N</code> widens available history but does not filter search results.</p>
+<ul>
+<li><code>message_sent_at</code> and <code>last_message_sent_at</code> are transport times. Never infer</li>
+</ul>
+<p>when an event mentioned inside a message occurred from those timestamps.</p>
+<h3>Message Text Input</h3>
+<p>For every send, Marketplace initiation, or edit, pass the body through <code>--text-stdin</code> and the separate <code>stdin</code> field of <code>muse.exec</code>:</p>
+<pre><code>{
+  &quot;command&quot;: &quot;/opt/hatch/bin/hatch_messenger_cli send --cid '&lt;CONVERSATION_ID&gt;' --text-stdin&quot;,
+  &quot;stdin&quot;: &quot;exact message text&quot;
+}</code></pre>
+<p>There is no <code>--text</code> flag. Put the complete outgoing text in <code>stdin</code>, using a separate invocation for each message.</p>
+<h3>Send a Message</h3>
+<p>Send only on an explicit request and never to a guessed recipient.</p>
+<h4>Resolve the recipient</h4>
+<ol>
+<li>Use <code>threads --search</code> for an existing conversation.</li>
+<li>A request for a one-to-one, direct, or individual chat is a hard constraint.</li>
+</ol>
+<p>Before using <code>--cid</code>, verify <code>thread_type</code> is not a group and participant metadata contains no one beyond the user and intended recipient. Never fall back to a matching group.</p>
+<ol>
+<li>If there is no verified one-to-one thread, follow the contact workflow. Use</li>
+</ol>
+<p><code>--to &lt;FACEBOOK_USER_ID&gt;</code> only when that exact FBID appears on the intended person's current name-based <code>contacts --search</code> result. When only an FBID was initially available, it must exactly match an unambiguous record from unfiltered <code>contacts</code>.</p>
+<ol>
+<li>An ID from thread participants, message metadata, memory, earlier output, or</li>
+</ol>
+<p>user text does not authorize <code>--to</code>. If the exact contact cannot be resolved, ask for the person's name or explain that the contact cannot be resolved.</p>
+<h4>Preview and execute</h4>
+<p>Immediately before sending, show:</p>
+<ul>
+<li><strong>Thread:</strong> only for <code>GROUP</code> or <code>SECURE_MESSAGE_OVER_WA_GROUP</code>;</li>
+<li><strong>Recipients:</strong> resolved full names, linked according to Contact profile links;</li>
+<li><strong>Message:</strong> the exact outgoing text as a Markdown blockquote; and</li>
+<li><strong>Attachment:</strong> when present, followed on its own line by</li>
+</ul>
+<p><code><a href="sandbox://workspace/&lt;workspace-relative-path&gt;">filename</a></code> outside the blockquote.</p>
+<p>Use names rather than IDs. Wait for explicit confirmation; if the user changes anything, show the revised preview and wait again. Then call exactly one form:</p>
+<pre><code>{
+  &quot;command&quot;: &quot;/opt/hatch/bin/hatch_messenger_cli send --cid '&lt;CONVERSATION_ID&gt;' --text-stdin&quot;,
+  &quot;stdin&quot;: &quot;message text&quot;
+}</code></pre>
+<pre><code>{
+  &quot;command&quot;: &quot;/opt/hatch/bin/hatch_messenger_cli send --to '&lt;FACEBOOK_USER_ID&gt;' --text-stdin&quot;,
+  &quot;stdin&quot;: &quot;message text&quot;
+}</code></pre>
+<p>For attachments, add <code>--attach '&lt;FILE&gt;'</code> to the command with a readable local path. If the source is outside the workspace, copy it into <code>~/workspace/</code> first and use that same copy in both the preview and <code>--attach</code>. Leading <code>~</code> resolves to the Muse home directory.</p>
+<h4>Automatic replies</h4>
+<p>The user may create a recurring rule that checks their ordinary or Marketplace conversations and replies for them. Build it once they have named the conversations, how often to check, and the exact reply text; ask only for settings that are genuinely missing.</p>
+<p>When setting up an automatic reply, reject reply text that creates or changes a real-world Marketplace commitment and suggest a non-committal alternative. Write the exception into the saved rule itself: if an incoming message or a proposed reply involves scheduling or other commitment details covered by Routing and Safety, send no reply and report the conversation and exact proposed text to the main conversation for fresh confirmation. Include this exception in the setup preview so the user knows which messages need follow-up.</p>
+<p>Before creating the rule, preview the conversations it covers, how often it checks, and the exact reply text as a Markdown blockquote. Wait for explicit confirmation, then create it. The rule's individual replies are not previewed again in chat. When Messenger approvals are on, a reply sends without a separate approval only if the user previously allowed that conversation from this Messenger account; replies to other conversations wait for approval. The user can revoke that allowance under Settings &gt; Connectors &gt; Messenger &gt; Manage recipient permissions.</p>
+<h4>Initiate a Marketplace conversation</h4>
+<p>Use <code>marketplace initiate</code> only when the user explicitly asks to contact the seller of a specific listing. Resolve the listing and its positive numeric ID, then preview:</p>
+<ul>
+<li><strong>Listing:</strong> its title or URL, not only its ID; and</li>
+<li><strong>Message:</strong> the exact text as a Markdown blockquote.</li>
+</ul>
+<p>Wait for explicit confirmation, then call once using the Message Text Input rule:</p>
+<pre><code>{
+  &quot;command&quot;: &quot;/opt/hatch/bin/hatch_messenger_cli marketplace initiate --listing-id &lt;LISTING_ID&gt; --text-stdin&quot;,
+  &quot;stdin&quot;: &quot;message text&quot;
+}</code></pre>
+<p><code>created: true</code> means a new thread was created and the message was sent. <code>created: false</code> means the existing buyer/seller thread was returned and no message was sent. In the latter case, use the returned <code>conversation_id</code> internally to sync and read the thread, then use the normal send preview and confirmation workflow for a follow-up. Never call <code>marketplace initiate</code> again for that follow-up.</p>
+<h3>React to a Message</h3>
+<p>Reactions work in open and E2EE conversations with the same command. The vendored Messenger CLI chooses the correct transport from the resolved thread. You may react to either the user's own message or another participant's message. <code>--cid</code> is optional at the wrapper; when omitted, the vendored CLI owns conversation inference and any target-specific requirement. The vendor also validates <code>--emoji</code>, which must be exactly one emoji. The command adds a reaction when none exists and changes the user's current reaction when one does.</p>
+<ol>
+<li>Resolve the exact target from <code>messages</code> or <code>search</code>; never guess its ID. If</li>
+</ol>
+<p>an older target is missing, deep-fetch that thread with <code>sync messages --cid '&lt;CONVERSATION_ID&gt;' --older 200</code> or <code>--since-days N</code>, then resolve it again.</p>
+<ol>
+<li>Immediately before previewing, run</li>
+</ol>
+<p><code>sync messages --cid '&lt;CONVERSATION_ID&gt;'</code> and read the target again. If it changed or is ambiguous, refresh the preview.</p>
+<ol>
+<li>Show <strong>Thread:</strong> only for a group, <strong>Message:</strong> with the target text when it</li>
+</ol>
+<p>has text, and <strong>Reaction:</strong> with either the exact emoji or “Remove your reaction.” Use names, never raw IDs.</p>
+<ol>
+<li>Wait for explicit confirmation. If the target or reaction changes, preview</li>
+</ol>
+<p>again. Single-quote <code>--mid</code>, the emoji, and <code>--cid</code> when provided so the shell cannot expand <code>$</code> sequences or alter the emoji.</p>
+<ol>
+<li>Call <code>react</code> once per requested state. Do not retry a failure or trigger</li>
+</ol>
+<p>approval again; report the returned reason once and stop.</p>
+<p>Add or change the user's reaction (exactly one emoji):</p>
+<pre><code>hatch_messenger_cli react --cid '&lt;CONVERSATION_ID&gt;' --mid '&lt;MESSAGE_ID&gt;' --emoji '❤️'</code></pre>
+<p>Remove the user's current reaction:</p>
+<pre><code>hatch_messenger_cli react --cid '&lt;CONVERSATION_ID&gt;' --mid '&lt;MESSAGE_ID&gt;' --remove</code></pre>
+<p><code>--cid</code> may be omitted; the wrapper forwards it only when provided and otherwise leaves inference to the vendored CLI. <code>--emoji</code> and <code>--remove</code> are mutually exclusive; use <code>--emoji</code> to add or change a reaction and <code>--remove</code> to remove it. Emoji validity is enforced by the vendor. After success, confirm briefly and naturally without exposing message IDs, transport details, or raw tool output.</p>
+<h3>Edit or Unsend an Existing Message</h3>
+<p>Messenger does not support unsending messages from Marketplace conversations. If an unsend target belongs to Marketplace, stop before preview or approval, do not call <code>hatch_messenger_cli unsend</code>, and tell the user plainly that the message cannot be unsent from a Marketplace conversation.</p>
+<p>For supported non-Marketplace conversations, both operations work in open and E2EE threads. <code>--cid</code> is optional for both edit and unsend: the wrapper forwards it when provided and otherwise leaves conversation inference and validation to the vendored CLI. Apply this shared workflow:</p>
+<ol>
+<li>Resolve the exact target from <code>messages</code> or <code>search</code>; never guess its ID.</li>
+</ol>
+<p>Only operate on a message whose <code>sender_id</code> matches <code>_cache.self_user_id</code>.</p>
+<ol>
+<li>If an older target is missing, deep-fetch that thread with</li>
+</ol>
+<p><code>sync messages --cid '&lt;CONVERSATION_ID&gt;' --older 200</code> or <code>--since-days N</code> (up to 30), then resolve it again.</p>
+<ol>
+<li>Immediately before the preview, run <code>sync messages --cid '&lt;CONVERSATION_ID&gt;'</code></li>
+</ol>
+<p>and read the target again. If it changed or is ambiguous, refresh the preview.</p>
+<ol>
+<li>Show <strong>Thread:</strong> only when <code>thread_type</code> is <code>GROUP</code> or</li>
+</ol>
+<p><code>SECURE_MESSAGE_OVER_WA_GROUP</code>, plus the original <strong>Timestamp:</strong> in the user's local timezone. Never show the sender, a raw ID, or a millisecond timestamp.</p>
+<ol>
+<li>Wait for explicit confirmation immediately before executing. Single-quote</li>
+</ol>
+<p><code>--mid</code> and <code>--cid</code> when provided so the shell cannot expand <code>$</code> sequences.</p>
+<ol>
+<li>Call the mutation at most once per target per user request. Do not retry a</li>
+</ol>
+<p>failure or trigger approval again; report the returned reason once and stop.</p>
+<h4>Unsend</h4>
+<p>Unsend removes the user's message for everyone. The preview also includes <strong>Message:</strong> with the exact current text as a Markdown blockquote.</p>
+<pre><code>hatch_messenger_cli unsend [--cid '&lt;CONVERSATION_ID&gt;'] --mid '&lt;MESSAGE_ID&gt;'</code></pre>
+<p>Only unsend when the user explicitly asks to unsend, delete, take back, or remove their own message. Do not treat an initial <code>not found</code> as final until the deep-fetch step above has been attempted.</p>
+<h4>Edit</h4>
+<p>Edit only when the user explicitly asks to edit, fix, or reword one of their own text messages. The preview also includes <strong>Before:</strong> with the current text and <strong>After:</strong> with the exact replacement, each as a Markdown blockquote. If the requested replacement changes, preview again.</p>
+<pre><code>{
+  &quot;command&quot;: &quot;/opt/hatch/bin/hatch_messenger_cli edit --cid '&lt;CONVERSATION_ID&gt;' --mid '&lt;MESSAGE_ID&gt;' --text-stdin&quot;,
+  &quot;stdin&quot;: &quot;replacement text&quot;
+}</code></pre>
+<p>The replacement must exactly match the confirmed Message Text Input body. Recipients see an &quot;edited&quot; marker immediately; editing does not generate a notification or unread bolding. Messenger typically limits edits to about 15 minutes after sending and about five edits per message; stale, over-limit, and non-text edits fail.</p>
+<h3>Repair Unreadable Messages</h3>
+<p>When rows show <code>(decrypt failed)</code> or <code>(no thread key)</code>, run:</p>
+<pre><code>hatch_messenger_cli repair</code></pre>
+<p>Repair is local and non-destructive: it refreshes epoch keys once, retries already retained ciphertext, leaves rows it still cannot decrypt untouched, and fetches no messages. Re-read the thread afterward. A later rerun is safe.</p>
+<p>These placeholders describe individual rows, not the thread or Companion's E2EE support. Never claim that encrypted conversations are inaccessible. If it matters, say only that those particular messages could not be read.</p>
+<p>Do not use repair for freshness, missing history, gaps, send failures, or write-registration cleanup. If it reports unavailable epoch refresh or stale device state, ask the user to disconnect and reconnect Companion. Do not loop on a failed repair.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

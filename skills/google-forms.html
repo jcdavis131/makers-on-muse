@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>google_forms — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Read, create, and update the user's Google Forms, and read responses.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/google-forms">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/google-forms">
+<meta property="og:title" content="google_forms">
+<meta property="og:description" content="Read, create, and update the user's Google Forms, and read responses.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="google_forms">
+<meta name="twitter:description" content="Read, create, and update the user's Google Forms, and read responses.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; General &middot; Bundled</p>
+      <h1>google_forms</h1>
+      <p class="lede">Read, create, and update the user's Google Forms, and read responses.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Google Forms</h2>
+<h3>Purpose</h3>
+<p>Manage Google Forms through <code>hatch_gws_cli</code>; the vendored Google Workspace CLI is the only implementation path.</p>
+<h3>Tooling</h3>
+<p>Use <code>exec</code> to run:</p>
+<pre><code>hatch_gws_cli forms &lt;resource&gt; &lt;method&gt; [flags]</code></pre>
+<h4>Connection management</h4>
+<pre><code>hatch_gws_cli forms status
+hatch_gws_cli forms disconnect</code></pre>
+<h4>Forms operations</h4>
+<p>Core patterns:</p>
+<ul>
+<li><code>hatch_gws_cli forms status</code></li>
+<li><code>hatch_gws_cli forms disconnect</code></li>
+<li><code>hatch_gws_cli schema forms.forms.get</code></li>
+<li><code>hatch_gws_cli schema forms.forms.create</code></li>
+<li><code>hatch_gws_cli schema forms.forms.batchUpdate</code></li>
+<li><code>hatch_gws_cli schema forms.forms.responses.list</code></li>
+<li><code>hatch_gws_cli schema forms.forms.responses.get</code></li>
+</ul>
+<p>Common raw API calls:</p>
+<ul>
+<li><code>hatch_gws_cli forms forms get --params '{&quot;formId&quot;:&quot;&lt;form_id&gt;&quot;}'</code></li>
+<li><code>hatch_gws_cli forms forms create --json '{&quot;info&quot;:{&quot;title&quot;:&quot;Feedback Survey&quot;,&quot;documentTitle&quot;:&quot;Feedback Survey&quot;}}'</code></li>
+<li><code>hatch_gws_cli forms forms batchUpdate --params '{&quot;formId&quot;:&quot;&lt;form_id&gt;&quot;}' --json '{&quot;requests&quot;:[{&quot;updateFormInfo&quot;:{&quot;info&quot;:{&quot;description&quot;:&quot;Quarterly survey&quot;},&quot;updateMask&quot;:&quot;description&quot;}}]}'</code></li>
+<li><code>hatch_gws_cli forms forms responses list --params '{&quot;formId&quot;:&quot;&lt;form_id&gt;&quot;,&quot;pageSize&quot;:20}'</code></li>
+<li><code>hatch_gws_cli forms forms responses get --params '{&quot;formId&quot;:&quot;&lt;form_id&gt;&quot;,&quot;responseId&quot;:&quot;&lt;response_id&gt;&quot;}'</code></li>
+</ul>
+<p>JSON output contract:</p>
+<ul>
+<li><code>status</code>: parse <code>status</code>, <code>connect_url</code>, and <code>disconnect_url</code></li>
+<li><code>disconnect</code>: parse <code>ok</code>, <code>action</code>, <code>status</code>, and <code>disconnect_url</code></li>
+</ul>
+<h3>Auth</h3>
+<p>Authentication is handled by the wrapper's <code>status</code> and <code>disconnect</code> subcommands. Do not hand-write credential files or run raw <code>gws auth ...</code>.</p>
+<h3>First-use setup flow</h3>
+<ol>
+<li>Run <code>hatch_gws_cli forms status</code>.</li>
+<li>If <code>status</code> is <code>unavailable</code>, tell the user that Google Forms is not available on this device. Do not offer alternative integration approaches or ask the user for credentials.</li>
+<li>If <code>status</code> is <code>not_connected</code> and <code>connect_url</code> is present, replace <code>&lt;connect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;connect_url&gt;">Connect Google Forms</a></code>; do not paste the raw URL separately. Wait for the user to reconnect.</li>
+<li>Once <code>status</code> is <code>connected</code>, proceed with Forms operations.</li>
+</ol>
+<h3>Operating Rules</h3>
+<ol>
+<li>Use <code>schema</code> before unfamiliar Forms methods so <code>--params</code> and <code>--json</code> match the current vendored CLI contract.</li>
+<li>Creating a form and editing an unpublished form owned only by the user may proceed from a clear request. Confirm before editing a shared or published form, or publishing one, because its contents can reach other people.</li>
+<li>Run <code>forms.get</code> before presenting response data so you can map question IDs to human-readable form structure.</li>
+<li>Treat form IDs and response IDs as opaque strings and only use IDs returned by prior commands or explicit user input.</li>
+<li>Run <code>hatch_gws_cli forms disconnect</code>. After running it, when <code>disconnect_url</code> is present, replace <code>&lt;disconnect_url&gt;</code> with the returned URL and share exactly this Markdown link: <code><a href="&lt;disconnect_url&gt;">Disconnect Google Forms</a></code>; do not paste the raw URL separately.</li>
+<li>Paginate through responses when the user asks for all responses; stop when <code>nextPageToken</code> is absent.</li>
+<li>After a read or write action, confirm the user-visible result only. Do not surface raw API identifiers (form, response, and question IDs) or other internal response fields (page tokens/cursors, raw JSON) in text shown to the user unless the user asks for them or you need them to troubleshoot a failure; keep using them internally to chain follow-up commands.</li>
+<li>Response reads retain Google's raw timestamps and add semantic UTC and</li>
+</ol>
+<p>user-local forms for response creation/submission times.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

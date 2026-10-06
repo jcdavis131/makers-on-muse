@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>deep-research-workbench — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Run the deep-research writeup workflow: decompose a topic into research lanes, rate sources, keep a citation ledger, and produce a limitations-first, reimplementation-grade research report. Triggers on 'deep research', 'research writeup', 'literature review', 'research report'.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/deep-research-workbench">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/deep-research-workbench">
+<meta property="og:title" content="deep-research-workbench">
+<meta property="og:description" content="Run the deep-research writeup workflow: decompose a topic into research lanes, rate sources, keep a citation ledger, and produce a limitations-first, reimplementation-grade research report. Triggers on 'deep research', 'research writeup', 'literature review', 'research report'.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="deep-research-workbench">
+<meta name="twitter:description" content="Run the deep-research writeup workflow: decompose a topic into research lanes, rate sources, keep a citation ledger, and produce a limitations-first, reimplementation-grade research report. Triggers on 'deep research', 'research writeup', 'literature review', 'research report'.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Custom</p>
+      <h1>deep-research-workbench</h1>
+      <p class="lede">Run the deep-research writeup workflow: decompose a topic into research lanes, rate sources, keep a citation ledger, and produce a limitations-first, reimplementation-grade research report. Triggers on 'deep research', 'research writeup', 'literature review', 'research report'.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Deep Research Workbench</h2>
+<h3>Purpose</h3>
+<p>Run the deep-research writeup workflow: decompose a research topic into 3-6 lanes, research each lane (in parallel via subagents when the topic is large), rate every source, keep a citation ledger, and produce a limitations-first, reimplementation-grade writeup from <code>assets/writeup-template.md</code>. Distilled from two real runs: a 6-lane curriculum-pretraining review (~60 papers, ~4.5k words) and RHO-1/annealing/initialization deep dives (source report ~3.9k + full writeup ~10.3k words).</p>
+<h3>Workflow</h3>
+<ol>
+<li><strong>Frame the topic.</strong> One sentence on what decision the writeup must inform (e.g. &quot;inform revising our training research projects&quot;). Set the word-count target and the deliverable path (<code>~/workspace/your_files/&lt;topic&gt;-research-report.md</code>).</li>
+<li><strong>Decompose into 3-6 lanes.</strong> Useful lane types, drawn from prior runs:</li>
+</ol>
+<ul>
+<li>Foundations/theory (canonical papers, intellectual lineage)</li>
+<li>Methods and mechanics (how the technique actually works, to reimplementation precision)</li>
+<li>Empirical results at scale (reported numbers with model sizes and token counts)</li>
+<li>Frontier practice (what labs actually do, often from grey literature)</li>
+<li>Counter-evidence (where the technique does not work — mandatory lane or section)</li>
+<li>Adjacent levers (related techniques that interact with the main one)</li>
+</ul>
+<ol>
+<li><strong>Swarm when large.</strong> For 3+ lanes, spawn one subagent per lane in the same turn. Each child gets: its lane brief, this skill's source rubric, and the instruction to return per-paper entries with reported numbers, limitations, and a source ledger. Children never inherit your transcript — make every brief self-contained.</li>
+<li><strong>Rate every source.</strong> Tag each source P1 / P2 / P3 / U:</li>
+</ol>
+<ul>
+<li><strong>P1 (primary):</strong> paper read in full; arXiv ID or venue page verified by fetching it. The only tier citable for numbers and mechanics.</li>
+<li><strong>P2 (secondary):</strong> survey, thesis, or citation chain — the claim is reported, not verified. Mark as &quot;reported by X&quot;.</li>
+<li><strong>P3 (grey):</strong> company blog, tech report without paper, forum post. Usable for frontier-practice lanes only; always labeled &quot;unverified vendor claim&quot;.</li>
+<li><strong>U (unverified):</strong> could not locate the source. Never cited as fact; listed under &quot;could not verify&quot; or dropped.</li>
+</ul>
+<ol>
+<li><strong>Keep the citation ledger.</strong> Every factual claim anchors to one ledger row in the format: <code>Title — Authors (venue year, arXiv:ID)</code> plus code/model links when they exist. No claim without a row. Numbers always carry their experimental setting (model size, tokens, metric).</li>
+<li><strong>Write the report.</strong> Fill <code>assets/writeup-template.md</code> top to bottom. The verdict goes first; limitations, research directions, and reimplementation checklists are mandatory, not optional.</li>
+<li><strong>Self-review pass.</strong> Before delivering: check every arXiv ID resolves, every number has a setting, every lane has at least one limitation, and the counter-evidence section is non-empty.</li>
+</ol>
+<h3>Output Contract</h3>
+<p>The deliverable is a single markdown file at the agreed path, containing:</p>
+<ul>
+<li>One-paragraph verdict (or executive summary for long writeups) at the top</li>
+<li>Per-lane findings: per-paper entries with mechanics, reported numbers, and limitations</li>
+<li>Cross-cutting synthesis ranked by evidence strength, plus rules of thumb the literature supports</li>
+<li>Explicit <strong>Limitations</strong> section (paper-admitted limits plus scale ceilings)</li>
+<li>Numbered <strong>Potential research directions</strong>, each with a concrete experimental design and a leverage ranking</li>
+<li><strong>Reimplementation checklists</strong> for the top 1-3 techniques</li>
+<li><strong>Primary-source identifiers</strong>: arXiv IDs, venues, code/model links — the citation ledger made public</li>
+</ul>
+<h3>Operating Rules</h3>
+<ol>
+<li>Never fabricate citations, author names, arXiv IDs, venues, or numbers. If a detail was not read from the source, it does not go in.</li>
+<li>Mark uncertain claims explicitly as guesses (&quot;likely&quot;, &quot;unverified&quot;) rather than stating them as fact.</li>
+<li>Real sources only. No synthetic papers, no plausible-sounding citations. If a paper cannot be located, say so and drop it.</li>
+<li>Counter-evidence is mandatory. A writeup with no &quot;where it doesn't work&quot; section is incomplete.</li>
+<li>Per-paper entries lead with mechanics (what was actually done, precisely enough to reimplement), then numbers, then limitations — in that order.</li>
+<li>Prefer primary sources for numbers; grey literature may describe frontier practice but never carries a number without a P1/P2 anchor.</li>
+<li>Word-count target is set per task by the requester; default to ~4-5k for a source report, ~10k for a full writeup.</li>
+</ol>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

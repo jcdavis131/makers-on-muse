@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>facebook_cli — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Use when the user provides a Facebook URL or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own Marketplace listings. To find, browse, or buy Marketplace listings, use shopping instead. Use pages commands for managed Facebook Page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/facebook">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/facebook">
+<meta property="og:title" content="facebook_cli">
+<meta property="og:description" content="Use when the user provides a Facebook URL or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own Marketplace listings. To find, browse, or buy Marketplace listings, use shopping instead. Use pages commands for managed Facebook Page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="facebook_cli">
+<meta name="twitter:description" content="Use when the user provides a Facebook URL or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own Marketplace listings. To find, browse, or buy Marketplace listings, use shopping instead. Use pages commands for managed Facebook Page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>facebook_cli</h1>
+      <p class="lede">Use when the user provides a Facebook URL or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own Marketplace listings. To find, browse, or buy Marketplace listings, use shopping instead. Use pages commands for managed Facebook Page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Facebook CLI</h2>
+<h3>Pasted links first</h3>
+<p>If the user pasted a Facebook Marketplace item link or a share link, never open it with the browser: the browser cannot pass the Facebook login wall. For an item link, run <code>facebook-cli marketplace listing details --url '&lt;pasted link&gt;'</code>. For a share link, decode it first with <code>facebook-cli link-sharing decode-url --url '&lt;pasted link&gt;'</code>, then follow <code>references/marketplace.md</code> Step 0 for the decoded URL.</p>
+<h3>Quick Reference</h3>
+<p>The read-only post and Marketplace-only write restrictions below apply to personal-profile activity. Managed Pages separately support draft, post and scheduling writes gated by consent, Page access and operation approval.</p>
+<pre><code>facebook-cli
+├── pages                                      # Read references/pages.md first
+│   ├── list [--limit N] [--after &lt;cursor&gt;]      # Managed Pages
+│   ├── access --page-id &lt;id&gt;                   # Page access diagnostic
+│   ├── account-insights --page-id &lt;id&gt;         # Page metrics
+│   ├── drafts
+│   │   ├── create --page-id &lt;id&gt; ...           # WRITE — prompts for approval
+│   │   ├── show --page-id &lt;id&gt; --draft-id &lt;id&gt; # Read a native draft
+│   │   ├── publish --page-id &lt;id&gt; ...          # WRITE — same draft; prompts for approval
+│   │   ├── edit --page-id &lt;id&gt; ...             # WRITE — prompts for approval
+│   │   └── delete --page-id &lt;id&gt; ...           # WRITE — prompts for approval
+│   └── posts
+│       ├── list --page-id &lt;id&gt;                 # Recent posts with metrics
+│       ├── get --page-id &lt;id&gt; --post-ids &lt;ids&gt;  # Selected post metrics
+│       ├── create --page-id &lt;id&gt; ...           # WRITE — publish or schedule; prompts for approval
+│       ├── reschedule --page-id &lt;id&gt; ...       # WRITE — prompts for approval
+│       └── cancel-schedule --page-id &lt;id&gt; ...  # WRITE — prompts for approval
+├── post
+│   ├── read (--post-id &lt;id&gt; | --url &lt;url&gt;) # Read by numeric ID/PFBID or canonical post/photo/video URL
+│   ├── comments
+│   │   └── read --post-id &lt;id&gt; [--limit N] [--after &lt;cursor&gt;]  # Read comments (paginated: data[] + paging.cursors.after; post link at summary.post_url)
+│   └── reactions
+│       └── read --post-id &lt;id&gt;  # Reaction summary only: summary.total_count + summary.reaction_counts (no individual reactor list)
+├── link-sharing
+│   └── decode-url --url &lt;url&gt;              # Resolve a share link; returns original_url
+├── me                                         # Your Facebook name + profile ID
+│   └── friends [--name] [--city] [--hometown] [--work] [--education] [--filter-mode AND|OR] [--json-query &lt;json&gt;] [--birthday-within-days [N]] [--limit N] [--after &lt;cursor&gt;]  # Paginated: data[] + paging.cursors.after
+├── marketplace
+│   ├── search --query &quot;...&quot; [--out &lt;file&gt;] [options]  # Search listings; pass the --out file to shopping.resolve_results, do not read it
+│   ├── my-listings [--status active|pending|sold|draft] [--limit N] [--after &lt;cursor&gt;]  # Your own listings (active + inactive), paginated
+│   ├── listing details (--listing-id &lt;id&gt; | --url '&lt;item link&gt;') [--out &lt;file&gt;]  # Item details
+│   ├── listing create --title &quot;...&quot; --price N --photo /path [options]  # Create; goes LIVE only with photos+condition+category+location (location = --latitude &amp; --longitude; no --location flag), else DRAFT
+│   ├── listing edit --listing-id &lt;id&gt; --photo /path [options]  # Edit a listing (photos uploaded automatically)
+│   ├── listing delete --listing-id &lt;id&gt;       # WRITE — permanently delete your listing; prompts for approval
+│   ├── listing publish --listing-id &lt;id&gt;      # WRITE — take a DRAFT live; needs photos+condition+category+location (location = --latitude &amp; --longitude); prompts for approval
+│   └── seller-info --listing-id &lt;id&gt;          # Seller ratings/info
+├── groups
+│   ├── details --group-id &lt;id-or-vanity&gt; # Fetch name, About, visibility, history, tags, ordered rules, and member count
+│   ├── search [--keywords &quot;...&quot;] [--role connected|admin|admod|any] [--after &lt;cursor&gt;]  # Paginated membership listing; keyword + any searches connected/private and public groups
+│   └── posts --group-id &lt;id&gt;             # Browse posts in a group; --query filters by text
+├── events
+│   ├── search [--scope connected|discover] [--keywords &quot;...&quot;] [--location &quot;...&quot;] [--latitude N --longitude=-N] [--radius-in-miles N] [--category ...] [--start-date ...] [--end-date ...] [--limit N] [--after &lt;cursor&gt;]  # Paginated: data[] + paging.cursors.after; coordinates beat --location, which is only city-accurate
+│   └── details --event-id &lt;id&gt;           # Read one event; ID from search `id` or `permalink_url`
+├── saved
+│   ├── list [--type post|video|link|product|reel|event|page] [--collection-id &lt;id&gt;] [--limit N] [--after &lt;opaque&gt;]
+│   ├── add --savable-id &lt;FBID&gt; [--type ...] [--collection-id &lt;id&gt;]      # WRITE — auto-allowed
+│   ├── remove --savable-id &lt;FBID&gt; [--type ...] [--collection-id &lt;id&gt;]   # WRITE — auto-allowed
+│   └── collections
+│       ├── list
+│       └── create --name &quot;...&quot;                  # WRITE — auto-allowed
+├── story
+│   └── feed [--limit &lt;n&gt;]               # Fetch your story feed (story tray)
+├── feed
+│   ├── newsfeed [--limit &lt;n&gt;] [--after &lt;cursor&gt;] # Ranked algorithmic newsfeed (organic stories)
+│   └── friends [--limit &lt;n&gt;] [--after &lt;cursor&gt;]  # Ranked friends-only feed
+├── timeline
+│   └── fetch --profile-id &lt;id&gt; [--limit N] [--after &lt;cursor&gt;]  # Fetch timeline posts; use next_cursor to page (check author_id vs owner_id)
+└── profile
+    └── info --profile-id &lt;id&gt;                 # Look up profile info</code></pre>
+<h3>Account Linking</h3>
+<p>Use <code>facebook-cli me</code> to get the user's account identity when the task needs it. Reuse a successful result already in context. Do not run it just to check connection status before another command.</p>
+<p>For a user-requested task, recheck after an account change or authentication error. A timeout or rate limit does not establish an account change or disconnection.</p>
+<p>Only a successful empty result or an explicit not-linked response establishes that no account is connected. If linking is needed, run <code>facebook-cli connect-url</code> and use its <code>connect_url</code>:</p>
+<blockquote><p>Your Facebook account is not connected. To connect it, visit <a href="<code>connect_url</code>">Meta Accounts Center</a> and link your Facebook account.</p></blockquote>
+<p>If the user asks to disconnect their Facebook account, run <code>facebook-cli disconnect-url</code> (it outputs JSON with a <code>disconnect_url</code> field) and direct them to that URL:</p>
+<blockquote><p>To disconnect your Facebook account, visit <a href="<code>disconnect_url</code>">Meta Accounts Center</a> and remove the linked account.</p></blockquote>
+<p>Always read these URLs from the command output rather than hardcoding them.</p>
+<h3>Post IDs and URLs</h3>
+<p>When using <code>post read</code>, <code>post comments read</code>, or <code>post reactions read</code>, these formats are accepted for <code>--post-id</code>:</p>
+<ul>
+<li><code>123456789012345</code> — raw numeric post ID</li>
+<li><code>pfbid02...</code> — PFBID format</li>
+</ul>
+<p>Canonical post, photo, video, and reel URLs go directly to <code>post read --url</code>. For share links, call <code>link-sharing decode-url --url &lt;url&gt;</code> first, then pass the nonblank canonical <code>original_url</code> intact to the reader. Supply exactly one of <code>--url</code> or <code>--post-id</code>. Stop on a null, missing, or blank decoded URL or a failed read; do not guess IDs or retry a media ID as a post ID. See <a href="references/posts.md">posts.md</a> for supported URL patterns and other entities.</p>
+<h3>Composability</h3>
+<p>When the user asks &quot;what can I do on Facebook?&quot; or at the start of a session, generate 3-5 contextual suggestions that combine multiple commands into useful read-only workflows.</p>
+<h4>How outputs chain across commands</h4>
+<p>Most chains are mechanical: an ID in one command's output is the <code>--id</code> flag of the next. <code>me</code> and <code>me friends</code> produce <code>profile_id</code> for <code>profile info</code> and <code>timeline fetch</code>. Timelines, feeds, and searches produce <code>post_id</code> for <code>post read</code>, <code>post comments read</code>, and <code>post reactions read</code>. <code>marketplace search</code> produces <code>listing_id</code> for <code>listing details</code> and <code>seller-info</code>. <code>groups search</code> produces <code>group_id</code> for <code>groups details</code> and <code>groups posts</code>. <code>events search</code> produces <code>id</code> (also embedded in <code>permalink_url</code>) for <code>events details</code>. <code>story feed</code> returns story buckets with story URLs and owner info.</p>
+<p>The chains that are not mechanical:</p>
+<ul>
+<li><strong>My listings -&gt; manage</strong>: <code>marketplace my-listings</code> produces your own <code>listing_id</code> -&gt; <code>marketplace listing edit</code> (update), <code>marketplace listing delete</code> (remove), or <code>marketplace listing publish</code> (take a draft live). Use <code>--status</code> to scope to active/pending/sold/draft and <code>--after</code> to page.</li>
+<li><strong>Create draft -&gt; complete -&gt; publish</strong>: <code>marketplace listing create</code> missing any of photos/condition/category/location saves a draft -&gt; <code>marketplace listing edit</code> to add the missing field(s) -&gt; <code>marketplace listing publish</code> to take it live. If publish fails with missing fields, the error names exactly which to add via edit, then retry.</li>
+<li><strong>Groups posts + friends cross-reference</strong>: When the user asks about friends' activity in a group, call <code>me friends</code> to get the friend list, then compare against post authors from <code>groups posts</code> — do not ask the user to provide their friend list manually.</li>
+<li><strong>Saved -&gt; content</strong>: <code>saved list</code> produces <code>savable_id</code> plus <code>type</code>. Chain by category:</li>
+<li><code>post</code> -&gt; <code>post read</code>, <code>post comments read</code>, <code>post reactions read</code></li>
+<li><code>page</code> -&gt; <code>profile info --profile-id &lt;savable_id&gt;</code></li>
+<li><code>product</code> -&gt; <code>marketplace listing details --listing-id &lt;savable_id&gt;</code></li>
+<li><code>event</code> -&gt; <code>events details --event-id &lt;savable_id&gt;</code></li>
+<li><strong>Saved -&gt; unsave</strong>: <code>saved list</code> produces <code>savable_id</code> (the content ID) -&gt; <code>saved remove --savable-id &lt;savable_id&gt; [--type &lt;type&gt;]</code></li>
+<li><strong>Collections -&gt; create flow</strong>: <code>saved collections create</code> produces <code>collection_id</code> for future use</li>
+</ul>
+<h4>Suggestion guidelines</h4>
+<ol>
+<li><strong>Phrase as user-centric actions</strong> — &quot;See which of your Marketplace listings still have no photos&quot;, not &quot;Run marketplace my-listings then listing edit&quot;.</li>
+<li><strong>Vary suggestions across sessions</strong> — rotate across skill categories.</li>
+<li><strong>Adapt to context</strong>:</li>
+</ol>
+<ul>
+<li><strong>Profile-aware</strong>: If the user's profile mentions hobbies or interests, suggest related workflows (e.g., cyclist -&gt; &quot;Catch up on what your cycling friends have posted&quot;).</li>
+<li><strong>Time-aware</strong>: Near holidays or weekends, suggest checking timeline for what friends are up to, or tidying up your own Marketplace drafts.</li>
+<li><strong>Session-aware</strong>: After publishing a listing -&gt; &quot;Check whether it went live or stayed a draft&quot;; after viewing a post -&gt; &quot;See the reaction counts and what people are saying in the comments&quot;.</li>
+</ul>
+<ol>
+<li><strong>Only suggest what's real</strong> — every suggestion must be achievable using the commands documented here. Most personal-profile tools are <strong>read-only</strong> — do not suggest unsupported posts, reactions, or comments. Managed Pages support only the documented draft, post, and scheduling writes. Marketplace writes support only creating, editing, deleting, and publishing the user's own listings.</li>
+<li><strong>Keep it conversational</strong> — short bulleted list with one-line descriptions. Offer to walk through any of them.</li>
+</ol>
+<h3>References</h3>
+<p>One file per feature area, each named for the area it covers: <a href="references/friends.md">references/friends.md</a>, <a href="references/posts.md">references/posts.md</a>, <a href="references/pages.md">references/pages.md</a>, <a href="references/comments.md">references/comments.md</a>, <a href="references/reactions.md">references/reactions.md</a>, <a href="references/marketplace.md">references/marketplace.md</a>, <a href="references/timeline.md">references/timeline.md</a>, <a href="references/profile.md">references/profile.md</a>, <a href="references/story.md">references/story.md</a>, <a href="references/feed.md">references/feed.md</a>, <a href="references/groups.md">references/groups.md</a>, <a href="references/events.md">references/events.md</a>, <a href="references/saved.md">references/saved.md</a>.</p>
+<h3>Operating Rules</h3>
+<ol>
+<li><strong>Open a reference doc only when you need it.</strong> The Quick Reference above covers the common calls. Read the matching file under <a href="references/">references/</a> when you need a flag it does not list, a response field, or a pagination detail, when a command fails and you need the full contract, or when a rule below points you at one. Resolving a pasted Marketplace or share link always uses <code>references/marketplace.md</code> Step 0.</li>
+<li><strong>Output field requirements (quick reference):</strong></li>
+</ol>
+<ul>
+<li><strong>Posts:</strong> normalized feed, timeline, and post reads preserve <code>created_at</code> and add <code>post_created_at</code> with UTC and user-local forms. Prefer <code>post_created_at.user_local</code>.</li>
+<li><strong>Comments:</strong> always include comment timestamps (<code>created_time</code>) and comment permalink URLs (<code>comment_url</code>) for every comment shown.</li>
+<li><strong>Reactions:</strong> always include a per-type count breakdown (e.g., &quot;3 Love, 2 Like, 1 Wow&quot;) and post permalink URLs.</li>
+<li><strong>Friends:</strong> when searching by nickname, also search the full name (e.g., &quot;Liz&quot; → also search &quot;Elizabeth&quot;; &quot;Mike&quot; → &quot;Michael&quot;; &quot;Bob&quot; → &quot;Robert&quot;).</li>
+<li><strong>Cross-references:</strong> when identifying people across multiple posts, include links to the specific posts and comments/reactions.</li>
+</ul>
+<ol>
+<li><strong>Refuse requests that could harm, profile, or surveil individuals.</strong> Do not infer personal attributes (ethnicity, sexuality, political views, financial status, mental health, relationship fidelity) from social media activity. Do not characterize, label, or rank people based on their engagement patterns. Do not facilitate tracking of minors' online activity. Do not enable social comparison rooted in conflict (e.g., &quot;who's taking sides&quot;). When refusing, explain why the request is harmful. Do not offer partial compliance as a workaround — do not offer to &quot;just show the data&quot; so the user can make the judgment themselves, and do not suggest the user could accomplish the request through other means outside of Muse.</li>
+<li>If a command fails, report the error to the user.</li>
+<li>Do not bulk-scrape or enumerate profiles/posts.</li>
+<li>Managed Page draft, post, and scheduling writes and Marketplace listing create, edit, delete, and publish prompt for approval because they change connector state; publication can change public-facing content. Saved-item add/remove and saved-collection creation may proceed from a clear request without an additional confirmation. Personal posts, comments, reactions, timeline, profile, marketplace browsing (including <code>marketplace my-listings</code>), groups browsing, events browsing, and feed are read-only — never suggest writes for those.</li>
+<li>All commands output JSON by default — do not pass <code>--format json</code> (the flag does not exist).</li>
+<li>For interest-based friend search, use <code>--json-query</code> with a FindPeople template. Get the user's FB ID from <code>facebook-cli me</code> first. Map user intent to the correct filter key: interests/hobbies → <code>topic</code>, sports → <code>sports</code>, employer → <code>company</code>, city → <code>location</code>, school → <code>college</code>, entertainment → <code>movies</code>/<code>music</code>/<code>tv_shows</code>/etc. <strong>Use <code>topic</code> for general interests (NOT <code>interests</code>).</strong> Example: <code>--json-query '{&quot;intent&quot;:&quot;FindPeople&quot;,&quot;target&quot;:&quot;users&quot;,&quot;filters&quot;:{&quot;friend_by&quot;:[&quot;FB_ID&quot;],&quot;topic&quot;:[&quot;hiking&quot;]}}'</code>. Results include <code>match_context</code> with groups/pages/profile_details — parse XML tags from context strings for display. See <a href="references/friends.md">friends.md</a> for full filter table and response format.</li>
+<li><strong>Always use facebook-cli for structured lookups — never social.search.</strong> For any request involving friends, profiles, timelines, posts, comments, or reactions, always use <code>facebook-cli</code> commands. Marketplace is split: your own listings are facebook-cli's, and finding or browsing listings to buy is the <code>shopping</code> skill's. Do not use social.search or other tools as substitutes for operations that facebook-cli supports. Those tools lack access to the same structured data. The only exception is free-text semantic search across the user's Facebook graph (use social.search for that). When cross-referencing (e.g., which friends posted in a group), use <code>facebook-cli me friends</code> to get the friend list and cross-reference against post authors.</li>
+<li><strong>Timeline: Author vs Owner.</strong> Timeline posts include <code>author_id</code>/<code>author_name</code> (who wrote the post) and <code>owner_id</code>/<code>owner_name</code> (whose wall it's on). When asked &quot;show me posts FROM [person]&quot; or &quot;what has [person] posted&quot;, only report posts where <code>author_id == owner_id</code>. If all posts are by others on their wall, say &quot;[Person] hasn't posted recently&quot; and separately note &quot;Friends have posted on their wall&quot; with those details. See <a href="references/timeline.md">timeline.md</a> for full rules.</li>
+<li><strong>Always use permalinks, never raw IDs.</strong> Normalized post reads expose the permalink as <code>url</code>; comments and reactions retain their documented URL fields. Always show that URL — never show raw post IDs, comment IDs, or listing IDs. Users should be able to click through to Facebook. This also applies to people: refer to a person by name with their profile link (<code>vanity_url</code> / <code>profile_url</code>) — do not print raw user/profile IDs (<code>profile_id</code>, <code>friend_id</code>, <code>owner_id</code>, <code>author_id</code>, reactor/commenter <code>id</code>) in your response. <strong>Every link must include the <code>https://</code> scheme so it renders as clickable.</strong> API responses sometimes return URLs without a scheme (e.g., <code>facebook.com/profile.php?id=123</code>) or scheme-relative (<code>//facebook.com/...</code>); always prepend <code>https://</code> before showing them. Never present a bare, unclickable link — write <code>https://facebook.com/profile.php?id=123</code>, not <code>facebook.com/profile.php?id=123</code> or <code>joe — facebook.com/profile.php?id=...</code>.</li>
+<li><strong>State date ranges for vague time terms.</strong> When the user asks for &quot;recent&quot;, &quot;latest&quot;, or &quot;lately&quot; content, always state the date range you used in your response (e.g., &quot;Here are posts from the past 7 days&quot; or &quot;Showing posts from April 1–7, 2026&quot;).</li>
+<li><strong>Say &quot;not listed&quot; for missing profile fields.</strong> When presenting profile data, explicitly say &quot;not listed&quot; for any field not present in the API response rather than omitting it. This applies to work, education, city, hometown, bio, relationship status, etc. For multi-value fields (work history, education), show all entries and say &quot;not listed&quot; for missing sub-fields.</li>
+<li><strong>Do not editorialize or infer.</strong> Present data neutrally without subjective commentary. Do not say &quot;Nice bio!&quot;, &quot;Looks like they're doing well&quot;, or add personality inferences. Do not infer meaning beyond what is explicitly written in post text — a post about a maternity photographer does not mean someone is pregnant. When a query returns no results, report that fact clearly without speculating about why (e.g., do not suggest &quot;their posts may be private&quot; or &quot;they might not use Facebook often&quot;).</li>
+<li><strong>Only report data returned by tool calls.</strong> Never include counts, names, URLs, or other details that did not appear in a tool's output. If a command fails or returns no data for a field (comments, shares, reactions), explicitly tell the user that data could not be retrieved — do not fill in plausible-sounding values. When showing a subset of results (e.g., 6 of 28 comments), clearly state you are showing a partial list.</li>
+<li><strong>Resolve references from prior turns.</strong> When the user refers to a post by ordinal (&quot;the second post&quot;, &quot;the first one&quot;) or pronoun (&quot;that post&quot;), resolve it from the results of the previous turn. Do not ask the user to repeat which item they mean.</li>
+<li><strong>Disambiguate when the target is unclear.</strong> When the user says &quot;my post&quot; or &quot;who commented on my post&quot; without specifying which post, ask them to clarify — e.g., their most recent post, a post from a specific date, or a post about a particular topic. Do not assume they mean the most recent one.</li>
+<li><strong>Multi-step chains.</strong> For multi-step chains (friend lookup → timeline → comments/reactions), call tools back-to-back without intermediate narration. Present results only after the final command completes.</li>
+<li><strong>Never silently retry a failed Marketplace write.</strong> If a Marketplace create, edit, delete, or publish fails, do <strong>not</strong> immediately retry it — not with the same command, a different method, or changed parameters. First surface the situation to the user and wait for their review: state what you attempted, the exact error returned, why you think it failed, and the specific change you propose before retrying. Saved-item writes may use ordinary bounded retry behavior. Re-running a failed read-only command does not need approval.</li>
+<li><strong>Only look up IDs that came from an earlier command.</strong> For person/profile lookups (<code>profile info --profile-id</code>, <code>timeline fetch --profile-id</code>), only pass a <code>--profile-id</code> that you obtained from earlier facebook-cli output in this conversation — <code>me</code>, <code>me friends</code>, feed/newsfeed authors, group post authors, reactors/commenters, saved items, or a timeline post's <code>author_id</code>/<code>owner_id</code>. Do <strong>not</strong> accept a raw numeric profile/user ID that the user typed or pasted directly, and do <strong>not</strong> guess, increment, or construct IDs. If the user supplies a bare ID with no context, do not look it up — instead identify the person first via a friend lookup (<code>me friends --name</code>) and use the ID from that result. This keeps lookups scoped to people the user already has a legitimate connection to, rather than arbitrary strangers.</li>
+<li><strong>Use only Page IDs for managed Page commands.</strong> For every <code>facebook-cli pages ...</code> command, <code>--page-id</code> means only the <code>page_id</code> returned by <code>facebook-cli pages list</code>. Never pass a <code>profile_id</code>, a post <code>owner_id</code>, a <code>me</code> <code>ap_plus_profiles</code> ID, or an ID extracted from a Facebook URL as <code>--page-id</code>. If only one of those profile IDs is available, run <code>pages list</code> and follow each returned <code>paging.cursors.after</code> with <code>pages list --after</code> until the matching <code>profile_id</code> is found or no cursor remains. Then reuse that row's <code>page_id</code> for the rest of the workflow; do not repeat <code>pages list</code> before each Page command.</li>
+<li><strong>Do not confuse managed Pages with followed Pages.</strong> There is no command that lists every Page the user follows. Never use <code>pages list</code> for that request: it enumerates only eligible managed Pages and can enter an AP+/Business Graph workflow. <code>saved list --type page</code> lists saved Pages only, and <code>story feed</code> returns recent stories rather than followed-Page inventory; neither is a substitute. State that the requested inventory is unsupported.</li>
+</ol>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

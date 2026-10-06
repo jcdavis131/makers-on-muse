@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zvec-grep — Local-First Hybrid Search (ripgrep + BM25 + Vector) — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Local-First Hybrid Search (ripgrep + BM25 + Vector)">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/zvec-grep">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/zvec-grep">
+<meta property="og:title" content="zvec-grep — Local-First Hybrid Search (ripgrep + BM25 + Vector)">
+<meta property="og:description" content="Local-First Hybrid Search (ripgrep + BM25 + Vector)">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="zvec-grep — Local-First Hybrid Search (ripgrep + BM25 + Vector)">
+<meta name="twitter:description" content="Local-First Hybrid Search (ripgrep + BM25 + Vector)">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Search &middot; Custom</p>
+      <h1>zvec-grep — Local-First Hybrid Search (ripgrep + BM25 + Vector)</h1>
+      <p class="lede">Local-First Hybrid Search (ripgrep + BM25 + Vector)</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>zvec-grep — Local-First Hybrid Search (ripgrep + BM25 + Vector)</h2>
+<p>zg (zvec-grep) is Qwen Dev's open-source local-first search layer unifying exact regex (ripgrep), lexical BM25, and vector semantic search behind one CLI/MCP.</p>
+<h3>Install</h3>
+<ul>
+<li>Requires Node 22+. Use fnm: <code>fnm install 22 &amp;&amp; fnm use 22</code></li>
+<li><code>npm install -g @zvec/zvec-grep</code></li>
+<li>Verify: <code>zg --version</code> (binary at <code>~/.fnm/.../bin/zg</code> when using fnm)</li>
+</ul>
+<h3>Core concepts</h3>
+<ul>
+<li>One index, four routes: <code>hybrid</code> (default, intent+lexical), <code>--fts</code> (BM25 exact terms), <code>--vector</code> (conceptual), <code>--rg</code> (exhaustive literal/regex, no index needed)</li>
+<li>Index lives <code>&lt;root&gt;/.zvec-grep/</code>, auto-excludes <code>.git</code>, build/cache, respects gitignore</li>
+<li>Incremental: <code>zg index</code> builds/updates; changing embedding model needs <code>--rebuild</code></li>
+<li>Freshness: <code>fresh</code> or <code>possibly_stale</code></li>
+<li>Default on-device embedding: <code>local/potion-code-16m-v2</code> (Model2Vec static 256-dim, 8k tokens, no GPU speedup). Heavier locals: <code>jina-embeddings-v2-base-code</code>, <code>embeddinggemma-300m</code>, <code>qwen3-embedding-0.6b</code>. Remote Qwen endpoints gated via <code>--allow-remote</code> or <code>zg auth grant</code>.</li>
+</ul>
+<h3>Route selection (pick before searching)</h3>
+<ul>
+<li><code>--rg</code>: exact identifiers, symbols, constant names, slugs, regex — especially long single-token ids (40+ chars, e.g. full model ids: <code>--fts</code> silently returns zero hits for those). Also the fallback when <code>--fts</code> returns nothing.</li>
+<li><code>--fts</code>: exact natural-language phrases (&quot;era twins map&quot;).</li>
+<li><code>--vector</code>: conceptual / intent questions (&quot;how is X computed?&quot;).</li>
+<li><code>hybrid</code> (default): when unsure — start here, then narrow by route.</li>
+</ul>
+<h3>CLI (v0.2.1 verified — 2026-09-04)</h3>
+<pre><code># index current repo
+zg index
+
+# hybrid search (default) — note: `zg query` prefix required in 0.2.1
+zg query &quot;how do we compute era twins map&quot;
+
+# BM25 only
+zg query --fts &quot;MTNN v5 champion 12966&quot;
+
+# vector only
+zg query --vector &quot;player similarity embedding&quot;
+
+# ripgrep only (no index) — managed rg via zg
+zg query --rg &quot;FAMILIES.*130&quot;
+zg query --rg -F &quot;vector-hoops-model-engine&quot; src
+
+# status (no --verbose in 0.2.1; use plain status)
+zg status</code></pre>
+<p>Note: <code>zg &quot;query&quot;</code> without <code>query</code> subcommand is invalid in 0.2.1. Always use <code>zg query</code>. <code>--verbose</code> is rejected by 0.2.1 — use <code>zg status</code> only.</p>
+<h3>MCP (for agents)</h3>
+<ul>
+<li><code>zg install</code> auto-detects Codex, Claude Code, Cursor, OpenCode and wires MCP (Streamable HTTP <code>http://127.0.0.1:7999/mcp</code>, optional bearer auth)</li>
+<li>Default agent toolset = 2 tools: <code>zvec_grep_search</code> (intent known, string not) and <code>zvec_grep_rg</code> (symbol/path/regex known)</li>
+<li>Full 6-tool set via <code>zg server --mcp-toolset full</code> adds <code>index create/drop/status/server status</code></li>
+<li>Rule: agent must never silently create/rebuild/delete persistent index — keep index lifecycle CLI-owned</li>
+</ul>
+<h3>Integration points in this workspace (Scout harness)</h3>
+<ol>
+<li><strong>Scout Prime Coordinator (L0 router)</strong></li>
+</ol>
+<ul>
+<li>Phase 0 Orient: replace ad-hoc grep with <code>zg query --vector</code> for intent queries (&quot;what drives Daily Court?&quot;) + <code>zg query --rg</code> for symbol lookup</li>
+<li>Before routing, <code>zg status</code> to ensure fresh index</li>
+</ul>
+<ol>
+<li><strong>Deep Researcher / Strategist</strong></li>
+</ol>
+<ul>
+<li>Orient step: <code>zg query</code> hybrid to pull memory lattice + culture + past launches (Launched, MTNN v5 gold)</li>
+<li>Wide sweep: <code>zg query --rg</code> for exact identifiers (model ids, slugs, constant names — long single-token ids return zero hits on <code>--fts</code>); <code>zg query --fts</code> for exact natural-language phrases</li>
+</ul>
+<ol>
+<li><strong>Executor / Builder</strong></li>
+</ol>
+<ul>
+<li>Pre-build: <code>zg query --rg &quot;slug.*vector-hoops-model-engine&quot;</code> to avoid duplicate artifact</li>
+<li>Search existing assets: <code>zg query --vector &quot;embedding map 3D&quot;</code></li>
+</ul>
+<ol>
+<li><strong>Verifier / Forensic Auditor</strong></li>
+</ol>
+<ul>
+<li>Fact-check cascade: <code>zg query --fts</code> for claim triangulation (e.g., &quot;v6 0.000758 vs 0.1180&quot;)</li>
+<li>Source audit: <code>zg status</code> for freshness (no --verbose in 0.2.1)</li>
+</ul>
+<ol>
+<li><strong>Active Tasks Board</strong></li>
+</ol>
+<ul>
+<li>Before claiming lane: <code>zg query --rg &quot;ACTIVE.*vector-hoops&quot;</code> + <code>zg query --vector &quot;hoops model engine work&quot;</code></li>
+<li>Prevent duplicate suppressions</li>
+</ul>
+<ol>
+<li><strong>Timeline / Memory</strong></li>
+</ol>
+<ul>
+<li>Replace full <code>timeline.jsonl</code> scans with <code>zg query --vector &quot;manim video update&quot;</code></li>
+<li>Memory search: augment <code>muse.memory_search</code> with <code>zg query --vector</code> over <code>~/memory/</code></li>
+</ul>
+<ol>
+<li><strong>Manim Video Pipeline</strong></li>
+</ol>
+<ul>
+<li>Search reusable patterns: <code>zg query --vector &quot;cam_style Okabe AAA&quot;</code> to ensure style compliance</li>
+<li>Asset lookup: <code>zg query --rg &quot;ChimeraEquation&quot;</code></li>
+</ul>
+<h3>Zero-deps guardrail</h3>
+<ul>
+<li>zg is Node-based, not Python. That's OK — authorized minimal dependency per TimesFM rule (minimal deps when building from scratch isn't reasonable)</li>
+<li>Never auto-rebuild index in agent loop; CLI owns it</li>
+<li>Keep stdlib-only Python for model training; zg is for search/orchestration only</li>
+</ul>
+<h3>Operational gotchas (verified 2026-09-24)</h3>
+<ul>
+<li><code>zg index</code> with no path anchors to the enclosing git root — from a subdirectory of a large repo it indexes everything. Pass an explicit root (<code>zg index &lt;dir&gt;</code>) for scoped work.</li>
+<li><code>zg status</code> / <code>zg query</code> may print <code>[ERROR ...] id_map.cc ... read only mode</code> lines on stderr yet exit 0 — noisy but harmless; trust the exit code and the <code>status:</code> line.</li>
+<li><code>ZVEC_GREP.ENGINE.LOCK.BUSY</code> means another index/rebuild holds the lock — wait for it to finish instead of stacking commands.</li>
+</ul>
+<h3>Quick start for this repo</h3>
+<pre><code>export PATH=&quot;$HOME/.fnm:$PATH&quot;; eval &quot;`$HOME/.fnm/fnm env`&quot;
+cd ~/workspace
+zg index
+zg query &quot;vector hoops model engine&quot;</code></pre>
+<p>Refs:</p>
+<ul>
+<li>GitHub: https://github.com/zvec-ai/zvec-grep</li>
+<li>npm: https://www.npmjs.com/package/@zvec/zvec-grep</li>
+<li>Pipeline: https://github.com/zvec-ai/zvec-grep/blob/main/docs/04-pipeline.md</li>
+<li>MCP: https://github.com/zvec-ai/zvec-grep/blob/main/docs/03-mcp.md</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

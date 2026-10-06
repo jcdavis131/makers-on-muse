@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>google_calendar — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Work with the user's Google Calendar: agenda views, event details, and scheduling changes.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/google-calendar">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/google-calendar">
+<meta property="og:title" content="google_calendar">
+<meta property="og:description" content="Work with the user's Google Calendar: agenda views, event details, and scheduling changes.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="google_calendar">
+<meta name="twitter:description" content="Work with the user's Google Calendar: agenda views, event details, and scheduling changes.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Bundled</p>
+      <h1>google_calendar</h1>
+      <p class="lede">Work with the user's Google Calendar: agenda views, event details, and scheduling changes.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Google Calendar</h2>
+<p>Everything runs through <code>hatch_gws_cli calendar ...</code>. Raw API calls are space-separated (<code>&lt;resource&gt; &lt;method&gt;</code>) and take a <code>--params</code> JSON object, plus a <code>--json</code> body when creating or editing. A timed event's start/end is a <code>dateTime</code> in RFC3339 with a timezone offset, like <code>2026-04-16T14:00:00-07:00</code>; an all-day event uses a date-only <code>date</code> like <code>2026-04-16</code> instead (never mix the two on one event). Run <code>hatch_gws_cli calendar &lt;command&gt; --help</code> for a command's flags, and <code>hatch_gws_cli schema calendar.events.insert</code> (and so on) for a raw method's <code>--params</code> and <code>--json</code> shape before you use one you are unsure of.</p>
+<h3>Connecting</h3>
+<p>Calendar needs a one-time connect before commands return data. Run <code>hatch_gws_cli calendar status</code>. If it comes back not connected and returns a <code>connect_url</code>, post it as <code><a href="&lt;connect_url&gt;">Connect Google Calendar</a></code>, then stop and wait for the user to tap it. If no URL is returned, report that connection is unavailable and stop; never invent one. Connecting is the user's step: never open the sign-in, drive a browser to it, send the user to Settings, or ask for credentials. If status is unavailable, say Google Calendar is unavailable on this device and stop. Disconnect with <code>hatch_gws_cli calendar disconnect</code>. Post <code><a href="&lt;disconnect_url&gt;">Disconnect Google Calendar</a></code> only when the command returns that URL; otherwise rerun <code>status</code> and report its state without inventing a link. If a later command fails with an auth error, missing connector, or not-connected status, rerun <code>status</code>: if not connected with a URL, post the connect link and wait; if connected, retry once; if unavailable or missing a URL, report that and stop. Auth flows only through <code>status</code> and <code>disconnect</code>. Never hand-author credential files or run raw <code>gws auth</code>.</p>
+<p>If the user asks to add or link another Google Calendar account, run <code>hatch_gws_cli calendar status</code> and post the exact <code>add_account_url</code> it returns as <code><a href="&lt;add_account_url&gt;">Add Google Calendar account</a></code>. Never reuse <code>connect_url</code> for an additional account. If <code>add_account_url</code> is absent, say that adding another account is unavailable. To remove one specific Google Calendar account while keeping the others, direct the user to that account under Connectors in Settings; do not disconnect Google Calendar entirely.</p>
+<h3>More than one account</h3>
+<p>A user can link several Google accounts. Calendar service calls use the default account when <code>--account</code> is omitted, so most tasks need nothing extra and there is no need to list accounts first. When the user clearly means a specific one of several, list them with <code>hatch_gws_cli calendar accounts</code> (identity only, no tokens) and match their words to a <code>display_name</code>, then add <code>--account &lt;account_id&gt;</code> to the command. <code>--account</code> selects which linked account runs a calendar service call and which account a capability-aware <code>status --for-command</code> checks; plain <code>status</code>, <code>disconnect</code>, and <code>accounts</code> remain connector-wide lifecycle commands. If you cannot match the user's words to exactly one <code>display_name</code>, ask which account rather than guessing; a wrong or unlinked <code>--account</code> fails closed (&quot;account may not be linked&quot;) — surface that and confirm the account, never silently retry on the default.</p>
+<p>If Google returns <code>403</code>, <code>insufficientPermissions</code>, or &quot;insufficient authentication scopes,&quot; run <code>hatch_gws_cli calendar status --for-command &lt;command-or-method&gt;</code> with the same <code>--account &lt;account_id&gt;</code> selection as the failed operation. When <code>scope_status</code> is <code>not_granted</code>, post the returned <code>scope_add_url</code> exactly as <code><a href="&lt;scope_add_url&gt;">Additional Google Calendar access</a></code> and tell the user to choose that same account on Google's consent screen. Do not substitute <code>add_account_url</code>: that starts a new-account flow rather than adding access to the selected account. Wait for consent to finish before retrying the command.</p>
+<h3>Common flows</h3>
+<h4>Read the agenda</h4>
+<p><code>+agenda</code> is the default for any read-only &quot;what's on my calendar&quot;, &quot;what's coming up&quot;, or multi-day summary. It searches every visible calendar.</p>
+<ul>
+<li>Match the window to the question: <code>+agenda --today</code> for today, <code>+agenda --week</code> or <code>+agenda --days 7</code> for a range.</li>
+<li>One calendar: <code>+agenda --calendar &lt;name-or-id&gt;</code>.</li>
+<li>Add <code>--format json</code> when you need to parse the result.</li>
+</ul>
+<h4>Look up calendars, events, and free time</h4>
+<ul>
+<li>Which calendars exist: <code>calendarList list</code>. Use it when the user asks what calendars are connected or wants to target one by name.</li>
+<li>Events in a known calendar, or to get an event's ID before editing it: <code>events list --params '{&quot;calendarId&quot;:&quot;primary&quot;,&quot;timeMin&quot;:&quot;&lt;start&gt;&quot;,&quot;timeMax&quot;:&quot;&lt;end&gt;&quot;}'</code>. Use this over <code>+agenda</code> only when you need a specific calendar, fields <code>+agenda</code> omits, or event IDs.</li>
+<li>One event's full detail: <code>events get --params '{&quot;calendarId&quot;:&quot;primary&quot;,&quot;eventId&quot;:&quot;&lt;id&gt;&quot;}'</code>.</li>
+<li>Whether a time is free or busy: <code>freebusy query --json '{&quot;timeMin&quot;:&quot;&lt;start&gt;&quot;,&quot;timeMax&quot;:&quot;&lt;end&gt;&quot;,&quot;items&quot;:[{&quot;id&quot;:&quot;primary&quot;}]}'</code>.</li>
+</ul>
+<h4>Create, update, or delete events</h4>
+<ul>
+<li>Create: <code>events insert --params '{&quot;calendarId&quot;:&quot;primary&quot;}' --json '{&quot;summary&quot;:&quot;Focus block&quot;,&quot;start&quot;:{&quot;dateTime&quot;:&quot;&lt;start&gt;&quot;},&quot;end&quot;:{&quot;dateTime&quot;:&quot;&lt;end&gt;&quot;}}'</code>. Add <code>attendees</code>, <code>location</code>, or <code>description</code> as needed. A block, hold, or focus event must show as busy: leave <code>transparency</code> unset or set it to <code>&quot;opaque&quot;</code>, never <code>&quot;transparent&quot;</code> (that shows the time as free) unless the user wants it to read as free. For an all-day event use date-only values instead, <code>&quot;start&quot;:{&quot;date&quot;:&quot;2026-04-16&quot;},&quot;end&quot;:{&quot;date&quot;:&quot;2026-04-17&quot;}</code>, where the end date is exclusive.</li>
+<li>Update: <code>events patch --params '{&quot;calendarId&quot;:&quot;primary&quot;,&quot;eventId&quot;:&quot;&lt;id&gt;&quot;}' --json '{&quot;location&quot;:&quot;Room A&quot;}'</code>. Patch only the fields that change. A patch REPLACES a whole array, so to add or remove a guest, first read the event and send back the COMPLETE attendee list with your change applied — never send only the new guest, or you silently drop the others.</li>
+<li>Delete: <code>events delete --params '{&quot;calendarId&quot;:&quot;primary&quot;,&quot;eventId&quot;:&quot;&lt;id&gt;&quot;}'</code>.</li>
+</ul>
+<p>Carry the account, calendar ID, and event ID from the read that found the event straight through the write, and use them exactly. <code>primary</code> above is only the default when the user has not pointed at another calendar; once a read locates an event on some calendar, target that same calendar and account for the update or delete — never fall back to <code>primary</code>. Never invent or rewrite an event ID.</p>
+<p>For any create, deletion, or guest-visible change, add <code>&quot;sendUpdates&quot;:&quot;all&quot;</code> to <code>--params</code> whenever attendees exist before or after the write. This includes adding the first guest, recurrence or conference changes, and time, location, title, description, or attendee changes. A deletion sent with <code>&quot;sendUpdates&quot;:&quot;all&quot;</code> gives each guest a cancellation notice. If the user asks not to notify anyone, explain that <code>&quot;sendUpdates&quot;:&quot;none&quot;</code> can stop the change from reaching guests' calendars, then confirm before using it.</p>
+<h3>Rules</h3>
+<ul>
+<li>Private event creation, private updates, and event deletion may proceed from a clear user request without an additional confirmation. Creating an event with guests, changing an event in a way that notifies guests, and calendar or ACL management require confirmation because event content or access changes reach other people. Before those outward-facing writes, restate the specific event, time, recipients, and notification effect.</li>
+<li>Commands that return the saved event in their response (such as timed-event reads, creates and updates) add <code>event_starts_at</code> / <code>event_ends_at</code>; recurring instances also add <code>event_original_starts_at</code>. Each carries UTC and user-local forms; prefer <code>user_local</code> in replies. All-day bounds remain calendar dates and must not be timezone-shifted. Trust the events <code>+agenda</code> returns for the window you asked for, and get &quot;today&quot; and &quot;tomorrow&quot; right against the current date.</li>
+<li>Talk to the user in plain language only. Never show raw commands, status words like not_connected or unavailable, opaque provider/event/calendar IDs, etags, page tokens or cursors, raw JSON, or other internal response fields, unless the user asks for them. You may name an account by its display name or recognizable email when you need to disambiguate which account you mean. Keep IDs and pagination cursors internally to chain follow-up commands.</li>
+<li>Never print tokens, secrets, or credential material. Redact them if they appear in tool output.</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

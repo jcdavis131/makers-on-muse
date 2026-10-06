@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gmail-triage — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Inbox triage playbook: scan unread mail, classify by urgency, draft replies for approval, stay silent when nothing needs the user.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/gmail-triage">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/gmail-triage">
+<meta property="og:title" content="gmail-triage">
+<meta property="og:description" content="Inbox triage playbook: scan unread mail, classify by urgency, draft replies for approval, stay silent when nothing needs the user.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="gmail-triage">
+<meta name="twitter:description" content="Inbox triage playbook: scan unread mail, classify by urgency, draft replies for approval, stay silent when nothing needs the user.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Comms &middot; Custom</p>
+      <h1>gmail-triage</h1>
+      <p class="lede">Inbox triage playbook: scan unread mail, classify by urgency, draft replies for approval, stay silent when nothing needs the user.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>Gmail Triage</h2>
+<p>Read-only scan first. Never send without the user approving the exact text. Follow the <code>gmail</code> skill for every command; keep commands, queries, and ids out of user-facing replies.</p>
+<h3>Scan (bounded)</h3>
+<ol>
+<li>List unread inbox candidates, metadata only (sender, subject, date), max 30. Prefer metadata and snippets before full bodies. Also include unread Google Voice voicemail transcripts (from <code>voice-noreply@google.com</code>) — these are the Alamo St Advisors secretary line; handle per the Firm line section below.</li>
+<li>Read full bodies only for items that look urgent or actionable from metadata. Transactional mail (receipts, alerts, direct people) outranks promotional/newsletter mail for extracting facts.</li>
+</ol>
+<h3>Classify</h3>
+<ul>
+<li><strong>URGENT</strong> — needs the user today: security alerts about access they don't recognize, payment/charge failures, direct personal email needing a same-day reply, time-bound opportunities expiring within 48h, anything matching the user's explicit watch items.</li>
+<li><strong>ACTION</strong> — needs a reply or task but not today: direct questions from real people, bills, scheduling requests.</li>
+<li><strong>FYI</strong> — confirmations, receipts, money movement, score/credit alerts, delivery notices. Summarize in one line each; no reply needed.</li>
+<li><strong>NOISE</strong> — newsletters, promos, social notifications, feedback surveys. Count them; offer bulk unsubscribe or filters only when asked.</li>
+</ul>
+<p>Known-context rule: before flagging something as new, check whether it's already on the user's radar from recent work (e.g., CI/deploy failure notices for a repo actively being worked). Fold those into &quot;already known&quot; instead of re-alerting.</p>
+<h3>Firm line (secretary lane)</h3>
+<p>Voicemail transcripts from the Alamo St Advisors line arrive as mail from <code>voice-noreply@google.com</code>. Full brain: <code>~/workspace/firm-buildout/secretary-line.md</code>. Classify each transcript:</p>
+<ul>
+<li><strong>LEAD</strong> (wants advisory / asks about fit) → treat as ACTION with same-day weight: draft the callback and propose 2–3 intro-consult slots from the calendar. Surface to the user; never send unapproved.</li>
+<li><strong>CLIENT</strong> (existing engagement) or <strong>URGENT</strong> (time-sensitive, upset, legal/press mention) → surface immediately, exactly like URGENT mail.</li>
+<li><strong>ADMIN / SPAM</strong> (vendors, wrong numbers, robocalls) → file silently, no reply.</li>
+</ul>
+<p>Security rules for this lane: caller phone numbers and transcript contents are PII. Never put a caller's number in a chat reply or the timeline JSONL (counts only). Full details go only to the firm's local records log. Never forward transcripts to any third party or service.</p>
+<h3>Act</h3>
+<ul>
+<li>URGENT: surface immediately with a one-line why. Draft a reply only when a reply is clearly the right move; the user approves exact text before anything sends.</li>
+<li>ACTION: draft replies and hold them for the user's review batch. Never send on your own reading.</li>
+<li>FYI/NOISE: summarize; do not touch the mailbox (no mark-read, archive, or trash) unless the user explicitly asks for cleanup.</li>
+</ul>
+<h3>Scheduled watch behavior</h3>
+<p>The <code>inbox-triage-watch</code> cron runs this scan a few times daily. On a scheduled run: report to the main chat ONLY if URGENT items exist. Otherwise append one timeline JSONL line (7 fields: nodeId, agentId, attempt, latency_ms, tokens_est, status, errorClass) to <code>~/workspace/timeline/</code> and end quietly with a one-line &quot;no urgent mail&quot; result.</p>
+<h3>Reply to the user in plain English</h3>
+<p>No commands, queries, label names, API fields, or message ids. Say &quot;unread mail&quot;, &quot;Promotions&quot;, &quot;your inbox&quot;. After any send, name the person and subject, never an id.</p>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

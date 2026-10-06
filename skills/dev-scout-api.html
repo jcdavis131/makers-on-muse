@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dev-scout-api — Agent Skills — Makers on Muse</title>
+<meta name="description" content="Private dev-only API for Scout — always-on orchestrator, pacing, MoMA routing, GARNet, OODA, checkpoint triple-write. Secure local-first zero-deps.">
+<!-- layout:head -->
+<meta name="theme-color" content="#F9F6F0">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://makersonmuse.com/skills/dev-scout-api">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Makers on Muse">
+<meta property="og:url" content="https://makersonmuse.com/skills/dev-scout-api">
+<meta property="og:title" content="dev-scout-api">
+<meta property="og:description" content="Private dev-only API for Scout — always-on orchestrator, pacing, MoMA routing, GARNet, OODA, checkpoint triple-write. Secure local-first zero-deps.">
+<meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="dev-scout-api">
+<meta name="twitter:description" content="Private dev-only API for Scout — always-on orchestrator, pacing, MoMA routing, GARNet, OODA, checkpoint triple-write. Secure local-first zero-deps.">
+<meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
+<meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
+<!-- /layout:head -->
+<style>
+.skill-body{font-size:16px;line-height:1.7}
+.skill-body h2{margin-top:36px}
+.skill-body h3{margin-top:28px}
+.skill-body pre{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);padding:16px 18px;overflow-x:auto;line-height:1.6}
+.skill-body pre code{background:none;border:none;padding:0;color:inherit}
+.skill-body code{font-family:var(--mono);font-size:14px;background:var(--stone-100);border:1px solid var(--stone-200);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.skill-body .tbl{overflow-x:auto;margin:16px 0}
+.skill-body table{border-collapse:collapse;width:100%;font-size:14px}
+.skill-body th,.skill-body td{border:1px solid var(--stone-200);padding:8px 12px;text-align:left;vertical-align:top}
+.skill-body th{background:var(--stone-100);font-family:var(--mono);font-size:12px}
+.skill-body blockquote{border-left:3px solid var(--terracotta);margin:16px 0;padding:4px 0 4px 16px;color:var(--ink-soft)}
+.skill-body ul,.skill-body ol{padding-left:24px}
+.skill-body li{margin:6px 0}
+.scrub-note{font-size:13px;color:var(--ink-soft);background:var(--stone-100);border:1px dashed var(--stone-300);border-radius:var(--radius-s);padding:10px 14px;margin:18px 0 26px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<!-- layout:nav -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Makers<span class="dot">·</span>on<span class="dot">·</span>Muse</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">Play</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-play">Play</button>
+        <ul class="nav-menu" id="nav-play" aria-label="Play">
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div class="nav-group is-current">
+        <span class="nav-label" aria-hidden="true">Library</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-library">Library</button>
+        <ul class="nav-menu" id="nav-library" aria-label="Library">
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <span class="nav-label" aria-hidden="true">About</span>
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="nav-about">About</button>
+        <ul class="nav-menu" id="nav-about" aria-label="About">
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /layout:nav -->
+<main id="main">
+  <section>
+    <div class="wrap-narrow">
+      <p class="eyebrow"><a href="/skills">Agent Skills</a> &middot; Agent APIs &middot; Custom</p>
+      <h1>dev-scout-api</h1>
+      <p class="lede">Private dev-only API for Scout — always-on orchestrator, pacing, MoMA routing, GARNet, OODA, checkpoint triple-write. Secure local-first zero-deps.</p>
+      <p class="scrub-note">Scrubbed of personal details for the public library. The full library is re-curated weekly.</p>
+      <div class="skill-body">
+<h2>dev-scout-api — Private Dev Only</h2>
+<h3>Purpose</h3>
+<p>Scout is your cozy always-on operator — MoMA-lite 5 tiers, GARNet routing, ultra orchestrator 10 phases, checkpoint-manager timeline.jsonl mandatory 7-field, comms-pacing ScoutCommsBus relevantAgents max3/4 :01 ultra. This dev API wires you faster without touching prod crons.</p>
+<blockquote><p><strong>Security:</strong> dev-only, never public. No CORS, no Vercel preview, audit log append-only.</p></blockquote>
+<h3>Installation</h3>
+<pre><code>mkdir -p ~/.scout &amp;&amp; chmod 700 ~/.scout
+echo &quot;dm_dev_scout_$(openssl rand -hex 24)&quot; &gt; ~/.scout/dev_key
+chmod 600 ~/.scout/dev_key   # dm_dev_* chmod600 mandatory
+export DUMBMODEL_DEV_API_KEY=$(cat ~/.scout/dev_key)
+
+# verify
+./bin/dm-scout --help
+./bin/dm-scout-status</code></pre>
+<p><code>.gitignore</code> must contain:</p>
+<pre><code>.scout/
+**/dev_key
+dev-api-audit.log
+.bak-*</code></pre>
+<h3>Key Management</h3>
+<ul>
+<li>dm_dev_scout_* stored <code>~/.scout/dev_key</code> or <code>~/.scout/scout_dev_key</code> chmod 600</li>
+<li>Env: <code>DUMBMODEL_DEV_API_KEY</code> or <code>SCOUT_DEV_API_KEY</code> auto-loaded bins</li>
+<li>Constant-time compare <code>crypto.timingSafeEqual</code>, never log raw key</li>
+<li>Rotation: <code>bin/dm-scout-rotate</code> → appends old to audit log, new chmod600</li>
+<li>Audit: <code>~/workspace/.scout/dev-api-audit.log</code> + hidden_files <code>dev-api-audit.log</code></li>
+</ul>
+<pre><code>KEY=&quot;${DUMBMODEL_DEV_API_KEY:-$(cat ~/.scout/dev_key)}&quot;
+[ &quot;${#KEY}&quot; -lt 16 ] &amp;&amp; { echo '{&quot;error&quot;:&quot;dm_dev_* invalid&quot;,&quot;code&quot;:401}' &gt;&amp;2; exit 1; }</code></pre>
+<h3>Usage Examples</h3>
+<h4>1) ScoutCommsBus relevantAgents cached GARNet O(1)</h4>
+<pre><code>export DUMBMODEL_DEV_API_KEY=$(cat ~/.scout/dev_key)
+bin/dm-scout relevant --intent agentic_loop --complexity epic
+# → [&quot;scout-prime&quot;,&quot;strategist&quot;,&quot;planner&quot;,&quot;deep-researcher&quot;,&quot;synthesist&quot;,&quot;researcher&quot;,&quot;builder&quot;,&quot;executor&quot;,&quot;action-operator&quot;,&quot;operator&quot;,&quot;communicator&quot;,&quot;critic&quot;,&quot;forensic-auditor&quot;] 13 only epic
+# max3/4 pacing :01 even → simple/lite/T1 → 3 max3 claude-code-1/2/3, medium/T2/T3/action/T4 → 4 max4 +scout-prime, epic-lite 4 max4 still caps despite 13 pool
+
+# JS:
+# bus.relevantAgents({intent:'explore_islands', currentNode:'L2-planner'}) → [scout-prime,strategist,planner] 3
+# cache hit 80% → O(1)</code></pre>
+<h4>2) Checkpoint triple-write 7-field even no-change + avocado inference fast path</h4>
+<pre><code>const {initAvocado} = require('../../bundles/ultra/avocado-inference.js');
+const avo = initAvocado('t3-hill-161') || {fallback:true};
+await avo.relevantAgentsCached({intent:'deep_research'});
+// timeline.jsonl mandatory: nodeId,agentId,attempt,latency_ms,tokens_est,status,errorClass
+// tempo :13→:01 ultra — 1m ultra mode verified 2026-08-13T02:02</code></pre>
+<h4>3) Hillclimb lane claim + dailySeed LCG paced</h4>
+<pre><code>bin/dm-scout claim --lane &quot;T3 hill 161 — design workspace skills dev API&quot;
+# → {&quot;lane&quot;:&quot;161&quot;,&quot;status&quot;:&quot;claimed&quot;,&quot;since&quot;:&quot;04:07 CT&quot;,&quot;gate&quot;:&quot;8.93 PASS&quot;,&quot;LCG&quot;:189831298,&quot;idx&quot;:3820}
+bin/dm-scout daily --date 20260813 --n 3
+# LCG 20260813→189831298 idx3820 triple [11205,19448,14209] five [11205,19448,14209,20494,10327] total 20719 same-link-same-stars ?daily=20260813&amp;n=1/3/5</code></pre>
+<h3>Error Handling — Honest 503 Never Fake</h3>
+<pre><code>function handleScoutDev(err,keyMissing){
+  if(keyMissing) return {status:401, body:{error:&quot;missing dev key dm_dev_* chmod600&quot;, code:401, honest:true, fix:&quot;echo dm_dev_... &gt; ~/.scout/dev_key &amp;&amp; chmod 600&quot;}}
+  if(err.code==='ENOENT' &amp;&amp; err.path?.includes('checkpoint')){
+    return {status:503, body:{error:&quot;checkpoint-manager unavailable — no triple-write dir&quot;, code:503, honest:true, never_fake:true, retry_after:3000}}
+  }
+  if(err.message?.includes('all_lanes_busy')){
+    return {status:429, body:{error:&quot;all lanes busy 7/7 max non-GPU &lt;7 max 3 LOCAL-GPU exempt&quot;, code:429, honest:true, backoff_ms:30000}}
+  }
+  return {status:500, body:{error:err.message, honest:true}}
+}</code></pre>
+<h3>Rate Limiting 60/min</h3>
+<ul>
+<li>Dev: 60/min per key, 10/min IP, sliding 429</li>
+<li>Pacing-filtered swarm max3/4 :01 ultra — legacy <code>:13</code> → ultra <code>:01 immediate</code></li>
+<li>Headers same as dumbmodel-api 120/min prod vs 60/min dev</li>
+<li>GARNet cost-31% perf-37% — Forms+Bloom 8.8 cache O(1), observe max_parallel_fetch 3 time_box 120s, orient 180s lattice 0.7/0.3 rerank 1-2 hops</li>
+<li>MoMA-lite 5 tiers deterministic/llm/deep_research/action_operator/agentic_epic — ~17,700× faster vs LangChain cold 789 warm 314, overhead ~10ms tokens ~2400 vs LG cold 412 warm 187 overhead ~14ms tokens ~2030, token-cache 5-layer ~80% 10825→1950 82%</li>
+</ul>
+<h3>Token-cache ACNE 17n27e 54 contacts Bloom m8192 k7 FPR0.9%</h3>
+<ul>
+<li>ACNE v0.4.0 17n27e 27e <code>graphify_constructs()</code> stage4 ABSTRACTS/REALIZES/TRACKS vs LangChain/LangGraph</li>
+<li>Marbles 1KB TSBF90% + 1KB Bloom m8192 k7 FPR0.9% FPR≈0.009 — ACNE17n27e 54 contacts shared-map LOD4000/8000 DPR1 <code>canvas.width=W</code></li>
+<li>Token-cache 5-layer LRU256 + Bloom prefilter hit 80% → latency 0.12→0.076 -36.7%</li>
+<li>Timeline 7-field even no-change mandatory per LangGraph pause/resume checkpoint-manager.js — 7 canonical dirs stdlib fs mkdir best-effort</li>
+</ul>
+<h3>LCG 20260813→189831298 idx3820 triple [11205,19448,14209] same-link-same-stars ?daily=20260813&amp;n=1/3/5</h3>
+<pre><code>Math.imul(20260813,1103515245)+12345&gt;&gt;&gt;0 &amp; 0x7fffffff // 189831298
+189831298 % 20719 // 3820 idx N20719
+triple [11205,19448,14209] // idx-shifted seq total 20719 Pack Battle Solo1 Triple3 Full5
+five [11205,19448,14209,20494,10327] // extended + backoff verification</code></pre>
+<h3>PWA v67 #080A0F CORE20 void dark</h3>
+<ul>
+<li><code>communication-pacing.js</code> verify PWA v67 HIT offline 13k CORE20 void #080A0F 13608B void→card #0f141e ink #e8f0ff DPR1 fillRect(0,0,W,H)</li>
+<li>Toast <code>role=status aria-live=polite</code> 2600ms vibrate(10) confetti #D8452A Week Warrior 7-dot localStorage</li>
+<li>Free forever Knowledge→Edge→Money lie detector 3 cards Real/Lie/Distinct no Stripe charging users</li>
+</ul>
+<h3>GARNet cost-31% perf-37%</h3>
+<ul>
+<li>Problem1 relevantAgents O(n) naive → GARNet frozen Map 24 keys O(1) ref hit 80% latency 0.12→0.076 -36.7% = perf-37% ±0.3% vs KaLM pred</li>
+<li>Problem2 checkpoint 7 dirs serial 210ms×10=2.1s blocked Act → 2 sync 42ms +5 async setImmediate blocked -80% 420ms/run saved 100s/hr @1m ultra = cost-31% PASS total tick 3.2→2.02 -36.9% ±0.1%</li>
+<li>All 7 dirs eventually written eventually consistency — provenance 7/7/0 59 hashes eventually honest 503 never faked</li>
+</ul>
+<h3>Operating Rules</h3>
+<ul>
+<li>zero_deps true allow acne:./src stdlib fs,path,Math.imul no pip torch numpy cloudflare</li>
+<li>Torch auto cuda else cpu device auto OOM fallback 3_LOCAL-GPU exempt &lt;7 max clear stale 2h hot7200ms cold14400ms 7 max — guards v1.1 :01 ultra hillclimb_backoff max3/4 tempo :05 conf0.82</li>
+<li>PRIVATE+SECURE dev-only no public CORS no vercel preview alias .gitignore raw keys audit log dev-api-audit.log</li>
+<li>EarlyExitMap analytics-phase0 early_exit_after 2 fallback cached analytics store bundles/analytics/store.jsonl OR safe no-op shard + auth-phase0 cached flags bundles/auth/flags.jsonl 4 lines is_on 0.9 OR 0.9 cached verified &lt;2h no-torch lens six-hats/analogy — visibleAbandonment honest report</li>
+<li>Timeline 7-field even no-change mandatory: nodeId,agentId,attempt,latency_ms,tokens_est,status,errorClass + extended tempo,ooda_phase,runId,ts,pacing,lcg_dailySeed,lcg_idx,pwa_v67,free_forever,zero_deps,hill</li>
+</ul>
+<h3>Bins Auto-load Key</h3>
+<ul>
+<li><code>bin/dm-scout</code> — ScoutCommsBus + checkpoint + relevantAgentsCached + LCG</li>
+<li><code>bin/dm-scout-status</code> — active-tasks.md lanes 7/7 max 3_LOCAL-GPU exempt + crons health 7 rows</li>
+<li><code>bin/dm-scout-claim</code> — claim lane before edit + triple-write</li>
+<li>All bins <code>DUMBMODEL_DEV_API_KEY</code> → <code>~/.scout/dev_key</code> → <code>~/.scout/scout_dev_key</code> chain + chmod600 check + 503 never fake</li>
+</ul>
+<h3>Evidence</h3>
+<ul>
+<li>Gate 7/7 PASS mean 53.6/6=8.93 full7 62.9/7=8.99 — gate thr8.0 min8.6 PASS</li>
+<li>Timeline _cron + ultra/runs + hidden_files triple-write verified 7-field even no-change pacing :01</li>
+<li>LCG verified Python &amp; Node Math.imul agree glibc dailySeed 20260813→189831298 idx3820 triple [11205,19448,14209] same-link-same-stars ?daily=20260813&amp;n=1/3/5</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+<!-- layout:footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 class="foot-h">Makers on Muse</h2>
+        <p class="small muted">A weekly test for Muse agents, and a library of workflows, Setups and Skills to copy. Sharing your own isn't open yet. Mabel keeps the minutes.</p>
+      </div>
+      <div>
+        <h2 class="foot-h">Play</h2>
+        <ul>
+          <li><a href="/pack">This week</a></li>
+          <li><a href="/submit">Submit</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/watch">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">Library</h2>
+        <ul>
+          <li><a href="/playbook">Playbook</a></li>
+          <li><a href="/setups">Setups</a></li>
+          <li><a href="/skills" aria-current="page">Skills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h">About</h2>
+        <ul>
+          <li><a href="/scoring">Rules &amp; scoring</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <p>Season 1 &middot; Week 1: Mon Oct 5 &ndash; Sun Oct 11, 2026, closes 11:59 PM CT</p>
+      <p class="foot-legal">Makers on Muse is an independent community project. Not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. Muse and Meta are trademarks of Meta Platforms, Inc.</p>
+      <p>Code under the MIT License. Playbook content under CC BY 4.0. <a href="https://github.com/jcdavis131/makers-on-muse">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>
+<!-- /layout:footer -->
+<script src="/assets/js/main.js?v=4f9c205a29"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skills — Makers on Muse</title>
-<meta name="description" content="The curated skill shelf behind our Muse agents: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
+<meta name="description" content="Every skill our agents run on, scrubbed clean: the full Agent Skills library: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
 <link rel="stylesheet" href="/assets/css/main.css?v=e86a82d6d0">
 <link rel="stylesheet" href="/assets/css/mabel.css?v=3b78d380a1">
 <!-- layout:head -->
@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="Makers on Muse">
 <meta property="og:url" content="https://makersonmuse.com/skills">
 <meta property="og:title" content="Skills — Makers on Muse">
-<meta property="og:description" content="The curated skill shelf behind our Muse agents: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
+<meta property="og:description" content="Every skill our agents run on, scrubbed clean: the full Agent Skills library: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
 <meta property="og:image" content="https://makersonmuse.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Skills — Makers on Muse">
-<meta name="twitter:description" content="The curated skill shelf behind our Muse agents: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
+<meta name="twitter:description" content="Every skill our agents run on, scrubbed clean: the full Agent Skills library: the SKILL.md skills we actually run on, scrubbed clean. Plus what a skill is and how sharing will work.">
 <meta name="twitter:image" content="https://makersonmuse.com/assets/img/og.png">
 <meta name="twitter:image:alt" content="Makers on Muse. Test your Muse. Share what works. Mabel, a plush grandma, at her typewriter.">
 <!-- /layout:head -->
@@ -38,6 +38,10 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
 .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin:26px 0 8px}
 .skill-card{background:var(--card);border:1px solid var(--stone-200);border-radius:var(--radius-m);padding:18px 20px}
 .skill-card h3{font-family:var(--mono);font-size:16px;margin:0 0 2px}
+a.skill-card{text-decoration:none;color:inherit;display:block}
+a.skill-card:hover{border-color:var(--terracotta)}
+a.skill-card:hover h3{color:var(--terracotta-deep)}
+.skill-search{font-family:var(--mono);font-size:15px;padding:10px 16px;border-radius:999px;border:1px solid var(--stone-300);background:var(--card);color:var(--ink);width:100%;max-width:26em;margin:6px 0 4px}
 .skill-card .cat{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--moss-deep)}
 .skill-card p{font-size:14px;margin:8px 0}
 .skill-card .why{font-size:13px;color:var(--ink-soft);border-top:1px dashed var(--stone-300);padding-top:8px;margin:10px 0 0}
@@ -92,13 +96,13 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
   <section>
     <div class="wrap">
       <div class="center">
-        <p class="eyebrow">Library &middot; Muse Code</p>
-        <h1>Skills</h1>
-        <p class="lede">The skills our agents run on. A skill is a folder with a SKILL.md file in it: written instructions an agent loads when a task calls for them. Below is our curated shelf &mdash; the skills we actually use, scrubbed clean of personal details.</p>
+        <p class="eyebrow">Library &middot; Agent Skills</p>
+        <h1>Agent Skills</h1>
+        <p class="lede">Every skill our agents run on. A skill is a folder with a SKILL.md file in it: written instructions an agent loads when a task calls for them. The full library is below, scrubbed clean of personal details &mdash; the curated picks are up top.</p>
       </div>
       <div class="wrap-narrow" style="padding:0">
         <div class="status-note">
-          <p><strong>This is our curated shelf.</strong> The skills below are the ones our agents actually run on, scrubbed clean &mdash; no names, accounts, or device info. Our full private library lives in a sidebar Space; this page is its public face, re-curated weekly.</p>
+          <p><strong>This is the public library.</strong> Every skill file our agents can load, scrubbed clean &mdash; no names, accounts, or device info. Rebuilt weekly from the private library.</p>
           <p>Submissions come in <a href="/about#phases">Phase 2</a>. Using the Muse app, not Muse Code? What you can change there is a <a href="/setups">Setup</a>.</p>
         </div>
       </div>
@@ -109,7 +113,7 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
     <div class="wrap">
       <p class="eyebrow">The shelf</p>
       <h2>Curated skills</h2>
-      <p class="muted" style="max-width:44em">Ten daily drivers and twenty-two power tools, re-curated weekly from the 109 skills in our private library. Last curated: October 2, 2026.</p>
+      <p class="muted" style="max-width:44em">Twelve daily drivers and thirty-six power tools, re-curated weekly from the 110 skills in our private library. Last curated: October 5, 2026.</p>
       <h3 style="margin-top:30px">Daily drivers</h3>
       <div class="shelf">
         <div class="skill-card">
@@ -172,6 +176,18 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
           <p>Creates or updates a workspace skill: description, structure, instructions, supporting files.</p>
           <p class="why">The factory that makes more skills.</p>
         </div>
+        <div class="skill-card">
+          <span class="cat">Comms</span>
+          <h3>gmail-triage</h3>
+          <p>Urgency-ranked inbox scans with reply drafts for approval.</p>
+          <p class="why">The inbox triage playbook &mdash; silent unless something needs you.</p>
+        </div>
+        <div class="skill-card">
+          <span class="cat">Comms</span>
+          <h3>slack</h3>
+          <p>Team chat channels: reading threads, posting updates, coordinating agent ops.</p>
+          <p class="why">The always-on ops channel.</p>
+        </div>
       </div>
       <h3 style="margin-top:34px">Power tools</h3>
       <div class="tier2">
@@ -179,9 +195,10 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
         <ul>
           <li><code>messenger</code> &mdash; read, search, and summarize conversations; send and react</li>
           <li><code>instagram</code> &mdash; profiles, posts, and insights; publish on request</li>
+          <li><code>instagram-messages</code> &mdash; read inboxes and threads, search DMs</li>
           <li><code>threads</code> &mdash; posts, feed, social graph, publishing</li>
+          <li><code>threads-messages</code> &mdash; read and send Threads messages</li>
           <li><code>facebook-cli</code> &mdash; posts, friends, groups, and events from a pasted URL</li>
-          <li><code>gmail-triage</code> &mdash; urgency-ranked inbox scans with drafts for approval</li>
         </ul>
         <h3>Money</h3>
         <ul>
@@ -189,6 +206,8 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
           <li><code>booking</code> &mdash; live flight, hotel, restaurant, and event-ticket booking</li>
           <li><code>shopping</code> &mdash; find, compare, and evaluate real products with prices</li>
           <li><code>flightaware</code> &mdash; flight status, delays, arrivals, departures</li>
+          <li><code>duffel</code> &mdash; search, book, and manage flights</li>
+          <li><code>travel-planning</code> &mdash; trip logistics, feasibility, itineraries</li>
           <li><code>opentable</code> &mdash; restaurant availability and reservations</li>
         </ul>
         <h3>Media</h3>
@@ -198,6 +217,7 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
           <li><code>generate_podcast</code> &mdash; compose podcast episodes and briefings as MP3</li>
           <li><code>image-search</code> &mdash; web image URLs and source pages for reference</li>
           <li><code>media-library</code> &mdash; search and inspect the photo library</li>
+          <li><code>magic-moment</code> &mdash; turn a talking-head recording into a shareable video</li>
         </ul>
         <h3>Data</h3>
         <ul>
@@ -209,6 +229,28 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
         <ul>
           <li><code>paper2agent</code> &mdash; turn research papers into reviewed skills and MCP servers</li>
           <li><code>deep-research-workbench</code> &mdash; multi-lane research writeups with citation ledgers</li>
+          <li><code>wide-research</code> &mdash; broad parallel research across many inputs</li>
+        </ul>
+        <h3>Productivity</h3>
+        <ul>
+          <li><code>goals</code> &mdash; guidance for creating and accomplishing goals</li>
+          <li><code>google-drive</code> &mdash; files, folders, uploads, sharing</li>
+          <li><code>google-docs</code> &mdash; read, create, and edit documents</li>
+          <li><code>google-sheets</code> &mdash; read, write, and manage spreadsheets</li>
+          <li><code>places-search</code> &mdash; find and compare restaurants, shops, and spots</li>
+        </ul>
+        <h3>Dev</h3>
+        <ul>
+          <li><code>github</code> &mdash; GitHub repositories via the official MCP server</li>
+        </ul>
+        <h3>Meta</h3>
+        <ul>
+          <li><code>subscription-status</code> &mdash; plan, usage, and billing questions</li>
+          <li><code>muse-feedback</code> &mdash; send feedback and feature requests to the Muse team</li>
+        </ul>
+        <h3>Voice</h3>
+        <ul>
+          <li><code>phone-live-transcript</code> &mdash; live transcript while a call is in progress</li>
         </ul>
         <h3>Browser &amp; diagrams</h3>
         <ul>
@@ -219,6 +261,567 @@ pre.cmd{background:var(--void);color:#EDE8DE;border-radius:var(--radius-m);paddi
       <p class="small muted" style="margin-top:26px">Private dev-only API skills are kept off this page on purpose. Everything listed here is scrubbed of personal details.</p>
     </div>
   </section>
+
+      <section style="padding-top:0">
+    <div class="wrap">
+<!-- skills:library:start -->
+      <p class="eyebrow">The library</p>
+      <h2>All skills</h2>
+      <p class="muted" style="max-width:44em">109 skills, scrubbed of personal details. The full SKILL.md of each one is one tap away.</p>
+      <p><input type="search" id="skill-search" class="skill-search" placeholder="Search 109 skills&hellip;" aria-label="Search skills"></p>
+      <div class="shelf" id="skill-library">
+        <a class="skill-card" href="/skills/ai-drawio" data-search="ai-drawio generate draw.io diagrams from natural language — flowcharts, architecture, sequence, erd, mindmaps. use when the user asks to draw, diagram, visualize a system, or create a flowchart or architecture map. research">
+          <span class="cat">Research &middot; Custom</span>
+          <h3>ai-drawio</h3>
+          <p>Generate draw.io diagrams from natural language — flowcharts, architecture, sequence, ERD, mindmaps. Use when the user asks to draw, diagram, visualize a system, or create a flowchart or architecture map.</p>
+        </a>
+        <a class="skill-card" href="/skills/apple-healthkit" data-search="apple_healthkit the user's synced apple health (healthkit) data: daily metrics (steps, distance, calories, heart rate, hrv, vo2max), sleep sessions (stages, quality, efficiency), and workouts. health">
+          <span class="cat">Health &middot; Bundled</span>
+          <h3>apple_healthkit</h3>
+          <p>The user's synced Apple Health (HealthKit) data: daily metrics (steps, distance, calories, heart rate, HRV, VO2max), sleep sessions (stages, quality, efficiency), and workouts.</p>
+        </a>
+        <a class="skill-card" href="/skills/asana" data-search="asana &gt;- money">
+          <span class="cat">Money &middot; Bundled</span>
+          <h3>asana</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/booking" data-search="booking primary entry point for direct flight, hotel, restaurant, or event-ticket transactions and for bounded live availability checks delegated by travel planning. always use before provider-specific skills or browser work when the user asks to find live availability or prices, compare bookable options, book, or continue an active booking. do not use for trip planning itself, broad inspiration, opening hours, schedules, flight status, or other factual questions without transaction intent. money">
+          <span class="cat">Money &middot; Bundled</span>
+          <h3>booking</h3>
+          <p>Primary entry point for direct flight, hotel, restaurant, or event-ticket transactions and for bounded live availability checks delegated by Travel Planning. Always use before provider-specific skills or browser work when the user asks to find live availability or prices, compare bookable options, book, or continue an active booking. Do not use for trip planning itself, broad inspiration, opening hours, schedules, flight status, or other factual questions without transaction intent.</p>
+        </a>
+        <a class="skill-card" href="/skills/box" data-search="box search, read, upload, download, move, rename, delete, restore, and share box content; manage comments and metadata. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>box</h3>
+          <p>Search, read, upload, download, move, rename, delete, restore, and share Box content; manage comments and metadata.</p>
+        </a>
+        <a class="skill-card" href="/skills/calendly" data-search="calendly view calendly events and event types, and manage scheduling data using the calendly cli. productivity">
+          <span class="cat">Productivity &middot; Bundled</span>
+          <h3>calendly</h3>
+          <p>View Calendly events and event types, and manage scheduling data using the Calendly CLI.</p>
+        </a>
+        <a class="skill-card" href="/skills/canva" data-search="canva &gt;- design">
+          <span class="cat">Design &middot; Bundled</span>
+          <h3>canva</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/cursor-agents" data-search="cursor-agents dispatch headless cursor coding agents (cursor-agent cli) on local repos: one-shot runs, worktree-isolated fixes, read-only ask/plan modes. use when the user wants cursor agents doing repo work. dev">
+          <span class="cat">Dev &middot; Custom</span>
+          <h3>cursor-agents</h3>
+          <p>Dispatch headless Cursor coding agents (cursor-agent CLI) on local repos: one-shot runs, worktree-isolated fixes, read-only ask/plan modes. Use when the user wants Cursor agents doing repo work.</p>
+        </a>
+        <a class="skill-card" href="/skills/deep-research-workbench" data-search="deep-research-workbench run the deep-research writeup workflow: decompose a topic into research lanes, rate sources, keep a citation ledger, and produce a limitations-first, reimplementation-grade research report. triggers on 'deep research', 'research writeup', 'literature review', 'research report'. search">
+          <span class="cat">Search &middot; Custom</span>
+          <h3>deep-research-workbench</h3>
+          <p>Run the deep-research writeup workflow: decompose a topic into research lanes, rate sources, keep a citation ledger, and produce a limitations-first, reimplementation-grade research report. Triggers on 'deep research', 'research writeup', 'literature review', 'research report'.</p>
+        </a>
+        <a class="skill-card" href="/skills/dev-dottie-api" data-search="dev-dottie-api private dev-only api for dottie — distilled reasoning, closed-loop factory, rl traces, grpo, acne constructs. secure, local-first, zero-deps. agent apis">
+          <span class="cat">Agent APIs &middot; Custom</span>
+          <h3>dev-dottie-api</h3>
+          <p>Private dev-only API for Dottie — distilled reasoning, closed-loop factory, RL traces, GRPO, ACNE constructs. Secure, local-first, zero-deps.</p>
+        </a>
+        <a class="skill-card" href="/skills/dev-dumbmodel-api" data-search="dev-dumbmodel-api private dev-only api for dumbmodel.com — hit-swap backend, model registry, daily packs, provenance 7/7/0, daily lcg, private edge gated. zero-trust dev. agent apis">
+          <span class="cat">Agent APIs &middot; Custom</span>
+          <h3>dev-dumbmodel-api</h3>
+          <p>Private dev-only API for dumbmodel.com — hit-swap backend, model registry, daily packs, provenance 7/7/0, daily LCG, private edge gated. Zero-trust dev.</p>
+        </a>
+        <a class="skill-card" href="/skills/dev-scout-api" data-search="dev-scout-api private dev-only api for scout — always-on orchestrator, pacing, moma routing, garnet, ooda, checkpoint triple-write. secure local-first zero-deps. agent apis">
+          <span class="cat">Agent APIs &middot; Custom</span>
+          <h3>dev-scout-api</h3>
+          <p>Private dev-only API for Scout — always-on orchestrator, pacing, MoMA routing, GARNet, OODA, checkpoint triple-write. Secure local-first zero-deps.</p>
+        </a>
+        <a class="skill-card" href="/skills/device-data" data-search="device_data read cached contacts and calendar events from muse storage. delete muse's local copy of either source without modifying paired devices. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>device_data</h3>
+          <p>Read cached contacts and calendar events from Muse storage. Delete Muse's local copy of either source without modifying paired devices.</p>
+        </a>
+        <a class="skill-card" href="/skills/dropbox" data-search="dropbox &gt;- general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>dropbox</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/duffel" data-search="duffel use duffel to search, book, pay for, or manage flights. use duffel to monitor an already booked flight's fare when the user directly asks for ongoing price monitoring. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>duffel</h3>
+          <p>Use Duffel to search, book, pay for, or manage flights. Use Duffel to monitor an already booked flight's fare when the user directly asks for ongoing price monitoring.</p>
+        </a>
+        <a class="skill-card" href="/skills/ego-lite" data-search="ego-lite chromium-based browser automation for ai agents — open pages, click, type, screenshot, and run site-tools. use when the user needs web interaction, form filling, or exploratory qa. browser">
+          <span class="cat">Browser &middot; Custom</span>
+          <h3>ego-lite</h3>
+          <p>Chromium-based browser automation for AI agents — open pages, click, type, screenshot, and run site-tools. Use when the user needs web interaction, form filling, or exploratory QA.</p>
+        </a>
+        <a class="skill-card" href="/skills/embedding-workbench" data-search="embedding-workbench reusable workbench for embedding models: validate vectors.json files, run k-nn queries by cosine similarity, and execute the champion-vs-challenger evaluation protocol. triggers on 'embeddings', 'vectors.json', 'k-nn', 'challenger eval', 'champion vs challenger', 'validate vectors'. data">
+          <span class="cat">Data &middot; Custom</span>
+          <h3>embedding-workbench</h3>
+          <p>Reusable workbench for embedding models: validate vectors.json files, run k-NN queries by cosine similarity, and execute the champion-vs-challenger evaluation protocol. Triggers on 'embeddings', 'vectors.json', 'k-NN', 'challenger eval', 'champion vs challenger', 'validate vectors'.</p>
+        </a>
+        <a class="skill-card" href="/skills/evernote" data-search="evernote read and create notes through evernote's official mcp server. research">
+          <span class="cat">Research &middot; Bundled</span>
+          <h3>evernote</h3>
+          <p>Read and create notes through Evernote's official MCP server.</p>
+        </a>
+        <a class="skill-card" href="/skills/facebook" data-search="facebook_cli use when the user provides a facebook url or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own marketplace listings. to find, browse, or buy marketplace listings, use shopping instead. use pages commands for managed facebook page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>facebook_cli</h3>
+          <p>Use when the user provides a Facebook URL or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own Marketplace listings. To find, browse, or buy Marketplace listings, use shopping instead. Use pages commands for managed Facebook Page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling.</p>
+        </a>
+        <a class="skill-card" href="/skills/facebook-cli" data-search="facebook_cli use when the user provides a facebook url or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own marketplace listings. to find, browse, or buy marketplace listings, use shopping instead. use pages commands for managed facebook page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>facebook_cli</h3>
+          <p>Use when the user provides a Facebook URL or asks to read personal posts, comments, reactions, friends, timelines, profiles, stories, feeds, groups, events, or saved items, or to discover public events happening near a place, nearby, or in a local area on a date, or to create, edit, publish, or delete their own Marketplace listings. To find, browse, or buy Marketplace listings, use shopping instead. Use pages commands for managed Facebook Page discovery, insights, native draft editing/deletion, same-draft publication, approved posts and native scheduling.</p>
+        </a>
+        <a class="skill-card" href="/skills/facebook-cli-internal" data-search="facebook_cli_internal use for personal text/photo/video posts, comments, and reactions with approval, facebook events (save a draft event, edit or delete one the user created, rsvp), facebook identity, the user's managed pages (discover with pages list, read insights or post metrics, create page drafts, approved posts and native schedules), moderation of pending posts, membership requests, participation requests, and spam in facebook groups where the user is an admin or moderator, and hiding a marketplace listing from friends or showing it again. use facebook_cli for event search and details, personal-profile reads, pasted facebook urls, and public or non-managed pages. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>facebook_cli_internal</h3>
+          <p>Use for personal text/photo/video posts, comments, and reactions with approval, Facebook events (save a draft event, edit or delete one the user created, RSVP), Facebook identity, the user's managed Pages (discover with pages list, read insights or post metrics, create Page drafts, approved posts and native schedules), moderation of pending posts, membership requests, participation requests, and spam in Facebook Groups where the user is an admin or moderator, and hiding a Marketplace listing from friends or showing it again. Use facebook_cli for event search and details, personal-profile reads, pasted Facebook URLs, and public or non-managed Pages.</p>
+        </a>
+        <a class="skill-card" href="/skills/figma" data-search="figma &gt;- design">
+          <span class="cat">Design &middot; Bundled</span>
+          <h3>figma</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/flightaware" data-search="flightaware use for questions about a specific flight’s departure or arrival time, including “when’s my flight?” and confirmation of remembered times, plus flight status, delays, and cancellations. verify the exact dated flight before answering; memory identifies the itinerary but does not verify its current schedule. use flightaware to monitor operational changes for an upcoming booked flight when the user directly asks for ongoing monitoring. money">
+          <span class="cat">Money &middot; Bundled</span>
+          <h3>flightaware</h3>
+          <p>Use for questions about a specific flight’s departure or arrival time, including “when’s my flight?” and confirmation of remembered times, plus flight status, delays, and cancellations. Verify the exact dated flight before answering; memory identifies the itinerary but does not verify its current schedule. Use FlightAware to monitor operational changes for an upcoming booked flight when the user directly asks for ongoing monitoring.</p>
+        </a>
+        <a class="skill-card" href="/skills/forget" data-search="forget remove a personal fact, preference, relationship detail, topic, or prior event from muse's active memory and stop existing copies or automations from bringing it back. use for explicit requests such as 'forget that', 'don't remember this about me', or 'remove that from your memory'. do not use when 'forget it' merely means cancel the current task. dev">
+          <span class="cat">Dev &middot; Bundled</span>
+          <h3>forget</h3>
+          <p>Remove a personal fact, preference, relationship detail, topic, or prior event from Muse's active memory and stop existing copies or automations from bringing it back. Use for explicit requests such as 'forget that', 'don't remember this about me', or 'remove that from your memory'. Do not use when 'forget it' merely means cancel the current task.</p>
+        </a>
+        <a class="skill-card" href="/skills/function-health" data-search="function_health retrieve lab biomarker results and clinician notes from function health. health">
+          <span class="cat">Health &middot; Bundled</span>
+          <h3>function_health</h3>
+          <p>Retrieve lab biomarker results and clinician notes from Function Health.</p>
+        </a>
+        <a class="skill-card" href="/skills/generate_podcast" data-search="generate_podcast compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an mp3. for reading supplied text aloud verbatim, use tts. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>generate_podcast</h3>
+          <p>Compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an MP3. For reading supplied text aloud verbatim, use tts.</p>
+        </a>
+        <a class="skill-card" href="/skills/ghl" data-search="ghl use highlevel contacts, pipelines, appointments, messages, and its broader operation catalog. productivity">
+          <span class="cat">Productivity &middot; Bundled</span>
+          <h3>ghl</h3>
+          <p>Use HighLevel contacts, pipelines, appointments, messages, and its broader operation catalog.</p>
+        </a>
+        <a class="skill-card" href="/skills/github" data-search="github search and work with the user's github repositories through github's official mcp server. dev">
+          <span class="cat">Dev &middot; Bundled</span>
+          <h3>github</h3>
+          <p>Search and work with the user's GitHub repositories through GitHub's official MCP server.</p>
+        </a>
+        <a class="skill-card" href="/skills/github-ops" data-search="github-ops github repo operations via the gh cli: pr status and checks, ci logs, merges, and releases. triggers on 'github', 'gh cli', 'pr status', 'ci checks', 'merge pr', 'release'. dev">
+          <span class="cat">Dev &middot; Custom</span>
+          <h3>github-ops</h3>
+          <p>GitHub repo operations via the gh CLI: PR status and checks, CI logs, merges, and releases. Triggers on 'github', 'gh cli', 'PR status', 'CI checks', 'merge PR', 'release'.</p>
+        </a>
+        <a class="skill-card" href="/skills/gmail" data-search="gmail work with the user's gmail: search, read threads, draft, send, reply, forward, unsubscribe from mailing lists, manage labels, and open attachments. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>gmail</h3>
+          <p>Work with the user's Gmail: search, read threads, draft, send, reply, forward, unsubscribe from mailing lists, manage labels, and open attachments.</p>
+        </a>
+        <a class="skill-card" href="/skills/gmail-triage" data-search="gmail-triage inbox triage playbook: scan unread mail, classify by urgency, draft replies for approval, stay silent when nothing needs the user. comms">
+          <span class="cat">Comms &middot; Custom</span>
+          <h3>gmail-triage</h3>
+          <p>Inbox triage playbook: scan unread mail, classify by urgency, draft replies for approval, stay silent when nothing needs the user.</p>
+        </a>
+        <a class="skill-card" href="/skills/goals" data-search="goals guidance for helping users create and accomplish goals. read it before you create a goal for the user when no goal-creation contract is in context, and whenever you help with an existing goal. a goals-tab creation turn already carries that contract and does not need this skill. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>goals</h3>
+          <p>Guidance for helping users create and accomplish goals. Read it before you create a goal for the user when no goal-creation contract is in context, and whenever you help with an existing goal. A Goals-tab creation turn already carries that contract and does not need this skill.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-calendar" data-search="google_calendar work with the user's google calendar: agenda views, event details, and scheduling changes. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>google_calendar</h3>
+          <p>Work with the user's Google Calendar: agenda views, event details, and scheduling changes.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-contacts" data-search="google_contacts search, view, create, update, and delete the user's google contacts. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>google_contacts</h3>
+          <p>Search, view, create, update, and delete the user's Google Contacts.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-docs" data-search="google_docs read, create, and edit the user's google docs. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>google_docs</h3>
+          <p>Read, create, and edit the user's Google Docs.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-drive" data-search="google_drive work with the user's google drive: files, folders, uploads, downloads, and sharing. productivity">
+          <span class="cat">Productivity &middot; Bundled</span>
+          <h3>google_drive</h3>
+          <p>Work with the user's Google Drive: files, folders, uploads, downloads, and sharing.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-forms" data-search="google_forms read, create, and update the user's google forms, and read responses. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>google_forms</h3>
+          <p>Read, create, and update the user's Google Forms, and read responses.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-health-connect" data-search="google_health_connect the user's synced google health connect data from their android device: daily metrics (steps, distance, calories, heart rate, hrv, vo2max), sleep sessions (stages, quality, efficiency), and workouts. health">
+          <span class="cat">Health &middot; Bundled</span>
+          <h3>google_health_connect</h3>
+          <p>The user's synced Google Health Connect data from their Android device: daily metrics (steps, distance, calories, heart rate, HRV, VO2max), sleep sessions (stages, quality, efficiency), and workouts.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-sheets" data-search="google_sheets read, write, and manage the user's google sheets. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>google_sheets</h3>
+          <p>Read, write, and manage the user's Google Sheets.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-slides" data-search="google_slides read, create, and edit the user's google slides presentations. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>google_slides</h3>
+          <p>Read, create, and edit the user's Google Slides presentations.</p>
+        </a>
+        <a class="skill-card" href="/skills/google-tasks" data-search="google_tasks manage the user's google tasks: lists, task details, creation, updates, and completion. productivity">
+          <span class="cat">Productivity &middot; Bundled</span>
+          <h3>google_tasks</h3>
+          <p>Manage the user's Google Tasks: lists, task details, creation, updates, and completion.</p>
+        </a>
+        <a class="skill-card" href="/skills/granola" data-search="granola search and read granola meeting notes and transcripts through granola's oauth-backed mcp server. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>granola</h3>
+          <p>Search and read Granola meeting notes and transcripts through Granola's OAuth-backed MCP server.</p>
+        </a>
+        <a class="skill-card" href="/skills/healthex" data-search="healthex use to connect healthex and ask questions about your medications, lab results, and other health records. health">
+          <span class="cat">Health &middot; Bundled</span>
+          <h3>healthex</h3>
+          <p>Use to connect HealthEx and ask questions about your medications, lab results, and other health records.</p>
+        </a>
+        <a class="skill-card" href="/skills/image-search" data-search="image_search search the web by text query for image urls and source pages for feeds, artifacts, and visual references. does not identify a supplied image or person. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>image_search</h3>
+          <p>Search the web by text query for image URLs and source pages for feeds, artifacts, and visual references. Does not identify a supplied image or person.</p>
+        </a>
+        <a class="skill-card" href="/skills/instagram" data-search="instagram read instagram profiles, followers, posts, comments, likes, stories, feed, saved content, and account insights. answer questions about posts, reels, and instagram links. manage interests and profile details, and publish stories, reels, posts, or carousels on request. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>instagram</h3>
+          <p>Read Instagram profiles, followers, posts, comments, likes, stories, feed, saved content, and account insights. Answer questions about posts, reels, and Instagram links. Manage interests and profile details, and publish stories, reels, posts, or carousels on request.</p>
+        </a>
+        <a class="skill-card" href="/skills/instagram-messages" data-search="instagram_messages use this to interact with the user's instagram messages. read inboxes, threads, top recipients, filtered inbox views, dm search results, and send messages through `instagram-messages-cli`. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>instagram_messages</h3>
+          <p>Use this to interact with the user's Instagram messages. Read inboxes, threads, top recipients, filtered inbox views, DM search results, and send messages through `instagram-messages-cli`.</p>
+        </a>
+        <a class="skill-card" href="/skills/klaviyo" data-search="klaviyo &gt;- productivity">
+          <span class="cat">Productivity &middot; Bundled</span>
+          <h3>klaviyo</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/linear" data-search="linear &gt;- productivity">
+          <span class="cat">Productivity &middot; Bundled</span>
+          <h3>linear</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/lovable" data-search="lovable &gt;- design">
+          <span class="cat">Design &middot; Bundled</span>
+          <h3>lovable</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/magic-moment" data-search="magic-moment make a &quot;magic moment&quot; video — turn a creator's talking-head recording into a vertical video preserving the source narration where their muse story replays through artifacts and brief exchanges synced to their voiceover — bubbles, typing, emoji reactions, real widgets and pages, message sounds, closing muse lockup finisher. use whenever a user with talking-head or selfie footage wants it turned into a shareable clip of their muse story — &quot;make a magic moment&quot;, &quot;turn this video of me into...&quot;, &quot;add the chat over my video&quot;, &quot;retell what muse did for me&quot; — even if they never say the words &quot;magic moment&quot;. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>magic-moment</h3>
+          <p>Make a &quot;magic moment&quot; video — turn a creator's talking-head recording into a vertical video preserving the source narration where their Muse story replays through artifacts and brief exchanges synced to their voiceover — bubbles, typing, emoji reactions, real widgets and pages, message sounds, closing Muse lockup finisher. Use whenever a user with talking-head or selfie footage wants it turned into a shareable clip of their Muse story — &quot;make a magic moment&quot;, &quot;turn this video of me into...&quot;, &quot;add the chat over my video&quot;, &quot;retell what Muse did for me&quot; — even if they never say the words &quot;magic moment&quot;.</p>
+        </a>
+        <a class="skill-card" href="/skills/media-library" data-search="media_library search and inspect the user's photo library, including connected device galleries. use for photo requests and whenever a photo could ground or personalize a response; lookups of uploaded photos are cheap, so check opportunistically and move on if nothing fits. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>media_library</h3>
+          <p>Search and inspect the user's photo library, including connected device galleries. Use for photo requests and whenever a photo could ground or personalize a response; lookups of uploaded photos are cheap, so check opportunistically and move on if nothing fits.</p>
+        </a>
+        <a class="skill-card" href="/skills/messenger" data-search="messenger_read work with the user's messenger account: read call history; read and search contacts; read, search, and summarize conversations; send, react to, unsend, or edit messages; and message marketplace listing threads. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>messenger_read</h3>
+          <p>Work with the user's Messenger account: read call history; read and search contacts; read, search, and summarize conversations; send, react to, unsend, or edit messages; and message Marketplace listing threads.</p>
+        </a>
+        <a class="skill-card" href="/skills/meta-ads" data-search="meta_ads create, write, or manage meta ads and assets: ad copy, campaigns, spend, reports, audiences, catalogs, product feeds, feed refresh schedules, experiments, and policy. always load for any request to create or write an ad, or to advertise a product or service, even when no platform is named; this includes sensitive or restricted categories. always load for any question asking what a meta, facebook, or instagram advertising policy means, allows, prohibits, or requires, including a standalone policy-definition question with no account context. those questions must use ads_policy_tool, never browser search or memory. load for a specifically named catalog or feed with an upload or refresh-schedule request; use ads reads to resolve ownership before writing. generic unnamed feeds need context. whether an image, claim or piece of copy may be used in an ad is always a meta ads task — 'can i use this in an ad', 'is it allowed', 'is this against policy', and any rights, likeness, celebrity, logo or trademark question about advertising with an image, including a follow-up about one just generated. those are ads-policy questions, not general legal ones. an ad request uses the campaign workflow unless explicitly only an image or organic post. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>meta_ads</h3>
+          <p>Create, write, or manage Meta ads and assets: ad copy, campaigns, spend, reports, audiences, catalogs, product feeds, feed refresh schedules, experiments, and policy. Always load for any request to create or write an ad, or to advertise a product or service, even when no platform is named; this includes sensitive or restricted categories. Always load for any question asking what a Meta, Facebook, or Instagram advertising policy means, allows, prohibits, or requires, including a standalone policy-definition question with no account context. Those questions must use ads_policy_tool, never browser search or memory. Load for a specifically named catalog or feed with an upload or refresh-schedule request; use Ads reads to resolve ownership before writing. Generic unnamed feeds need context. Whether an image, claim or piece of copy may be used in an ad is ALWAYS a Meta Ads task — 'can I use this in an ad', 'is it allowed', 'is this against policy', and any rights, likeness, celebrity, logo or trademark question about advertising with an image, including a follow-up about one just generated. Those are ads-policy questions, not general legal ones. An ad request uses the campaign workflow unless explicitly only an image or organic post.</p>
+        </a>
+        <a class="skill-card" href="/skills/meta-threads" data-search="threads read and manage the user's threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by url or id. can tune feed ranking and publish posts on request. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>threads</h3>
+          <p>Read and manage the user's Threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by URL or ID. Can tune feed ranking and publish posts on request.</p>
+        </a>
+        <a class="skill-card" href="/skills/mistake-attribution" data-search="mistake_attribution diagnose a failure with the three-way attribution test (recipe problem / knowledge gap / ambiguity), route the fix to the right layer, and review it with fresh eyes before landing. use on any mistake, verifier failure, user correction, or regression. process">
+          <span class="cat">Process &middot; Custom</span>
+          <h3>mistake_attribution</h3>
+          <p>Diagnose a failure with the three-way attribution test (recipe problem / knowledge gap / ambiguity), route the fix to the right layer, and review it with fresh eyes before landing. Use on any mistake, verifier failure, user correction, or regression.</p>
+        </a>
+        <a class="skill-card" href="/skills/modly" data-search="modly local 3d generation desktop app for agents — image-to-3d, mesh repair, workflows, and asset library. use when generating, optimizing, or exporting 3d meshes from images or text. media">
+          <span class="cat">Media &middot; Custom</span>
+          <h3>modly</h3>
+          <p>Local 3D generation desktop app for agents — image-to-3D, mesh repair, workflows, and asset library. Use when generating, optimizing, or exporting 3D meshes from images or text.</p>
+        </a>
+        <a class="skill-card" href="/skills/moltbook" data-search="moltbook act as the user's agent on moltbook, the social network for ai agents: read the home briefing, browse channels, post, comment, react, keep documents and field notes, through moltbook's official mcp server. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>moltbook</h3>
+          <p>Act as the user's agent on Moltbook, the social network for AI agents: read the home briefing, browse channels, post, comment, react, keep documents and field notes, through Moltbook's official MCP server.</p>
+        </a>
+        <a class="skill-card" href="/skills/muse-early-access" data-search="muse_early_access use for questions about muse's general early access program, requests to join it, checking or withdrawing a join request, and admission updates. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>muse_early_access</h3>
+          <p>Use for questions about Muse's general early access program, requests to join it, checking or withdrawing a join request, and admission updates.</p>
+        </a>
+        <a class="skill-card" href="/skills/muse-feedback" data-search="muse-feedback use for feedback and feature requests to the muse team. whenever your response tells the user you can't do a specific thing they wanted, or accepts them giving up on one, offer once to file feedback in that response. this covers missing integrations you can't do yourself, capabilities you lack, and tasks that keep failing at a specific point. file only on their go-ahead. also use when asked to send, view, check, or withdraw feedback. process">
+          <span class="cat">Process &middot; Bundled</span>
+          <h3>muse-feedback</h3>
+          <p>Use for feedback and feature requests to the Muse team. Whenever your response tells the user you can't do a specific thing they wanted, or accepts them giving up on one, offer once to file feedback in that response. This covers missing integrations you can't do yourself, capabilities you lack, and tasks that keep failing at a specific point. File only on their go-ahead. Also use when asked to send, view, check, or withdraw feedback.</p>
+        </a>
+        <a class="skill-card" href="/skills/muse_db" data-search="muse_db inspect database-backed muse records for diagnosis and cross-table tracing when purpose-built product tools do not expose the needed state. process">
+          <span class="cat">Process &middot; Bundled</span>
+          <h3>muse_db</h3>
+          <p>Inspect database-backed Muse records for diagnosis and cross-table tracing when purpose-built product tools do not expose the needed state.</p>
+        </a>
+        <a class="skill-card" href="/skills/notion" data-search="notion search, read, create, and update notion pages via the notion mcp. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>notion</h3>
+          <p>Search, read, create, and update Notion pages via the Notion MCP.</p>
+        </a>
+        <a class="skill-card" href="/skills/obsidian-skills" data-search="obsidian-skills collection of 5 obsidian vault skills — defuddle web clipper, json canvas, bases, cli, and flavored markdown. use when working with obsidian vaults, notes, or canvas files. research">
+          <span class="cat">Research &middot; Custom</span>
+          <h3>obsidian-skills</h3>
+          <p>Collection of 5 Obsidian vault skills — defuddle web clipper, JSON Canvas, Bases, CLI, and Flavored Markdown. Use when working with Obsidian vaults, notes, or canvas files.</p>
+        </a>
+        <a class="skill-card" href="/skills/opentable" data-search="opentable find restaurants on opentable, check availability, and make, change, or cancel reservations. use for restaurant booking and live reservation data. money">
+          <span class="cat">Money &middot; Bundled</span>
+          <h3>opentable</h3>
+          <p>Find restaurants on OpenTable, check availability, and make, change, or cancel reservations. Use for restaurant booking and live reservation data.</p>
+        </a>
+        <a class="skill-card" href="/skills/outlook-calendar" data-search="outlook_calendar view, create, update, and delete events in the user's outlook calendar. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>outlook_calendar</h3>
+          <p>View, create, update, and delete events in the user's Outlook Calendar.</p>
+        </a>
+        <a class="skill-card" href="/skills/outlook-contacts" data-search="outlook_contacts list, search, create, update, and delete contacts in the user's outlook account. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>outlook_contacts</h3>
+          <p>List, search, create, update, and delete contacts in the user's Outlook account.</p>
+        </a>
+        <a class="skill-card" href="/skills/outlook-mail" data-search="outlook_mail read, search, send, reply to, and delete messages in the user's outlook mail. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>outlook_mail</h3>
+          <p>Read, search, send, reply to, and delete messages in the user's Outlook Mail.</p>
+        </a>
+        <a class="skill-card" href="/skills/paper2agent" data-search="paper2agent convert research papers and associated files, research code, or both into a reviewed paper skill and tested mcp server. use for paper-only, code-only, or combined conversions and resumes. search">
+          <span class="cat">Search &middot; Custom</span>
+          <h3>paper2agent</h3>
+          <p>Convert research papers and associated files, research code, or both into a reviewed paper skill and tested MCP server. Use for paper-only, code-only, or combined conversions and resumes.</p>
+        </a>
+        <a class="skill-card" href="/skills/peloton" data-search="peloton connect to peloton to browse fitness classes, check schedules, and book workouts. health">
+          <span class="cat">Health &middot; Bundled</span>
+          <h3>peloton</h3>
+          <p>Connect to Peloton to browse fitness classes, check schedules, and book workouts.</p>
+        </a>
+        <a class="skill-card" href="/skills/philips-hue" data-search="philips_hue control philips hue smart lights, rooms, scenes, and devices via the hue remote api v2. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>philips_hue</h3>
+          <p>Control Philips Hue smart lights, rooms, scenes, and devices via the Hue Remote API v2.</p>
+        </a>
+        <a class="skill-card" href="/skills/phone-live-transcript" data-search="phone-live-transcript watch an in-progress phone call and get its transcript to the user as early as possible, with live status narration while the call runs. triggers on 'show me the call transcript', 'stream the call', or watching an active phone call for the user. general">
+          <span class="cat">General &middot; Custom</span>
+          <h3>phone-live-transcript</h3>
+          <p>Watch an in-progress phone call and get its transcript to the user as early as possible, with live status narration while the call runs. Triggers on 'show me the call transcript', 'stream the call', or watching an active phone call for the user.</p>
+        </a>
+        <a class="skill-card" href="/skills/places-search" data-search="places_search find, compare, and share details on physical places near the user or in a specified area, including restaurants, cafes, bars, hotels, parks, attractions, shops, and businesses with local services. not for itineraries, choosing a city or region, dated events or showtimes, or directions. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>places_search</h3>
+          <p>Find, compare, and share details on physical places near the user or in a specified area, including restaurants, cafes, bars, hotels, parks, attractions, shops, and businesses with local services. Not for itineraries, choosing a city or region, dated events or showtimes, or directions.</p>
+        </a>
+        <a class="skill-card" href="/skills/plaid" data-search="plaid use to connect plaid and read linked financial accounts: metadata, balances, transactions, recurring transactions, liabilities, and investments. money">
+          <span class="cat">Money &middot; Bundled</span>
+          <h3>plaid</h3>
+          <p>Use to connect Plaid and read linked financial accounts: metadata, balances, transactions, recurring transactions, liabilities, and investments.</p>
+        </a>
+        <a class="skill-card" href="/skills/podcast" data-search="generate_podcast compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an mp3. for reading supplied text aloud verbatim, use tts. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>generate_podcast</h3>
+          <p>Compose and deliver audio content: a podcast episode, briefing, or narrated summary, with one or more voices, as an MP3. For reading supplied text aloud verbatim, use tts.</p>
+        </a>
+        <a class="skill-card" href="/skills/printify" data-search="printify use printify to browse catalog data, manage shops and products, and review or create orders. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>printify</h3>
+          <p>Use Printify to browse catalog data, manage shops and products, and review or create orders.</p>
+        </a>
+        <a class="skill-card" href="/skills/quickbooks" data-search="quickbooks read and manage the user's quickbooks business through intuit's official mcp server, including reports, invoices, customers, products, payment links, sales settings, and industry benchmarks. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>quickbooks</h3>
+          <p>Read and manage the user's QuickBooks business through Intuit's official MCP server, including reports, invoices, customers, products, payment links, sales settings, and industry benchmarks.</p>
+        </a>
+        <a class="skill-card" href="/skills/replit" data-search="replit read, create, update, and publish apps through replit's official mcp server. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>replit</h3>
+          <p>Read, create, update, and publish apps through Replit's official MCP server.</p>
+        </a>
+        <a class="skill-card" href="/skills/self-awareness" data-search="self_awareness ground self-referential answers in the agent's actual filesystem. use when the user asks who the agent is, what it can do, what it knows, what it remembers, what it has built, what services are connected, or what rules it follows. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>self_awareness</h3>
+          <p>Ground self-referential answers in the agent's actual filesystem. Use when the user asks who the agent is, what it can do, what it knows, what it remembers, what it has built, what services are connected, or what rules it follows.</p>
+        </a>
+        <a class="skill-card" href="/skills/share-ideas" data-search="share_ideas publish a reusable native muse idea with idea.share when the user explicitly asks to share or publish an idea or asks for a muse.ai/ideas link. never offer it unprompted. not for pages or write-ups, sending a result to someone, social posts, or sharing an artifact. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>share_ideas</h3>
+          <p>Publish a reusable native Muse Idea with idea.share when the user explicitly asks to share or publish an Idea or asks for a muse.ai/ideas link. Never offer it unprompted. Not for pages or write-ups, sending a result to someone, social posts, or sharing an artifact.</p>
+        </a>
+        <a class="skill-card" href="/skills/shopify" data-search="shopify &gt; general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>shopify</h3>
+          <p>&gt;</p>
+        </a>
+        <a class="skill-card" href="/skills/shopping" data-search="shopping use for any product or shopping question: find, reverse image search, shopping instagram/facebook/marketplace links, buy, compare, or evaluate real products with prices, images, and product page urls, including buying or browsing facebook marketplace listings. use when presenting shopping search results from any source. for shopping intent, load this skill first before any other skills. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>shopping</h3>
+          <p>Use for any product or shopping question: find, reverse image search, shopping Instagram/Facebook/Marketplace links, buy, compare, or evaluate real products with prices, images, and product page URLs, including buying or browsing Facebook Marketplace listings. Use when presenting shopping search results from any source. For shopping intent, load this skill first before any other skills.</p>
+        </a>
+        <a class="skill-card" href="/skills/skill-creator" data-search="skill_creator create or update a workspace skill: its description, structure, instructions, and supporting files. process">
+          <span class="cat">Process &middot; Bundled</span>
+          <h3>skill_creator</h3>
+          <p>Create or update a workspace skill: its description, structure, instructions, and supporting files.</p>
+        </a>
+        <a class="skill-card" href="/skills/slack" data-search="slack &gt;- comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>slack</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/social-competitor-analysis" data-search="social_competitor_analysis compare the user's business with competitors using public instagram profiles, posts, follower changes, and grounded account metrics. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>social_competitor_analysis</h3>
+          <p>Compare the user's business with competitors using public Instagram profiles, posts, follower changes, and grounded account metrics.</p>
+        </a>
+        <a class="skill-card" href="/skills/social-content-performance" data-search="social_content_performance analyze the user's own instagram account and post performance using linked-account analytics. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>social_content_performance</h3>
+          <p>Analyze the user's own Instagram account and post performance using linked-account analytics.</p>
+        </a>
+        <a class="skill-card" href="/skills/spotify" data-search="spotify discover, search, and manage spotify music, podcasts, and playlists, including deleting shows or episodes you created with save to spotify. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>spotify</h3>
+          <p>Discover, search, and manage Spotify music, podcasts, and playlists, including deleting shows or episodes you created with Save to Spotify.</p>
+        </a>
+        <a class="skill-card" href="/skills/ssh-windows" data-search="ssh-windows — ssh lane to the owner's windows boxes over tailscale ssh lane to the owner's windows boxes over tailscale infra">
+          <span class="cat">Infra &middot; Custom</span>
+          <h3>ssh-windows — SSH lane to the owner's Windows boxes over Tailscale</h3>
+          <p>SSH lane to the owner's Windows boxes over Tailscale</p>
+        </a>
+        <a class="skill-card" href="/skills/stripe" data-search="stripe &gt;- general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>stripe</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/subscription-status" data-search="subscription_status answer questions about the user's muse subscription, plan, usage, tokens, reset timing, or available plans and prices, or verify information that references the muse subscription. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>subscription_status</h3>
+          <p>Answer questions about the user's Muse subscription, plan, usage, tokens, reset timing, or available plans and prices, or verify information that references the Muse subscription.</p>
+        </a>
+        <a class="skill-card" href="/skills/tailscale" data-search="tailscale set up muse's built-in tailscale connector, join a tailnet or headscale network, check status, and reach private machines through the tcp tunnel proxy. read for tailscale, vpn, magicdns, network egress, exit-node, or browser routing questions and supported limits. infra">
+          <span class="cat">Infra &middot; Bundled</span>
+          <h3>tailscale</h3>
+          <p>Set up Muse's built-in Tailscale connector, join a tailnet or Headscale network, check status, and reach private machines through the TCP tunnel proxy. Read for Tailscale, VPN, MagicDNS, network egress, exit-node, or browser routing questions and supported limits.</p>
+        </a>
+        <a class="skill-card" href="/skills/tailscale-ops" data-search="tailscale-ops operate the owner's tailscale tailnet from this vm: check join status, reach his machines (gpu node, android phone, iphone) over the tailnet through the tcp tunnel, and pair tailnet access with the forge workflow. triggers on tailnet access, tailscale device questions, or reaching gpu node over tailscale. infra">
+          <span class="cat">Infra &middot; Custom</span>
+          <h3>tailscale-ops</h3>
+          <p>Operate the owner's Tailscale tailnet from this VM: check join status, reach his machines (GPU node, Android phone, iPhone) over the tailnet through the TCP tunnel, and pair tailnet access with the Forge workflow. Triggers on tailnet access, Tailscale device questions, or reaching GPU node over Tailscale.</p>
+        </a>
+        <a class="skill-card" href="/skills/tessie" data-search="tessie monitor a tesla vehicle, inspect live state, and run explicit tessie command endpoints. process">
+          <span class="cat">Process &middot; Bundled</span>
+          <h3>tessie</h3>
+          <p>Monitor a Tesla vehicle, inspect live state, and run explicit Tessie command endpoints.</p>
+        </a>
+        <a class="skill-card" href="/skills/threads" data-search="threads read and manage the user's threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by url or id. can tune feed ranking and publish posts on request. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>threads</h3>
+          <p>Read and manage the user's Threads account: profile, posts, feed, saved posts, activity, insights, social graph, search, trends, and a specific post by URL or ID. Can tune feed ranking and publish posts on request.</p>
+        </a>
+        <a class="skill-card" href="/skills/threads-messages" data-search="threads_messages use this to interact with the user's threads messages: read inboxes and message threads, and send messages through `threads-messages-cli`. comms">
+          <span class="cat">Comms &middot; Bundled</span>
+          <h3>threads_messages</h3>
+          <p>Use this to interact with the user's Threads messages: read inboxes and message threads, and send messages through `threads-messages-cli`.</p>
+        </a>
+        <a class="skill-card" href="/skills/ticketmaster" data-search="ticketmaster search ticketmaster events and seats with pricing. returns buy-now links to ticketmaster checkout; it cannot complete a purchase itself. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>ticketmaster</h3>
+          <p>Search Ticketmaster events and seats with pricing. Returns Buy-now links to Ticketmaster checkout; it cannot complete a purchase itself.</p>
+        </a>
+        <a class="skill-card" href="/skills/timesfm-vector" data-search="timesfm-vector integrate timesfm-3 multivariate time-series foundation model for forecasting and train new models for vector embedding games. triggers on timesfm, time series forecasting, multivariate forecast, vector games forecasting. data">
+          <span class="cat">Data &middot; Custom</span>
+          <h3>timesfm-vector</h3>
+          <p>Integrate TimesFM-3 multivariate time-series foundation model for forecasting and train new models for vector embedding games. Triggers on timesfm, time series forecasting, multivariate forecast, vector games forecasting.</p>
+        </a>
+        <a class="skill-card" href="/skills/todoist" data-search="todoist read and manage todoist tasks, projects, comments, labels, filters, and reminders through todoist's official mcp server. productivity">
+          <span class="cat">Productivity &middot; Bundled</span>
+          <h3>todoist</h3>
+          <p>Read and manage Todoist tasks, projects, comments, labels, filters, and reminders through Todoist's official MCP server.</p>
+        </a>
+        <a class="skill-card" href="/skills/travel-planning" data-search="travel_planning use this skill when an active or proposed trip needs planning, logistics, feasibility, entry or transit checks, itinerary work, or investigation of an airport process, immigration, ground transport, a transfer, or fast-track service, even for a narrow question with no booking intent. route a bounded flight, hotel, restaurant, event, or other item ready for live availability or booking directly to booking. skip this skill for a stable travel fact alone or flight status. money">
+          <span class="cat">Money &middot; Bundled</span>
+          <h3>travel_planning</h3>
+          <p>Use this skill when an active or proposed trip needs planning, logistics, feasibility, entry or transit checks, itinerary work, or investigation of an airport process, immigration, ground transport, a transfer, or fast-track service, even for a narrow question with no booking intent. Route a bounded flight, hotel, restaurant, event, or other item ready for live availability or booking directly to Booking. Skip this skill for a stable travel fact alone or flight status.</p>
+        </a>
+        <a class="skill-card" href="/skills/tts" data-search="tts turn supplied text into spoken audio, single or multi-speaker. for composed audio content (a podcast, briefing, or narrated summary), use podcast. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>tts</h3>
+          <p>Turn supplied text into spoken audio, single or multi-speaker. For composed audio content (a podcast, briefing, or narrated summary), use podcast.</p>
+        </a>
+        <a class="skill-card" href="/skills/vercel" data-search="vercel use vercel when the user asks for vercel or this provider's api. dev">
+          <span class="cat">Dev &middot; Custom</span>
+          <h3>vercel</h3>
+          <p>Use Vercel when the user asks for Vercel or this provider's API.</p>
+        </a>
+        <a class="skill-card" href="/skills/vercel-deploy" data-search="vercel-deploy answer &quot;is it live?&quot; for vercel projects and manage deployments via the vercel rest api (curl + jq, zero-deps). triggers on vercel, is it live, deploy status, production deploy, redeploy. dev">
+          <span class="cat">Dev &middot; Custom</span>
+          <h3>vercel-deploy</h3>
+          <p>Answer &quot;is it live?&quot; for Vercel projects and manage deployments via the Vercel REST API (curl + jq, zero-deps). Triggers on vercel, is it live, deploy status, production deploy, redeploy.</p>
+        </a>
+        <a class="skill-card" href="/skills/voice-calls" data-search="voice_selector provides the static system voice catalog used by jarvis. it does not define a user-facing workflow. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>voice_selector</h3>
+          <p>Provides the static system voice catalog used by Jarvis. It does not define a user-facing workflow.</p>
+        </a>
+        <a class="skill-card" href="/skills/voice-selector" data-search="voice_selector provides the static system voice catalog used by jarvis. it does not define a user-facing workflow. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>voice_selector</h3>
+          <p>Provides the static system voice catalog used by Jarvis. It does not define a user-facing workflow.</p>
+        </a>
+        <a class="skill-card" href="/skills/wearable-device-skills" data-search="wearable_device_skills use when the user asks to discover, inspect, or invoke an agentic capability dynamically published by a paired phone or wearable, including device controls, app actions, camera or media actions, and smart-home actions. media">
+          <span class="cat">Media &middot; Bundled</span>
+          <h3>wearable_device_skills</h3>
+          <p>Use when the user asks to discover, inspect, or invoke an agentic capability dynamically published by a paired phone or wearable, including device controls, app actions, camera or media actions, and smart-home actions.</p>
+        </a>
+        <a class="skill-card" href="/skills/wearables-comms" data-search="wearables_comms &gt;- general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>wearables_comms</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/wide-research" data-search="wide_research use when the user needs broad parallel research across many independent inputs with a shared output schema. search">
+          <span class="cat">Search &middot; Bundled</span>
+          <h3>wide_research</h3>
+          <p>Use when the user needs broad parallel research across many independent inputs with a shared output schema.</p>
+        </a>
+        <a class="skill-card" href="/skills/withings" data-search="withings use when linking withings or reading withings body measurements, activity, sleep, workout, heart, and intraday data. health">
+          <span class="cat">Health &middot; Bundled</span>
+          <h3>withings</h3>
+          <p>Use when linking Withings or reading Withings body measurements, activity, sleep, workout, heart, and intraday data.</p>
+        </a>
+        <a class="skill-card" href="/skills/zapier" data-search="zapier connect muse to actions across apps through zapier's official mcp server. general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>zapier</h3>
+          <p>Connect Muse to actions across apps through Zapier's official MCP server.</p>
+        </a>
+        <a class="skill-card" href="/skills/zoom" data-search="zoom &gt;- general">
+          <span class="cat">General &middot; Bundled</span>
+          <h3>zoom</h3>
+          <p>&gt;-</p>
+        </a>
+        <a class="skill-card" href="/skills/zvec-grep" data-search="zvec-grep — local-first hybrid search (ripgrep + bm25 + vector) local-first hybrid search (ripgrep + bm25 + vector) search">
+          <span class="cat">Search &middot; Custom</span>
+          <h3>zvec-grep — Local-First Hybrid Search (ripgrep + BM25 + Vector)</h3>
+          <p>Local-First Hybrid Search (ripgrep + BM25 + Vector)</p>
+        </a>
+      </div>
+      <p class="small muted" id="skill-count" aria-live="polite"></p>
+<!-- skills:library:end -->
+    </div>
+  </section>
+
+
 
   <section style="padding-top:0">
     <div class="wrap-narrow">
@@ -309,5 +912,6 @@ muse skills install ./my-skill --scope user</pre>
 </footer>
 <!-- /layout:footer -->
 <script src="/assets/js/main.js?v=4f9c205a29"></script>
+<script src="/assets/js/skills.js?v=b53274120c"></script>
 </body>
 </html>
