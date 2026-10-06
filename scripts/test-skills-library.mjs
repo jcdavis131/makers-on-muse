@@ -18,7 +18,10 @@ function t(name, cond, extra) {
   else { fail++; console.error("FAIL:", name, extra === undefined ? "" : String(extra).slice(0, 120)); }
 }
 
-/* the skill ids on disk: top-level dirs with SKILL.md, custom wins ties */
+/* the skill ids: top-level dirs with SKILL.md on the author's machine, custom
+   wins ties. In CI there are no source skill dirs, so fall back to the
+   generated skills/ pages and verify the library is self-consistent
+   (a page per skill, titles, descriptions, PII-clean, fully indexed). */
 const ids = new Map();
 for (const [base, custom] of [["/opt/hatch/skills", false], [join(HOME, "workspace/skills"), true]]) {
   if (!existsSync(base)) continue;
@@ -29,7 +32,15 @@ for (const [base, custom] of [["/opt/hatch/skills", false], [join(HOME, "workspa
     ids.set(d.name, custom);
   }
 }
-t("skill dirs found on disk", ids.size > 100, ids.size);
+if (ids.size === 0) {
+  const genDir = join(ROOT, "skills");
+  if (existsSync(genDir)) {
+    for (const f of readdirSync(genDir)) {
+      if (f.endsWith(".html")) ids.set(f.slice(0, -".html".length), true);
+    }
+  }
+}
+t("skills in library (>100 expected)", ids.size > 100, ids.size);
 
 const index = read("skills.html");
 let pages = 0;
